@@ -17,6 +17,10 @@ app.use('/uploads/', express.static(UPLOADS_FOLDER));
 // Auth Routes
 app.use('/auth', require('./routes/auth'));
 app.use('/users', require('./routes/users'));
+app.use('/api', require('./routes/ferries'));
+
+
+
 
 app.use((err, req, res, next) => {
     if (err.code === 'LIMIT_FILE_SIZE') {
