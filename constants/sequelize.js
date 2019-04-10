@@ -3,3 +3,6 @@ global.Users = db.users;
 global.UsersStatuses = db.users_statuses;
 global.sequelize = require('sequelize');
 global.Roles = db.roles;
+global.Ferries = db.ferries;
+global.Tours = db.tours;
+global.Partners = db.partners;
