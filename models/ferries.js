@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     lng: DataTypes.STRING,
     partner_id: DataTypes.INTEGER,
     type: DataTypes.INTEGER
-  }, {});
+  }, {timestamps:false,underscored:true});
   ferries.associate = function(models) {
     // associations can be defined here
   };

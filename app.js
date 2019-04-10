@@ -17,7 +17,9 @@ app.use('/uploads/', express.static(UPLOADS_FOLDER));
 // Auth Routes
 app.use('/auth', require('./routes/auth'));
 app.use('/users', require('./routes/users'));
-app.use('/api', require('./routes/ferries'));
+app.use('/ferries', require('./routes/ferries'));
+app.use('/tours', require('./routes/tours'));
+app.use('/partners', require('./routes/partners'));
 
 
 

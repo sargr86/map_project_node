@@ -1,6 +1,6 @@
 require('../constants/sequelize');
 
 exports.get = async (req, res) => {
-    let result = await Ferries.findAll({});
+    let result = await Tours.findAll({});
     res.json(result);
 };
