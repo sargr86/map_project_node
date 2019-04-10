@@ -50,9 +50,8 @@ exports.add = async (req, res) => {
         return res.status(422).json(errors.array()[0]);
     }
 
-    let data = req.body;
-    const result = Partners.create(data);
-    res.json(result);
+    await Partners.create(req.body);
+    this.get(req,res);
 };
 
 /**
