@@ -5,5 +5,6 @@ global.sequelize = require('sequelize');
 global.Roles = db.roles;
 global.Ferries = db.ferries;
 global.Tours = db.tours;
+global.ToursType = db.tours_type;
 global.Partners = db.partners;
 global.PartnerTypes = db.partner_types;

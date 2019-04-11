@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {timestamps:false,underscored:true});
   tours.associate = function(models) {
     // associations can be defined here
+    tours.belongsTo(models.tours_type, {foreignKey: "tours_type_id"});
   };
   return tours;
 };
