@@ -19,6 +19,7 @@ app.use('/auth', require('./routes/auth'));
 app.use('/users', require('./routes/users'));
 app.use('/ferries', require('./routes/ferries'));
 app.use('/tours', require('./routes/tours'));
+app.use('/tour_types', require('./routes/tour_types'));
 app.use('/partners', require('./routes/partners'));
 
 

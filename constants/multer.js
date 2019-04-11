@@ -1,10 +1,18 @@
 // Multer stuff
 global.multer = require('multer');
-global.UPLOAD_MAX_FILE_SIZE = 1024*1024;
+global.UPLOAD_MAX_FILE_SIZE = 1024 * 1024;
 
 let storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, USERS_UPLOAD_FOLDER)
+        const data = req.body;
+
+        let dir = USERS_UPLOAD_FOLDER;
+
+        if ('tours_type_id' in data) {
+            dir = TOURS_UPLOAD_FOLDER;
+        }
+
+        cb(null, dir)
     },
     filename: function (req, file, cb) {
         cb(null, file.originalname) // already have got Date implemented in the name
@@ -14,9 +22,8 @@ let storage = multer.diskStorage({
 
 let upload = multer({
     storage: storage,
-    limits:{fileSize:UPLOAD_MAX_FILE_SIZE},
+    limits: {fileSize: UPLOAD_MAX_FILE_SIZE},
     fileFilter: function (req, file, cb) {
-
         let filetypes = /jpeg|jpg/;
         let mimetype = filetypes.test(file.mimetype);
         let extname = filetypes.test(path.extname(file.originalname).toLowerCase());
@@ -24,10 +31,11 @@ let upload = multer({
 
         if (!mimetype && !extname) {
             req.fileTypeError = "invalid_file_type";
-            return cb(null, false,req.fileTypeError)
+            return cb(null, false, req.fileTypeError)
         }
         cb(null, true);
     }
 });
 global.uploadProfileImg = upload.single('profile_img_file');
+global.uploadTourImg = upload.single('upload_image');
 
