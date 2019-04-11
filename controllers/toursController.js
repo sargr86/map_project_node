@@ -8,8 +8,8 @@ require('../constants/sequelize');
  */
 exports.get = async (req, res) => {
     let result = await Tours.findAll({
-        include:[
-            {model:ToursType}
+        include: [
+            {model: ToursType}
         ]
     });
     res.json(result);
@@ -42,27 +42,28 @@ exports.add = async (req, res) => {
     uploadProfileImg(req, res, async (err) => {
 
 
-        // Gets file type validation error
-        if (req.fileTypeError) {
-            res.status(423).json(req.fileTypeError);
-        }
-
-        // Getting multer errors if any
-        else if (err) res.status(423).json(err);
-
-        // If file validation passed, heading to the request data validation
-        else {
-
-
-            // Getting validation result from express-validator
-            const errors = validationResult(req);
-            if (!errors.isEmpty()) {
-                return res.status(422).json(errors.array()[0]);
-            }
+        // // Gets file type validation error
+        // if (req.fileTypeError) {
+        //     res.status(423).json(req.fileTypeError);
+        // }
+        //
+        // // Getting multer errors if any
+        // else if (err) res.status(423).json(err);
+        //
+        // // If file validation passed, heading to the request data validation
+        // else {
+        //
+        //     // Getting validation result from express-validator
+        //     const errors = validationResult(req);
+        //     if (!errors.isEmpty()) {
+        //         return res.status(422).json(errors.array()[0]);
+        //     }
+        if (!showIfErrors(req, res, err)) {
 
             await Tours.create(data);
             this.get(req, res);
         }
+        // }
     })
 };
 
