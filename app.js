@@ -1,3 +1,4 @@
+require('dotenv').config();
 require('./constants/main');
 
 // Start server on pre-defined port
