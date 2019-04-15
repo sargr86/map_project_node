@@ -45,10 +45,8 @@ const allowedExt = [
 app.get('*', (req,res)=>{
     if (allowedExt.filter(ext => req.url.indexOf(ext) > 0).length > 0) {
 
-        let url = `/var/www/html/secret_south/secret_south_angular/dist/front/${req.url}`
+        let url = `/var/www/html/secret_south/secret_south_angular/dist/front/${req.url}`;
 
-        console.log(url)
-//res.sendFile(path.join(__dirname,`../../secret_south/secret_south_angular/dist/front/${req.url}`))
         res.sendFile(url);
     } else {
         res.sendFile(path.join(__dirname,'../../secret_south/secret_south_angular/dist/front/index.html'));
