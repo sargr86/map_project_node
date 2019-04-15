@@ -5,13 +5,9 @@ module.exports = {
         return queryInterface.bulkInsert('roles', [
             {
                 name_en: "Admin",
-                name_ru:"Администратор",
-                name_hy:"Ադմինիստրատոր"
             },
             {
                 name_en: "User",
-                name_ru:"Пользователь",
-                name_hy:"Օգտագործող"
 
             }
         ])
