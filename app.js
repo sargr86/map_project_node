@@ -51,6 +51,7 @@ app.get('*', (req,res)=>{
 //res.sendFile(path.join(__dirname,`../../secret_south/secret_south_angular/dist/front/${req.url}`))
         res.sendFile(url);
     } else {
+        console.log(url)
         res.sendFile(path.join(__dirname,'../../secret_south/secret_south_angular/dist/front/index.html'));
     }
     //res.sendFile(path.join(__dirname,'../../secret_south/secret_south_angular/dist/front/index.html'))
