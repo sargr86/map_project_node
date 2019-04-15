@@ -20,7 +20,8 @@ module.exports = {
                 password: bcrypt.hashSync('jdoe', 10),
                 profile_img: '',
                 status_id: status_id,
-                created_at: new Date()
+                created_at: new Date(),
+                updated_at: new Date()
             }
         ])
     },
