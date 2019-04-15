@@ -16,7 +16,7 @@ module.exports = {
                 last_name_en: 'Doe',
                 birthday: '1986-03-30',
                 gender: 'male',
-                email: 'sargr1986@gmail.com',
+                email: 'johndoe@gmail.com',
                 password: bcrypt.hashSync('jdoe', 10),
                 profile_img: '',
                 status_id: status_id,
