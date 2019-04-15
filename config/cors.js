@@ -1,7 +1,8 @@
 let originsWhitelist = [
     'http://localhost:4200', 
     'http://localhost:4202',
-    'http://localhost:4201'     //this is my front-end url for development
+    'http://localhost:4201',     //this is my front-end url for development,
+    'http://167.99.92.212:9200'
 ];
 let corsOptions = {
     origin: function(origin, callback){
