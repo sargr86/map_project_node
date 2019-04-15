@@ -26,8 +26,32 @@ app.use('/tour_types', require('./routes/tour_types'));
 app.use('/partners', require('./routes/partners'));
 app.use('/home', require('./routes/home'));
 
+
+
+
+// Allowed extensions list can be extended depending on your own needs
+const allowedExt = [
+    '.js',
+    '.ico',
+    '.css',
+    '.png',
+    '.jpg',
+    '.woff2',
+    '.woff',
+    '.ttf',
+    '.svg',
+];
+
 app.get('*', (req,res)=>{
-    res.sendFile(path.join(__dirname,'../../secret_south/secret_south_angular/dist/front'))
+    if (allowedExt.filter(ext => req.url.indexOf(ext) > 0).length > 0) {
+        console.log(req.url)
+//res.sendFile(path.join(__dirname,`../../secret_south/secret_south_angular/dist/front/${req.url}`))
+        res.sendFile(path.resolve(`/var/www/html/${req.url}`));
+    } else {
+        console.log("aaa");
+        res.sendFile(path.join(__dirname,'../../secret_south/secret_south_angular/dist/front/index.html'));
+    }
+    //res.sendFile(path.join(__dirname,'../../secret_south/secret_south_angular/dist/front/index.html'))
 });
 
 
