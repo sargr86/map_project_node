@@ -10,10 +10,11 @@ const rules = [
     body('phone').not().isEmpty().withMessage('Phone number is required'),
     body('address').not().isEmpty().withMessage('Address is required'),
     body('partner_id').not().isEmpty().withMessage('Partner is required'),
+    body('type').not().isEmpty().withMessage('Partner type is required'),
     body().custom(async (req) => {
         let email = req.email;
 
-        if(req.min_people >= req.max_people){
+        if (req.min_people >= req.max_people) {
             throw new Error('Max people must be greater than Min people count');
         }
 
@@ -21,7 +22,7 @@ const rules = [
         let partner = await Ferries.findOne({where: {email: email}, attributes: ['email']});
 
         // Checking if ferry email exists
-       if (partner != null && !req.id) throw new Error('E-mail exists');
+        if (partner != null && !req.id) throw new Error('E-mail exists');
 
     }),
 
