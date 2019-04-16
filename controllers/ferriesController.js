@@ -64,6 +64,7 @@ exports.remove = async (req, res) => {
  * @returns {Promise<void>}
  */
 exports.update = async(req,res) =>{
+
     // Getting validation result from express-validator
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
