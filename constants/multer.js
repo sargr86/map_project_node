@@ -12,6 +12,8 @@ let storage = multer.diskStorage({
             dir = TOURS_UPLOAD_FOLDER;
         }
 
+        console.log(dir)
+
         cb(null, dir)
     },
     filename: function (req, file, cb) {
