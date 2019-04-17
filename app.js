@@ -21,14 +21,13 @@ app.use('/auth', require('./routes/auth'));
 app.use('/home', require('./routes/home'));
 
 
-
 // Admin middleware
 app.use((req, res, next) => {
     let token = req.headers['x-access-token'] || req.headers['authorization']; // Express headers are auto converted to lowercase
     // if(process.env.NODE_ENV === 'production'){
     //
     // }
-    fixRoutes(req,res);
+    fixRoutes(req, res);
     if (!token) {
         res.status(500).json('Auth token is not supplied');
     }
@@ -52,7 +51,10 @@ app.use((req, res, next) => {
     } else {
         return res.status(500).json('Auth token is not supplied');
     }
-    // next();
+    if (req.url === '/') {
+
+        next();
+    }
 });
 
 // Auth Routes
@@ -79,7 +81,7 @@ const allowedExt = [
 // Separating Angular routes
 app.get('*', (req, res) => {
     console.log(process.env.NODE_ENV)
-    fixRoutes(req,res);
+    fixRoutes(req, res);
 
 });
 
