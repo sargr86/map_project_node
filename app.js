@@ -27,6 +27,10 @@ app.use((req, res, next) => {
     // if(process.env.NODE_ENV === 'production'){
     //
     // }
+    if (req.url === '/') {
+
+        next();
+    }
     fixRoutes(req, res);
     if (!token) {
         res.status(500).json('Auth token is not supplied');
@@ -51,10 +55,7 @@ app.use((req, res, next) => {
     } else {
         return res.status(500).json('Auth token is not supplied');
     }
-    if (req.url === '/') {
 
-        next();
-    }
 });
 
 // Auth Routes
