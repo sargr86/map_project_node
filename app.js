@@ -19,10 +19,11 @@ app.use('/uploads/', express.static(UPLOADS_FOLDER));
 
 app.use('/auth', require('./routes/auth'));
 app.use('/home', require('./routes/home'));
-app.get('*', detectAngularPaths);
+// app.get('*', detectAngularPaths);
 
 // Admin middleware
 app.use((req, res, next) => {
+    detectAngularPaths(req,res);
     let token = req.headers['x-access-token'] || req.headers['authorization']; // Express headers are auto converted to lowercase
     if (!token) {
         res.status(500).json('Auth token is not supplied');
