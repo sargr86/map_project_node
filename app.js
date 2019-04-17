@@ -73,6 +73,7 @@ const allowedExt = [
 
 // Separating Angular routes
 app.get('*', (req, res) => {
+    console.log(process.env.NODE_ENV)
     if (allowedExt.filter(ext => req.url.indexOf(ext) > 0).length > 0) {
         let url = `/var/www/html/secret_south/secret_south_angular/dist/front/${req.url}`;
         res.sendFile(url);
