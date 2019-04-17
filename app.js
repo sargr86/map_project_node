@@ -30,7 +30,7 @@ app.use((req, res, next) => {
 
 
     fixRoutes(req, res);
-    if (!token) {
+    if (!token && req.url !== '/') {
         res.status(500).json('Auth token is not supplied');
     }
     if (token.startsWith('Bearer ')) {
