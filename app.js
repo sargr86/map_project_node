@@ -19,36 +19,36 @@ app.use('/uploads/', express.static(UPLOADS_FOLDER));
 
 app.use('/auth', require('./routes/auth'));
 app.use('/home', require('./routes/home'));
-// app.get('*', detectAngularPaths);
+app.get('*', detectAngularPaths);
 
 // Admin middleware
-app.use((req, res, next) => {
-    detectAngularPaths(req,res);
-    let token = req.headers['x-access-token'] || req.headers['authorization']; // Express headers are auto converted to lowercase
-    if (!token) {
-        res.status(500).json('Auth token is not supplied');
-    }
-    if (token.startsWith('Bearer ')) {
-        // Remove Bearer from string
-        token = token.slice(7, token.length);
-    }
-
-    if (token) {
-        jwt.verify(token, 'secretkey', (err, decoded) => {
-            if (err) {
-                return res.json({
-                    success: false,
-                    message: 'Token is not valid'
-                });
-            } else {
-                req.decoded = decoded;
-                next();
-            }
-        });
-    } else {
-        return res.status(500).json('Auth token is not supplied');
-    }
-});
+// app.use((req, res, next) => {
+//     detectAngularPaths(req,res);
+//     let token = req.headers['x-access-token'] || req.headers['authorization']; // Express headers are auto converted to lowercase
+//     if (!token) {
+//         res.status(500).json('Auth token is not supplied');
+//     }
+//     if (token.startsWith('Bearer ')) {
+//         // Remove Bearer from string
+//         token = token.slice(7, token.length);
+//     }
+//
+//     if (token) {
+//         jwt.verify(token, 'secretkey', (err, decoded) => {
+//             if (err) {
+//                 return res.json({
+//                     success: false,
+//                     message: 'Token is not valid'
+//                 });
+//             } else {
+//                 req.decoded = decoded;
+//                 next();
+//             }
+//         });
+//     } else {
+//         return res.status(500).json('Auth token is not supplied');
+//     }
+// });
 
 // Auth Routes
 app.use('/users', require('./routes/users'));
