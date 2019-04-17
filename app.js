@@ -70,7 +70,7 @@ const allowedExt = [
     '.svg',
 ];
 
-// app.get('*', detectAngularPaths);
+app.get('*', detectAngularPaths);
 
 //res.sendFile(path.join(__dirname,'../../secret_south/secret_south_angular/dist/front/index.html'))
 
