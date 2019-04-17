@@ -21,7 +21,6 @@ app.use('/auth', require('./routes/auth'));
 app.use('/home', require('./routes/home'));
 
 
-
 // Admin middleware
 // app.use((req, res, next) => {
 //     let token = req.headers['x-access-token'] || req.headers['authorization']; // Express headers are auto converted to lowercase
@@ -73,16 +72,13 @@ const allowedExt = [
 ];
 
 app.get('*', (req, res) => {
-    if(!res.headersSent){
-        if (allowedExt.filter(ext => req.url.indexOf(ext) > 0).length > 0) {
+    if (allowedExt.filter(ext => req.url.indexOf(ext) > 0).length > 0) {
 
-            let url = `/var/www/html/secret_south/secret_south_angular/dist/front/${req.url}`;
-            res.sendFile(url);
-        } else {
-            res.sendFile(path.join(__dirname, '../../secret_south/secret_south_angular/dist/front/index.html'));
-        }
+        let url = `/var/www/html/secret_south/secret_south_angular/dist/front/${req.url}`;
+        res.sendFile(url);
+    } else {
+        res.sendFile(path.join(__dirname, '../../secret_south/secret_south_angular/dist/front/index.html'));
     }
-    next();
     //res.sendFile(path.join(__dirname,'../../secret_south/secret_south_angular/dist/front/index.html'))
 });
 
