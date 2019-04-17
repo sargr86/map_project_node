@@ -51,7 +51,10 @@ app.use((req, res, next) => {
             }
         });
     } else {
-        return res.status(500).json('Auth token is not supplied');
+        if (req.url === '/') {
+
+            next();
+        } else return res.status(500).json('Auth token is not supplied');
     }
 
 });
@@ -83,8 +86,7 @@ app.get('*', (req, res) => {
     if (req.url === '/') {
 
         next();
-    }
-    else fixRoutes(req, res);
+    } else fixRoutes(req, res);
 
 });
 
