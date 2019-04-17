@@ -75,7 +75,7 @@ exports.login = async (req, res) => {
     // Getting request data and setting user fields to return
     let data = req.body;
     let email = data.email.trim();
-    let lang = data.lang || 'en';
+    let lang = 'en';
 
     console.log('!!!!!!!!!!!!!!!!')
     console.log(lang)
