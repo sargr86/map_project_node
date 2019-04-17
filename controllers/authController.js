@@ -76,6 +76,12 @@ exports.login = async (req, res) => {
     let data = req.body;
     let email = data.email.trim();
     let lang = data.lang || 'en';
+
+    console.log('!!!!!!!!!!!!!!!!')
+    console.log(lang)
+    console.log('!!!!!!!!!!!!!!!!')
+
+
     let attributes = [`first_name_${lang}`, `last_name_${lang}`, 'email', 'profile_img', 'password', 'id', 'status_id'];
 
     // Active status selecting
