@@ -8,7 +8,7 @@ require('../constants/sequelize');
  */
 exports.register = async (req, res) => {
     let data = req.body;
-    let lang = data.lang;
+    let lang = data.lang || 'en';
 
     uploadProfileImg(req, res, async (err) => {
 
@@ -75,7 +75,7 @@ exports.login = async (req, res) => {
     // Getting request data and setting user fields to return
     let data = req.body;
     let email = data.email.trim();
-    let lang = data.lang;
+    let lang = data.lang || 'en';
     let attributes = [`first_name_${lang}`, `last_name_${lang}`, 'email', 'profile_img', 'password', 'id', 'status_id'];
 
     // Active status selecting
