@@ -51,11 +51,11 @@ app.use((req, res, next) => {
             }
         });
     } else {
-        console.log("URL is "+req.url)
-        if (req.url === '/') {
-
-            next();
-        } else return res.status(500).json('Auth token is not supplied');
+        // console.log("URL is "+req.url)
+        // if (req.url === '/') {
+        //
+        //     next();
+        // } else return res.status(500).json('Auth token is not supplied');
     }
 
 });
