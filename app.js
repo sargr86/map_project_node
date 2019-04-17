@@ -27,10 +27,8 @@ app.use((req, res, next) => {
     // if(process.env.NODE_ENV === 'production'){
     //
     // }
-    if (req.url === '/') {
 
-        next();
-    }
+
     fixRoutes(req, res);
     if (!token) {
         res.status(500).json('Auth token is not supplied');
@@ -82,7 +80,11 @@ const allowedExt = [
 // Separating Angular routes
 app.get('*', (req, res) => {
     console.log(process.env.NODE_ENV)
-    fixRoutes(req, res);
+    if (req.url === '/') {
+
+        next();
+    }
+    else fixRoutes(req, res);
 
 });
 
