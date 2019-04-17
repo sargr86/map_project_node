@@ -84,10 +84,12 @@ const allowedExt = [
 // Separating Angular routes
 app.get('*', (req, res) => {
     console.log(process.env.NODE_ENV)
-    if (req.url === '/') {
-
-        next();
-    } else fixRoutes(req, res);
+    // if (req.url === '/') {
+    //
+    //     next();
+    // }
+    // else
+        fixRoutes(req, res);
 
 });
 
