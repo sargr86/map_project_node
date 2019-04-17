@@ -51,6 +51,7 @@ app.use((req, res, next) => {
             }
         });
     } else {
+        console.log("URL is "+req.url)
         if (req.url === '/') {
 
             next();
