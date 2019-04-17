@@ -7,6 +7,7 @@ require('../constants/sequelize');
  * @returns {Promise<void>}
  */
 exports.get = async (req, res) => {
+    console.log('ferries!!!')
     const result = await to(Ferries.findAll({}));
     res.json(result);
 };

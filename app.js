@@ -19,7 +19,7 @@ app.use('/uploads/', express.static(UPLOADS_FOLDER));
 
 app.use('/auth', require('./routes/auth'));
 app.use('/home', require('./routes/home'));
-app.use('/',detectAngularPaths)
+
 
 // Admin middleware
 app.use((req, res, next) => {
@@ -47,7 +47,6 @@ app.use((req, res, next) => {
     } else {
         return res.status(500).json('Auth token is not supplied');
     }
-    next();
 });
 
 // Auth Routes
@@ -71,18 +70,23 @@ const allowedExt = [
     '.svg',
 ];
 
-app.get('*', detectAngularPaths)
+// app.get('*', detectAngularPaths);
 
 //res.sendFile(path.join(__dirname,'../../secret_south/secret_south_angular/dist/front/index.html'))
 
 function detectAngularPaths(req, res) {
-    if (allowedExt.filter(ext => req.url.indexOf(ext) > 0).length > 0) {
 
-        let url = `/var/www/html/secret_south/secret_south_angular/dist/front/${req.url}`;
-        res.sendFile(url);
-    } else {
-        res.sendFile(path.join(__dirname, '../../secret_south/secret_south_angular/dist/front/index.html'));
+    if (process.env.NODE_ENV != 'development') {
+        if (allowedExt.filter(ext => req.url.indexOf(ext) > 0).length > 0) {
+
+            let url = `/var/www/html/secret_south/secret_south_angular/dist/front/${req.url}`;
+            res.sendFile(url);
+        } else {
+            res.sendFile(path.join(__dirname, '../../secret_south/secret_south_angular/dist/front/index.html'));
+        }
     }
+    console.log('here!!!!!')
+    next();
 }
 
 
@@ -90,7 +94,7 @@ app.use((err, req, res, next) => {
     if (err.code === 'LIMIT_FILE_SIZE') {
         res.status(423).json(err.code.toLowerCase())
     }
-
+    next();
     // Handle any other errors
 });
 
