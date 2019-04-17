@@ -19,7 +19,6 @@ app.use('/uploads/', express.static(UPLOADS_FOLDER));
 
 app.use('/auth', require('./routes/auth'));
 app.use('/home', require('./routes/home'));
-app.use('/', detectAngularPaths);
 
 // Admin middleware
 app.use((req, res, next) => {
