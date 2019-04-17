@@ -82,7 +82,7 @@ app.get('*', (req, res) => {
             res.sendFile(path.join(__dirname, '../../secret_south/secret_south_angular/dist/front/index.html'));
         }
     }
-
+    next();
     //res.sendFile(path.join(__dirname,'../../secret_south/secret_south_angular/dist/front/index.html'))
 });
 
