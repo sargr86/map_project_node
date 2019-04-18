@@ -102,7 +102,7 @@ exports.login = async (req, res) => {
     if (!res.headersSent) {
 
         // User is not active
-        if (!user) res.status(500).json({name: 'you_are_inactive_error'});
+        if (!user) res.status(500).json({msg: 'You are inactive'});
 
         else {
             // Cloning users object without password and saving user full name
