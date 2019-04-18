@@ -14,8 +14,9 @@ module.exports = (sequelize, DataTypes) => {
     }, {underscored: true});
     users.associate = function (models) {
         // users.belongsToMany(models.roles, {through: models.users_roles, foreignKey: 'user_id'})
-        users.belongsTo(models.users_statuses, {foreignKey: 'status_id'})
+        users.belongsTo(models.users_statuses, {foreignKey: 'status_id'});
         users.belongsTo(models.roles, {foreignKey: 'role_id'})
+        users.belongsTo(models.partner_types, {foreignKey: 'partner_type_id'})
     };
     return users;
 };
