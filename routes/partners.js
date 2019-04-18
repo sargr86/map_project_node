@@ -4,7 +4,7 @@ const validatePartner = require('../validators/validatePartner');
 const validateLogin = require('../validators/validateLogin');
 
 router.post('/login', validateLogin.rules, partnersController.login);
-// router.use(checkAdmin);
+router.use(checkAdmin);
 router.get('/get', partnersController.get);
 router.get('/getTypes', partnersController.getTypes);
 router.get('/getOne', partnersController.getOne);
