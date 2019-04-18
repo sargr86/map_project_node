@@ -60,12 +60,11 @@ app.use('/home', require('./routes/home'));
 // });
 
 // Auth Routes
-app.use('/users', require('./routes/users'));
-app.use('/ferries', require('./routes/ferries'));
-app.use('/tours', require('./routes/tours'));
-app.use('/tour_types', require('./routes/tour_types'));
-app.use('/partners', require('./routes/partners'));
-
+app.use('/users', checkAdmin, require('./routes/users'));
+app.use('/ferries', checkAdmin, require('./routes/ferries'));
+app.use('/tours', checkAdmin, require('./routes/tours'));
+app.use('/tour_types', checkAdmin, require('./routes/tour_types'));
+app.use('/partners', checkAdmin, require('./routes/partners'));
 
 
 // Allowed extensions list can be extended depending on your own needs
@@ -83,13 +82,13 @@ const allowedExt = [
 
 // Separating Angular routes
 app.get('*', (req, res) => {
-    console.log(process.env.NODE_ENV)
+    // console.log(process.env.NODE_ENV)
     // if (req.url === '/') {
     //
     //     next();
     // }
     // else
-        fixRoutes(req, res);
+    fixRoutes(req, res);
 
 });
 
