@@ -30,27 +30,27 @@ exports.register = async (req, res) => {
             }
 
             // Saving the original password of user and hashing it to save in db
-            let originalPass = data.password;
+            let originalPass = data.pass;
             data.password = bcrypt.hashSync(originalPass, 10);
 
-            // Getting the translations of user first and last names
-            let firstName = await translateHelper(data['first_name_' + lang], lang, 'first_name');
-            let lastName = await translateHelper(data['last_name_' + lang], lang, 'last_name');
 
             // Getting active status id and appending it to user request data
-            let status = await UsersStatuses.findOne({name_en: 'active', attributes: ['id']});
+            let status = await UsersStatuses.findOne({where:{name_en: 'active'}, attributes: ['id']});
             data.status_id = status.toJSON()['id'];
 
-            // Merging translated names & descriptions with the request object
-            let merged = {...data, ...firstName, ...lastName};
+            let role = await Roles.findOne({where:{name_en: 'Partner'}, attributes: ['id']});
+            data.role_id = role.toJSON()['id'];
 
-            await Users.create(merged);
+
+            await Users.create(data);
 
             // Saving the original password again to request for authenticating the user at once
             data.password = originalPass;
             req.body = data;
 
-            this.login(req, res);
+            res.json("OK");
+
+            // this.login(req, res);
         }
 
 
@@ -77,24 +77,25 @@ exports.login = async (req, res) => {
     let email = data.email.trim();
     let lang = 'en';
 
-    console.log('!!!!!!!!!!!!!!!!')
-    console.log(lang)
-    console.log('!!!!!!!!!!!!!!!!')
+    let userType = data.userType ? 'Partner' : 'Admin';
 
 
-    let attributes = [`first_name_en`, `last_name_en`, 'email', 'profile_img', 'password', 'id', 'status_id'];
+    let attributes = [`first_name`, `last_name`, 'email', 'profile_img', 'password', 'id', 'status_id'];
 
     // Active status selecting
     let statusWhere = sequelize.where(sequelize.col('`users_status`.`name_en`'), 'active');
+
+    let userTypeWhere = sequelize.where(sequelize.col('`role.name_en`'), userType);
+
 
     // Selecting an employee that has an email matching request one
     let user = await Users.findOne({
         attributes: attributes,
         include: [
-            {model: UsersStatuses, attributes: ['name_en','id'],where:{statusWhere}},
-            {model: Roles, attributes: ['name_en','id']},
+            {model: UsersStatuses, attributes: ['name_en', 'id'], where: {statusWhere}},
+            {model: Roles, attributes: ['name_en', 'id'], where: {userTypeWhere}}
         ],
-        where: {email: email}
+        where: {email: email,userTypeWhere}
     }, res);
 
 
@@ -106,7 +107,7 @@ exports.login = async (req, res) => {
         else {
             // Cloning users object without password and saving user full name
             let {password, ...details} = user.toJSON();
-            let full_name = user[`first_name_${lang}`] + ' ' + user[`last_name_${lang}`];
+            let full_name = user[`first_name`] + ' ' + user[`last_name`];
 
 
             res.status(200).json({

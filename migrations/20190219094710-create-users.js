@@ -9,25 +9,19 @@ module.exports = {
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
+            role_id: {
+                type: Sequelize.INTEGER
+            },
             status_id: {
                 type: Sequelize.INTEGER
             },
-            first_name_en: {
+            partner_type_id: {
+                type: Sequelize.INTEGER,
+            },
+            first_name: {
                 type: Sequelize.STRING
             },
-            last_name_en: {
-                type: Sequelize.STRING
-            },
-            first_name_ru: {
-                type: Sequelize.STRING
-            },
-            last_name_ru: {
-                type: Sequelize.STRING
-            },
-            first_name_hy: {
-                type: Sequelize.STRING
-            },
-            last_name_hy: {
+            last_name: {
                 type: Sequelize.STRING
             },
             birthday: {

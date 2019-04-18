@@ -1,5 +1,5 @@
 require('../constants/sequelize');
-
+const authController = require('./authController');
 /**
  * Gets all partners list
  * @param req
@@ -7,7 +7,19 @@ require('../constants/sequelize');
  * @returns {Promise<void>}
  */
 exports.get = async (req, res) => {
-    let result = await Partners.findAll({});
+
+    // Active status selecting
+    let statusWhere = sequelize.where(sequelize.col('`users_status`.`name_en`'), 'active');
+
+    let userTypeWhere = sequelize.where(sequelize.col('`role.name_en`'), 'Partner');
+
+
+    let result = await Users.findAll({
+        include: [
+            {model: UsersStatuses, attributes: ['name_en', 'id'], where: {statusWhere}},
+            {model: Roles, attributes: ['name_en', 'id'], where: {userTypeWhere}}
+        ],
+    });
     res.json(result);
 };
 
@@ -19,8 +31,8 @@ exports.get = async (req, res) => {
  */
 exports.getOne = async (req, res) => {
     let data = req.query;
-    let result = await Partners.findOne({
-        where: {id: data.id}, attributes: ['first_name', 'last_name', 'email', 'type', 'id']
+    let result = await Users.findOne({
+        where: {id: data.id}, attributes: ['first_name', 'last_name', 'email', 'partner_type_id', 'id']
     });
     res.json(result);
 };
@@ -44,14 +56,15 @@ exports.getTypes = async (req, res) => {
  */
 exports.add = async (req, res) => {
 
-    // Getting validation result from express-validator
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(422).json(errors.array()[0]);
-    }
-
-    await Partners.create(req.body);
-    this.get(req,res);
+    // // Getting validation result from express-validator
+    // const errors = validationResult(req);
+    // if (!errors.isEmpty()) {
+    //     return res.status(422).json(errors.array()[0]);
+    // }
+    //
+    // await Users.create(req.body);
+    // this.get(req, res);
+    authController.register(req,res);
 };
 
 /**
@@ -62,7 +75,7 @@ exports.add = async (req, res) => {
  */
 exports.remove = async (req, res) => {
     let data = req.query;
-    await Partners.destroy({where: {id: data.id}});
+    await Users.destroy({where: {id: data.id}});
     this.get(req, res);
 };
 
@@ -76,6 +89,17 @@ exports.update = async (req, res) => {
     let data = req.body;
     let id = data.id;
     delete data.id;
-    await Partners.update(data, {where: {id: id}});
+    await Users.update(data, {where: {id: id}});
     this.get(req, res);
+};
+
+/**
+ * Partner login
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+exports.login = async (req, res) => {
+    req.body.userType = 'partner';
+    authController.login(req,res);
 };

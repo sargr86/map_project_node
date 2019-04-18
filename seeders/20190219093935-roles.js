@@ -7,7 +7,7 @@ module.exports = {
                 name_en: "Admin",
             },
             {
-                name_en: "User",
+                name_en: "Partner",
 
             }
         ])

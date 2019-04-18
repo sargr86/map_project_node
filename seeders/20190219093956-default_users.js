@@ -10,15 +10,22 @@ module.exports = {
             },
         }, ['id']);
 
+        const role_id = await queryInterface.rawSelect('roles', {
+            where: {
+                name_en: 'Admin'
+            },
+        }, ['id']);
+
         return queryInterface.bulkInsert('users', [
             {
-                first_name_en: 'John',
-                last_name_en: 'Doe',
+                first_name: 'John',
+                last_name: 'Doe',
                 birthday: '1986-03-30',
                 gender: 'male',
                 email: 'admin@gmail.com',
                 password: bcrypt.hashSync('12345678', 10),
                 profile_img: '',
+                role_id: role_id,
                 status_id: status_id,
                 created_at: new Date(),
                 updated_at: new Date()

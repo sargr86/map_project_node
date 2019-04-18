@@ -64,7 +64,7 @@ app.use('/users', checkAdmin, require('./routes/users'));
 app.use('/ferries', checkAdmin, require('./routes/ferries'));
 app.use('/tours', checkAdmin, require('./routes/tours'));
 app.use('/tour_types', checkAdmin, require('./routes/tour_types'));
-app.use('/partners', checkAdmin, require('./routes/partners'));
+app.use('/partners', require('./routes/partners'));
 
 
 // Allowed extensions list can be extended depending on your own needs
