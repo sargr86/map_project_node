@@ -20,45 +20,6 @@ app.use('/uploads/', express.static(UPLOADS_FOLDER));
 app.use('/auth', require('./routes/auth'));
 app.use('/home', require('./routes/home'));
 
-// Admin middleware
-// app.use((req, res, next) => {
-//     let token = req.headers['x-access-token'] || req.headers['authorization']; // Express headers are auto converted to lowercase
-//     // if(process.env.NODE_ENV === 'production'){
-//     //
-//     // }
-//
-//
-//     fixRoutes(req, res);
-//     if (!token) {
-//         res.status(500).json('Auth token is not supplied');
-//     }
-//     if (token.startsWith('Bearer ')) {
-//         // Remove Bearer from string
-//         token = token.slice(7, token.length);
-//     }
-//
-//     if (token) {
-//         jwt.verify(token, 'secretkey', (err, decoded) => {
-//             if (err) {
-//                 return res.json({
-//                     success: false,
-//                     message: 'Token is not valid'
-//                 });
-//             } else {
-//                 req.decoded = decoded;
-//                 next();
-//             }
-//         });
-//     } else {
-//         console.log("URL is "+req.url)
-//         if (req.url === '/') {
-//
-//             next();
-//         } else return res.status(500).json('Auth token is not supplied');
-//     }
-//
-// });
-
 // Auth Routes
 app.use('/users', checkAdmin, require('./routes/users'));
 app.use('/ferries', checkAdmin, require('./routes/ferries'));
