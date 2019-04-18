@@ -4,7 +4,7 @@ module.exports = {
     up: (queryInterface, Sequelize) => {
         return queryInterface.bulkInsert('partner_types', [
             {
-                name: 'Ferry'
+                name: 'Ferries'
             },
             {
                 name: 'Food/Drink'

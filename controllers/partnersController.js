@@ -17,7 +17,8 @@ exports.get = async (req, res) => {
     let result = await Users.findAll({
         include: [
             {model: UsersStatuses, attributes: ['name_en', 'id'], where: {statusWhere}},
-            {model: Roles, attributes: ['name_en', 'id'], where: {userTypeWhere}}
+            {model: Roles, attributes: ['name_en', 'id'], where: {userTypeWhere}},
+            {model:PartnerTypes}
         ],
     });
     res.json(result);
@@ -32,7 +33,10 @@ exports.get = async (req, res) => {
 exports.getOne = async (req, res) => {
     let data = req.query;
     let result = await Users.findOne({
-        where: {id: data.id}, attributes: ['first_name', 'last_name', 'email', 'partner_type_id', 'id']
+        where: {id: data.id}, attributes: ['first_name', 'last_name', 'email', 'partner_type_id', 'id'],
+        include:[
+            {model:PartnerTypes}
+        ]
     });
     res.json(result);
 };
