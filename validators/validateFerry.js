@@ -9,8 +9,8 @@ const rules = [
     body('lng').not().isEmpty().withMessage('Longitude is required'),
     body('phone').not().isEmpty().withMessage('Phone number is required'),
     body('address').not().isEmpty().withMessage('Address is required'),
-    body('partner_id').not().isEmpty().withMessage('Partner is required'),
     body('type').not().isEmpty().withMessage('Partner type is required'),
+    body('partner_id').not().isEmpty().withMessage('Partner is required'),
     body().custom(async (req) => {
         let email = req.email;
 
