@@ -7,3 +7,4 @@ global.Ferries = db.ferries;
 global.Tours = db.tours;
 global.ToursType = db.tours_type;
 global.PartnerTypes = db.partner_types;
+global.FoodDrink = db.food_drink;
