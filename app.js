@@ -25,6 +25,7 @@ app.use('/users', checkAdmin, require('./routes/users'));
 app.use('/ferries', checkAdmin, require('./routes/ferries'));
 app.use('/tours', checkAdmin, require('./routes/tours'));
 app.use('/tour_types', checkAdmin, require('./routes/tour_types'));
+app.use('/food-drink', checkAdmin, require('./routes/food_drink'));
 app.use('/partners', require('./routes/partners'));
 
 
@@ -43,12 +44,6 @@ const allowedExt = [
 
 // Separating Angular routes
 app.get('*', (req, res) => {
-    // console.log(process.env.NODE_ENV)
-    // if (req.url === '/') {
-    //
-    //     next();
-    // }
-    // else
     fixRoutes(req, res);
 
 });
