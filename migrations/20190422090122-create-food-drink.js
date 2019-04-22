@@ -11,6 +11,9 @@ module.exports = {
       type_id: {
         type: Sequelize.INTEGER
       },
+      partner_id: {
+        type: Sequelize.INTEGER
+      },
       name: {
         type: Sequelize.STRING
       },
@@ -28,14 +31,6 @@ module.exports = {
       },
       img: {
         type: Sequelize.STRING
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
       }
     });
   },
