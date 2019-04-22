@@ -30,6 +30,29 @@ exports.getOne = async (req, res) => {
 };
 
 /**
+ * Gets tour partners list
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+exports.getPartners = async (req, res) => {
+
+    let statusWhere = sequelize.where(sequelize.col('`users_status`.`name_en`'), 'active');
+
+    let userTypeWhere = sequelize.where(sequelize.col('`role.name_en`'), 'Partner');
+
+    const partners = await to(Users.findAll({
+        include: [
+            {model: UsersStatuses, attributes: ['name_en', 'id'], where: {statusWhere}},
+            {model: Roles, attributes: ['name_en', 'id'], where: {userTypeWhere}},
+            {model: PartnerTypes, where: {name: 'Tours'}}
+        ]
+    }));
+
+    res.json(partners);
+};
+
+/**
  * Adds a new tour
  * @param req
  * @param res

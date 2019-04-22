@@ -10,27 +10,28 @@ exports.get = async (req, res) => {
 };
 
 /**
- * Gets food-drink partners
+ * Gets food-drink partners list
  * @param req
  * @param res
  * @returns {Promise<void>}
  */
 exports.getPartners = async (req, res) => {
-    // Active status selecting
+
     let statusWhere = sequelize.where(sequelize.col('`users_status`.`name_en`'), 'active');
 
     let userTypeWhere = sequelize.where(sequelize.col('`role.name_en`'), 'Partner');
 
-
-    let result = await Users.findAll({
+    const partners = await to(Users.findAll({
         include: [
             {model: UsersStatuses, attributes: ['name_en', 'id'], where: {statusWhere}},
             {model: Roles, attributes: ['name_en', 'id'], where: {userTypeWhere}},
-            {model: PartnerTypes}
-        ],
-    });
-    res.json(result);
+            {model: PartnerTypes, where: {name: 'Food/Drink'}}
+        ]
+    }));
+
+    res.json(partners);
 };
+
 
 /**
  * Gets one food-drink info
