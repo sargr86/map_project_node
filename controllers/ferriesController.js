@@ -12,6 +12,23 @@ exports.get = async (req, res) => {
 };
 
 /**
+ * Gets ferry partners list
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+exports.getPartners = async (req, res) => {
+
+    const partners = await to(Users.findAll({
+        include: [
+            {model: PartnerTypes, where: {name: 'Ferries'}}
+        ]
+    }));
+
+    res.json(partners);
+};
+
+/**
  * Gets one ferry info
  * @param req
  * @param res
@@ -63,7 +80,7 @@ exports.remove = async (req, res) => {
  * @param res
  * @returns {Promise<void>}
  */
-exports.update = async(req,res) =>{
+exports.update = async (req, res) => {
 
     // Getting validation result from express-validator
     const errors = validationResult(req);
