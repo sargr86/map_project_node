@@ -22,10 +22,10 @@ app.use('/home', require('./routes/home'));
 
 // Auth Routes
 app.use('/users', checkAdmin, require('./routes/users'));
-app.use('/ferries', checkAdmin, require('./routes/ferries'));
-app.use('/tours', checkAdmin, require('./routes/tours'));
+app.use('/ferries', require('./routes/ferries'));
+app.use('/tours', require('./routes/tours'));
 app.use('/tour_types', checkAdmin, require('./routes/tour_types'));
-app.use('/food-drink', checkAdmin, require('./routes/food_drink'));
+app.use('/food-drink', require('./routes/food_drink'));
 app.use('/partners', require('./routes/partners'));
 
 

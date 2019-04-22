@@ -3,9 +3,9 @@ const ferriesController = require('../controllers/ferriesController');
 const validateFerry = require('../validators/validateFerry');
 
 router.get('/get', ferriesController.get);
-router.get('/getOne', ferriesController.getOne);
-router.post('/add', validateFerry.rules, ferriesController.add);
-router.put('/update',validateFerry.rules, ferriesController.update);
-router.delete('/remove', ferriesController.remove);
+router.get('/getOne',checkAdmin, ferriesController.getOne);
+router.post('/add',checkAdmin, validateFerry.rules, ferriesController.add);
+router.put('/update',checkAdmin,validateFerry.rules, ferriesController.update);
+router.delete('/remove',checkAdmin, ferriesController.remove);
 
 module.exports = router;
