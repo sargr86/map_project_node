@@ -75,7 +75,6 @@ exports.login = async (req, res) => {
     // Getting request data and setting user fields to return
     let data = req.body;
     let email = data.email.trim();
-    let lang = 'en';
 
     let userType = data.userType ? 'Partner' : 'Admin';
 
