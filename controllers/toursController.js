@@ -24,7 +24,10 @@ exports.get = async (req, res) => {
 exports.getOne = async (req, res) => {
     let data = req.query;
     let result = await Tours.findOne({
-        where: {id: data.id}
+        where: {id: data.id},
+        include:[
+            {model:Users}
+        ]
     });
     res.json(result);
 };
