@@ -9,4 +9,5 @@ global.ToursType = db.tours_type;
 global.PartnerTypes = db.partner_types;
 global.FoodDrink = db.food_drink;
 global.Activities = db.activities;
+global.ActivityTypes = db.activity_types;
 global.Accommodations = db.accommodations;

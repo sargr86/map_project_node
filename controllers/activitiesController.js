@@ -103,3 +103,81 @@ exports.update = async(req,res) =>{
     await Activities.update(data, {where: {id: id}});
     this.get(req, res);
 };
+
+
+
+/**
+ * Gets all tour types list
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+exports.getActivityTypes = async (req, res) => {
+    let result = await ActivityTypes.findAll({});
+    res.json(result);
+};
+
+/**
+ * Adds a new tour type
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+exports.addActivityType = async (req, res) => {
+
+    // Getting validation result from express-validator
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(422).json(errors.array()[0]);
+    }
+
+    await ActivityTypes.create(req.body);
+    this.get(req, res);
+};
+
+/**
+ * Updates a tour type
+ * @param req
+ * @param res
+ * @returns {Promise<*>}
+ */
+exports.updateActivityType = async (req, res) => {
+
+    // Getting validation result from express-validator
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(422).json(errors.array()[0]);
+    }
+
+    let data = req.body;
+    let id = data.id;
+    delete data.id;
+    await ActivityTypes.update(data, {where: {id: id}});
+    this.get(req, res);
+};
+
+/**
+ * Gets one tour type
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+exports.getOneActivityType = async (req, res) => {
+    let data = req.query;
+    let result = await ActivityTypes.findOne({
+        where: {id: data.id}
+    });
+    res.json(result);
+};
+
+/**
+ * Removes a tour type
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+exports.removeActivityType = async (req, res) => {
+    let data = req.query;
+    await ActivityTypes.destroy({where: {id: data.id}});
+    this.getTourTypes(req, res);
+};
