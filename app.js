@@ -26,6 +26,8 @@ app.use('/ferries', require('./routes/ferries'));
 app.use('/tours', require('./routes/tours'));
 app.use('/tour_types', checkAdmin, require('./routes/tour_types'));
 app.use('/food-drink', require('./routes/food_drink'));
+app.use('/activities', require('./routes/activities'));
+app.use('/accommodations', require('./routes/accommodations'));
 app.use('/partners', require('./routes/partners'));
 
 

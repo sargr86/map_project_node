@@ -11,6 +11,12 @@ module.exports = {
             },
             {
                 name: 'Tours'
+            },
+            {
+                name: 'Activities'
+            },
+            {
+                name: 'Accommodations'
             }
         ])
     },
