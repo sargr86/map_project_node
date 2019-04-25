@@ -2,7 +2,7 @@ require('../constants/sequelize');
 
 const rules = [
     body('name').not().isEmpty().withMessage('Name is required'),
-    body('email').not().isEmpty().withMessage('E-mail is required').isEmail().withMessage('Email is invalid'),
+    // body('email').not().isEmpty().withMessage('E-mail is required').isEmail().withMessage('Email is invalid'),
     body('max_people').not().isEmpty().withMessage('Max people is required'),
     body('min_people').not().isEmpty().withMessage('Min people is required'),
     body('lat').not().isEmpty().withMessage('Latitude is required'),
