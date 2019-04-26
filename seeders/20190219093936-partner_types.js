@@ -1,24 +1,9 @@
 'use strict';
-
+require('../constants/main');
 module.exports = {
-    up: (queryInterface, Sequelize) => {
-        return queryInterface.bulkInsert('partner_types', [
-            {
-                name: 'Ferries'
-            },
-            {
-                name: 'Food/Drink'
-            },
-            {
-                name: 'Tours'
-            },
-            {
-                name: 'Activities'
-            },
-            {
-                name: 'Accommodations'
-            }
-        ])
+    up: async(queryInterface, Sequelize) => {
+        const data = await fse.readJSON(path.resolve(__dirname + '/data/partner_types.json'));
+        return queryInterface.bulkInsert('partner_types', data)
     },
 
     down: (queryInterface, Sequelize) => {

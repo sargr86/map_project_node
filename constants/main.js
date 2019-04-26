@@ -9,6 +9,7 @@ global.postMaxSize = 50;
 global.jwt = require('jsonwebtoken');
 global.port = process.env.PORT || 3000;
 global.server = require('http').createServer(app);
+global.fse = require('fs-extra');
 
 console.log(`Your port is ${process.env.PORT}`)
 
