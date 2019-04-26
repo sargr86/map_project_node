@@ -18,13 +18,13 @@ if (config.use_env_variable) {
 
 // Handling sequelize db connecting for all requests
 app.get('*', (req, res, next) => {
-
     sequelize.authenticate()
         .then(() => {
             next();
         })
         .catch(err => {
-            res.status(422).json({db_error: err.toString()});
+console.log('!!!!!')
+            res.status(422).json({db_error: 'Please check db connection'}); //err.toString()
         });
     if (!res.headersSent) {
         next();

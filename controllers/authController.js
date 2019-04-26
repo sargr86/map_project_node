@@ -35,10 +35,10 @@ exports.register = async (req, res) => {
 
 
             // Getting active status id and appending it to user request data
-            let status = await UsersStatuses.findOne({where:{name_en: 'active'}, attributes: ['id']});
+            let status = await UsersStatuses.findOne({where: {name_en: 'active'}, attributes: ['id']});
             data.status_id = status.toJSON()['id'];
 
-            let role = await Roles.findOne({where:{name_en: 'Partner'}, attributes: ['id']});
+            let role = await Roles.findOne({where: {name_en: 'Partner'}, attributes: ['id']});
             data.role_id = role.toJSON()['id'];
 
 
@@ -66,55 +66,53 @@ exports.register = async (req, res) => {
  */
 exports.login = async (req, res) => {
 
-    // Getting validation result from express-validator
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(422).json(errors.array()[0]);
-    }
 
-    // Getting request data and setting user fields to return
-    let data = req.body;
-    let email = data.email.trim();
+    // Checking validation result from express-validator
+    if (!showIfErrors(req, res)) {
+        // Getting request data and setting user fields to return
+        let data = req.body;
+        let email = data.email.trim();
 
-    let userType = data.userType ? 'Partner' : 'Admin';
+        let userType = data.userType ? 'Partner' : 'Admin';
 
 
-    let attributes = [`first_name`, `last_name`, 'email', 'profile_img', 'password', 'id', 'status_id'];
+        let attributes = [`first_name`, `last_name`, 'email', 'profile_img', 'password', 'id', 'status_id'];
 
-    // Active status selecting
-    let statusWhere = sequelize.where(sequelize.col('`users_status`.`name_en`'), 'active');
+        // Active status selecting
+        let statusWhere = sequelize.where(sequelize.col('`users_status`.`name_en`'), 'active');
 
-    let userTypeWhere = sequelize.where(sequelize.col('`role.name_en`'), userType);
-
-
-    // Selecting an employee that has an email matching request one
-    let user = await Users.findOne({
-        attributes: attributes,
-        include: [
-            {model: UsersStatuses, attributes: ['name_en', 'id'], where: {statusWhere}},
-            {model: Roles, attributes: ['name_en', 'id'], where: {userTypeWhere}}
-        ],
-        where: {email: email,userTypeWhere}
-    }, res);
+        let userTypeWhere = sequelize.where(sequelize.col('`role.name_en`'), userType);
 
 
-    if (!res.headersSent) {
+        // Selecting an employee that has an email matching request one
+        let user = await Users.findOne({
+            attributes: attributes,
+            include: [
+                {model: UsersStatuses, attributes: ['name_en', 'id'], where: {statusWhere}},
+                {model: Roles, attributes: ['name_en', 'id'], where: {userTypeWhere}}
+            ],
+            where: {email: email, userTypeWhere}
+        }, res);
 
-        // User is not active
-        if (!user) res.status(500).json({msg: 'You don\'t have such privileges or the account is inactive'});
 
-        else {
-            // Cloning users object without password and saving user full name
-            let {password, ...details} = user.toJSON();
-            let full_name = user[`first_name`] + ' ' + user[`last_name`];
+        if (!res.headersSent) {
+
+            // User is not active
+            if (!user) res.status(500).json({msg: 'You don\'t have such privileges or the account is inactive'});
+
+            else {
+                // Cloning users object without password and saving user full name
+                let {password, ...details} = user.toJSON();
+                let full_name = user[`first_name`] + ' ' + user[`last_name`];
 
 
-            res.status(200).json({
-                token: jwt.sign(details, 'secretkey', {expiresIn: '8h'}), user_id: user.id, full_name: full_name
-            })
+                res.status(200).json({
+                    token: jwt.sign(details, 'secretkey', {expiresIn: '8h'}), user_id: user.id, full_name: full_name
+                })
+            }
+
+
         }
-
-
     }
 
 
