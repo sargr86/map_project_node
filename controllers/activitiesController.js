@@ -179,5 +179,5 @@ exports.getOneActivityType = async (req, res) => {
 exports.removeActivityType = async (req, res) => {
     let data = req.query;
     await ActivityTypes.destroy({where: {id: data.id}});
-    this.getTourTypes(req, res);
+    this.getActivityTypes(req, res);
 };
