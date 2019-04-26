@@ -59,15 +59,6 @@ exports.getTypes = async (req, res) => {
  * @returns {Promise<void>}
  */
 exports.add = async (req, res) => {
-
-    // // Getting validation result from express-validator
-    // const errors = validationResult(req);
-    // if (!errors.isEmpty()) {
-    //     return res.status(422).json(errors.array()[0]);
-    // }
-    //
-    // await Users.create(req.body);
-    // this.get(req, res);
     authController.register(req,res);
 };
 
