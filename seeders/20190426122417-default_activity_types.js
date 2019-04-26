@@ -3,7 +3,6 @@ require('../constants/main');
 module.exports = {
     up: async (queryInterface, Sequelize) => {
         const data = await fse.readJSON(path.resolve(__dirname + '/data/activity_types.json'));
-        console.log(data)
         return queryInterface.bulkInsert('activity_types', data)
     },
 
