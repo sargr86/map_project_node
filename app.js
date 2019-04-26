@@ -1,7 +1,5 @@
 require('dotenv').config();
 require('./constants/main');
-// const path = require('path');
-// const fs = require('fs');
 
 // Start server on pre-defined port
 server.listen(port);
@@ -48,7 +46,6 @@ const allowedExt = [
 // Separating Angular routes
 app.get('*', (req, res) => {
     fixRoutes(req, res);
-
 });
 
 fixRoutes = (req, res) => {

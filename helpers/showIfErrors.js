@@ -1,4 +1,5 @@
-module.exports = (req,res,err)=>{
+module.exports = (req, res, err = '') => {
+
     // Gets file type validation error
     if (req.fileTypeError) {
         res.status(423).json(req.fileTypeError);
@@ -16,9 +17,17 @@ module.exports = (req,res,err)=>{
 
         // Getting validation result from express-validator
         const errors = validationResult(req);
+
+
+        // Handling database connection error
+
         if (!errors.isEmpty()) {
-           res.status(422).json(errors.array()[0]);
-            return true;
+            let singleError = errors.array()[0];
+            if (singleError.hasOwnProperty('msg') && singleError.msg.includes('ECONNREFUSED 127.0.0.1:3306')) {
+                singleError = 'Please check db connection';
+                return res.status(422).json({db_error: singleError});
+            } else return res.status(422).json(singleError);
+            // return true;
         }
     }
     return false;
