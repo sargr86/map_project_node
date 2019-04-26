@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
         birthday: DataTypes.DATEONLY,
         gender: DataTypes.STRING,
         email: DataTypes.STRING,
+        phone: DataTypes.STRING,
         password: DataTypes.STRING,
         profile_img: DataTypes.STRING,
     }, {underscored: true});
