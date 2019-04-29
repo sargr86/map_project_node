@@ -73,7 +73,7 @@ exports.login = async (req, res) => {
         let data = req.body;
         let email = data.email.trim();
 
-        let userType = data.userType ? 'Partner' : 'Admin';
+        // let userType = data.userType ? 'Partner' : 'Admin';
 
 
         let attributes = [`first_name`, `last_name`, 'email', 'profile_img', 'password', 'id', 'status_id'];
@@ -81,7 +81,7 @@ exports.login = async (req, res) => {
         // Active status selecting
         let statusWhere = sequelize.where(sequelize.col('`users_status`.`name_en`'), 'active');
 
-        let userTypeWhere = sequelize.where(sequelize.col('`role.name_en`'), userType);
+        // let userTypeWhere = sequelize.where(sequelize.col('`role.name_en`'), userType);
 
 
         // Selecting an employee that has an email matching request one
@@ -89,9 +89,9 @@ exports.login = async (req, res) => {
             attributes: attributes,
             include: [
                 {model: UsersStatuses, attributes: ['name_en', 'id'], where: {statusWhere}},
-                {model: Roles, attributes: ['name_en', 'id'], where: {userTypeWhere}}
+                {model: Roles, attributes: ['name_en', 'id']} // where: {userTypeWhere}
             ],
-            where: {email: email, userTypeWhere}
+            where: {email: email} //userTypeWhere
         }, res);
 
 
