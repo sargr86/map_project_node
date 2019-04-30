@@ -7,7 +7,11 @@ require('../constants/sequelize');
  * @returns {Promise<void>}
  */
 exports.get = async (req, res) => {
-    const result = await to(Ferries.findAll({}));
+    const data = req.query;
+    let partner_id = data.partner_id;
+
+    let wherePartner = {where: partner_id ? {partner_id: data.partner_id} : {}};
+    const result = await to(Ferries.findAll(wherePartner));
     res.json(result);
 };
 
@@ -84,7 +88,6 @@ exports.remove = async (req, res) => {
  * @returns {Promise<void>}
  */
 exports.update = async (req, res) => {
-
     // Getting validation result from express-validator
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

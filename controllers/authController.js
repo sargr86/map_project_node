@@ -120,7 +120,7 @@ exports.login = async (req, res) => {
 
 
 /**
- * Updates profile info
+ * Updates show-profile info
  * @param req
  * @param res
  * @returns {Promise<void>}
