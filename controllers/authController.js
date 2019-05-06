@@ -159,8 +159,18 @@ exports.updateProfile = async (req, res) => {
 
 };
 
+/**
+ * Gets profile data of current authenticated user
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
 exports.getProfile = async (req, res) => {
+
+    const data = req.query;
+    const email = data.email;
+
     // Selecting an employee that has an email matching request one
-    let user = await Users.findOne({})
+    let user = await Users.findOne({where: {email: email}})
     res.json(user);
 };
