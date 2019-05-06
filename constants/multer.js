@@ -32,7 +32,7 @@ let upload = multer({
 
 
         if (!mimetype && !extname) {
-            req.fileTypeError = "invalid_file_type";
+            req.fileTypeError = {message: "The file has an invalid type"};
             return cb(null, false, req.fileTypeError)
         }
         cb(null, true);
