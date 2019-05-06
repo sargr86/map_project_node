@@ -169,8 +169,11 @@ exports.getProfile = async (req, res) => {
 
     const data = req.query;
     const email = data.email;
+    const attributes = ['first_name', 'last_name', 'id','email', 'profile_img'
+        // 'partner_type_id',  'role_id'
+    ];
 
     // Selecting an employee that has an email matching request one
-    let user = await Users.findOne({where: {email: email}})
+    let user = await Users.findOne({where: {email: email}, attributes: attributes})
     res.json(user);
 };
