@@ -8,7 +8,6 @@ require('../constants/sequelize');
  */
 exports.register = async (req, res) => {
     let data = req.body;
-    let lang = data.lang || 'en';
 
     uploadProfileImg(req, res, async (err) => {
 
@@ -89,8 +88,8 @@ exports.login = async (req, res) => {
             attributes: attributes,
             include: [
                 {model: UsersStatuses, attributes: ['name_en', 'id'], where: {statusWhere}},
-                {model: Roles, attributes: ['name_en', 'id']} ,// where: {userTypeWhere},
-                {model:PartnerTypes}
+                {model: Roles, attributes: ['name_en', 'id']},// where: {userTypeWhere},
+                {model: PartnerTypes}
             ],
             where: {email: email} //userTypeWhere
         }, res);
@@ -158,4 +157,10 @@ exports.updateProfile = async (req, res) => {
     })
 
 
-}
+};
+
+exports.getProfile = async (req, res) => {
+    // Selecting an employee that has an email matching request one
+    let user = await Users.findOne({})
+    res.json(user);
+};
