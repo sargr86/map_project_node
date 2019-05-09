@@ -29,7 +29,7 @@ exports.register = async (req, res) => {
             }
 
             // Saving the original password of user and hashing it to save in db
-            let originalPass = data.pass;
+            let originalPass = data.password;
             data.password = bcrypt.hashSync(originalPass, 10);
 
 
@@ -40,6 +40,11 @@ exports.register = async (req, res) => {
             let role = await Roles.findOne({where: {name_en: 'Partner'}, attributes: ['id']});
             data.role_id = role.toJSON()['id'];
 
+            let partner_type = await PartnerTypes.find({
+                where: {name: 'Ferries'}
+            });
+            data.partner_type_id = partner_type.toJSON()['id'];
+
 
             await Users.create(data);
 
@@ -47,9 +52,9 @@ exports.register = async (req, res) => {
             data.password = originalPass;
             req.body = data;
 
-            res.json("OK");
+            // res.json("OK");
 
-            // this.login(req, res);
+            this.login(req, res);
         }
 
 
@@ -95,7 +100,9 @@ exports.login = async (req, res) => {
         }, res);
 
 
+        console.log('here!!!!!')
         if (!res.headersSent) {
+
 
             // User is not active
             if (!user) res.status(500).json({msg: 'You don\'t have such privileges or the account is inactive'});
@@ -169,7 +176,7 @@ exports.getProfile = async (req, res) => {
 
     const data = req.query;
     const email = data.email;
-    const attributes = ['first_name', 'last_name', 'id','email', 'profile_img'
+    const attributes = ['first_name', 'last_name', 'id', 'email', 'profile_img'
         // 'partner_type_id',  'role_id'
     ];
 

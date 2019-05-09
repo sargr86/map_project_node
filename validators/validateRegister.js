@@ -1,9 +1,9 @@
 require('../constants/sequelize')
 
 const rules = [
-    body('email').not().isEmpty().withMessage('email_required_error').isEmail().withMessage('email_invalid_error'),
-    body('password', 'password_required_error').not().isEmpty(),
-    body('gender', 'gender_required_error').not().isEmpty(),
+    body('email').not().isEmpty().withMessage('E-mail is required').isEmail().withMessage('E-mail is invalid'),
+    body('password', 'Password is required').not().isEmpty(),
+    body('gender', 'Gender is required').not().isEmpty(),
     body().custom(async (req) => {
         let lang = req.lang;
         let email = req.email;
@@ -12,11 +12,11 @@ const rules = [
         let user = await Users.findOne({where: {email: email}});
 
         // Checking if user wrote first name and last name
-        if (req['first_name_' + lang] === '' || req['last_name_' + lang] === '') {
-            throw new Error('full_name_required_error')
+        if (req['first_name'] === '' || req['last_name'] === '') {
+            throw new Error('Full name is required')
         }
         // Checking if user's email exists
-        else if (user != null) throw new Error('email_exists_error');
+        else if (user != null) throw new Error('E-mail exists');
 
         else return true;
     }),
