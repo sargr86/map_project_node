@@ -28,6 +28,7 @@ app.use('/food-drink', require('./routes/food_drink'));
 app.use('/activities', require('./routes/activities'));
 app.use('/accommodations', require('./routes/accommodations'));
 app.use('/partners', require('./routes/partners'));
+app.use('/employees', require('./routes/employees'));
 
 
 // Allowed extensions list can be extended depending on your own needs
