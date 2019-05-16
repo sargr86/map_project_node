@@ -3,4 +3,6 @@ global.to = require('../helpers/getPromiseResult'); // Async/await error handler
 global.fullName = require('../helpers/getUserFullName');
 global.showIfErrors = require('../helpers/showIfErrors');
 global.validatePattern = require('../helpers/patternValidator');
-global.checkAdmin = require('../helpers/checkAdmin');
+global.checkAdmin = require('../helpers/checkRole');
+global.checkAuth = require('../helpers/checkAuth');
+global.checkRole = require('../helpers/checkRole')
