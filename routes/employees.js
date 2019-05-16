@@ -4,7 +4,7 @@ const validatePartner = require('../validators/validatePartner');
 const validateLogin = require('../validators/validateLogin');
 
 router.post('/login', validateLogin.rules, employeesController.login);
-router.get('/get',checkAdmin, employeesController.get);
+router.get('/get', employeesController.get);
 router.get('/getTypes', employeesController.getTypes);
 router.get('/getOne',checkAdmin, employeesController.getOne);
 router.post('/add',checkAdmin, uploadProfileImg,validatePartner.rules, employeesController.add);

@@ -14,21 +14,23 @@ app.use(cors(require('./config/cors')));
 // Static resources
 app.use('/uploads/', express.static(UPLOADS_FOLDER));
 
-
+// Non-auth routes
 app.use('/auth', require('./routes/auth'));
 app.use('/home', require('./routes/home'));
-
-// Auth Routes
-app.use('/users', checkAdmin, require('./routes/users'));
 app.use('/ferries', require('./routes/ferries'));
 app.use('/tours', require('./routes/tours'));
-app.use('/tour_types', checkAdmin, require('./routes/tour_types'));
-app.use('/activity_types', checkAdmin, require('./routes/activity_types'));
 app.use('/food-drink', require('./routes/food_drink'));
 app.use('/activities', require('./routes/activities'));
 app.use('/accommodations', require('./routes/accommodations'));
 app.use('/partners', require('./routes/partners'));
-app.use('/employees', require('./routes/employees'));
+
+// app.use();
+
+// Auth Routes
+app.use('/users', checkAuth, require('./routes/users'));
+app.use('/tour_types', checkAuth, require('./routes/tour_types'));
+app.use('/activity_types', checkAuth, require('./routes/activity_types'));
+app.use('/employees', checkAuth, require('./routes/employees'));
 
 
 // Allowed extensions list can be extended depending on your own needs
