@@ -18,7 +18,7 @@ exports.get = async (req, res) => {
         include: [
             {model: UsersStatuses, attributes: ['name_en', 'id'], where: {statusWhere}},
             {model: Roles, attributes: ['name_en', 'id'], where: {userTypeWhere}},
-            {model:PartnerTypes}
+            {model: PartnerTypes}
         ],
     });
     res.json(result);
@@ -33,9 +33,9 @@ exports.get = async (req, res) => {
 exports.getOne = async (req, res) => {
     let data = req.query;
     let result = await Users.findOne({
-        where: {id: data.id}, attributes: ['first_name', 'last_name', 'email', 'partner_type_id', 'id','phone'],
-        include:[
-            {model:PartnerTypes}
+        where: {id: data.id}, attributes: ['first_name', 'last_name', 'email', 'partner_type_id', 'id', 'phone'],
+        include: [
+            {model: PartnerTypes}
         ]
     });
     res.json(result);
@@ -59,7 +59,7 @@ exports.getTypes = async (req, res) => {
  * @returns {Promise<void>}
  */
 exports.add = async (req, res) => {
-    authController.register(req,res);
+    authController.register(req, res);
 };
 
 /**
@@ -96,5 +96,9 @@ exports.update = async (req, res) => {
  */
 exports.login = async (req, res) => {
     req.body.userType = 'partner';
-    authController.login(req,res);
+    authController.login(req, res);
+};
+
+exports.invite = async (req, res) => {
+
 };

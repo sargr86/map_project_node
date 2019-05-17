@@ -12,7 +12,7 @@ const rules = [
     body('min_people').not().isEmpty().withMessage('Min people is required'),
     body('lat').not().isEmpty().withMessage('Latitude is required').custom((lat) => validatePattern(lat, 'lat')).withMessage('Latitude is invalid'),
     body('lng').not().isEmpty().withMessage('Longitude is required').custom((lat) => validatePattern(lat, 'lat')).withMessage('Longitude is invalid'),
-    body('phone').not().isEmpty().withMessage('Phone number is required'),
+    // body('phone').not().isEmpty().withMessage('Phone number is required'),
     body('address').not().isEmpty().withMessage('Address is required'),
     body('partner_id').custom((partner_id, {req}) => {
         if (req.decoded.role.name_en.toLocaleLowerCase() === 'admin' && !req.body.partner_id) {
