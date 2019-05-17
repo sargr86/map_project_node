@@ -7,10 +7,10 @@ const validateLogin = require('../validators/validateLogin');
 router.post('/register', uploadProfileImg, validateRegister.rules, authController.register);
 router.post('/login', validateLogin.rules, authController.login);
 
-router.use(checkAuth);
+// router.use(checkAuth);
 
-router.put('/update-profile', uploadProfileImg, validateProfile.rules, authController.updateProfile);
-router.get('/get-profile', authController.getProfile);
+router.put('/update-profile', checkAuth,uploadProfileImg, validateProfile.rules, authController.updateProfile);
+router.get('/get-profile', checkAuth,authController.getProfile);
 
 
 module.exports = router;
