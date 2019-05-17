@@ -24,8 +24,6 @@ app.use('/activities', require('./routes/activities'));
 app.use('/accommodations', require('./routes/accommodations'));
 app.use('/partners', require('./routes/partners'));
 
-// app.use();
-
 // Auth Routes
 app.use('/users', checkAuth, require('./routes/users'));
 app.use('/tour_types', checkAuth, require('./routes/tour_types'));
