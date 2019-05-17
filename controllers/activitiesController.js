@@ -43,8 +43,9 @@ exports.getOne = async (req, res) => {
     let data = req.query;
     let result = await Activities.findOne({
         where: {id: data.id},
-        include:[
-            {model:Users}
+        include: [
+            {model: Users},
+            {model: ActivityTypes}
         ]
     });
 
@@ -89,7 +90,7 @@ exports.remove = async (req, res) => {
  * @param res
  * @returns {Promise<void>}
  */
-exports.update = async(req,res) =>{
+exports.update = async (req, res) => {
 
     // Getting validation result from express-validator
     const errors = validationResult(req);
@@ -103,7 +104,6 @@ exports.update = async(req,res) =>{
     await Activities.update(data, {where: {id: id}});
     this.get(req, res);
 };
-
 
 
 /**

@@ -2,6 +2,7 @@
 module.exports = (sequelize, DataTypes) => {
     const activities = sequelize.define('activities', {
         partner_id: DataTypes.INTEGER,
+        activity_type_id: DataTypes.INTEGER,
         name: DataTypes.STRING,
         description: DataTypes.TEXT,
         lat: DataTypes.STRING,
@@ -11,6 +12,8 @@ module.exports = (sequelize, DataTypes) => {
     }, {timestamps: false, underscored: true});
     activities.associate = function (models) {
         // associations can be defined here
+        activities.belongsTo(models.activity_types, {foreignKey: "activity_type_id"});
+        activities.belongsTo(models.users, {foreignKey: 'partner_id'})
     };
     return activities;
 };
