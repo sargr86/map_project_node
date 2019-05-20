@@ -12,6 +12,10 @@ let storage = multer.diskStorage({
             dir = TOURS_UPLOAD_FOLDER;
         }
 
+        else if('activity_type_id' in data){
+            dir = ACTIVITIES_UPLOAD_FOLDER;
+        }
+
         console.log(dir)
 
         cb(null, dir)
