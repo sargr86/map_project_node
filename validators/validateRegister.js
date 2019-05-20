@@ -7,6 +7,7 @@ const rules = [
     body('password', 'Password is required').not().isEmpty(),
     body('gender', 'Gender is required').not().isEmpty(),
     body('user_type','User type is required').not().isEmpty(),
+    body('field_type','Field type is required').not().isEmpty(),
     body().custom(async (req) => {
         let email = req.email;
 
@@ -15,7 +16,7 @@ const rules = [
 
         if (user != null) throw new Error('E-mail exists');
 
-        return true;
+        // return true;
     }),
 
 
