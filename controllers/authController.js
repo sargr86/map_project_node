@@ -41,7 +41,7 @@ exports.register = async (req, res) => {
             data.role_id = role.toJSON()['id'];
 
             let partner_type = await PartnerTypes.find({
-                where: {name: 'Ferries'}
+                where: {id: data.field_type}
             });
             data.partner_type_id = partner_type.toJSON()['id'];
 
