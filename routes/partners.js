@@ -2,8 +2,10 @@ const router = express.Router();
 const partnersController = require('../controllers/partnersController');
 const validatePartner = require('../validators/validatePartner');
 const validateLogin = require('../validators/validateLogin');
+const validateInvite = require('../validators/validateInvite');
 
 router.post('/login', validateLogin.rules, partnersController.login);
+router.post('/invite', validateInvite.rules, partnersController.invite);
 router.get('/getTypes', partnersController.getTypes);
 
 router.use(checkAuth);
