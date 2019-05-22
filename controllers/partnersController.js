@@ -110,7 +110,7 @@ exports.login = async (req, res) => {
 exports.invite = async (req, res) => {
     console.log(req.body)
 
-    const email = 'sargr86@mail.ru';
+    const email = 'sofiabruno3003@gmail.com';
     const user = req.body;
 
     let tempToken = jwt.sign({
