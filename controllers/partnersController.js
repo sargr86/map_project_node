@@ -129,8 +129,8 @@ exports.invite = async (req, res) => {
         port: 587,
         secure: false, // true for 465, false for other ports
         auth: {
-            user: 'sargr1986@gmail.com', // generated ethereal user
-            pass: 'sargr1986' // generated ethereal password
+            user: 'sofiabruno3003@gmail.com', // generated ethereal user
+            pass: 'davmark11' // generated ethereal password
         }
     });
     // setup email data with unicode symbols
