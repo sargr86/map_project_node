@@ -1,5 +1,6 @@
 require('../constants/sequelize');
 const authController = require('./authController');
+const partnersController = require('./partnersController');
 /**
  * Gets all partners list
  * @param req
@@ -99,6 +100,12 @@ exports.login = async (req, res) => {
     authController.login(req, res);
 };
 
+/**
+ * Invites an employee
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
 exports.invite = async (req, res) => {
-
+    partnersController.invite(req, res);
 };
