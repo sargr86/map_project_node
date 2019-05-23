@@ -7,6 +7,11 @@ const rules = [
     body('user_type','User type is required').not().isEmpty(),
     body('field_type','Field type is required').not().isEmpty(),
     body().custom(async (req) => {
+
+        console.log('!!!!!!!!!!!!!!!')
+        console.log(req)
+        console.log('!!!!!!!!!!!!!!!')
+
         let email = req.email;
 
         // Retrieving a user with request email
@@ -14,7 +19,7 @@ const rules = [
 
         if (user != null) throw new Error('E-mail exists');
 
-        // return true;
+        return true;
     }),
 
 

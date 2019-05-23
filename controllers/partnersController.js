@@ -109,6 +109,14 @@ exports.login = async (req, res) => {
  */
 exports.invite = async (req, res) => {
 
+
+    // Getting validation result from express-validator
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(422).json(errors.array()[0]);
+    }
+
+
     const email = 'sofiabruno3003@gmail.com';
     const user = req.body;
 
@@ -119,7 +127,9 @@ exports.invite = async (req, res) => {
         first_name: user.first_name,
         last_name: user.last_name,
 
-        full_name: user.first_name + ' ' + user.last_name,
+        gender: user.gender,
+        field_type: user.field_type,
+        user_type: user.user_type
     }, 'secretkey', {expiresIn: '1h'});
 
     // create reusable transporter object using the default SMTP transport
