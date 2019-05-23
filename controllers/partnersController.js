@@ -108,7 +108,6 @@ exports.login = async (req, res) => {
  * @returns {Promise<void>}
  */
 exports.invite = async (req, res) => {
-    console.log(req.body)
 
     const email = 'sofiabruno3003@gmail.com';
     const user = req.body;
@@ -142,7 +141,8 @@ exports.invite = async (req, res) => {
         html: `<h1 style="color:#747474a3">Hello, dear ` + user.first_name + ' ' + user.last_name + `!</h1>
                                 <b>You have recently been invited to register in our system.
                                 Please follow  <a target="_self" href="http://localhost:4200/auth/register?token=` + tempToken + `">this link</a>
-                                 to complete the process</b>` // html body
+                                 to complete the process.
+                                 </b>` // html body
     };
 
     // send mail with defined transport object
