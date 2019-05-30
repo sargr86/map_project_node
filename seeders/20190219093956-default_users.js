@@ -16,6 +16,12 @@ module.exports = {
             },
         }, ['id']);
 
+        const company_id = await queryInterface.rawSelect('companies', {
+            where: {
+                name: 'Secret South'
+            },
+        }, ['id']);
+
         return queryInterface.bulkInsert('users', [
             {
                 first_name: 'John',
@@ -26,6 +32,7 @@ module.exports = {
                 password: bcrypt.hashSync('12345678', 10),
                 profile_img: '',
                 role_id: role_id,
+                company_id: company_id,
                 status_id: status_id,
                 created_at: new Date(),
                 updated_at: new Date()
