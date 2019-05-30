@@ -11,4 +11,5 @@ global.FoodDrink = db.food_drink;
 global.Activities = db.activities;
 global.ActivityTypes = db.activity_types;
 global.Accommodations = db.accommodations;
+global.Companies = db.companies;
 global.Op = sequelize.Op;
