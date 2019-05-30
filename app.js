@@ -23,6 +23,7 @@ app.use('/food-drink', require('./routes/food_drink'));
 app.use('/activities', require('./routes/activities'));
 app.use('/accommodations', require('./routes/accommodations'));
 app.use('/partners', require('./routes/partners'));
+app.use('/companies', require('./routes/companies'));
 
 // Auth Routes
 app.use('/users', checkAuth, require('./routes/users'));
