@@ -8,7 +8,7 @@ router.post('/login', validateLogin.rules, partnersController.login);
 router.post('/invite', validateInvite.rules, partnersController.invite);
 router.get('/getTypes', partnersController.getTypes);
 
-router.use(checkAuth);
+// router.use(checkAuth);
 router.get('/get', checkRole('admin'), partnersController.get);
 router.get('/getOne', checkRole('admin', 'partner'), partnersController.getOne);
 router.put('/update', checkRole('admin', 'partner'), validatePartner.rules, partnersController.update);
