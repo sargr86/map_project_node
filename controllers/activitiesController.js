@@ -45,7 +45,8 @@ exports.getOne = async (req, res) => {
         where: {id: data.id},
         include: [
             {model: Users},
-            {model: ActivityTypes}
+            {model: ActivityTypes},
+            {model: Companies}
         ]
     });
 

@@ -2,7 +2,8 @@
 module.exports = (sequelize, DataTypes) => {
   const ferries = sequelize.define('ferries', {
     name: DataTypes.STRING,
-    email: DataTypes.STRING,
+    company_id: DataTypes.INTEGER,
+    // email: DataTypes.STRING,
     max_people: DataTypes.INTEGER,
     min_people: DataTypes.INTEGER,
     phone: DataTypes.STRING,
@@ -15,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   ferries.associate = function(models) {
     // associations can be defined here
     ferries.belongsTo(models.users, {foreignKey: 'partner_id'})
+    ferries.belongsTo(models.companies, {foreignKey: 'company_id'})
   };
   return ferries;
 };
