@@ -142,6 +142,9 @@ exports.invite = async (req, res) => {
             pass: 'davmark11' // generated ethereal password
         }
     });
+
+    console.log(process.env)
+
     // setup email data with unicode symbols
     let mailOptions = {
         from: '"Secret South " <foo@example.com>', // sender address
@@ -150,7 +153,7 @@ exports.invite = async (req, res) => {
         text: 'You recently requested a password reset', // plain text body
         html: `<h1 style="color:#747474a3">Hello, dear ` + user.first_name + ' ' + user.last_name + `!</h1>
                                 <b>You have recently been invited to register in our system.
-                                Please follow  <a target="_self" href="http://localhost:4200/auth/register?token=` + tempToken + `">this link</a>
+                                Please follow  <a target="_self" href="`+process.env.DB_HOST+`auth/register?token=` + tempToken + `">this link</a>
                                  to complete the process.
                                  </b>` // html body
     };
