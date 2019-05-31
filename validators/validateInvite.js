@@ -9,10 +9,6 @@ const rules = [
     body('field_type','Field type is required').not().isEmpty(),
     body().custom(async (req) => {
 
-        console.log('!!!!!!!!!!!!!!!')
-        console.log(req)
-        console.log('!!!!!!!!!!!!!!!')
-
         let email = req.email;
 
         // Retrieving a user with request email
