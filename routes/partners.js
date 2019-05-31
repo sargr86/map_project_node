@@ -8,11 +8,10 @@ router.post('/login', validateLogin.rules, partnersController.login);
 router.post('/invite', validateInvite.rules, partnersController.invite);
 router.get('/getTypes', partnersController.getTypes);
 
-// router.use(checkAuth);
-router.get('/get', checkRole('admin'), partnersController.get);
-router.get('/getOne', checkRole('admin', 'partner'), partnersController.getOne);
-router.put('/update', checkRole('admin', 'partner'), validatePartner.rules, partnersController.update);
-router.delete('/remove', checkRole('admin'), partnersController.remove);
+router.get('/get', checkAuth,checkRole('admin'), partnersController.get);
+router.get('/getOne', checkAuth,checkRole('admin', 'partner'), partnersController.getOne);
+router.put('/update', checkAuth,checkRole('admin', 'partner'), validatePartner.rules, partnersController.update);
+router.delete('/remove', checkAuth,checkRole('admin'), partnersController.remove);
 
 
 // // @todo Check this two urls for deprecated
