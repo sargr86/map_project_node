@@ -126,7 +126,7 @@ exports.invite = async (req, res) => {
 
         first_name: user.first_name,
         last_name: user.last_name,
-
+        company_id: user.company_id,
         gender: user.gender,
         field_type: user.field_type,
         user_type: user.user_type

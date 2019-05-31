@@ -9,17 +9,22 @@ const partnersController = require('./partnersController');
  */
 exports.get = async (req, res) => {
 
+    let data = req.query;
+
     // Active status selecting
     let statusWhere = sequelize.where(sequelize.col('`users_status`.`name_en`'), 'active');
 
     let userTypeWhere = sequelize.where(sequelize.col('`role.name_en`'), 'Employee');
+
+    let companyWhere = data.name ? {name: data.name} : '';
 
 
     let result = await Users.findAll({
         include: [
             {model: UsersStatuses, attributes: ['name_en', 'id'], where: {statusWhere}},
             {model: Roles, attributes: ['name_en', 'id'], where: {userTypeWhere}},
-            {model: PartnerTypes}
+            {model: PartnerTypes},
+            {model: Companies, where: companyWhere}
         ],
     });
     res.json(result);

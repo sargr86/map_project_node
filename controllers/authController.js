@@ -38,7 +38,7 @@ exports.register = async (req, res) => {
             data.status_id = status.toJSON()['id'];
 
             let role = await Roles.findOne({
-                where: {name_en: { [Op.like]: `%${data.user_type}%` } }, attributes: ['id']
+                where: {name_en: {[Op.like]: `%${data.user_type}%`}}, attributes: ['id']
             });
             data.role_id = role.toJSON()['id'];
 
@@ -96,6 +96,7 @@ exports.login = async (req, res) => {
             include: [
                 {model: UsersStatuses, attributes: ['name_en', 'id'], where: {statusWhere}},
                 {model: Roles, attributes: ['name_en', 'id']},// where: {userTypeWhere},
+                {model: Companies},
                 {model: PartnerTypes}
             ],
             where: {email: email} //userTypeWhere

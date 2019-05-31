@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         users.belongsTo(models.users_statuses, {foreignKey: 'status_id'});
         users.belongsTo(models.roles, {foreignKey: 'role_id'})
         users.belongsTo(models.partner_types, {foreignKey: 'partner_type_id'})
+        users.belongsTo(models.companies, {foreignKey: 'company_id'})
     };
     return users;
 };
