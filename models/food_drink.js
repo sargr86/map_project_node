@@ -3,6 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     const food_drink = sequelize.define('food_drink', {
         type_id: DataTypes.INTEGER,
         partner_id: DataTypes.INTEGER,
+        company_id: DataTypes.INTEGER,
         name: DataTypes.STRING,
         description: DataTypes.TEXT,
         lat: DataTypes.FLOAT,

@@ -8,12 +8,15 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      company_id: {
+        type: Sequelize.INTEGER
+      },
       name: {
         type: Sequelize.STRING
       },
-      email: {
-        type: Sequelize.STRING
-      },
+      // email: {
+      //   type: Sequelize.STRING
+      // },
       max_people: {
         type: Sequelize.INTEGER
       },

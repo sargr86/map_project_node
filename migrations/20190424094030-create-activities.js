@@ -11,6 +11,9 @@ module.exports = {
             partner_id: {
                 type: Sequelize.INTEGER
             },
+            company_id: {
+                type: Sequelize.INTEGER
+            },
             activity_type_id: {
                 type: Sequelize.INTEGER
             },
