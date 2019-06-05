@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     }, {underscored: true});
     companies.associate = function (models) {
         // associations can be defined here
+        companies.belongsTo(models.partner_types, {foreignKey: 'type_id'})
     };
     return companies;
 };

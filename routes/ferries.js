@@ -10,4 +10,7 @@ router.post('/add', checkAuth,checkRole('admin', 'partner'), validateFerry.rules
 router.put('/update', checkAuth,checkRole('admin', 'partner'), validateFerry.rules, ferriesController.update);
 router.delete('/remove', checkAuth,checkRole('admin', 'partner'), ferriesController.remove);
 
+
+router.get('/get_real_locations', ferriesController.getRealLocations)
+
 module.exports = router;
