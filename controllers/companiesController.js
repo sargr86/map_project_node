@@ -5,7 +5,12 @@
  * @returns {Promise<void>}
  */
 exports.get = async (req, res) => {
-    let companies = await Companies.findAll();
+    const data = req.query;
+    let companies = await Companies.findAll({
+        include: [
+            {model: PartnerTypes, where: {'name': data.name}}
+        ]
+    });
     res.json(companies);
 };
 

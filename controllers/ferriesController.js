@@ -1,4 +1,5 @@
 require('../constants/sequelize');
+const request = require('request');
 
 /**
  * Gets all ferries list
@@ -99,4 +100,19 @@ exports.update = async (req, res) => {
     delete data.id;
     await Ferries.update(data, {where: {id: id}});
     this.get(req, res);
+};
+
+exports.getRealLocations = async (req, res) => {
+    // const options = {
+    //     //     hostname: 'curl \'http://www.marinetraffic.com/ais/getjson.aspx?sw_x=0&sw_y=70&ne_x=30&ne_y=80&zoom=6&fleet=&station=0&id=null\' -H \'Referer: http://www.marinetraffic.com/ais/\'',
+    //     // };
+    //     // const curl = request(options.hostname, (res) => {
+    //     //     console.log(res)
+    //     // })
+
+    const { curly } = require('node-libcurl');
+
+    const { statusCode, data, headers } = await curly.get('http://www.marinetraffic.com/ais/getjson.aspx?sw_x=0&sw_y=70&ne_x=30&ne_y=80&zoom=6&fleet=&station=0&id=null')
+
+    console.log(statusCode, data)
 };
