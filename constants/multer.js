@@ -5,15 +5,16 @@ global.UPLOAD_MAX_FILE_SIZE = 1024 * 1024;
 let storage = multer.diskStorage({
     destination: function (req, file, cb) {
         const data = req.body;
+        console.log('!!!!!!!!!!!!!!!!!!!!!')
 
         let dir = USERS_UPLOAD_FOLDER;
 
         if ('tours_type_id' in data) {
             dir = TOURS_UPLOAD_FOLDER;
-        }
-
-        else if('activity_type_id' in data){
+        } else if ('activity_type_id' in data) {
             dir = ACTIVITIES_UPLOAD_FOLDER;
+        } else {
+            dir = path.join(UPLOADS_FOLDER, 'others/' + data.folder);
         }
 
         console.log(dir)

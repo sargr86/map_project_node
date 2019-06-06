@@ -6,9 +6,10 @@
  */
 exports.get = async (req, res) => {
     const data = req.query;
+    const where = data.name ? {'name': data.name} : {};
     let companies = await Companies.findAll({
         include: [
-            {model: PartnerTypes, where: {'name': data.name}}
+            {model: PartnerTypes, where: where}
         ]
     });
     res.json(companies);
