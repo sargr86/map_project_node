@@ -11,7 +11,8 @@ module.exports = (sequelize, DataTypes) => {
     }, {timestamps: false, underscored: true});
     accommodation.associate = function (models) {
         // associations can be defined here
-        accommodation.belongsTo(models.users, {foreignKey: 'partner_id'})
+        accommodation.belongsTo(models.users, {foreignKey: 'partner_id'});
+        accommodation.belongsTo(models.companies, {foreignKey: 'company_id'});
     };
     return accommodation;
 };
