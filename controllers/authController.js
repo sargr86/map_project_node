@@ -103,7 +103,6 @@ exports.login = async (req, res) => {
         }, res);
 
 
-        console.log('here!!!!!')
         if (!res.headersSent) {
 
 

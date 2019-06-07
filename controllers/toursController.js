@@ -9,7 +9,8 @@ require('../constants/sequelize');
 exports.get = async (req, res) => {
     let result = await Tours.findAll({
         include: [
-            {model: ToursType}
+            {model: ToursType},
+            {model: Companies, attributes:['id','name']}
         ]
     });
     res.json(result);
@@ -25,8 +26,8 @@ exports.getOne = async (req, res) => {
     let data = req.query;
     let result = await Tours.findOne({
         where: {id: data.id},
-        include:[
-            {model:Users}
+        include: [
+            {model: Users}
         ]
     });
     res.json(result);

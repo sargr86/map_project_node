@@ -5,7 +5,6 @@ global.UPLOAD_MAX_FILE_SIZE = 1024 * 1024;
 let storage = multer.diskStorage({
     destination: function (req, file, cb) {
         const data = req.body;
-        console.log('!!!!!!!!!!!!!!!!!!!!!')
 
         let dir = USERS_UPLOAD_FOLDER;
 
