@@ -5,4 +5,4 @@ global.showIfErrors = require('../helpers/showIfErrors');
 global.validatePattern = require('../helpers/patternValidator');
 global.checkAdmin = require('../helpers/checkRole');
 global.checkAuth = require('../helpers/checkAuth');
-global.checkRole = require('../helpers/checkRole')
+global.checkRole = require('../helpers/checkRole');
