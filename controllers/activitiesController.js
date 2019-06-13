@@ -46,7 +46,7 @@ exports.getOne = async (req, res) => {
         include: [
             {model: Users},
             {model: ActivityTypes},
-            {model: Companies}
+            {model: Companies, attributes: ['id','name']}
         ]
     });
 

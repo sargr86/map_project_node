@@ -44,7 +44,7 @@ exports.getOne = async (req, res) => {
     let result = await FoodDrink.findOne({
         where: {id: data.id},
         include:[
-            {model:Users}
+            {model: Companies, attributes: ['id','name']}
         ]
     });
 
