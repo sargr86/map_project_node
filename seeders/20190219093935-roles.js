@@ -11,6 +11,9 @@ module.exports = {
             },
             {
                 name_en: 'Employee'
+            },
+            {
+                name_en: 'Customer'
             }
         ])
 

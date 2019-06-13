@@ -42,10 +42,12 @@ exports.register = async (req, res) => {
             });
             data.role_id = role.toJSON()['id'];
 
-            let partner_type = await PartnerTypes.find({
-                where: {id: data.field_type}
-            });
-            data.partner_type_id = partner_type.toJSON()['id'];
+            if (data.user_type !== 'customer') {
+                let partner_type = await PartnerTypes.findOne({
+                    where: {id: data.field_type}
+                });
+                data.partner_type_id = partner_type.toJSON()['id'];
+            }
 
 
             await Users.create(data);

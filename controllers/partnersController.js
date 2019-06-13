@@ -117,7 +117,7 @@ exports.invite = async (req, res) => {
     }
 
 
-    const email = 'sofiabruno3003@gmail.com';
+    const email = 'sofiabruno3003@gmail.com'; //sofiabruno3003@gmail.com
     const user = req.body;
 
     let tempToken = jwt.sign({
@@ -143,7 +143,7 @@ exports.invite = async (req, res) => {
         }
     });
 
-    console.log(process.env)
+    // console.log(process.env)
 
     // setup email data with unicode symbols
     let mailOptions = {
