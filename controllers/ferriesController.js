@@ -110,7 +110,7 @@ exports.getRealLocations = async (req, res) => {
     //     //     console.log(res)
     //     // })
 
-    const { curly } = require('node-libcurl');
+    // const { curly } = require('node-libcurl');
 
     const { statusCode, data, headers } = await curly.get('http://www.marinetraffic.com/ais/getjson.aspx?sw_x=0&sw_y=70&ne_x=30&ne_y=80&zoom=6&fleet=&station=0&id=null')
 
