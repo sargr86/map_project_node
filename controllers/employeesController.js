@@ -2,7 +2,7 @@ require('../constants/sequelize');
 const authController = require('./authController');
 const partnersController = require('./partnersController');
 /**
- * Gets all partners list
+ * Gets all employees list
  * @param req
  * @param res
  * @returns {Promise<void>}
