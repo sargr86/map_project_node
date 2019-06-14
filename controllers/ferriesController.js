@@ -1,5 +1,4 @@
 require('../constants/sequelize');
-const request = require('request');
 
 /**
  * Gets all ferries list
