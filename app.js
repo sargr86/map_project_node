@@ -30,6 +30,7 @@ app.use('/users', checkAuth, require('./routes/users'));
 app.use('/tour_types', checkAuth, require('./routes/tour_types'));
 app.use('/activity_types', checkAuth, require('./routes/activity_types'));
 app.use('/employees', checkAuth, require('./routes/employees'));
+app.use('/customers', checkAuth, require('./routes/customers'));
 
 
 // Allowed extensions list can be extended depending on your own needs
