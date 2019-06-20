@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {timestamps:false,underscored:true});
   ferries.associate = function(models) {
     // associations can be defined here
-    ferries.belongsTo(models.users, {foreignKey: 'partner_id'})
+    ferries.belongsTo(models.users, {foreignKey: 'partner_id'});
     ferries.belongsTo(models.companies, {foreignKey: 'company_id'})
   };
   return ferries;
