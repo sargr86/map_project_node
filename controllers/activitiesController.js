@@ -5,7 +5,11 @@
  * @returns {Promise<void>}
  */
 exports.get = async (req, res) => {
-    let result = await to(Activities.findAll({}));
+    let result = await to(Activities.findAll({
+        include: [
+            {model: Companies, attributes: ['id', 'name']}
+        ]
+    }));
     res.json(result);
 };
 
@@ -46,7 +50,7 @@ exports.getOne = async (req, res) => {
         include: [
             {model: Users},
             {model: ActivityTypes},
-            {model: Companies, attributes: ['id','name']}
+            {model: Companies, attributes: ['id', 'name']}
         ]
     });
 

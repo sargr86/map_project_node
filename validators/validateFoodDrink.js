@@ -11,7 +11,7 @@ const rules = [
     body('lat').not().isEmpty().withMessage('Latitude is required').custom((lat) => validatePattern(lat, 'lat')).withMessage('Latitude is invalid'),
     body('lng').not().isEmpty().withMessage('Longitude is required').custom((lat) => validatePattern(lat, 'lat')).withMessage('Longitude is invalid'),
     body('address', 'Address is required').not().isEmpty(),
-    body('partner_id', 'Partner is required').not().isEmpty()
+    body('company_id', 'Company is required').not().isEmpty()
 
 ];
 
