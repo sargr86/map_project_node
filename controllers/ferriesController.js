@@ -10,7 +10,7 @@ exports.get = async (req, res) => {
     const data = req.query;
     let partner_id = data.partner_id;
 
-    let wherePartner = {where: partner_id ? {partner_id: data.partner_id} : {}};
+    let wherePartner = {where: (partner_id ? {partner_id: data.partner_id} : {}), include: {model: Companies}};
     const result = await to(Ferries.findAll(wherePartner));
     res.json(result);
 };
@@ -43,7 +43,7 @@ exports.getOne = async (req, res) => {
     let result = await Ferries.findOne({
         where: {id: data.id},
         include: [
-            {model: Companies, attributes: ['id','name']}
+            {model: Companies, attributes: ['id', 'name']}
         ]
     });
     res.json(result);
@@ -111,7 +111,7 @@ exports.getRealLocations = async (req, res) => {
 
     // const { curly } = require('node-libcurl');
 
-    const { statusCode, data, headers } = await curly.get('http://www.marinetraffic.com/ais/getjson.aspx?sw_x=0&sw_y=70&ne_x=30&ne_y=80&zoom=6&fleet=&station=0&id=null')
+    const {statusCode, data, headers} = await curly.get('http://www.marinetraffic.com/ais/getjson.aspx?sw_x=0&sw_y=70&ne_x=30&ne_y=80&zoom=6&fleet=&station=0&id=null')
 
     console.log(statusCode, data)
 };
