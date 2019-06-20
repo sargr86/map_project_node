@@ -5,7 +5,11 @@
  * @returns {Promise<void>}
  */
 exports.get = async (req, res) => {
-    let result = await to(FoodDrink.findAll({}));
+    let result = await to(FoodDrink.findAll({
+        include: [
+            {model: Companies,attributes: ['name', 'id']}
+        ]
+    }));
     res.json(result);
 };
 
