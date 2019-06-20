@@ -13,7 +13,8 @@ module.exports = (sequelize, DataTypes) => {
     }, {timestamps: false, underscore: true});
     food_drink.associate = function (models) {
         // associations can be defined here
-        food_drink.belongsTo(models.users, {foreignKey: 'partner_id'})
+        food_drink.belongsTo(models.users, {foreignKey: 'partner_id'});
+        food_drink.belongsTo(models.companies, {foreignKey: 'company_id'})
     };
     return food_drink;
 };
