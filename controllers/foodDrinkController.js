@@ -7,7 +7,7 @@
 exports.get = async (req, res) => {
     let result = await to(FoodDrink.findAll({
         include: [
-            {model: Companies,attributes: ['name', 'id']}
+            {model: Companies, attributes: ['name', 'id']}
         ]
     }));
     res.json(result);
@@ -47,8 +47,8 @@ exports.getOne = async (req, res) => {
     let data = req.query;
     let result = await FoodDrink.findOne({
         where: {id: data.id},
-        include:[
-            {model: Companies, attributes: ['id','name']}
+        include: [
+            {model: Companies, attributes: ['id', 'name']}
         ]
     });
 
@@ -64,15 +64,13 @@ exports.getOne = async (req, res) => {
  */
 exports.add = async (req, res) => {
 
-    // Getting validation result from express-validator
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(422).json(errors.array()[0]);
-    }
-
-    let data = req.body;
-    await FoodDrink.create(data);
-    this.get(req, res)
+    uploadTourImg(req, res, async (err) => {
+        if (!showIfErrors(req, res, err)) {
+            let data = req.body;
+            await FoodDrink.create(data);
+            this.get(req, res)
+        }
+    })
 };
 
 /**
@@ -93,17 +91,15 @@ exports.remove = async (req, res) => {
  * @param res
  * @returns {Promise<void>}
  */
-exports.update = async(req,res) =>{
-
-    // Getting validation result from express-validator
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(422).json(errors.array()[0]);
-    }
-
+exports.update = async (req, res) => {
     let data = req.body;
-    let id = data.id;
-    delete data.id;
-    await FoodDrink.update(data, {where: {id: id}});
-    this.get(req, res);
+
+    uploadTourImg(req, res, async (err) => {
+        if (!showIfErrors(req, res, err)) {
+            let id = data.id;
+            delete data.id;
+            await FoodDrink.update(data, {where: {id: id}});
+            this.get(req, res);
+        }
+    })
 };

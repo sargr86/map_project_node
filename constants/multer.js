@@ -15,7 +15,7 @@ let storage = multer.diskStorage({
         } else {
             dir = path.join(UPLOADS_FOLDER, 'others/' + data.folder);
         }
-
+// console.log('dir!!!!!')
         console.log(dir)
 
         cb(null, dir)
@@ -33,8 +33,6 @@ let upload = multer({
         let filetypes = /jpeg|jpg/;
         let mimetype = filetypes.test(file.mimetype);
         let extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-
-
         if (!mimetype && !extname) {
             req.fileTypeError = {message: "The file has an invalid type"};
             return cb(null, false, req.fileTypeError)
