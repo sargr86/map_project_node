@@ -40,7 +40,10 @@ module.exports = {
       },
       type: {
         type: Sequelize.INTEGER
-      }
+      },
+      img: {
+        type: Sequelize.STRING
+      },
     });
   },
   down: (queryInterface, Sequelize) => {
