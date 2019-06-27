@@ -63,10 +63,9 @@ exports.getOne = async (req, res) => {
  * @returns {Promise<void>}
  */
 exports.add = async (req, res) => {
-
+    let data = req.body;
     uploadTourImg(req, res, async (err) => {
         if (!showIfErrors(req, res, err)) {
-            let data = req.body;
             await FoodDrink.create(data);
             this.get(req, res)
         }
