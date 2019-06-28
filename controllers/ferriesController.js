@@ -57,18 +57,20 @@ exports.getOne = async (req, res) => {
  */
 exports.add = async (req, res) => {
 
-    // Getting validation result from express-validator
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(422).json(errors.array()[0]);
-    }
+    let data = req.body;
+    uploadProfileImg(req, res, async (err) => {
 
-    if (!showIfErrors(req, res, err)) {
-        let data = req.body;
-        await Ferries.create(data);
-        this.get(req, res)
-    }
+        // Getting validation result from express-validator
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(422).json(errors.array()[0]);
+        }
 
+        if (!showIfErrors(req, res, err)) {
+            await Ferries.create(data);
+            this.get(req, res)
+        }
+    })
 
 };
 
