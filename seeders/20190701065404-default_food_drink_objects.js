@@ -22,8 +22,6 @@ module.exports = {
 
             d['company_id'] = company_id;
             d['type_id'] = type_id;
-            d['created_at'] = new Date();
-            d['updated_at'] = new Date();
             delete d['company'];
             return d;
         });
