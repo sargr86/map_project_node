@@ -64,7 +64,7 @@ fixRoutes = (req, res) => {
 
 app.use((err, req, res, next) => {
     if (err.code === 'LIMIT_FILE_SIZE') {
-        res.status(423).json(err.code.toLowerCase())
+        res.status(423).json({msg: 'File size exceeds maximum size of 1Mb'})
     }
 
     // Handle any other errors
