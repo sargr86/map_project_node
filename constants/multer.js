@@ -30,7 +30,7 @@ let upload = multer({
     storage: storage,
     limits: {fileSize: UPLOAD_MAX_FILE_SIZE},
     fileFilter: function (req, file, cb) {
-        let filetypes = /jpeg|jpg/;
+        let filetypes = /jpeg|jpg|png/;
         let mimetype = filetypes.test(file.mimetype);
         let extname = filetypes.test(path.extname(file.originalname).toLowerCase());
         if (!mimetype && !extname) {
