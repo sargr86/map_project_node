@@ -12,6 +12,8 @@ module.exports = {
 
         data['companies'].map(d => {
             d['type_id'] = type_id;
+            d['created_at'] = new Date();
+            d['updated_at'] = new Date();
         });
 
 
