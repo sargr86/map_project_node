@@ -1,0 +1,108 @@
+{
+  "objects": [
+    {
+      "name": "Cronin’s Pub",
+      "description": "Taste the ocean in this relaxed comfortable bar offering the very freshest of locally sourced seafood. Try Thelca’s unique version of Seafood Chowder -a popular dish amongst locals and visitors alike. Cronin’s location so close to the waterfront makes it an attractive foodie destination for sailor’s and boaters throughout Cork Harbour. A table seating area to the rear of the bar is popular to enjoy the Mad Fish menu for guests who want to be close to the action of this busy and lively local pub. The Mad Fish Restaurant, set in an annexe room off the bar, offers a full A La Carte menu with fresh Seafood at it’s core -perfect for those looking for a more formal dining experience. ",
+      "address": "Crosshaven, Co. Cork",
+      "company": "Cronin’s",
+      "lat": "51.802117",
+      "lng": "-8.294661"
+    },
+    {
+      "name": "Bunnyconnellan Bar & Restaurant",
+      "description": "Perched atop the cliffs overlooking the Atlantic, Bunnyconnellan is a long-established, family-run restaurant with a history as rich as its surroundings. Affectionately known as “Bunny’s” among the locals, this venue boasts stunning views of Cork Harbour and offers a birds-eye view of Roche’s Point. ",
+      "address": "Myrtleville, Co. Cork",
+      "company": "Bunnyconnellan",
+      "lat": "51.7818",
+      "lng": "-8.29322"
+    },
+    {
+      "name": "The Oar Bar",
+      "description": "A fun filled modern bar with a great atmosphere, spacious private upstairs function room with stunning views of the Owenabue River with its own external deck/bbq area. Based at the entrance to Crosshaven overlooking Hugh Coveney Pier its an ideal spot to watch the sunset or to moor up and have a bite to eat.",
+      "address": "Crosshaven, Co. Cork",
+      "company": "The Oar",
+      "lat": "51.804467",
+      "lng": "-8.298239"
+    },
+    {
+      "name": "The Overdraught",
+      "description": "The Overdraught moved into a new era in 2015 when new owners John & Lisa Cronin took over the property when a substantial renovation took place. After 15 years in New York working in the hospitality industry John & Lisa moved back home to Carrigaline to raise their young family. Their goal for The Overdraught is to create a hospitality business with wholesome, fresh, hearty food accompanied by a concise but delicious wine menu, a range of worldly beers & exciting cocktails, where quality, service, value for money & consistency are always the focus. Whether its a family dinner, a special occasion, a romantic meal or simply a few drinks with friends, you will be taken care of by people who are passionate about what they do…",
+      "address": "Tracton, Co. Cork",
+      "company": "The Overdraught",
+      "lat": "51.761727",
+      "lng": "-8.391664"
+    },
+    {
+      "name": "Finders Inn",
+      "description": "The Mc Donnell brothers Donagh & chef Cormac are your congenial hosts. Candlelit dining commences each Wednesday to Saturday at 6.30 & we have a bar food menu Sunday from 2.00-7.00. Our menu includes a huge variety of local seafood, our renowned steaks, Oysterhaven Mussels & Oysters.",
+      "address": "Nohoval, Co. Cork",
+      "company": "Finders Inn",
+      "lat": "51.722490",
+      "lng": "-8.402415"
+    },
+    {
+      "name": "Rosies ‘The Peppershack’ Aghada",
+      "description": "Martin & Imelda Budden,with the collaboration of their growing team of chefs and front of house,are creating one of the most innovative &honest food establishments Cork has ever seen.\n\nThe Pepperstack experience leaves each and every customer wanting more, which has built an incredible loyal fan base here in East Cork. The Pepperstack was awarded “Munsters Favourite Place to Eat” at the 2016 Keeling’s Gold Medal Awards.  ",
+      "address": "Lower Aghada, Midleton, Co. Cork",
+      "company": "Rosies",
+      "lat": "51.843771",
+      "lng": "-8.209404"
+    },
+    {
+      "name": "The Quays Bar & Restaurant",
+      "description": "The spectacular views of Cork Harbour and relaxing atmosphere make The Quays an experience not to be missed. Enjoying prime location along the waterfront in the heart of Cobh with strong focus on fresh seafood and inviting ambience the Quays is a must for locals and visitors alike. With a large outdoor seating area and a private pontoon for customers there is no better location to appreciate the passing cruise liners and maritime scenery. Management and staff pride themselves on their friendly and thorough service and their willingness to cater for specific customer requirements.  ",
+      "address": "Cobh, Co. Cork",
+      "company": "The Quays",
+      "lat": "51.849275",
+      "lng": "-8.297485"
+    },
+    {
+      "name": "Pier 26 Ballycotton",
+      "description": "Situated by the working pier of Ballycotton, Pier 26 is an eclectic mix of old and new: a welcoming traditional pub, an award-winning restaurant, and a stylish, comfortable B&B. You’ll always find a warm smile, an ear to listen and some of the best craic in Ireland! A trip to Ballycotton isn’t complete without sampling the award-winning cuisine on offer at Pier 26. Esteemed chef Colin Hennessy, along with his experienced team, source all of their ingredients locally, cooking up an array of delicious dishes that cater to all tastes. Our coastal location gives us access to the freshest, sustainably sourced seafood, which is showcased across our daytime and evening menus. It is this which has led to Pier 26 being featured in the Sunday Independent’s top 20 seafood restaurants in Ireland.  ",
+      "address": "Ballycotton, Co. Cork",
+      "company": "Pier 26",
+      "lat": "51.849136",
+      "lng": "-8.297506"
+    },
+    {
+      "name": "The Blackbird Bar & Field Kitchen",
+      "description": "The Blackbird, Ballycotton is a charming traditional Irish pub in the picturesque fishing village of Ballycotton, East Cork. Renowned for popular Live Music, welcoming staff, fantastic family beer garden, great craic and delicious hand-made and locally sourced food from The Field Kitchen, The Blackbird is the perfect place to socialize and party when in East Cork.",
+      "address": "Ballycotton, Co. Cork",
+      "company": "The Blackbird",
+      "lat": "51.831303",
+      "lng": "-8.013577"
+    },
+    {
+      "name": "The Bulman Kinsale",
+      "description": "The Bulman Bar is steeped in tradition, full of character, has history in abundance and with an atmosphere that cannot be described. All of this as a result of time and tradition. For all these attributes, the bar proudly hangs its “Black and White Pub of the Year Award”. Uniquely situated on the outskirts of Kinsale, looking across the harbour to the town and next to Charles fort, the Bulman Bar is a mere 10 meters from the Atlantic Ocean, in the scenic village of Summercove. Whether you drop in for a drink, or a bite to eat from the award winning kitchen of Toddies Restaurant, who have recently taken over the Bulman, a welcoming log fire greets you.",
+      "address": "Kinsale, Co. Cork",
+      "company": "The Bulman",
+      "lat": "51.700426",
+      "lng": "-8.499898"
+    },
+    {
+      "name": "The Titanic Bar",
+      "description": "Carefully designed menus, quality suppliers and a contemporary, stylish atmosphere combine to provide an ideal setting for you enjoyment. Titanic Bar and Grill is situated in the Worlds second largest natural harbour. Our riverside deck allows you to enjoy food and drink beside some of the Worlds largest cruise liners. Extensive drinks offering including top end gins and whiskeys, a unique craft beer collection, refreshing cocktails and much more. Live music every Friday night and our in-house DJ every Saturday night all year round.",
+      "address": "Cobh, Co. Cork",
+      "company": "The Titanic",
+      "lat": "51.850925",
+      "lng": "-8.294571"
+    },
+    {
+      "name": "The Royal Cork Yacht Club",
+      "description": "The Royal Cork Yacht Club is based in Crosshaven, Cork, Ireland and is the world’s oldest yacht club founded in 1720. It is the organiser of the biennial Cork Week, widely regarded as Europe’s premier sailing event. The Club House has all of the usual facilities, including bars and restaurant, which are open during normal licensing hours. The restaurant provides a full range of meals, and sandwiches, snacks etc, are available on request.",
+      "address": "Crosshaven, Co. Cork",
+      "company": "The Royal Cork",
+      "lat": "51.804528",
+      "lng": "-8.303795"
+    },
+    {
+      "name": "The Roberts Cove Inn",
+      "company": "The Roberts",
+      "description": "",
+      "address": "Minane Brideg, Co. Cork",
+      "lat": "51.744540",
+      "lng": "-8.313211"
+    }
+  ]
+}
