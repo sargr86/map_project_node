@@ -48,7 +48,8 @@ exports.getOne = async (req, res) => {
     let result = await Accommodations.findOne({
         where: {id: data.id},
         include: [
-            {model: Users}
+            {model: Users},
+            {model: Companies, attributes: ['id', 'name']}
         ]
     });
 
