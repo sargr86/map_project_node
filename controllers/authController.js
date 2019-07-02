@@ -96,9 +96,9 @@ exports.login = async (req, res) => {
         let user = await Users.findOne({
             attributes: attributes,
             include: [
-                {model: UsersStatuses, attributes: ['name_en', 'id'], where: {statusWhere}},
+                {model: UsersStatuses, attributes: ['name_en'], where: {statusWhere}},
                 {model: Roles, attributes: ['name_en', 'id']},// where: {userTypeWhere},
-                {model: Companies},
+                {model: Companies, attributes: ['id', 'name']},
                 {model: PartnerTypes}
             ],
             where: {email: email} //userTypeWhere

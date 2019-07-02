@@ -5,9 +5,11 @@
  * @returns {Promise<void>}
  */
 exports.get = async (req, res) => {
+    let data = req.query;
+    let companyWhere = data.company ? {name: data.company} : {};
     let result = await to(FoodDrink.findAll({
         include: [
-            {model: Companies, attributes: ['name', 'id']}
+            {model: Companies, attributes: ['name', 'id'], where: companyWhere}
         ]
     }));
     res.json(result);
