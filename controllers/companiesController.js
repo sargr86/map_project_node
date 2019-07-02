@@ -33,6 +33,23 @@ exports.getOne = async (req, res) => {
 };
 
 /**
+ * Gets companies list by business type
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+exports.getByType = async (req, res) => {
+    const data = req.query;
+    let companies = await Companies.findAll(
+        {
+            attributes: ['id', 'name', 'type_id'],
+            where: {type_id: data.type_id}
+        }
+    );
+    res.json(companies);
+};
+
+/**
  * Adds a new company
  * @param req
  * @param res
