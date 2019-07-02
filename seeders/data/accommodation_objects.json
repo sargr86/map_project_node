@@ -1,0 +1,76 @@
+{
+  "objects": [
+    {
+      "name": "Crosshaven House (Upstairs)",
+      "description": "Crosshaven House is an elegant eighteenth century country house set in the picturesque village of Crosshaven, overlooking Currabinny Wood and Cork Harbour. It is where the spaciousness and elegance of the Georgian age is combined with the comforts of modern living.\n\nThe spacious and elegant reception rooms are complimented by the 5 separate suites on the upper floors, offering the height of luxury with a homely and comfortable feel. Catering equally well for wedding parties or families, you will be assured a stay to remember.   ",
+      "address": "Crosshaven, Co. Cork",
+      "company": "Crosshaven",
+      "lat": "51.801655",
+      "lng": "-8.294717"
+    },
+    {
+      "name": "Carrigaline Court Hotel",
+      "description": "In the heart of the bustling town of Carrigaline in County Cork, this 4-star hotel offers free parking, luxurious accommodations and superb leisure facilities, including a 19 m indoor pool. The Carrigaline Court Hotel & Leisure Center is just 15 minutes’ drive south of the city of Cork and 10 minutes’ drive from Cork Airport.\n\nAll of the rooms have satellite TV, broadband internet access and power showers. Stylish and contemporary, the Collins Bar serves evening meals from Monday to Sunday. There are large plasma screens throughout the bar and all major sporting events are screened live. ",
+      "address": "Carrigaline, Co. Cork",
+      "company": "Carrigaline",
+      "lat": "51.816455",
+      "lng": "-8.391891"
+    },
+    {
+      "name": "Whispering Pines",
+      "description": "Whispering Pines Accommodation Crosshaven, lies just a short distance from Crosshaven Village. Sheltered by surrounding woodland and overlooking the Owenabue River, Crosshaven is a  charming fishing village with a number of restaurants & traditional pubs and is a hub of maritime activity with modern marinas & boatyards contributing to the everchanging seascape. The Twomey Family (Whispering Pines Accommodation Crosshaven) have created a friendly, informal and unique Guest house and Bed & Breakfast to help you relax and unwind in this peaceful, idyllic setting in Ireland’s most southerly county. Good value, warmth and traditional Irish hospitality, in spacious and tastefully furnished surroundings, will ensure your stay is both a restful and memorable experience.",
+      "address": "Crosshaven, Co. Cork",
+      "company": "Crosshaven",
+      "lat": "51.804800",
+      "lng": "-8.316797"
+    },
+    {
+      "name": "51 Degrees North",
+      "description": "51 Degrees North as the name evokes is ideally suited for the more adventurous type. Entered from the lower West wing of Crosshaven House, it has its own private pedestrian entrance with ample parking to the outside. Original white-washed stone walls, barrel vaulted ceilings and brick voussoirs dating back to the mid-18th century are exposed throughout and contrasted with abstract artwork by local artists.\n\nThree nautical themed dorms accommodate upwards of 14 persons on a group booking basis. Hand-crafted bunk-beds are in New-England style and complemented with individual curtains. Each bed even has its own reading light, power outlet and USB point to recharge that drained iPhone of yours! ",
+      "address": "Crosshaven, Co. Cork",
+      "company": "Crosshaven",
+      "lat": "51.801881",
+      "lng": "-8.295224"
+    },
+    {
+      "name": "Myrtleville House",
+      "description": "This Victorian cottage is a unique piece of history in a beautiful and relaxed seaside village. Constructed in the 17th century this home has more stories than we will ever know. Come and relax by the fireside, in the cosiest of settings, that will be sure to help your pulse drop and set your mind at ease. Stunning coastal walks are easily reached and bound to impress no matter what the weather",
+      "address": "Myrtleville, Co. Cork",
+      "company": "Myrtleville",
+      "lat": "51.783148",
+      "lng": "-8.302887"
+    },
+    {
+      "name": "Compass Rose B&B",
+      "description": "Ronan and Kathy welcome you to their comfortable accommodation Compass Rose Bed & Breakfast in Crosshaven situated two hundred yards from the centre of this beautiful fishing village of Crosshaven in County Cork where you will find restaurants, pubs, shops and the Marina.",
+      "address": "1 Camden Road, Crosshaven, Co. Cork, Ireland",
+      "company": "Compass Rose",
+      "lat": "51.805307",
+      "lng": "-8.289864"
+    },
+    {
+      "name": "Bellevue B&B",
+      "description": "Bellevue B&B is a large country house overlooking the entrance to Cork Airport. All rooms are ensuite and are individually decorated. Myrtleville is a tiny village with its own beach ( 300 yards ) and there are …More 2 pubs and a restaurant. Bellevue is an ideal base to tour West Cork, Blarney, Cobh, Kinsale, Youghal, Lismore etc. Your hosts are both linguists and tourist guides, so there is plenty of information for our guests.   \n\n",
+      "address": "Myrtleville, Co. Cork",
+      "company": "Bellevue",
+      "lat": "51.783856",
+      "lng": "-8.302212"
+    },
+    {
+      "name": "Garryvoe Hotel",
+      "description": "There has been a hotel on the beach of garryvoe since the early 1900s and while the world has changed beyond recognition, some things have thankfully remained the same – the golden, sandy, five-mile beach; the view of Ballycotton and its lighthouse, and the smiling faces at the Garryvoe Hotel – a family-owned, independent four-star hotel.",
+      "address": "Garryvoe, Co. Cork",
+      "company": "Garryvoe",
+      "lat": "51.859504",
+      "lng": "-8.004178"
+    },
+    {
+      "name": "Bayview Hotel",
+      "description": "Welcome to the 4 Star Bayview at Ballycotton East Cork Hotel, a Manor House Hotel nestled cliffside in the beautiful village of Ballycotton, in the south of Ireland. regarded as one of the finest hostels in east Cork, the Bayview Hotel romantically overlooks miles of spectacular coastline, in the centre of the small unspoilt fishing village of Ballycotton.",
+      "address": "Ballycotton, Co. Cork",
+      "company": "Bayview",
+      "lat": "51.828100",
+      "lng": "-8.004672"
+    }
+  ]
+}
