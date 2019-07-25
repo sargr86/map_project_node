@@ -6,11 +6,33 @@
  */
 exports.get = async (req, res) => {
     let result = await to(Accommodations.findAll({
+        attributes: ['name', ['img', 'small'], ['img', 'medium'], ['img', 'big']],
         include: [
-            {model: Companies, attributes: ['id','name']}
+            {model: Companies, attributes: ['id', 'name']}
         ]
     }));
-    res.json(result);
+
+    let ret = [];
+
+    result.map(img => {
+        img = img.toJSON();
+        if (img['small']) {
+
+            // Searching the current file by name and appending full path on the end to it
+
+            let search = 'http://' + req.headers.host + '/uploads/others/accommodations/' + img['small'];
+
+            // Preparation for ngx-gallery in frontend
+            img['big'] = img['small'] = img['medium'] = search;
+
+            ret.push(img)
+        }
+
+
+    });
+
+
+    res.json(ret);
 };
 
 /**
