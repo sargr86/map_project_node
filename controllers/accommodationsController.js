@@ -6,7 +6,7 @@
  */
 exports.get = async (req, res) => {
     let result = await to(Accommodations.findAll({
-        attributes: ['id', 'name', 'img'],
+        attributes: ['id', 'name', 'img', 'address'],
         include: [
             {model: Companies, attributes: ['id', 'name']}
         ]
