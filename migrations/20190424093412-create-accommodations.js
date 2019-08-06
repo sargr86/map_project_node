@@ -14,7 +14,7 @@ module.exports = {
             type_id: {
                 type: Sequelize.INTEGER
             },
-            partner_id: i{
+            partner_id: {
                 type: Sequelize.INTEGER
             },
             name: {
