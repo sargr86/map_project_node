@@ -118,7 +118,15 @@ exports.update = async (req, res) => {
  * @returns {Promise<void>}
  */
 exports.getActivityTypes = async (req, res) => {
-    let result = await ActivityTypes.findAll({});
+    let result = await ActivityTypes.findAll({
+        include: [
+            {
+                model: Activities, include: [{
+                    model: Companies, attributes:['name']
+                }]
+            }
+        ]
+    });
     res.json(result);
 };
 
