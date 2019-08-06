@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     }, {timestamps: false, underscored: true});
     activity_types.associate = function (models) {
         // associations can be defined here
-        activity_types.belongsTo(models.activities, {foreignKey: "id"});
+        activity_types.hasMany(models.activities, {foreignKey: "activity_type_id"});
     };
     return activity_types;
 };

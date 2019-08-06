@@ -1,26 +1,38 @@
 [
   {
-    "name": "Kayaking"
+    "name": "Kayaking",
+    "description": "Whether it’s a gentle paddle down unspoilt waterways, an adventure round Irelands Alcatraz or a spot of  cave exploring and cliff jumping, we have many unique locations to please even the most seasoned of paddlers.  For those looking for solitude, a romantic evening  adventure or just some time on the water with the family, you can avail of equipment rentals at one of our locations.   "
   },
   {
-    "name": "SUP"
+    "name": "Surfing",
+    "description": "Enjoy the thrill of cruising down the face of a wave on your board. Choose from a number of providers in the area."
   },
   {
-    "name": "Snorkelling"
+    "name": "SUP",
+    "description": "Stand Up Paddleboarding gives a unique magic to experience, with great stability and elevated perspective you can enjoy the ocean on a whole new level. Enjoy a relaxing evening on the water taking in the scenery or brush up your skills out in the surf. Got a group, why not try out our SUP Safari where you are whisked away by passenger boat to breath-taking locations.   "
   },
   {
-    "name": "Scuba"
+    "name": "Snorkelling",
+    "description": "Experience travelling by boat to one of the most amazing scenic locations on the Southern Coastline,  Nohoval Cove, snorkle beneath the surface in the crystal clear water with Sea Stacks, Arches and rugged cliff faces towering above you. This is the experience of a lifetime.  "
   },
   {
-    "name": "Sailing"
+    "name": "Scuba",
+    "description": "Have you ever wondered what it would be like to breathe underwater? Well what are you waiting for. . . Come join Oceans Of Discovery for a PADI Discover Scuba Diving experience and turn your dreams into reality. For Certified Divers, why not join us for a fun dive in one of the areas spectacular dive sites. From exploring underwater sea caves in Nohoval Cove to navigating the gullies of Roberts Cove, there is plenty to choose from. Boat dives also available.  "
   },
   {
-    "name": "Amusements"
+    "name": "Sailing",
+    "description": "With the oldest sailing club in the world comes a wealth of knowledge adventure and experience in the world of sailing, Crosshaven RCYC  has been a global leader in producing world class sailors over the years and with a jam packed yearly race schedule you’ll get the chance to experience sailing at its best."
   },
   {
-    "name": "Fishing"
+    "name": "Amusements",
+    "description": "Piper’s Funfair and Amusements, known locally as “The Merries”, has been the heart of Crosshaven’s fun and family entertainment for generations.  The Piper family are Ireland’s oldest funfair family still in business in Ireland, dating back as far as 1837. Today you can experience everything from the bumper cars, to the waltzer and the merry go round horses, you and the family can enjoy hours of fun! Next to ‘The Merries’ is the La Scala, where you can play pool, slot machines and arcade games."
   },
   {
-    "name": "Walking"
+    "name": "Fishing",
+    "description": "Holiday makers travel from all over the world  to fish the second largest harbour in the world. With a modern  fleet and some of the finest waters in the Atlantic, Cork’s recreational fishing is going from strength to strength. Choose from the many vessels and options available."
+  },
+  {
+    "name": "Walking",
+    "description": "There are a number of walking trails to bring you off the beaten track to places simply not seen by the average traveller. Stunning cliff walks and scenic  locations known only to locals will give you a glimpse of the true beauty  of the meeting of land and sea."
   }
 ]
