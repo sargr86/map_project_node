@@ -58,7 +58,7 @@ exports.getOne = async (req, res) => {
 exports.add = async (req, res) => {
 
     let data = req.body;
-    uploadProfileImg(req, res, async (err) => {
+    uploadImages(req, res, async (err) => {
 
         // Getting validation result from express-validator
         const errors = validationResult(req);
@@ -96,7 +96,7 @@ exports.remove = async (req, res) => {
 exports.update = async (req, res) => {
 
     let data = req.body;
-    uploadProfileImg(req, res, async (err) => {
+    uploadImages(req, res, async (err) => {
 
         // Getting validation result from express-validator
         const errors = validationResult(req);

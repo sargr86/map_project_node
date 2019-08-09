@@ -6,8 +6,8 @@ router.get('/get', ferriesController.get);
 router.get('/get-partners', ferriesController.getPartners);
 
 router.get('/getOne', checkAuth, checkRole('admin', 'partner'), ferriesController.getOne);
-router.post('/add', checkAuth, checkRole('admin', 'partner'), uploadTourImg, validateFerry.rules, ferriesController.add);
-router.put('/update', checkAuth, checkRole('admin', 'partner'), uploadTourImg, validateFerry.rules, ferriesController.update);
+router.post('/add', checkAuth, checkRole('admin', 'partner'), uploadImages, validateFerry.rules, ferriesController.add);
+router.put('/update', checkAuth, checkRole('admin', 'partner'), uploadImages, validateFerry.rules, ferriesController.update);
 router.delete('/remove', checkAuth, checkRole('admin', 'partner'), ferriesController.remove);
 
 
