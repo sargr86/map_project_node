@@ -47,4 +47,5 @@ let upload = multer({
 });
 global.uploadProfileImg = upload.single('profile_img_file');
 global.uploadTourImg = upload.single('upload_image');
+global.uploadImages = upload.array('upload_images');
 
