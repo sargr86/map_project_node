@@ -49,6 +49,11 @@ exports.register = async (req, res) => {
                 data.partner_type_id = partner_type.toJSON()['id'];
             }
 
+            if (data.company_id === '') {
+
+                data.company_id = null;
+            }
+
 
             await Users.create(data);
 
