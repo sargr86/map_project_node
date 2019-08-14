@@ -6,3 +6,4 @@ global.validatePattern = require('../helpers/patternValidator');
 global.checkAdmin = require('../helpers/checkRole');
 global.checkAuth = require('../helpers/checkAuth');
 global.checkRole = require('../helpers/checkRole');
+global.getOneItemImages = require('../helpers/getOneItemImages');

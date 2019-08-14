@@ -46,7 +46,10 @@ exports.getOne = async (req, res) => {
             {model: Companies, attributes: ['id', 'name']}
         ]
     });
-    res.json(result);
+
+
+    let r = await getOneItemImages(req, FERRIES_UPLOAD_FOLDER, result);
+    res.json(r);
 };
 
 /**
@@ -59,7 +62,6 @@ exports.add = async (req, res) => {
 
     let data = req.body;
     uploadImages(req, res, async (err) => {
-
         // Getting validation result from express-validator
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -115,6 +117,14 @@ exports.update = async (req, res) => {
         }
     })
 };
+
+
+exports.makeCover = async (req, res) => {
+    let data = req.body;
+    await Ferries.update({img: data.img}, {where: {id: data.id}});
+    res.json("OK")
+};
+
 
 exports.getRealLocations = async (req, res) => {
     // const options = {
