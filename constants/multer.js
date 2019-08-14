@@ -3,7 +3,7 @@ global.multer = require('multer');
 global.UPLOAD_MAX_FILE_SIZE = 1024 * 1024;
 
 let storage = multer.diskStorage({
-    destination: function (req, file, cb) {
+    destination: async function (req, file, cb) {
         const data = req.body;
         const folder = data.folder;
 
@@ -14,14 +14,17 @@ let storage = multer.diskStorage({
                 dir = TOURS_UPLOAD_FOLDER;
             } else if ('activity_type_id' in data) {
                 dir = ACTIVITIES_UPLOAD_FOLDER;
+                // data.name is added for ferries section
             } else {
-                dir = path.join(UPLOADS_FOLDER, 'others/' + folder);
+                dir = path.join(UPLOADS_FOLDER, 'others/' + folder + '/' + data.name.replace(/ /g, '_'));
             }
         }
 
 
-// console.log('dir!!!!!')
+        console.log('dir!!!!!')
         console.log(dir)
+
+        await fse.ensureDir(dir)
 
         cb(null, dir)
     },

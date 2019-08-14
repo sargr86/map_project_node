@@ -33,6 +33,7 @@
     "nodemailer": "^6.1.1",
     "nodemon": "^1.18.10",
     "sequelize": "^4.42.0",
-    "sequelize-cli": "^5.4.0"
+    "sequelize-cli": "^5.4.0",
+    "util": "^0.12.1"
   }
 }
