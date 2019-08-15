@@ -8,10 +8,9 @@ require('../constants/sequelize');
  */
 exports.getUserById = async (req, res) => {
     let data = req.query;
-    let lang = data.lang;
     let result = await to(Users.findOne({
         where: {id: data.id},
-        attributes: ['id', 'email', 'gender', 'profile_img', `first_name_${lang}`, `last_name_${lang}`, 'birthday']
+        attributes: ['id', 'email', 'gender', 'profile_img', `first_name`, `last_name`, 'birthday']
     }), res);
     res.json(result)
 };
@@ -30,9 +29,9 @@ exports.getUsers = async (req, res) => {
     let result = await to(Users.findAll({
         attributes: attributes,
         include: [
-            {model:UsersStatuses}
+            {model: UsersStatuses}
         ]
-    }),res);
+    }), res);
     res.json(result)
 };
 
@@ -44,9 +43,9 @@ exports.getUsers = async (req, res) => {
  */
 exports.changeUserStatus = async (req, res) => {
     let data = req.body;
-    let status = await UsersStatuses.findOne({where:{name_en:data.status},attributes:['id']});
+    let status = await UsersStatuses.findOne({where: {name_en: data.status}, attributes: ['id']});
 
-    await Users.update({status_id:status.id},{where:{id:data.id}});
+    await Users.update({status_id: status.id}, {where: {id: data.id}});
     req.query = data;
-    this.getUsers(req,res);
+    this.getUsers(req, res);
 };
