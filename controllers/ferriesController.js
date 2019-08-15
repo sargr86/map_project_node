@@ -1,5 +1,10 @@
 require('../constants/sequelize');
 
+const {promisify} = require('util');
+const readdir = promisify(require('fs-extra').readdir);
+const unlink = promisify(require('fs-extra').unlink);
+
+
 /**
  * Gets all ferries list
  * @param req
@@ -62,6 +67,7 @@ exports.add = async (req, res) => {
 
     let data = req.body;
     uploadImages(req, res, async (err) => {
+
         // Getting validation result from express-validator
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -87,6 +93,32 @@ exports.remove = async (req, res) => {
     let data = req.query;
     await Ferries.destroy({where: {id: data.id}});
     this.get(req, res);
+};
+
+
+exports.removeImage = async (req, res) => {
+    let data = req.query;
+
+    if (fse.existsSync(data.folder)) {
+        console.log(data.folder)
+        console.log(FERRIES_UPLOAD_FOLDER)
+        // Do something
+        let files = await readdir(data.folder);
+
+        files.map((async (file) => {
+            if (file === data.file) {
+
+                console.log(file)
+                await unlink(path.join(data.folder, file));
+
+                this.getOne(req, res);
+            }
+        }));
+
+        // if (!res.headersSent) {
+        //     res.json('');
+        // }
+    }
 };
 
 /**

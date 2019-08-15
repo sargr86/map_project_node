@@ -16,7 +16,8 @@ let storage = multer.diskStorage({
                 dir = ACTIVITIES_UPLOAD_FOLDER;
                 // data.name is added for ferries section
             } else {
-                dir = path.join(UPLOADS_FOLDER, 'others/' + folder + '/' + data.name.replace(/ /g, '_'));
+                // dir = path.join(UPLOADS_FOLDER, 'others/' + folder + '/' + data.name.replace(/ /g, '_'));
+                dir = folder;
             }
         }
 

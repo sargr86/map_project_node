@@ -10,6 +10,7 @@ router.post('/add', checkAuth, checkRole('admin', 'partner'), uploadImages, vali
 router.put('/update', checkAuth, checkRole('admin', 'partner'), uploadImages, validateFerry.rules, ferriesController.update);
 router.put('/make-cover', checkAuth, checkRole('admin', 'partner'), ferriesController.makeCover);
 router.delete('/remove', checkAuth, checkRole('admin', 'partner'), ferriesController.remove);
+router.delete('/remove-image', checkAuth, checkRole('admin', 'partner'), ferriesController.removeImage);
 
 
 router.get('/get_real_locations', ferriesController.getRealLocations)
