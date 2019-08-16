@@ -75,7 +75,9 @@ exports.getOne = async (req, res) => {
         ]
     });
 
-    res.json(result);
+    let r = await getOneItemImages(req, ACCOMMODATIONS_UPLOAD_FOLDER, result);
+    res.json(r);
+
 };
 
 

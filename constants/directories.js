@@ -4,4 +4,5 @@ global.OTHERS_UPLOAD_FOLDER = path.join(UPLOADS_FOLDER, 'others/');
 global.TOURS_UPLOAD_FOLDER = path.join(UPLOADS_FOLDER, 'others/tours');
 global.FERRIES_UPLOAD_FOLDER = path.join(UPLOADS_FOLDER, 'others/ferries');
 global.ACTIVITIES_UPLOAD_FOLDER = path.join(UPLOADS_FOLDER, 'others/activities');
+global.ACCOMMODATIONS_UPLOAD_FOLDER = path.join(UPLOADS_FOLDER, 'others/accommodations');
 
