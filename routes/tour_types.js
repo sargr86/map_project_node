@@ -3,9 +3,9 @@ const toursController = require('../controllers/toursController');
 const validateTourType = require('../validators/validateTourType');
 
 router.get('/get', toursController.getTourTypes);
-router.get('/getOne', toursController.getOneTourType);
-router.post('/add',validateTourType.rules,toursController.addTourType);
-router.put('/update', validateTourType.rules, toursController.updateTourType);
-router.delete('/remove', toursController.removeTourType);
+router.get('/getOne', checkAuth, toursController.getOneTourType);
+router.post('/add', checkAuth, validateTourType.rules, toursController.addTourType);
+router.put('/update', checkAuth, validateTourType.rules, toursController.updateTourType);
+router.delete('/remove', checkAuth, toursController.removeTourType);
 
 module.exports = router;
