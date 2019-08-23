@@ -10,7 +10,7 @@ exports.get = async (req, res) => {
     let result = await Tours.findAll({
         include: [
             {model: ToursType},
-            {model: Companies, attributes:['id','name']}
+            {model: Companies, attributes: ['id', 'name']}
         ]
     });
     res.json(result);
@@ -27,7 +27,7 @@ exports.getOne = async (req, res) => {
     let result = await Tours.findOne({
         where: {id: data.id},
         include: [
-            {model: Companies, attributes: ['id','name']}
+            {model: Companies, attributes: ['id', 'name']}
         ]
     });
     res.json(result);
@@ -150,7 +150,10 @@ exports.remove = async (req, res) => {
  */
 exports.getTourTypes = async (req, res) => {
     let result = await ToursType.findAll({});
-    res.json(result);
+    if (!res.headersSent) {
+        res.json(result);
+    }
+
 };
 
 /**
