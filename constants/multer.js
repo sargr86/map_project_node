@@ -7,6 +7,10 @@ let storage = multer.diskStorage({
         const data = req.body;
         const folder = data.folder;
 
+        console.log('!!!!!!!')
+        console.log(folder)
+        console.log('!!!!!!!')
+
         let dir = USERS_UPLOAD_FOLDER;
 
         if (folder !== 'users') {
@@ -16,8 +20,8 @@ let storage = multer.diskStorage({
                 dir = ACTIVITIES_UPLOAD_FOLDER;
                 // data.name is added for ferries section
             } else {
-                // dir = path.join(UPLOADS_FOLDER, 'others/' + folder + '/' + data.name.replace(/ /g, '_'));
-                dir = folder;
+                dir = path.join(UPLOADS_FOLDER, 'others/' + folder + '/' + data.name.replace(/ /g, '_'));
+                // dir = folder;
             }
         }
 
