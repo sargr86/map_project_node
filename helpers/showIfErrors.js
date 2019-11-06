@@ -18,9 +18,7 @@ module.exports = (req, res, err = '') => {
         // Getting validation result from express-validator
         const errors = validationResult(req);
 
-
         // Handling database connection error
-
         if (!errors.isEmpty()) {
             let singleError = errors.array()[0];
             if (singleError.hasOwnProperty('msg') && singleError.msg.includes('ECONNREFUSED 127.0.0.1:3306')) {
