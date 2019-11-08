@@ -129,6 +129,9 @@ exports.update = async (req, res) => {
     let data = req.body;
     let id = data.id;
     delete data.id;
+    console.log('!!!!!')
+    console.log(data)
+    console.log('!!!!!')
     await Accommodations.update(data, {where: {id: id}});
     this.get(req, res);
 };

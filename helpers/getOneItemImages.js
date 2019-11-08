@@ -15,6 +15,7 @@ module.exports = async (req, uploadFolder, dbData, gallery = true) => {
             // img['big'] = img['small'] = img['medium']
             dbData['images'] = [];
             dbData['folder'] = folder;
+            dbData['realFolder'] = realFolder;
             files.map(file => {
 
                 dbData['images'].push({
