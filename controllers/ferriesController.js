@@ -45,12 +45,12 @@ exports.getPartners = async (req, res) => {
  */
 exports.getOne = async (req, res) => {
     let data = req.query;
-    let result = await Ferries.findOne({
+    let result = await to(Ferries.findOne({
         where: {id: data.id},
         include: [
             {model: Companies, attributes: ['id', 'name']}
         ]
-    });
+    }));
 
 
     let r = await getOneItemImages(req, FERRIES_UPLOAD_FOLDER, result);
