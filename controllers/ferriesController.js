@@ -144,6 +144,7 @@ exports.update = async (req, res) => {
 
             let id = data.id;
             delete data.id;
+            delete data.img;
             await Ferries.update(data, {where: {id: id}});
             this.get(req, res);
         }
