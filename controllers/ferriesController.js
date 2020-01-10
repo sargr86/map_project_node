@@ -18,9 +18,9 @@ exports.get = async (req, res) => {
     let wherePartner = {where: (partner_id ? {partner_id: data.partner_id} : {}), include: {model: Companies}};
     const result = await to(Ferries.findAll(wherePartner));
 
-    // if (!res.headersSent) {
-    res.json(result);
-    // }
+    if (!res.headersSent) {
+        res.json(result);
+    }
 };
 
 /**
@@ -57,9 +57,9 @@ exports.getOne = async (req, res) => {
 
 
     let r = await getOneItemImages(req, FERRIES_UPLOAD_FOLDER, result);
-    if (!res.headersSent) {
+    // if (!res.headersSent) {
         res.json(r);
-    }
+    // }
 };
 
 /**
