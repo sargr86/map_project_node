@@ -40,7 +40,9 @@ exports.getOne = async (req, res) => {
             {model: PartnerTypes}
         ]
     });
-    res.json(result);
+    if (!res.headersSent) {
+        res.json(result);
+    }
 };
 
 /**
@@ -51,7 +53,10 @@ exports.getOne = async (req, res) => {
  */
 exports.getTypes = async (req, res) => {
     let result = await to(PartnerTypes.findAll({}));
-    res.json(result);
+    if (!res.headersSent) {
+
+        res.json(result);
+    }
 };
 
 /**
@@ -153,7 +158,7 @@ exports.invite = async (req, res) => {
         text: 'You recently requested a password reset', // plain text body
         html: `<h1 style="color:#747474a3">Hello, dear ` + user.first_name + ' ' + user.last_name + `!</h1>
                                 <b>You have recently been invited to register in our system.
-                                Please follow  <a target="_self" href="`+process.env.DB_HOST+`auth/register?token=` + tempToken + `">this link</a>
+                                Please follow  <a target="_self" href="` + process.env.DB_HOST + `auth/register?token=` + tempToken + `">this link</a>
                                  to complete the process.
                                  </b>` // html body
     };
