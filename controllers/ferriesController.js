@@ -54,7 +54,9 @@ exports.getOne = async (req, res) => {
 
 
     let r = await getOneItemImages(req, FERRIES_UPLOAD_FOLDER, result);
-    res.json(r);
+    if (!res.headersSent) {
+        res.json(r);
+    }
 };
 
 /**
