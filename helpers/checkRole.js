@@ -3,7 +3,7 @@ module.exports = (...allowed) => {
 
     // return a middleware
     return (req, res, next) => {
-        // console.log('checking role')
+        console.log('checking role')
         const decoded = req.decoded;
         const role = decoded.role.name_en.toLowerCase();
         // console.log(decoded)
