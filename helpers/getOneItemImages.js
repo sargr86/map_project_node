@@ -5,7 +5,6 @@ const readdir = promisify(require('fs-extra').readdir);
 module.exports = async (req, uploadFolder, dbData, gallery = true) => {
     let files;
     if (dbData) {
-        console.log('in if')
         dbData = dbData.toJSON();
         const folder = path.resolve(uploadFolder + '/' + dbData['name'].replace(/ /g, '_'));
         const realFolder = 'http://' + req.headers.host + path.relative('./', folder).replace(/\\/g, '/').replace('public', '');
@@ -27,7 +26,6 @@ module.exports = async (req, uploadFolder, dbData, gallery = true) => {
             })
         }
     }
-    console.log(dbData)
     return dbData;
 
 };
