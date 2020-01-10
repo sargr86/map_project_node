@@ -6,22 +6,28 @@ let storage = multer.diskStorage({
     destination: async function (req, file, cb) {
         const data = req.body;
         const folder = data.folder;
+        const edit = !!data.id;
 
-        console.log('!!!!!!!')
-        console.log(folder)
-        console.log('!!!!!!!')
+        let dir;
 
-        let dir = USERS_UPLOAD_FOLDER;
+        // This is done for ferries info editing!!!
+        if (edit) {
+            dir = folder;
+        } else {
 
-        if (folder !== 'users') {
-            if ('tours_type_id' in data) {
-                dir = TOURS_UPLOAD_FOLDER;
-            } else if ('activity_type_id' in data) {
-                dir = ACTIVITIES_UPLOAD_FOLDER;
-                // data.name is added for ferries section
-            } else {
-                dir = path.join(UPLOADS_FOLDER, 'others/' + folder + '/' + data.name.replace(/ /g, '_'));
-                // dir = folder;
+
+            dir = USERS_UPLOAD_FOLDER;
+
+            if (folder !== 'users') {
+                if ('tours_type_id' in data) {
+                    dir = TOURS_UPLOAD_FOLDER;
+                } else if ('activity_type_id' in data) {
+                    dir = ACTIVITIES_UPLOAD_FOLDER;
+                    // data.name is added for ferries section
+                } else {
+                    dir = path.join(UPLOADS_FOLDER, 'others/' + folder + '/' + data.name.replace(/ /g, '_'));
+                    // dir = folder;
+                }
             }
         }
 
