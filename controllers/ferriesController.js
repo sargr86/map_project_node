@@ -19,6 +19,7 @@ exports.get = async (req, res) => {
     const result = await to(Ferries.findAll(wherePartner));
 
     if (!res.headersSent) {
+        console.log('in')
         res.json(result);
     }
 };
