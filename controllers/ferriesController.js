@@ -53,10 +53,9 @@ exports.getOne = async (req, res) => {
     }));
 
 
-    // let r = await getOneItemImages(req, FERRIES_UPLOAD_FOLDER, result);
+    let r = await getOneItemImages(req, FERRIES_UPLOAD_FOLDER, result);
     if (!res.headersSent) {
-    // console.log(r)
-        res.json(result);
+        res.json(r);
     }
 };
 
