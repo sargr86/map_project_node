@@ -5,7 +5,7 @@ const validateFerry = require('../validators/validateFerry');
 router.get('/get', ferriesController.get);
 router.get('/get-partners', ferriesController.getPartners);
 
-router.get('/getOne', checkAuth, checkRole('admin', 'partner'), ferriesController.getOne);
+router.get('/getOne',  ferriesController.getOne);
 router.post('/add', checkAuth, checkRole('admin', 'partner'), uploadImages, validateFerry.rules, ferriesController.add);
 router.put('/update', checkAuth, checkRole('admin', 'partner'), uploadImages, validateFerry.rules, ferriesController.update);
 router.put('/make-cover', checkAuth, checkRole('admin', 'partner'), ferriesController.makeCover);
