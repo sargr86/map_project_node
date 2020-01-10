@@ -5,7 +5,11 @@ module.exports = (promise,res = '') => {
             return data;
     })
     .catch(err => {
-        if(res) res.status(500).json(err)
+        console.log(err)
+        if(res) {
+            console.log('res exists')
+            res.status(500).json(err);
+        }
         else return err;
     });
 };
