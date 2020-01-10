@@ -17,7 +17,10 @@ exports.get = async (req, res) => {
 
     let wherePartner = {where: (partner_id ? {partner_id: data.partner_id} : {}), include: {model: Companies}};
     const result = await to(Ferries.findAll(wherePartner));
-    res.json(result);
+
+    if (!res.headersSent) {
+        res.json(result);
+    }
 };
 
 /**
