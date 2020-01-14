@@ -55,6 +55,7 @@ app.get('*', (req, res) => {
 // Passport.js config
 const passport = require('passport');
 require('./config/google-passport-strategy')(passport);
+require('./config/facebook-passport-strategy')(passport);
 app.use(passport.initialize({}));
 
 
