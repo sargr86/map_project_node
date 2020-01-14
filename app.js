@@ -51,6 +51,13 @@ app.get('*', (req, res) => {
     fixRoutes(req, res);
 });
 
+
+// Passport.js config
+const passport = require('passport');
+require('./config/google-passport-strategy')(passport);
+app.use(passport.initialize({}));
+
+
 fixRoutes = (req, res) => {
     if (allowedExt.filter(ext => req.url.indexOf(ext) > 0).length > 0) {
         let url = `/var/www/html/secret_south/secret_south_angular/dist/front/${req.url}`;
