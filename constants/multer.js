@@ -12,7 +12,10 @@ let storage = multer.diskStorage({
 
         // This is done for ferries info editing!!!
         if (edit) {
-            dir = folder;
+            if (folder !== 'users') {
+                dir = folder;
+            }
+            else dir = USERS_UPLOAD_FOLDER;
         } else {
 
 

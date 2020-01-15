@@ -27,11 +27,20 @@ module.exports = (passport) => {
                     },
 
                 }).spread((item) => {
-                    return item.get({
-                        plain: true
-                    });
+                    return item;
+                    // return item.get({
+                    //     plain: true
+                    // });
                 })
             );
+
+            user = await Users.findOne({
+                where: {
+                    email: profile._json.email
+                },
+                attributes: {exclude: ['role_id', 'status_id', 'access_token', 'id']},
+                include: [{model: Roles, attributes: ['id', 'name_en']}]
+            });
 
             console.log(user)
             cb(null, user);
