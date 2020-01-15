@@ -52,8 +52,6 @@ app.get('*', (req, res) => {
 });
 
 
-console.log(`${process.env.API_URL}auth/google/callback`)
-
 // Passport.js config
 const passport = require('passport');
 require('./config/google-passport-strategy')(passport);
