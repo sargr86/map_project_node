@@ -23,7 +23,7 @@ router.get('/google/callback', passport.authenticate('google', {
     console.log(`${process.env.FRONTEND_URL}/?token=${token}`);
     console.log('token!!!!!')
     console.log(token)
-    return res.redirect(`${process.env.FRONTEND_URL}/?token=${token}`);
+    res.redirect(`${process.env.FRONTEND_URL}/?token=${token}`);
 });
 
 
