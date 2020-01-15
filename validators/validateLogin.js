@@ -7,12 +7,16 @@ const rules = [
         let email = req.email;
         let pass = req.password;
 
+
         // Checking email existence & passwords match
         let found = await Users.findOne({attributes: ['email', 'password'], where: {email: email}});
         if (!found) throw new Error('A user with such email doesn\'t exist');
-        let match = await bcrypt.compare(pass, found.password);
 
-        // Passwords mismatch case
+        // This case is for the users that signed up via social medias, and (accidentally) want to login regularly
+        if (!found.password) throw new Error('Invalid password or email');
+
+        // Checking passwords match
+        let match = await bcrypt.compare(pass, found.password);
         if (!match) throw new Error('Wrong password')
     })
 ];
