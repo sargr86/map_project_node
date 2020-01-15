@@ -21,6 +21,8 @@ router.get('/google/callback', passport.authenticate('google', {
 }), (req, res) => {
     let token = jwt.sign(req.user.toJSON(), 'secretkey', {expiresIn: '8h'});
     console.log(`${process.env.FRONTEND_URL}`);
+    console.log('token!!!!!')
+    console.log(token)
     res.redirect(`${process.env.FRONTEND_URL}/?token=${token}`);
 });
 
