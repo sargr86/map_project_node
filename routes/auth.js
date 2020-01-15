@@ -35,7 +35,7 @@ router.get('/facebook/callback', passport.authenticate('facebook', {
     scope: ['email', 'openid', 'profile'],
     session: false
 }), (req, res) => {
-    let token = jwt.sign(req.user, 'secretkey', {expiresIn: '8h'});
+    let token = jwt.sign(req.user.toJSON(), 'secretkey', {expiresIn: '8h'});
     res.redirect(`${process.env.FRONTEND_URL}/?token=${token}`);
 });
 
