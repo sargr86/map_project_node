@@ -31,6 +31,8 @@ exports.get = async (req, res) => {
     //
     // });
 
+    console.log('get accommodations')
+
 
     res.json(result);
 };
