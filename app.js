@@ -1,6 +1,8 @@
 require('dotenv').config();
 require('./constants/main');
 
+console.log('test')
+
 // Start server on pre-defined port
 server.listen(port);
 
