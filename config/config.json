@@ -20,6 +20,7 @@
     "database": "secret_south",
     "host": "127.0.0.1",
     "dialect": "mysql",
-    "operatorsAliases": 0
+    "operatorsAliases": 0,
+    "logging": true
   }
 }

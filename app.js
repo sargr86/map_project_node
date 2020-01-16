@@ -48,6 +48,7 @@ const allowedExt = [
 
 // Separating Angular routes
 app.get('*', (req, res) => {
+    console.log('fix routes')
     fixRoutes(req, res);
 });
 
