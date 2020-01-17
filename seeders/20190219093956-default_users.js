@@ -10,7 +10,13 @@ module.exports = {
             },
         }, ['id']);
 
-        const role_id = await queryInterface.rawSelect('roles', {
+        const admin_role_id = await queryInterface.rawSelect('roles', {
+            where: {
+                name_en: 'Admin'
+            },
+        }, ['id']);
+
+        const driver_role_id = await queryInterface.rawSelect('roles', {
             where: {
                 name_en: 'Driver'
             },
@@ -31,7 +37,21 @@ module.exports = {
                 email: 'admin@gmail.com',
                 password: bcrypt.hashSync('12345678', 10),
                 profile_img: '',
-                role_id: role_id,
+                role_id: admin_role_id,
+                company_id: company_id,
+                status_id: status_id,
+                created_at: new Date(),
+                updated_at: new Date()
+            },
+            {
+                first_name: 'Test',
+                last_name: 'User',
+                birthday: '1986-03-30',
+                gender: 'male',
+                email: 'driver@gmail.com',
+                password: bcrypt.hashSync('12345678', 10),
+                profile_img: '',
+                role_id: driver_role_id,
                 company_id: company_id,
                 status_id: status_id,
                 created_at: new Date(),
