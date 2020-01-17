@@ -23,6 +23,7 @@ if (config.use_env_variable) {
 
 // Handling sequelize db connecting for all requests
 app.get('*', (req, res, next) => {
+    console.log('request test')
     sequelize.authenticate()
         .then(() => {
             next();
