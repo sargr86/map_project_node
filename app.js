@@ -2,7 +2,6 @@ require('dotenv').config();
 require('./constants/main');
 
 
-
 // Start server on pre-defined port
 server.listen(port);
 
@@ -15,7 +14,6 @@ app.use(cors(require('./config/cors')));
 
 // Static resources
 app.use('/uploads/', express.static(UPLOADS_FOLDER));
-
 
 
 // Non-auth routes
@@ -66,17 +64,17 @@ app.use(passport.initialize({}));
 
 
 fixRoutes = (req, res) => {
-    if (allowedExt.filter(ext => req.url.indexOf(ext) > 0).length > 0) {
-        let url = `/var/www/html/secret_south/secret_south_angular/dist/front/${req.url}`;
-        res.sendFile(url);
-    } else {
-        // console.log(req.url)
+    // if (allowedExt.filter(ext => req.url.indexOf(ext) > 0).length > 0) {
+    //     let url = `/var/www/html/secret_south/secret_south_angular/dist/front/${req.url}`;
+    //     res.sendFile(url);
+    // } else {
+    //     console.log(req.url)
+    //     res.sendFile(path.join(__dirname, '../../secret_south/secret_south_angular/dist/front/index.html'));
+    // }
+    app.use(express.static(path.join(__dirname, '../../secret_south/secret_south_angular/dist/front/')));
+    app.get('*', (req, res) => {
         res.sendFile(path.join(__dirname, '../../secret_south/secret_south_angular/dist/front/index.html'));
-    }
-    // app.use(express.static(path.join(__dirname, 'build')));
-    // app.get('*', (req, res) => {
-    //     res.sendFile(path.join(__dirname, 'build/index.html'));
-    // });
+    });
 };
 
 
