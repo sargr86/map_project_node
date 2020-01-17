@@ -60,7 +60,7 @@ module.exports = (passport) => {
                 include: [{model: Roles, attributes: ['id', 'name_en']}]
             });
 
-            // console.log('strategy!!!')
+            console.log('strategy!!!')
             // console.log(user.toJSON())
             done(null, user);
         }
