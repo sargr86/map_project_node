@@ -16,9 +16,9 @@ module.exports = {
             },
         }, ['id']);
 
-        const driver_role_id = await queryInterface.rawSelect('roles', {
+        const employee_role_id = await queryInterface.rawSelect('roles', {
             where: {
-                name_en: 'Driver'
+                name_en: 'Employee'
             },
         }, ['id']);
 
@@ -57,7 +57,7 @@ module.exports = {
                 email: 'driver@gmail.com',
                 password: bcrypt.hashSync('12345678', 10),
                 profile_img: '',
-                role_id: driver_role_id,
+                role_id: employee_role_id,
                 company_id: company_id,
                 status_id: status_id,
                 created_at: new Date(),

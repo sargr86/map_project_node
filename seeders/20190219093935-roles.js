@@ -14,9 +14,6 @@ module.exports = {
             },
             {
                 name_en: 'Customer'
-            },
-            {
-                name_en: "Driver"
             }
         ])
 
