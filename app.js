@@ -18,23 +18,23 @@ app.use('/uploads/', express.static(UPLOADS_FOLDER));
 
 
 
-// // Non-auth routes
-// app.use('/auth', require('./routes/auth'));
-// app.use('/home', require('./routes/home'));
-// app.use('/ferries', require('./routes/ferries'));
-// app.use('/tours', require('./routes/tours'));
-// app.use('/food-drink', require('./routes/food_drink'));
-// app.use('/activities', require('./routes/activities'));
-// app.use('/accommodations', require('./routes/accommodations'));
-// app.use('/partners', require('./routes/partners'));
-// app.use('/companies', require('./routes/companies'));
-//
-// // Auth Routes
-// app.use('/users', checkAuth, require('./routes/users'));
-// app.use('/tour_types', require('./routes/tour_types'));
-// app.use('/activity_types', require('./routes/activity_types'));
-// app.use('/employees', checkAuth, require('./routes/employees'));
-// app.use('/customers', checkAuth, require('./routes/customers'));
+// Non-auth routes
+app.use('/auth', require('./routes/auth'));
+app.use('/home', require('./routes/home'));
+app.use('/ferries', require('./routes/ferries'));
+app.use('/tours', require('./routes/tours'));
+app.use('/food-drink', require('./routes/food_drink'));
+app.use('/activities', require('./routes/activities'));
+app.use('/accommodations', require('./routes/accommodations'));
+app.use('/partners', require('./routes/partners'));
+app.use('/companies', require('./routes/companies'));
+
+// Auth Routes
+app.use('/users', checkAuth, require('./routes/users'));
+app.use('/tour_types', require('./routes/tour_types'));
+app.use('/activity_types', require('./routes/activity_types'));
+app.use('/employees', checkAuth, require('./routes/employees'));
+app.use('/customers', checkAuth, require('./routes/customers'));
 
 
 // Allowed extensions list can be extended depending on your own needs
