@@ -15,7 +15,7 @@ module.exports = (passport) => {
         async (accessToken, refreshToken, profile, done) => {
             delete profile._json['id'];
 
-console.log(`${process.env.API_URL}auth/google/callback`)
+
             // Getting 'active' status id
             const status_id = await UsersStatuses.findOne({
                 where: {

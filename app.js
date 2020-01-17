@@ -54,6 +54,7 @@ if (process.env.NODE_ENV === 'production') {
     dist = path.join(__dirname, '../../secret_south/secret_south_angular/dist/front/')
 }
 console.log('dist path:', dist)
+console.log(`${process.env.API_URL}auth/google/callback`)
 // Separating Angular routes
 app.get('*', (req, res) => {
     console.log('fix routes')
