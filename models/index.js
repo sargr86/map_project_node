@@ -7,9 +7,9 @@ const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.json')[env];
 const db = {};
-config.logging = (str) => {
-    console.log(str)
-};
+// config.logging = (str) => {
+//     console.log(str)
+// };
 
 console.log('auth db', config);
 
@@ -28,6 +28,7 @@ app.get('*', (req, res, next) => {
             next();
         })
         .catch(err => {
+            console.log('error', err)
             res.status(422).json({db_error: 'Please check db connection'}); //err.toString()
         });
     if (!res.headersSent) {
