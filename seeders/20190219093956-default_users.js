@@ -12,7 +12,7 @@ module.exports = {
 
         const role_id = await queryInterface.rawSelect('roles', {
             where: {
-                name_en: 'Admin'
+                name_en: 'Driver'
             },
         }, ['id']);
 
