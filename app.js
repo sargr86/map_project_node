@@ -50,7 +50,7 @@ const allowedExt = [
     '.svg',
 ];
 
-// console.log('test')
+console.log('test')
 // Separating Angular routes
 app.get('*', (req, res) => {
     console.log('fix routes')
