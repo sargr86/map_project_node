@@ -19,7 +19,7 @@
     "username": "root",
     "password": "`4aAsQ#k@!LPRn6d",
     "database": "secret_south",
-    "host": "68.183.36.96",
+    "host": "127.0.0.1",
     "dialect": "mysql",
     "operatorsAliases": 0
   }

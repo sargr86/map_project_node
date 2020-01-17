@@ -9,6 +9,7 @@ server.listen(port);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true, limit: postMaxSize + 'mb'}));
 
+
 // Cors
 app.use(cors(require('./config/cors')));
 
@@ -48,7 +49,11 @@ const allowedExt = [
     '.svg',
 ];
 
-console.log('test')
+let dist = path.join(__dirname, '../../secret_south/frontend/dist/front/');
+if (process.env.NODE_ENV === 'production') {
+    dist = path.join(__dirname, '../../secret_south/secret_south_angular/dist/front/')
+}
+console.log('dist path:', dist)
 // Separating Angular routes
 app.get('*', (req, res) => {
     console.log('fix routes')
@@ -71,9 +76,10 @@ fixRoutes = (req, res) => {
     //     console.log(req.url)
     //     res.sendFile(path.join(__dirname, '../../secret_south/secret_south_angular/dist/front/index.html'));
     // }
-    app.use(express.static(path.join(__dirname, '../../secret_south/secret_south_angular/dist/front/')));
+    app.use(express.static(dist));
     app.get('*', (req, res) => {
-        res.sendFile(path.join(__dirname, '../../secret_south/secret_south_angular/dist/front/index.html'));
+        res.sendFile(dist + 'index.html');
+
     });
 };
 
