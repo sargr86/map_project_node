@@ -7,11 +7,6 @@ const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.json')[env];
 const db = {};
-// config.logging = (str) => {
-//     console.log(str)
-// };
-
-console.log('auth db', config);
 
 let sequelize;
 if (config.use_env_variable) {
@@ -23,13 +18,12 @@ if (config.use_env_variable) {
 
 // Handling sequelize db connecting for all requests
 app.get('*', (req, res, next) => {
-    console.log('request test')
     sequelize.authenticate()
         .then(() => {
             next();
         })
         .catch(err => {
-            console.log('error', err)
+            // console.log('error', err)
             res.status(422).json({db_error: 'Please check db connection'}); //err.toString()
         });
     if (!res.headersSent) {
