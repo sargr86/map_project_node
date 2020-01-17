@@ -1,7 +1,7 @@
 require('dotenv').config();
 require('./constants/main');
 
-console.log('test')
+
 
 // Start server on pre-defined port
 server.listen(port);
@@ -15,6 +15,8 @@ app.use(cors(require('./config/cors')));
 
 // Static resources
 app.use('/uploads/', express.static(UPLOADS_FOLDER));
+
+
 
 // Non-auth routes
 app.use('/auth', require('./routes/auth'));
@@ -48,6 +50,7 @@ const allowedExt = [
     '.svg',
 ];
 
+// console.log('test')
 // Separating Angular routes
 app.get('*', (req, res) => {
     console.log('fix routes')
@@ -67,7 +70,7 @@ fixRoutes = (req, res) => {
         let url = `/var/www/html/secret_south/secret_south_angular/dist/front/${req.url}`;
         res.sendFile(url);
     } else {
-        console.log(req.url)
+        // console.log(req.url)
         res.sendFile(path.join(__dirname, '../../secret_south/secret_south_angular/dist/front/index.html'));
     }
     // app.use(express.static(path.join(__dirname, 'build')));
