@@ -2,8 +2,11 @@ require('dotenv').config();
 require('./constants/main');
 
 
-// Start server on pre-defined port
-server.listen(port);
+server.listen(port)
+// // Start server on pre-defined port
+// server.listen(port,'192.168.1.126', ()=>{
+//     console.log('test')
+// });
 
 //Body parser
 app.use(bodyParser.json());
@@ -19,6 +22,7 @@ app.use('/uploads/', express.static(UPLOADS_FOLDER));
 
 // Non-auth routes
 app.use('/auth', require('./routes/auth'));
+app.use('/apk', require('./routes/apk'));
 app.use('/home', require('./routes/home'));
 app.use('/ferries', require('./routes/ferries'));
 app.use('/tours', require('./routes/tours'));
@@ -49,12 +53,13 @@ const allowedExt = [
     '.svg',
 ];
 
+
 let dist = path.join(__dirname, '../../secret_south/frontend/dist/front/');
 if (process.env.NODE_ENV === 'production') {
     dist = path.join(__dirname, '../../secret_south/secret_south_angular/dist/front/')
 }
-console.log('dist path:', dist)
-console.log(`${process.env.API_URL}auth/google/callback`)
+// console.log('dist path:', dist)
+// console.log(`${process.env.API_URL}auth/google/callback`)
 // Separating Angular routes
 app.get('*', (req, res) => {
     console.log('fix routes')
