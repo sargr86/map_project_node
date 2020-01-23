@@ -24,7 +24,10 @@ module.exports = (req, res, err = '') => {
             if (singleError.hasOwnProperty('msg') && singleError.msg.includes('ECONNREFUSED 127.0.0.1:3306')) {
                 singleError = 'Please check db connection';
                 return res.status(422).json({db_error: singleError});
-            } else return res.status(422).json(singleError);
+            } else {
+                console.log(singleError)
+                return res.status(422).json(singleError);
+            }
             // return true;
         }
     }
