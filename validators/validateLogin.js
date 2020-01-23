@@ -16,7 +16,7 @@ const rules = [
         // }
 
         // This case is for the users that signed up via social medias, and (accidentally) want to login regularly
-        if (!found && !found.password) throw new Error('Invalid password or email');
+        if (!found || !found.password) throw new Error('Invalid password or email');
 
         // Checking passwords match
         let match = await bcrypt.compare(pass, found.password);
