@@ -83,11 +83,13 @@ fixRoutes = (req, res) => {
     //     res.sendFile(path.join(__dirname, '../../secret_south/secret_south_angular/dist/front/index.html'));
     // }
     app.use(express.static(dist));
-    app.get('*', (req, res) => {
+    app.get('*', (req, res, next) => {
         if (!req.url.includes('phpmyadmin')) {
 
             res.sendFile(dist + 'index.html');
         }
+
+        next();
 
     });
 };
