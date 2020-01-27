@@ -17,7 +17,7 @@ let storage = multer.diskStorage({
             }
             else dir = USERS_UPLOAD_FOLDER;
         } else {
-
+console.log('not edit!!!')
 
             dir = USERS_UPLOAD_FOLDER;
 
