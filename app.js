@@ -2,7 +2,7 @@ require('dotenv').config();
 require('./constants/main');
 
 
-server.listen(port)
+server.listen(port);
 // // Start server on pre-defined port
 // server.listen(port,'192.168.1.126', ()=>{
 //     console.log('test')
@@ -85,7 +85,6 @@ fixRoutes = (req, res) => {
     app.use(express.static(dist));
     app.get('*', (req, res, next) => {
         if (!req.url.includes('phpmyadmin')) {
-
             res.sendFile(dist + 'index.html');
         }
 
