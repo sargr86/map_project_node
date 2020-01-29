@@ -31,6 +31,7 @@ app.use('/activities', require('./routes/activities'));
 app.use('/accommodations', require('./routes/accommodations'));
 app.use('/partners', require('./routes/partners'));
 app.use('/companies', require('./routes/companies'));
+app.use('/contacts', require('./routes/contacts'));
 
 // Auth Routes
 app.use('/users', checkAuth, require('./routes/users'));
