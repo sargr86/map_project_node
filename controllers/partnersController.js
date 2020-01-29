@@ -65,7 +65,7 @@ exports.getTypes = async (req, res) => {
  * @param res
  * @returns {Promise<void>}
  */
-exports.add = async (req, res) => {
+exports.add = (req, res) => {
     authController.register(req, res);
 };
 
@@ -143,7 +143,7 @@ exports.invite = async (req, res) => {
         port: 587,
         secure: false, // true for 465, false for other ports
         auth: {
-            user: 'sofiabruno3003@gmail.com', // generated ethereal user
+            user: 'sofiabruno3003', // generated ethereal user
             pass: 'davmark11' // generated ethereal password
         }
     });
@@ -166,13 +166,14 @@ exports.invite = async (req, res) => {
     // send mail with defined transport object
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
-            return console.log(error);
-        }
-        console.log('Message sent: %s', info.messageId);
-        // Preview only available when sending through an Ethereal account
-        console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+            res.status(500).json({msg: error.toString()})
+        } else if (info) {
 
-        res.json("OK");
+            console.log('Message sent: %s', info.messageId);
+            // Preview only available when sending through an Ethereal account
+            console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+            res.json("OK");
+        }
 
 
     });
