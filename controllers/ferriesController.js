@@ -135,6 +135,11 @@ exports.removeImage = async (req, res) => {
 exports.update = async (req, res) => {
 
     let data = req.body;
+
+    // Renaming folder if name is changed
+    if (data.oldName !== data.name) await renameFolder(data.oldName, data.name, FERRIES_UPLOAD_FOLDER);
+
+
     uploadImages(req, res, async (err) => {
 
         // Getting validation result from express-validator

@@ -106,6 +106,12 @@ exports.update = async (req, res) => {
     let data = req.body;
     let id = data.id;
     delete data.id;
+
+
+    // Renaming folder if name is changed
+    if (data.oldName !== data.name) await renameFolder(data.oldName, data.name, ACTIVITIES_UPLOAD_FOLDER);
+
+
     await Activities.update(data, {where: {id: id}});
     this.get(req, res);
 };
