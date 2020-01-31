@@ -1,11 +1,16 @@
 'use strict';
 
+const fse = require('fs-extra');
+const path = require('path');
+const toFolderName = require('../helpers/convertToFolderName');
 module.exports = {
     up: async (queryInterface, Sequelize) => {
         const data = await fse.readJSON(path.resolve(__dirname + '/data/food_drink_objects.json'));
 
         let list = data['objects'].map(async (d) => {
 
+            // Creating corresponding folders without files
+            await fse.ensureDir(path.join(__dirname, '../public/uploads/others/food-drink') + '/' + toFolderName(d.name));
 
             let company_id = await queryInterface.rawSelect('companies', {
                 where: {
