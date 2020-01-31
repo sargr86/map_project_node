@@ -9,5 +9,6 @@ router.post('/add', uploadImages, validateFoodDrink.rules, foodDrinkController.a
 router.put('/update', uploadImages, validateFoodDrink.rules, foodDrinkController.update);
 router.put('/make-cover', checkAuth, checkRole('admin', 'partner'), foodDrinkController.makeCover);
 router.delete('/remove', foodDrinkController.remove);
+router.delete('/remove-image', foodDrinkController.removeImage);
 
 module.exports = router;

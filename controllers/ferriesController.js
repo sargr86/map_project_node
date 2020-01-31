@@ -58,7 +58,7 @@ exports.getOne = async (req, res) => {
 
     let r = await getOneItemImages(req, FERRIES_UPLOAD_FOLDER, result);
     // if (!res.headersSent) {
-        res.json(r);
+    res.json(r);
     // }
 };
 
@@ -182,4 +182,15 @@ exports.getRealLocations = async (req, res) => {
     const {statusCode, data, headers} = await curly.get('http://www.marinetraffic.com/ais/getjson.aspx?sw_x=0&sw_y=70&ne_x=30&ne_y=80&zoom=6&fleet=&station=0&id=null')
 
     console.log(statusCode, data)
+};
+
+
+/**
+ * Removes a selected ferries gallery image
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+exports.removeImage = async (req, res) => {
+    await removeImage(req.query, res);
 };

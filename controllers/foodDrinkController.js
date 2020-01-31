@@ -1,3 +1,5 @@
+
+
 /**
  * Gets food-drink places
  * @param req
@@ -116,4 +118,14 @@ exports.makeCover = async (req, res) => {
     let data = req.body;
     await FoodDrink.update({img: data.img}, {where: {id: data.id}});
     res.json("OK")
+};
+
+/**
+ * Removes a selected food-drink gallery image
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+exports.removeImage = async (req, res) => {
+    await removeImage(req.query, res);
 };
