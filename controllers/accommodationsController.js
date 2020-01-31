@@ -128,9 +128,16 @@ exports.update = async (req, res) => {
         return res.status(422).json(errors.array()[0]);
     }
 
+
     let data = req.body;
     let id = data.id;
     delete data.id;
+
+
+    // Renaming folder if name is changed
+    if (data.oldName !== data.name) await renameFolder(data.oldName, data.name, ACCOMMODATIONS_UPLOAD_FOLDER);
+
+
     console.log('!!!!!')
     console.log(data)
     console.log('!!!!!')

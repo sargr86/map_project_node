@@ -95,6 +95,10 @@ exports.remove = async (req, res) => {
 exports.update = async (req, res) => {
     let data = req.body;
 
+    // Renaming folder if name is changed
+    if (data.oldName !== data.name) await renameFolder(data.oldName, data.name, FOOD_DRINK_UPLOAD_FOLDER);
+
+
     uploadTourImg(req, res, async (err) => {
         if (!showIfErrors(req, res, err)) {
             let id = data.id;
