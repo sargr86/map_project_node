@@ -54,7 +54,9 @@ exports.getOne = async (req, res) => {
         ]
     });
 
-    res.json(result);
+    let r = await getOneItemImages(req, FOOD_DRINK_UPLOAD_FOLDER, result);
+    res.json(r);
+
 };
 
 
@@ -107,4 +109,11 @@ exports.update = async (req, res) => {
             this.get(req, res);
         }
     })
+};
+
+
+exports.makeCover = async (req, res) => {
+    let data = req.body;
+    await FoodDrink.update({img: data.img}, {where: {id: data.id}});
+    res.json("OK")
 };
