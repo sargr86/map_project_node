@@ -144,3 +144,7 @@ exports.update = async (req, res) => {
     await Accommodations.update(data, {where: {id: id}});
     this.get(req, res);
 };
+
+exports.removeImage = async (req, res) => {
+    await removeImage(req.query, res);
+};

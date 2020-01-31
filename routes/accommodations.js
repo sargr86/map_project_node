@@ -8,5 +8,6 @@ router.get('/getOne', accommodationsController.getOne);
 router.post('/add', uploadImages, validateAccommodation.rules, accommodationsController.add);
 router.put('/update', uploadImages, validateAccommodation.rules, accommodationsController.update);
 router.delete('/remove', accommodationsController.remove);
+router.delete('/remove-image', accommodationsController.removeImage);
 
 module.exports = router;
