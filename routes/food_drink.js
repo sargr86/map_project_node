@@ -7,6 +7,7 @@ router.get('/get-partners', foodDrinkController.getPartners);
 router.get('/getOne', foodDrinkController.getOne);
 router.post('/add', uploadImages, validateFoodDrink.rules, foodDrinkController.add);
 router.put('/update', uploadImages, validateFoodDrink.rules, foodDrinkController.update);
+router.put('/make-cover', checkAuth, checkRole('admin', 'partner'), foodDrinkController.makeCover);
 router.delete('/remove', foodDrinkController.remove);
 
 module.exports = router;
