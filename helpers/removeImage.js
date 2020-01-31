@@ -2,6 +2,7 @@ const rimrafPromise = require('rimraf-promise');
 
 module.exports = async (req, res) => {
     let filePath = path.resolve(__dirname + '\\..\\public/' + req.filename.replace(/^.*\/\/[^\/]+/, ''));
+    console.log(filePath)
     if (fse.existsSync(filePath)) {
         await rimrafPromise(filePath);
         res.json('OK')
