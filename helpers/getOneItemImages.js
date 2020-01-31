@@ -6,7 +6,7 @@ module.exports = async (req, uploadFolder, dbData) => {
     let files;
     if (dbData) {
         dbData = dbData.toJSON();
-        const folder = path.resolve(uploadFolder + '/' + dbData['name'].replace(/ /g, '_'));
+        const folder = path.resolve(uploadFolder + '/' + toFolderName(dbData['name']));
         const realFolder = 'http://' + req.headers.host + path.relative('./', folder).replace(/\\/g, '/').replace('public', '');
         console.log(realFolder)
         const folderPath = path.relative('./', folder).replace(/\\/g, '/').replace('public', '');

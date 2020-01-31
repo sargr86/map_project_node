@@ -6,6 +6,7 @@ global.validatePattern = require('../helpers/patternValidator');
 global.checkAdmin = require('../helpers/checkRole');
 global.checkAuth = require('../helpers/checkAuth');
 global.checkRole = require('../helpers/checkRole');
+global.removeImage = require('../helpers/removeImage');
 global.getOneItemImages = require('../helpers/getOneItemImages');
 global.renameFolder = require('../helpers/renameFolder');
 global.toFolderName = require('../helpers/convertToFolderName');
