@@ -145,6 +145,12 @@ exports.update = async (req, res) => {
     this.get(req, res);
 };
 
+exports.makeCover = async (req, res) => {
+    let data = req.body;
+    await Accommodations.update({img: data.img}, {where: {id: data.id}});
+    res.json("OK")
+};
+
 exports.removeImage = async (req, res) => {
     await removeImage(req.query, res);
 };
