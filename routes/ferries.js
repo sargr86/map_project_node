@@ -11,7 +11,7 @@ router.put('/update', checkAuth, checkRole('admin', 'partner'), uploadImages, va
 router.put('/make-cover', checkAuth, checkRole('admin', 'partner'), ferriesController.makeCover);
 router.delete('/remove', checkAuth, checkRole('admin', 'partner'), ferriesController.remove);
 router.delete('/remove-image', checkAuth, checkRole('admin', 'partner'), ferriesController.removeImage);
-router.delete('/remove-image', ferriesController.removeImage);
+// router.delete('/remove-image', ferriesController.removeImage);
 
 router.get('/get_real_locations', ferriesController.getRealLocations)
 
