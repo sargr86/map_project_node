@@ -1,0 +1,116 @@
+{
+  "objects": [
+    {
+      "name": "Funkytown Adventure Centre",
+      "description": "Outdoor activity organiser in the Republic of Ireland",
+      "address": "Crosshaven, Co. Cork",
+      "company": "Funkytown",
+      "lat": "51.773039",
+      "lng": "-8.313548"
+    },
+    {
+      "name": "Myrtleville Equipment Rental",
+      "description": "",
+      "address": "Myrtleville, Co. Cork",
+      "company": "Myrtleville",
+      "lat": "51.782893",
+      "lng": "-8.295004"
+    },
+    {
+      "name": "Minane Amazon Paddle",
+      "description": "",
+      "address": "Minane Bridge, Co. Cork",
+      "company": "Minane Bridge",
+      "lat": "51.762474",
+      "lng": "-8.372075"
+    },
+    {
+      "name": "Carrigaline Crosshaven Paddle",
+      "description": "",
+      "address": "Carrigaline",
+      "company": "Carrigaline",
+      "lat": "51.813948",
+      "lng": "-8.387823"
+    },
+    {
+      "name": "SUP Rental Fountainstown",
+      "description": "",
+      "address": "Carrigaline, Co. Cork",
+      "company": "Carrigaline",
+      "lat": "51.775027",
+      "lng": "-8.311558"
+    },
+    {
+      "name": "SUP Crosshaven",
+      "description": "",
+      "address": "Crosshaven, Co. Cork",
+      "company": "Crosshaven",
+      "lat": "51.805760",
+      "lng": "-8.292713"
+    },
+    {
+      "name": "Nohoval Cove",
+      "description": "Close to the village Nohoval lies a small bay, which is a real eye-catcher due to its steep cliffs and some rocks rising from the sea – the Nohoval Cove. Once you have reached the bay via a narrow country road, you first notices the ruins of an old slate mine. On the opposite slope a path leads up to the cliffs. From here you can enjoy the best view over the bay.",
+      "address": "Nohoval, Co. Cork",
+      "company": "Nohoval",
+      "lat": "51.713578",
+      "lng": "-8.384904"
+    },
+    {
+      "name": "Roberts Cove",
+      "description": "",
+      "address": "Roberts Cove, Co. Cork",
+      "company": "Roberts Cove",
+      "lat": "51.745355",
+      "lng": "-8.312791"
+    },
+    {
+      "name": "Royal Cork Yacht Club",
+      "description": "The Royal Cork Yacht Club is a claimant to the title of the world's oldest yacht club, founded in 1720, although some consider the Neva Yacht Club to be older by two years. It is presently located in Crosshaven, Co. Cork, Ireland.",
+      "address": "Crosshaven, Co. Cork",
+      "company": "Crosshaven",
+      "lat": "51.804395",
+      "lng": "-8.305041"
+    },
+    {
+      "name": "Pipers Funfair",
+      "description": "Amusement center in Crosshaven, Ireland",
+      "address": "2 Point Rd, Crosshaven, Co. Cork, Ireland",
+      "company": "Crosshaven",
+      "lat": "51.802867",
+      "lng": "-8.294108"
+    },
+    {
+      "name": "Hugh coveney Pier",
+      "description": "Fishing pier in the Republic of Ireland",
+      "address": "Hugh Coveney Pier, Crosshaven, Co. Cork, Ireland",
+      "company": "Crosshaven",
+      "lat": "51.804688",
+      "lng": "-8.298072"
+    },
+    {
+      "name": "Camden Graball Walk",
+      "description": "",
+      "address": "Crosshaven, Co. Cork, Ireland",
+      "company": "Crosshaven",
+      "lat": "51.807424",
+      "lng": "-8.280100"
+    },
+    {
+      "name": "Weavers Point Cliff Point",
+      "description": "",
+      "address": "Crosshaven, Co. Cork",
+      "company": "Weavers Point",
+      "lat": "51.798141",
+      "lng": "-8.274143"
+    },
+    {
+      "name": "Church Bay Cliff View point",
+      "description": "Fishing pier in the Republic of Ireland",
+      "address": "Crosshaven, Co. Cork",
+      "company": "Crosshaven",
+      "lat": "51.796045",
+      "lng": "-8.277192"
+    }
+  ]
+}

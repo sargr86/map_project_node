@@ -103,6 +103,14 @@
       "address": "Minane Brideg, Co. Cork",
       "lat": "51.744540",
       "lng": "-8.313211"
+    },
+    {
+      "name": "Fishy Fishy Kinsale",
+      "description": "Simple restaurant serving locally-caught seafood, where they even know the fishermen's names.",
+      "address": "Crowleys Quay, Kinsale Co, Co. IE, Ireland",
+      "company": "Fishy Fishy",
+      "lat": "51.704040",
+      "lng": "-8.521543"
     }
   ]
 }
