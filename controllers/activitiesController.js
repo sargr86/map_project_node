@@ -54,7 +54,10 @@ exports.getOne = async (req, res) => {
         ]
     });
 
-    res.json(result);
+    let r = await getOneItemImages(req, ACTIVITIES_UPLOAD_FOLDER, result);
+    res.json(r);
+
+    res.json(r);
 };
 
 
@@ -201,4 +204,15 @@ exports.removeActivityType = async (req, res) => {
     let data = req.query;
     await ActivityTypes.destroy({where: {id: data.id}});
     this.getActivityTypes(req, res);
+};
+
+
+exports.makeCover = async (req, res) => {
+    let data = req.body;
+    await Activities.update({img: data.img}, {where: {id: data.id}});
+    res.json("OK")
+};
+
+exports.removeImage = async (req, res) => {
+    await removeImage(req.query, res);
 };

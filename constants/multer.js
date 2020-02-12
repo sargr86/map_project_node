@@ -10,6 +10,8 @@ let storage = multer.diskStorage({
 
         let dir;
 
+        console.log('multer!!!!')
+
         // This is done for ferries info editing!!!
         if (edit) {
             if (folder !== 'users') {
