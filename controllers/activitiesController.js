@@ -49,14 +49,12 @@ exports.getOne = async (req, res) => {
         where: {id: data.id},
         include: [
             {model: Users},
-            {model: ActivityTypes},
+            {model: ActivityTypes, attributes: ['id']},
             {model: Companies, attributes: ['id', 'name']}
-        ]
+        ],
     });
 
     let r = await getOneItemImages(req, ACTIVITIES_UPLOAD_FOLDER, result);
-    res.json(r);
-
     res.json(r);
 };
 
@@ -114,8 +112,21 @@ exports.update = async (req, res) => {
     // Renaming folder if name is changed
     if (data.oldName !== data.name) await renameFolder(data.oldName, data.name, ACTIVITIES_UPLOAD_FOLDER);
 
-
+    // Updating activities
     await Activities.update(data, {where: {id: id}});
+
+    // Updating activities_act_types table
+    let activityTypes = data.activity_types.split(',');
+
+    await ActivitiesTypes.destroy({where: {act_id: id}});
+
+    activityTypes.map((async (type_id) => {
+        await ActivitiesTypes.create({
+            act_id: id,
+            act_type_id: type_id
+        });
+    }));
+
     this.get(req, res);
 };
 
