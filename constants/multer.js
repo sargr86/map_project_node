@@ -29,7 +29,7 @@ let storage = multer.diskStorage({
             if (folder !== 'users') {
                 if ('tours_type_id' in data) {
                     dir = TOURS_UPLOAD_FOLDER;
-                } else if ('activity_type_id' in data) {
+                } else if ('activity_types' in data) {
                     dir = ACTIVITIES_UPLOAD_FOLDER;
                     // data.name is added for ferries section
                 } else {

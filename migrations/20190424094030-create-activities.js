@@ -14,9 +14,9 @@ module.exports = {
             company_id: {
                 type: Sequelize.INTEGER
             },
-            activity_type_id: {
-                type: Sequelize.INTEGER
-            },
+            // activity_type_id: {
+            //     type: Sequelize.INTEGER
+            // },
             name: {
                 type: Sequelize.STRING
             },
