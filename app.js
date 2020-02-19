@@ -63,19 +63,6 @@ if (process.env.NODE_ENV === 'production') {
 // console.log(`${process.env.API_URL}auth/google/callback`)
 // Separating Angular routes
 app.get('*', (req, res) => {
-    console.log('fix routes')
-    fixRoutes(req, res);
-});
-
-
-// Passport.js config
-const passport = require('passport');
-require('./config/google-passport-strategy')(passport);
-require('./config/facebook-passport-strategy')(passport);
-app.use(passport.initialize({}));
-
-
-fixRoutes = (req, res) => {
     // if (allowedExt.filter(ext => req.url.indexOf(ext) > 0).length > 0) {
     //     let url = `/var/www/html/secret_south/secret_south_angular/dist/front/${req.url}`;
     //     res.sendFile(url);
@@ -88,11 +75,15 @@ fixRoutes = (req, res) => {
         if (!req.url.includes('phpmyadmin')) {
             res.sendFile(dist + 'index.html');
         }
-
-        next();
-
     });
-};
+});
+
+
+// Passport.js config
+const passport = require('passport');
+require('./config/google-passport-strategy')(passport);
+require('./config/facebook-passport-strategy')(passport);
+app.use(passport.initialize({}));
 
 
 app.use((err, req, res, next) => {
