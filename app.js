@@ -59,6 +59,9 @@ let dist = path.join(__dirname, '../../secret_south/frontend/dist/front/');
 if (process.env.NODE_ENV === 'production') {
     dist = path.join(__dirname, '../../secret_south/secret_south_angular/dist/front/')
 }
+
+app.use(express.static(dist));
+
 // console.log('dist path:', dist)
 // console.log(`${process.env.API_URL}auth/google/callback`)
 // Separating Angular routes
@@ -70,7 +73,7 @@ app.get('*', (req, res) => {
     //     console.log(req.url)
     //     res.sendFile(path.join(__dirname, '../../secret_south/secret_south_angular/dist/front/index.html'));
     // }
-    app.use(express.static(dist));
+
     app.get('*', (req, res, next) => {
         if (!req.url.includes('phpmyadmin')) {
             res.sendFile(dist + 'index.html');
