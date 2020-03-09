@@ -238,7 +238,7 @@ exports.forgotPassword = async (req, res) => {
     const user = req.body;
     let foundUser = await Users.findOne({where: {email: user.email}});
 
-console.log(foundUser)
+
 
     if (!foundUser) {
         res.status(500).json('User is not found');
@@ -271,6 +271,7 @@ console.log(foundUser)
         });
 
         let randomCode = Math.floor(1000 + Math.random() * 9000);
+        console.log("CODE"+ randomCode)
         // console.log(process.env)
 
         // setup email data with unicode symbols
