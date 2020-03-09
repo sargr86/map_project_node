@@ -89,7 +89,7 @@ exports.login = async (req, res) => {
         // let userType = data.userType ? 'Partner' : 'Admin';
 
 
-        let attributes = [`first_name`, `last_name`, 'email', 'profile_img', 'password', 'id', 'status_id','phone'];
+        let attributes = [`first_name`, `last_name`, 'email', 'profile_img', 'password', 'id', 'status_id', 'phone', 'birthday'];
 
         // Active status selecting
         let statusWhere = sequelize.where(sequelize.col('`users_status`.`name_en`'), 'active');
@@ -192,4 +192,38 @@ exports.getProfile = async (req, res) => {
     // Selecting an employee that has an email matching request one
     let user = await Users.findOne({where: {email: email}, attributes: attributes})
     res.json(user);
+};
+
+/**
+ * Reset/change password
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
+exports.changePassword = async (req, res) => {
+    let data = req.body;
+    let newPassword = data.new_password;
+    let oldPassword = data.old_password;
+    let foundUser = await Users.findOne({where: {email: data.email}});
+
+
+
+    if (!foundUser) {
+        res.status(500).json('User is not found');
+    } else {
+
+        let match = await bcrypt.compare(oldPassword, foundUser.password);
+        if (!match) {
+            res.status(500).json('Wrong password')
+        }
+        else {
+            data.password = bcrypt.hashSync(newPassword, 10);
+
+            let result = await to(Users.update({password: data.password}, {where: {email: data.email}}), res);
+            res.json('OK')
+        }
+
+
+    }
+
 };
