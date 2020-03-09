@@ -285,7 +285,7 @@ exports.forgotPassword = async (req, res) => {
 
         // send mail with defined transport object
         transporter.sendMail(mailOptions, (error, info) => {
-            console.log('aaaaaa')
+            console.log(error)
             if (error) {
                 res.status(500).json({msg: error.toString()})
             } else if (info) {
