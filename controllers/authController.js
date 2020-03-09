@@ -235,10 +235,10 @@ exports.forgotPassword = async (req, res) => {
 //     if (!errors.isEmpty()) {
 //         return res.status(422).json(errors.array()[0]);
 //     }
-console.log("OK")
     const user = req.body;
     let foundUser = await Users.findOne({where: {email: user.email}});
 
+console.log(foundUser)
 
     if (!foundUser) {
         res.status(500).json('User is not found');
