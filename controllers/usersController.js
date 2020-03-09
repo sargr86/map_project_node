@@ -10,7 +10,8 @@ exports.getUserById = async (req, res) => {
     let data = req.query;
     let result = await to(Users.findOne({
         where: {id: data.id},
-        attributes: ['id', 'email', 'gender', 'profile_img', `first_name`, `last_name`, 'birthday','phone']
+        attributes: ['id', 'email', 'gender', 'profile_img', `first_name`, `last_name`, 'birthday', 'phone'],
+        include: [{model: Roles, attributes: ['name_en']}]
     }), res);
     res.json(result)
 };
