@@ -7,11 +7,12 @@ const passport = require('passport');
 
 router.post('/register', uploadProfileImg, validateRegister.rules, authController.register);
 router.post('/login', validateLogin.rules, authController.login);
+router.post('/forgot-password', authController.forgotPassword);
 
 router.put('/update-profile', checkAuth, uploadProfileImg, validateProfile.rules, authController.updateProfile);
 router.get('/get-profile', checkAuth, authController.getProfile);
-// router.get('/forgot-password', checkAuth, authController.forgotPassword);
-router.put('/change-password', checkAuth, authController.changePassword);
+router.put('/change-password', authController.changePassword);
+router.put('/change-forgotten-password', authController.changeForgottenPassword);
 
 
 // Passport.js Google auth routes

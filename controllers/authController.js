@@ -1,4 +1,5 @@
 require('../constants/sequelize');
+const nodemailer = require('nodemailer');
 
 /**
  * Registers a user in the database
@@ -207,7 +208,6 @@ exports.changePassword = async (req, res) => {
     let foundUser = await Users.findOne({where: {email: data.email}});
 
 
-
     if (!foundUser) {
         res.status(500).json('User is not found');
     } else {
@@ -215,8 +215,7 @@ exports.changePassword = async (req, res) => {
         let match = await bcrypt.compare(oldPassword, foundUser.password);
         if (!match) {
             res.status(500).json('Wrong password')
-        }
-        else {
+        } else {
             data.password = bcrypt.hashSync(newPassword, 10);
 
             let result = await to(Users.update({password: data.password}, {where: {email: data.email}}), res);
@@ -224,6 +223,98 @@ exports.changePassword = async (req, res) => {
         }
 
 
+    }
+
+};
+
+
+
+exports.forgotPassword = async (req, res) => {
+// Getting validation result from express-validator
+//     const errors = validationResult(req);
+//     if (!errors.isEmpty()) {
+//         return res.status(422).json(errors.array()[0]);
+//     }
+console.log("OK")
+    const user = req.body;
+    let foundUser = await Users.findOne({where: {email: user.email}});
+
+
+    if (!foundUser) {
+        res.status(500).json('User is not found');
+    } else {
+
+
+        const email = user.email || 'sofiabruno3003@gmail.com'; //sofiabruno3003@gmail.com
+
+        let tempToken = jwt.sign({
+            email: user.email,
+            id: user.id,
+
+            first_name: user.first_name,
+            last_name: user.last_name,
+            company_id: user.company_id,
+            gender: user.gender,
+            field_type: user.field_type,
+            user_type: user.user_type
+        }, 'secretkey', {expiresIn: '1h'});
+
+        // create reusable transporter object using the default SMTP transport
+        let transporter = nodemailer.createTransport({
+            host: 'smtp.gmail.com',
+            port: 587,
+            secure: false, // true for 465, false for other ports
+            auth: {
+                user: 'sofiabruno3003', // generated ethereal user
+                pass: 'davmark11' // generated ethereal password
+            }
+        });
+
+        let randomCode = Math.floor(1000 + Math.random() * 9000);
+        // console.log(process.env)
+
+        // setup email data with unicode symbols
+        let mailOptions = {
+            from: '"Secret South " <foo@example.com>', // sender address
+            to: email, // list of receivers
+            subject: 'Password Reset', // Subject line
+            text: 'You recently requested a password reset', // plain text body
+            html: `${randomCode}` // html body
+        };
+
+        // send mail with defined transport object
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                res.status(500).json({msg: error.toString()})
+            } else if (info) {
+
+                console.log('Message sent: %s', info.messageId);
+                // Preview only available when sending through an Ethereal account
+                console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+                res.json(randomCode);
+            }
+
+
+        });
+    }
+};
+
+
+exports.changeForgottenPassword = async (req, res) => {
+    console.log('here!!!!')
+    let data = req.body;
+    let newPassword = data.new_password;
+    let foundUser = await Users.findOne({where: {email: data.email}});
+
+
+    if (!foundUser) {
+        res.status(500).json('User is not found');
+    } else {
+
+        data.password = bcrypt.hashSync(newPassword, 10);
+
+        await to(Users.update({password: data.password}, {where: {email: data.email}}), res);
+        res.json('OK')
     }
 
 };
