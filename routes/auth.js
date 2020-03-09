@@ -10,6 +10,8 @@ router.post('/login', validateLogin.rules, authController.login);
 
 router.put('/update-profile', checkAuth, uploadProfileImg, validateProfile.rules, authController.updateProfile);
 router.get('/get-profile', checkAuth, authController.getProfile);
+// router.get('/forgot-password', checkAuth, authController.forgotPassword);
+router.put('/change-password', checkAuth, authController.changePassword);
 
 
 // Passport.js Google auth routes

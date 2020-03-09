@@ -10,7 +10,7 @@ exports.getUserById = async (req, res) => {
     let data = req.query;
     let result = await to(Users.findOne({
         where: {id: data.id},
-        attributes: ['id', 'email', 'gender', 'profile_img', `first_name`, `last_name`, 'birthday']
+        attributes: ['id', 'email', 'gender', 'profile_img', `first_name`, `last_name`, 'birthday','phone']
     }), res);
     res.json(result)
 };
