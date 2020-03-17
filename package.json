@@ -26,6 +26,7 @@
     "express-validator": "^5.3.1",
     "fs-extra": "^7.0.1",
     "jsonwebtoken": "^8.4.0",
+    "mongoose": "^5.9.5",
     "multer": "^1.4.1",
     "mysql": "^2.16.0",
     "mysql2": "^1.6.5",
@@ -38,6 +39,7 @@
     "rimraf-promise": "^2.0.0",
     "sequelize": "^4.42.0",
     "sequelize-cli": "^5.4.0",
+    "socket.io": "^2.3.0",
     "util": "^0.12.1"
   }
 }

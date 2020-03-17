@@ -1,7 +1,7 @@
 require('dotenv').config();
 require('./constants/main');
 
-
+console.log('works')
 server.listen(port);
 // // Start server on pre-defined port
 // server.listen(port,'192.168.1.126', ()=>{
@@ -13,11 +13,32 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true, limit: postMaxSize + 'mb'}));
 
 
+
 // Cors
 app.use(cors(require('./config/cors')));
 
+// Mongoose
+//Import the mongoose module
+const mongoose = require('mongoose');
+
+//Set up default mongoose connection
+const mongoDB = 'mongodb://127.0.0.1/secret_south';
+mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
+
+//Get the default connection
+const db = mongoose.connection;
+
+//Bind connection to error event (to get notification of connection errors)
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
+//Socket IO
+global.io = require('socket.io')(server);
+const {socket} = require('./socket');
+socket(io);
+
 // Static resources
 app.use('/uploads/', express.static(UPLOADS_FOLDER));
+
 
 
 // Non-auth routes
@@ -32,6 +53,7 @@ app.use('/accommodations', require('./routes/accommodations'));
 app.use('/partners', require('./routes/partners'));
 app.use('/companies', require('./routes/companies'));
 app.use('/contacts', require('./routes/contacts'));
+app.use('/orders', require('./routes/orders'));
 
 // Auth Routes
 app.use('/users', checkAuth, require('./routes/users'));
@@ -53,6 +75,7 @@ const allowedExt = [
     '.ttf',
     '.svg',
 ];
+
 
 
 let dist = path.join(__dirname, '../../secret_south/frontend/dist/front/');
