@@ -22,6 +22,12 @@ module.exports = {
             },
         }, ['id']);
 
+        const operator_role_id = await queryInterface.rawSelect('roles', {
+            where: {
+                name_en: 'Operator'
+            },
+        }, ['id']);
+
         const customer_role_id = await queryInterface.rawSelect('roles', {
             where: {
                 name_en: 'Customer'
@@ -72,6 +78,20 @@ module.exports = {
                 password: bcrypt.hashSync('12345678', 10),
                 profile_img: '',
                 role_id: customer_role_id,
+                company_id: company_id,
+                status_id: status_id,
+                created_at: new Date(),
+                updated_at: new Date()
+            },
+            {
+                first_name: 'Test',
+                last_name: 'Operator',
+                birthday: new Date(),
+                gender: 'female',
+                email: 'operator@gmail.com',
+                password: bcrypt.hashSync('12345678', 10),
+                profile_img: '',
+                role_id: operator_role_id,
                 company_id: company_id,
                 status_id: status_id,
                 created_at: new Date(),
