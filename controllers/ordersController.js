@@ -16,9 +16,33 @@ exports.create = async (orderData) => {
     return result;
 };
 
-exports.getAll = async(req, res) => {
-   const orders = await Orders.find({});
+exports.getByStatus = async (req, res) => {
+    let status = req.query.status !== 'all' ? {status: req.query.status} : {};
+    const orders = await Orders.find(status);
     res.json(orders)
+};
+
+exports.getActiveOrders = async (req, res) => {
+    console.log(req.query)
+    const orders = await Orders.find({'client.email': req.query.email, status: {$nin: ['cancelled', 'finished']}});
+    res.json(orders)
+};
+
+exports.getUserOrders = async (req, res) => {
+    const orders = await Orders.find({'client.email': req.query.email});
+    res.json(orders)
+};
+
+exports.changeStatus = async (req, res) => {
+    let data = req.body;
+    console.log(data)
+
+    let order = await Orders.findOne({_id: data.id});
+    // await Orders.updateOne({id: data.id}, {status: data.status});
+    // await Orders.update({id: data.id}, {$set: {status: data.status}});
+    order.status = data.status;
+    await order.save();
+    res.json("OK")
 };
 
 
