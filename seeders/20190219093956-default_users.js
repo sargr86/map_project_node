@@ -83,20 +83,20 @@ module.exports = {
                 created_at: new Date(),
                 updated_at: new Date()
             },
-            {
-                first_name: 'Test',
-                last_name: 'Operator',
-                birthday: new Date(),
-                gender: 'female',
-                email: 'operator@gmail.com',
-                password: bcrypt.hashSync('12345678', 10),
-                profile_img: '',
-                role_id: operator_role_id,
-                company_id: company_id,
-                status_id: status_id,
-                created_at: new Date(),
-                updated_at: new Date()
-            },
+            // {
+            //     first_name: 'Test',
+            //     last_name: 'Operator',
+            //     birthday: new Date(),
+            //     gender: 'female',
+            //     email: 'operator@gmail.com',
+            //     password: bcrypt.hashSync('12345678', 10),
+            //     profile_img: '',
+            //     role_id: operator_role_id,
+            //     company_id: company_id,
+            //     status_id: status_id,
+            //     created_at: new Date(),
+            //     updated_at: new Date()
+            // },
 
         ])
     },

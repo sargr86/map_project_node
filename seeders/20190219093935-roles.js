@@ -15,9 +15,9 @@ module.exports = {
             {
                 name_en: 'Customer'
             },
-            {
-                name_en: 'Operator'
-            }
+            // {
+            //     name_en: 'Operator'
+            // }
         ])
 
     },
