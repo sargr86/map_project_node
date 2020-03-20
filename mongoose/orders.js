@@ -5,6 +5,15 @@ const moment = require('moment');
 // mongoose.connect('mongodb://localhost/chat');
 
 let OrderSchema = new mongoose.Schema({
+    client: {
+        type: {
+            first_name: {type: String},
+            last_name: {type: String},
+            email: {type: String},
+            phone: {type: String}
+        },
+        required: true
+    },
     startPoint: {
         type: {
             name: {type: String},
@@ -30,6 +39,10 @@ let OrderSchema = new mongoose.Schema({
         default: false
     },
     payment: {
+        type: String,
+        default: false
+    },
+    status: {
         type: String,
         default: false
     },
