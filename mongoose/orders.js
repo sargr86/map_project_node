@@ -14,6 +14,11 @@ let OrderSchema = new mongoose.Schema({
         },
         required: true
     },
+    driver: {
+        type: {
+            full_name: {type: String}
+        }
+    },
     startPoint: {
         type: {
             name: {type: String},

@@ -22,14 +22,24 @@ exports.getByStatus = async (req, res) => {
     res.json(orders)
 };
 
-exports.getActiveOrders = async (req, res) => {
+exports.getUserActiveOrders = async (req, res) => {
     console.log(req.query)
     const orders = await Orders.find({'client.email': req.query.email, status: {$nin: ['cancelled', 'finished']}});
     res.json(orders)
 };
 
-exports.getUserOrders = async (req, res) => {
+exports.getAllUserOrders = async (req, res) => {
     const orders = await Orders.find({'client.email': req.query.email});
+    res.json(orders)
+};
+
+exports.getDriverActiveOrders = async (req, res) => {
+    const orders = await Orders.find({driver: req.query.email, status: {$nin: ['cancelled', 'finished']}});
+    res.json(orders)
+};
+
+exports.getAllDriverOrders = async (req, res) => {
+    const orders = await Orders.find({'driver': req.query.email});
     res.json(orders)
 };
 
@@ -43,6 +53,29 @@ exports.changeStatus = async (req, res) => {
     order.status = data.status;
     await order.save();
     res.json("OK")
+};
+
+exports.changeStatusFromSocket = async (data) => {
+    let order = await Orders.findOne({_id: data.id});
+    order.status = data.status;
+    await order.save();
+};
+
+// Assigns a boat to the selected driver
+exports.assignBoatToDriver = async (data) => {
+    console.log(data)
+    if (data) {
+
+        let order = await Orders.findOne({_id: data._id});
+        order.driver = data.driver;
+        order.status = 'assigned';
+        await order.save();
+    }
+};
+
+exports.getOrderById = async (data)=>{
+    let order = await Orders.findOne({_id: data._id});
+    return order;
 };
 
 

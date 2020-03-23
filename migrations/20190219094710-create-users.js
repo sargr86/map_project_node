@@ -12,6 +12,9 @@ module.exports = {
             role_id: {
                 type: Sequelize.INTEGER
             },
+            position_id: {
+                type: Sequelize.INTEGER
+            },
             company_id: {
                 type: Sequelize.INTEGER
             },

@@ -14,4 +14,5 @@ global.ActivitiesTypes = db.activities_act_types;
 global.Accommodations = db.accommodations;
 global.Companies = db.companies;
 global.Contacts = db.contacts;
+global.Positions = db.positions;
 global.Op = sequelize.Op;

@@ -105,6 +105,7 @@ exports.login = async (req, res) => {
                 {model: UsersStatuses, attributes: ['name_en'], where: {statusWhere}},
                 {model: Roles, attributes: ['name_en', 'id']},// where: {userTypeWhere},
                 {model: Companies, attributes: ['id', 'name']},
+                {model: Positions, attributes: ['name']},
                 {model: PartnerTypes}
             ],
             where: {email: email} //userTypeWhere
