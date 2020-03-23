@@ -22,11 +22,6 @@ module.exports = {
             },
         }, ['id']);
 
-        const operator_role_id = await queryInterface.rawSelect('roles', {
-            where: {
-                name_en: 'Operator'
-            },
-        }, ['id']);
 
         const customer_role_id = await queryInterface.rawSelect('roles', {
             where: {
@@ -37,6 +32,20 @@ module.exports = {
         const company_id = await queryInterface.rawSelect('companies', {
             where: {
                 name: 'Secret South'
+            },
+        }, ['id']);
+
+        const operator_pos_id = await queryInterface.rawSelect('positions', {
+            where: {
+                name: 'Operator'
+            },
+        }, ['id']);
+
+        console.log("OPERATOR!!!!!!!!!!!" + operator_pos_id)
+
+        const driver_pos_id = await queryInterface.rawSelect('positions', {
+            where: {
+                name: 'Driver'
             },
         }, ['id']);
 
@@ -57,13 +66,28 @@ module.exports = {
             },
             {
                 first_name: 'Test',
+                last_name: 'Operator',
+                birthday: new Date(),
+                gender: 'female',
+                email: 'operator@gmail.com',
+                password: bcrypt.hashSync('12345678', 10),
+                profile_img: '',
+                role_id: operator_pos_id,
+                company_id: company_id,
+                status_id: status_id,
+                created_at: new Date(),
+                updated_at: new Date()
+            },
+            {
+                first_name: 'Test',
                 last_name: 'Driver',
-                birthday: '1986-03-30',
+                birthday: '',
                 gender: 'male',
                 email: 'driver@gmail.com',
                 password: bcrypt.hashSync('12345678', 10),
                 profile_img: '',
                 role_id: employee_role_id,
+                position_id: driver_pos_id,
                 company_id: company_id,
                 status_id: status_id,
                 created_at: new Date(),
@@ -72,7 +96,7 @@ module.exports = {
             {
                 first_name: 'Test',
                 last_name: 'Customer',
-                birthday: '1986-03-30',
+                birthday: '',
                 gender: 'male',
                 email: 'customer@gmail.com',
                 password: bcrypt.hashSync('12345678', 10),
@@ -83,20 +107,7 @@ module.exports = {
                 created_at: new Date(),
                 updated_at: new Date()
             },
-            // {
-            //     first_name: 'Test',
-            //     last_name: 'Operator',
-            //     birthday: new Date(),
-            //     gender: 'female',
-            //     email: 'operator@gmail.com',
-            //     password: bcrypt.hashSync('12345678', 10),
-            //     profile_img: '',
-            //     role_id: operator_role_id,
-            //     company_id: company_id,
-            //     status_id: status_id,
-            //     created_at: new Date(),
-            //     updated_at: new Date()
-            // },
+
 
         ])
     },

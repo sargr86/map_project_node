@@ -50,3 +50,17 @@ exports.changeUserStatus = async (req, res) => {
     req.query = data;
     this.getUsers(req, res);
 };
+
+exports.getUsersByRole = async (req, res) => {
+    let data = req.query;
+    let attributes = [[sequelize.fn('concat', sequelize.col('first_name'), ' ', sequelize.col('last_name')), 'full_name'], 'id','phone', 'email', 'gender', 'profile_img', 'birthday'];
+
+    let result = await to(Users.findAll({
+        attributes: attributes,
+        include: [
+            {model: Positions, where: {name: data.position}}
+        ],
+
+    }), res);
+    res.json(result)
+};
