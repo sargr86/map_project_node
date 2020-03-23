@@ -81,7 +81,7 @@ module.exports = {
             {
                 first_name: 'Test',
                 last_name: 'Driver',
-                birthday: '',
+                birthday: new Date(),
                 gender: 'male',
                 email: 'driver@gmail.com',
                 password: bcrypt.hashSync('12345678', 10),
@@ -96,7 +96,7 @@ module.exports = {
             {
                 first_name: 'Test',
                 last_name: 'Customer',
-                birthday: '',
+                birthday: new Date(),
                 gender: 'male',
                 email: 'customer@gmail.com',
                 password: bcrypt.hashSync('12345678', 10),
