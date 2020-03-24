@@ -28,17 +28,37 @@ exports.getByStatus = async (req, res) => {
 };
 
 exports.getAllOrdersCounts = async (req, res) => {
+    const data = req.query;
+    let where = {};
+    if (data.hasOwnProperty('driverEmail')) {
+        where['driver.email'] = data.driverEmail;
+    }
+
+
     const aggregatorOpts = [
+        {$match: where},
+        // {
+        // $unwind: "$items"
+        // },
         {
             $group: {
                 _id: "$status",
-                count: {$sum: 1}
+                count: {$sum: 1},
+            },
+
+        },
+        {
+            $group: {
+                _id: "total",
+                count: {$sum: "$count"},
+                statuses: {$push: {name: "$_id", count: "$count"}}
             }
-        }
+        },
+
     ];
 
     const orders = await Orders.aggregate(aggregatorOpts).exec();
-    res.json(orders);
+    res.json(orders[0]);
 };
 
 exports.getUserActiveOrders = async (req, res) => {
@@ -53,7 +73,10 @@ exports.getAllUserOrders = async (req, res) => {
 };
 
 exports.getDriverActiveOrders = async (req, res) => {
-    const orders = await Orders.find({'driver.email': req.query.email, status: {$nin: ['pending','cancelled', 'finished']}});
+    const orders = await Orders.find({
+        'driver.email': req.query.email,
+        status: {$nin: ['pending', 'cancelled', 'finished']}
+    });
     res.json(orders)
 };
 
