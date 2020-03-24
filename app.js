@@ -59,7 +59,7 @@ app.use('/orders', require('./routes/orders'));
 app.use('/users', checkAuth, require('./routes/users'));
 app.use('/tour_types', require('./routes/tour_types'));
 app.use('/activity_types', require('./routes/activity_types'));
-app.use('/employees', checkAuth, require('./routes/employees'));
+app.use('/employees', require('./routes/employees'));
 app.use('/customers', checkAuth, require    ('./routes/customers'));
 
 
@@ -98,6 +98,7 @@ app.get('*', (req, res) => {
     // }
 
     app.get('*', (req, res, next) => {
+        console.log(req.url)
         if (!req.url.includes('phpmyadmin')) {
             res.sendFile(dist + 'index.html');
         }

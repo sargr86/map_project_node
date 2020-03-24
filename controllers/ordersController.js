@@ -17,9 +17,28 @@ exports.create = async (orderData) => {
 };
 
 exports.getByStatus = async (req, res) => {
-    let status = req.query.status !== 'all' ? {status: req.query.status} : {};
-    const orders = await Orders.find(status);
+    let data = req.query;
+    let where = data.status !== 'all' ? {status: data.status} : {};
+    if (data.hasOwnProperty('driverEmail')) {
+        where['driver.email'] = data.driverEmail;
+    }
+    console.log(where)
+    const orders = await Orders.find(where);
     res.json(orders)
+};
+
+exports.getAllOrdersCounts = async (req, res) => {
+    const aggregatorOpts = [
+        {
+            $group: {
+                _id: "$status",
+                count: {$sum: 1}
+            }
+        }
+    ];
+
+    const orders = await Orders.aggregate(aggregatorOpts).exec();
+    res.json(orders);
 };
 
 exports.getUserActiveOrders = async (req, res) => {
@@ -34,12 +53,12 @@ exports.getAllUserOrders = async (req, res) => {
 };
 
 exports.getDriverActiveOrders = async (req, res) => {
-    const orders = await Orders.find({driver: req.query.email, status: {$nin: ['cancelled', 'finished']}});
+    const orders = await Orders.find({'driver.email': req.query.email, status: {$nin: ['pending','cancelled', 'finished']}});
     res.json(orders)
 };
 
 exports.getAllDriverOrders = async (req, res) => {
-    const orders = await Orders.find({'driver': req.query.email});
+    const orders = await Orders.find({'driver.email': req.query.email});
     res.json(orders)
 };
 
@@ -56,6 +75,7 @@ exports.changeStatus = async (req, res) => {
 };
 
 exports.changeStatusFromSocket = async (data) => {
+    console.log(data)
     let order = await Orders.findOne({_id: data.id});
     order.status = data.status;
     await order.save();
@@ -73,7 +93,7 @@ exports.assignBoatToDriver = async (data) => {
     }
 };
 
-exports.getOrderById = async (data)=>{
+exports.getOrderById = async (data) => {
     let order = await Orders.findOne({_id: data._id});
     return order;
 };

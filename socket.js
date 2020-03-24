@@ -42,10 +42,39 @@ exports.socket = (io) => {
             io.sockets.emit('driverAssignmentFinished', changedOrder)
         });
 
+        // Order is taken by a driver
         socket.on('orderTaken', async (data) => {
-            console.log(data)
-            io.sockets.emit('orderTakenFinished')
-            // await ordersController.changeStatusFromSocket(data);
+            console.log("ORDER TAKEN")
+            data.status = 'ongoing';
+            data.id = data._id;
+            await ordersController.changeStatusFromSocket(data);
+            let changedOrder = await ordersController.getOrderById(data);
+            io.sockets.emit('orderTakenFinished', changedOrder)
+        });
+
+        socket.on('arrivedToOrder', async (data) => {
+            data.status = 'arrived';
+            data.id = data._id;
+            await ordersController.changeStatusFromSocket(data);
+            let changedOrder = await ordersController.getOrderById(data);
+            io.sockets.emit('arrivedToOrderFinished', changedOrder)
+        });
+
+        socket.on('startOrder', async (data) => {
+            data.status = 'started';
+            data.id = data._id;
+            await ordersController.changeStatusFromSocket(data);
+            let changedOrder = await ordersController.getOrderById(data);
+            io.sockets.emit('orderStarted', changedOrder)
+        });
+
+        socket.on('finishOrder', async (data) => {
+            console.log("FINISH ORDER!!!!!!")
+            data.status = 'finished';
+            data.id = data._id;
+            await ordersController.changeStatusFromSocket(data);
+            let changedOrder = await ordersController.getOrderById(data);
+            io.sockets.emit('orderFinished', changedOrder)
         });
 
         // Log out
