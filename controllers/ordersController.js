@@ -116,11 +116,13 @@ exports.changeStatusFromSocket = async (data) => {
 
 // Assigns a boat to the selected driver
 exports.assignBoatToDriver = async (data) => {
-    console.log(data)
     if (data) {
+        console.log("ASSIGN")
+    console.log(data)
 
         let order = await Orders.findOne({_id: data._id});
         order.driver = data.driver;
+        order.ferry = data.driver.ferry;
         order.status = 'assigned';
         await order.save();
     }

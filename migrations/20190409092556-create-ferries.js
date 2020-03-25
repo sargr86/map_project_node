@@ -11,6 +11,9 @@ module.exports = {
       company_id: {
         type: Sequelize.INTEGER
       },
+      driver_id: {
+        type: Sequelize.INTEGER
+      },
       name: {
         type: Sequelize.STRING
       },

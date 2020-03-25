@@ -58,7 +58,8 @@ exports.getUsersByRole = async (req, res) => {
     let result = await to(Users.findAll({
         attributes: attributes,
         include: [
-            {model: Positions, where: {name: data.position}}
+            {model: Positions, where: {name: data.position}},
+            {model: Ferries}
         ],
 
     }), res);
