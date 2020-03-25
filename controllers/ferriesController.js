@@ -15,6 +15,7 @@ exports.get = async (req, res) => {
     const data = req.query;
     let partner_id = data.partner_id;
 
+    console.log(data)
     let wherePartner = {where: (partner_id ? {partner_id: data.partner_id} : {}), include: {model: Companies}};
     const result = await to(Ferries.findAll(wherePartner));
 
@@ -165,6 +166,12 @@ exports.update = async (req, res) => {
 exports.makeCover = async (req, res) => {
     let data = req.body;
     await Ferries.update({img: data.img}, {where: {id: data.id}});
+    res.json("OK")
+};
+
+exports.assignDriver = async (req, res) => {
+    let data = req.body;
+    await Ferries.update({driver_id: data.driver_id}, {where: {id: data.ferry_id}});
     res.json("OK")
 };
 

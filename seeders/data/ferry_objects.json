@@ -1,0 +1,13 @@
+{
+  "objects": [
+    {
+      "name": "Funkytown Ferry",
+      "address": "Cork",
+      "company": "Funkytown",
+      "lat": "51.773039",
+      "lng": "-8.313548",
+      "max_people": "12",
+      "min_people": "5"
+    }
+  ]
+}

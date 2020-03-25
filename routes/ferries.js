@@ -9,6 +9,7 @@ router.get('/getOne',  ferriesController.getOne);
 router.post('/add', checkAuth, checkRole('admin', 'partner'), uploadImages, validateFerry.rules, ferriesController.add);
 router.put('/update', checkAuth, checkRole('admin', 'partner'), uploadImages, validateFerry.rules, ferriesController.update);
 router.put('/make-cover', checkAuth, checkRole('admin', 'partner'), ferriesController.makeCover);
+router.put('/assign-driver', checkAuth, checkRole('admin', 'partner'), ferriesController.assignDriver);
 router.delete('/remove', checkAuth, checkRole('admin', 'partner'), ferriesController.remove);
 router.delete('/remove-image', checkAuth, checkRole('admin', 'partner'), ferriesController.removeImage);
 // router.delete('/remove-image', ferriesController.removeImage);

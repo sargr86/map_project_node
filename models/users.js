@@ -23,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
         users.belongsTo(models.positions, {foreignKey: 'position_id'});
         users.belongsTo(models.partner_types, {foreignKey: 'partner_type_id'})
         users.belongsTo(models.companies, {foreignKey: 'company_id'})
+        users.hasOne(models.ferries, {foreignKey: 'driver_id'})
     };
     return users;
 };
