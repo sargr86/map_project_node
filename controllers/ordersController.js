@@ -72,11 +72,21 @@ exports.getAllUserOrders = async (req, res) => {
     res.json(orders)
 };
 
+exports.getUserInactiveOrders = async(req,res)=>{
+    const orders = await Orders.find({'client.email': req.query.email,status: {$in: [ 'cancelled', 'finished']}});
+    res.json(orders)
+};
+
 exports.getDriverActiveOrders = async (req, res) => {
     const orders = await Orders.find({
         'driver.email': req.query.email,
         status: {$nin: ['pending', 'cancelled', 'finished']}
     });
+    res.json(orders)
+};
+
+exports.getDriverInactiveOrders = async(req,res)=>{
+    const orders = await Orders.find({'driver.email': req.query.email,status: {$in: [ 'cancelled', 'finished']}});
     res.json(orders)
 };
 
