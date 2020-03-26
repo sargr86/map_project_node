@@ -11,7 +11,7 @@ global.port = process.env.PORT || 3001;
 global.server = require('http').createServer(app);
 global.fse = require('fs-extra');
 
-console.log(`Your port is ${process.env.PORT}`)
+console.log(`Your port is ${port}`)
 
 
 require('./directories');

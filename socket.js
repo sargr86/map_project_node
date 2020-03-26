@@ -77,6 +77,11 @@ exports.socket = (io) => {
             io.sockets.emit('orderFinished', changedOrder)
         });
 
+        socket.on('rateDriver', async(data)=>{
+            await ordersController.rateDriver(data);
+            io.sockets.emit('ratedDriver', data)
+        });
+
         // Log out
         socket.on('logout', () => {
             if (!socket.nickname) return;

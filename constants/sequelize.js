@@ -15,4 +15,5 @@ global.Accommodations = db.accommodations;
 global.Companies = db.companies;
 global.Contacts = db.contacts;
 global.Positions = db.positions;
+global.Ratings = db.ratings;
 global.Op = sequelize.Op;
