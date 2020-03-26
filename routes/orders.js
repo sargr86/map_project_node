@@ -12,7 +12,7 @@ router.get('/get-driver-active-orders', ordersController.getDriverActiveOrders);
 router.get('/get-driver-orders', ordersController.getAllDriverOrders);
 router.get('/get-driver-inactive-orders', ordersController.getDriverInactiveOrders);
 router.get('/get-counts', ordersController.getAllOrdersCounts);
-// router.put('/rate-driver', ordersController.changeStatus);
+router.put('/rate-driver', ordersController.rateDriver);
 
 
 module.exports = router;
