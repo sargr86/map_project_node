@@ -175,6 +175,10 @@ exports.assignDriver = async (req, res) => {
     res.json("OK")
 };
 
+exports.getFerriesDirections = async (req, res) => {
+    res.json(await FerryDirections.findAll());
+};
+
 
 exports.getRealLocations = async (req, res) => {
     // const options = {

@@ -2,6 +2,7 @@ const ordersController = require('./controllers/ordersController');
 const validateOrder = require('./validators/validateOrder');
 let users = {};
 let connections = [];
+const validator = require('validator');
 exports.socket = (io) => {
     io.on('connection', async (socket) => {
 
@@ -14,17 +15,8 @@ exports.socket = (io) => {
         socket.on('createOrder', async (data) => {
             // console.log(validateOrder.rules)
 
-
-            // Getting validation result from express-validator
-            const errors = validationResult(data);
-
-            // Handling validation errors
-            if (!errors.isEmpty()) {
-                console.log(errors)
-                console.log(errors.array)
-                let singleError = errors.array()[0];
-                console.log(singleError)
-            }
+            console.log(data)
+            console.log(validator.isEmpty(data.client.email))
 
 
             console.log('creating order')
@@ -78,6 +70,7 @@ exports.socket = (io) => {
         });
 
         socket.on('rateDriver', async(data)=>{
+            console.log(validator.isEmpty(data.driver_feedback))
             await ordersController.rateDriver(data);
             io.sockets.emit('ratedDriver', data)
         });
