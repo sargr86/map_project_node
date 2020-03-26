@@ -16,4 +16,5 @@ global.Companies = db.companies;
 global.Contacts = db.contacts;
 global.Positions = db.positions;
 global.Ratings = db.ratings;
+global.FerryDirections = db.ferries_directions;
 global.Op = sequelize.Op;

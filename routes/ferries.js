@@ -15,5 +15,6 @@ router.delete('/remove-image', checkAuth, checkRole('admin', 'partner'), ferries
 // router.delete('/remove-image', ferriesController.removeImage);
 
 router.get('/get_real_locations', ferriesController.getRealLocations)
+router.get('/get-directions', ferriesController.getFerriesDirections)
 
 module.exports = router;
