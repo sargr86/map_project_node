@@ -108,7 +108,7 @@ exports.changeStatus = async (req, res) => {
 };
 
 exports.changeStatusFromSocket = async (data) => {
-    console.log(data)
+    // console.log(data)
     let order = await Orders.findOne({_id: data.id});
     order.status = data.status;
     await order.save();
@@ -132,32 +132,60 @@ exports.getOrderById = async (data) => {
 
 exports.rateDriver = async (data) => {
 
+
+    let orderId = data.order_id;
+    delete data.order_id;
+    delete data.driver_id;
+    delete data.customer_id;
+
+    let order = await Orders.findOne({_id: orderId});
+    order.rating = data;
+    await order.save();
+    //
+    // await Ratings.update({driver_id: data.driver_id}, {where: {id: data.ferry_id}});
+    // let rating = await to(Ratings.findOrCreate({
+    //         where: {
+    //             driver_id: data.driver_id,
+    //             customer_id: data.customer_id
+    //         },
+    //         defaults: {
+    //             driver_feedback: data.driver_feedback,
+    //             driver_rating: data.driver_rating,
+    //             driver_id: data.driver_id,
+    //             customer_id: data.customer_id,
+    //             order_id: data.order_id
+    //         },
+    //
+    //     }).spread((item) => {
+    //         console.log(item)
+    //         return item;
+    //         // return item.get({
+    //         //     plain: true
+    //         // });
+    //     })
+    // );
+
+
+    return data;
+
+
+    // res.json("OK")
 };
 
 
 // Works from routes (test method!!!)
 exports.createFromReq = async (req, res) => {
-    const orderData = req.body;
-    if (!showIfErrors(req, res)) {
-        //{
-        //         "name": "Crosshaven",
-        //          "coordinate": {"latitude": 51.804713, "longitude": -8.298334}
-        //   }
-        res.json('OK');
+    let data = req.body;
+    let orderId = data.order_id;
+    delete data.order_id;
+    delete data.driver_id;
+    delete data.customer_id;
 
-    }
-    // console.log(orderData)
-    // const testOrder = {
-    //     "startPoint": {
-    //         "name": "Crosshaven",
-    //         "coordinate": {"latitude": 51.804713, "longitude": -8.298334}
-    //     },
-    //     "endPoint": {"name": "Fountainstown", "coordinate": {"latitude": 51.775695, "longitude": -8.311389}},
-    //     "wayType": 1,
-    //     "time": "9 : 00",
-    //     "more": {"children": "0", "bike": false},
-    //     "payment": 1
-    // };
-    // let newMsg = new Orders(orderData);
-    // let result = await to(newMsg.save());
+    let order = await Orders.findOne({_id: orderId});
+    order.rating = data;
+    console.log("RATE DRIVER!!!!")
+    console.log(data)
+    console.log(order)
+    await order.save();
+    res.json("OK");
 };

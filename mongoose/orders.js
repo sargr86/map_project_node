@@ -51,6 +51,14 @@ let OrderSchema = new mongoose.Schema({
         type: String,
         default: false
     },
+    rating: {
+        type: {
+            driver_rating: {type: Number},
+            driver_feedback: {type: String},
+            client_rating: {type: Number},
+            client_feedback: {type: String},
+        }
+    },
     created: {
         type: Date,
         default: moment().format()
