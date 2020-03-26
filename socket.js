@@ -15,8 +15,8 @@ exports.socket = (io) => {
         socket.on('createOrder', async (data) => {
             // console.log(validateOrder.rules)
 
-            console.log(data)
-            console.log(validator.isEmpty(data.client.email))
+            // console.log(data)
+            // console.log(validator.isEmpty(data.client.email))
 
 
             console.log('creating order')
@@ -69,8 +69,9 @@ exports.socket = (io) => {
             io.sockets.emit('orderFinished', changedOrder)
         });
 
-        socket.on('rateDriver', async(data)=>{
-            console.log(validator.isEmpty(data.driver_feedback))
+        socket.on('rateDriver', async (data) => {
+            data = JSON.parse(data);
+            // console.log(validator.isEmpty(data.driver_feedback))
             await ordersController.rateDriver(data);
             io.sockets.emit('ratedDriver', data)
         });
