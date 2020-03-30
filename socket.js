@@ -72,8 +72,8 @@ exports.socket = (io) => {
         socket.on('rateDriver', async (data) => {
             data = JSON.parse(data);
             // console.log(validator.isEmpty(data.driver_feedback))
-            await ordersController.rateDriver(data);
-            io.sockets.emit('ratedDriver', data)
+            let changedOrder = await ordersController.rateDriver(data);
+            io.sockets.emit('ratedDriver', changedOrder)
         });
 
         // Log out

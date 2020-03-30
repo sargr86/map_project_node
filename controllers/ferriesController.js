@@ -176,7 +176,19 @@ exports.assignDriver = async (req, res) => {
 };
 
 exports.getFerriesDirections = async (req, res) => {
-    res.json(await FerryDirections.findAll());
+    let data = req.query;
+    let directions = await FerryDirections.findAll({attributes: ['name', 'lat', 'lng'], raw: true});
+
+    // For order form mat-select
+    if (data.dropdown) {
+
+        directions.map(d => {
+            d['coordinates'] = {lat: d.lat, lng: d.lng};
+            delete d.lat;
+            delete d.lng;
+        });
+    }
+    res.json(directions);
 };
 
 

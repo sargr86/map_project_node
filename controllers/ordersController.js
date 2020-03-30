@@ -1,16 +1,6 @@
 const Orders = require('../mongoose/orders');
 exports.create = async (orderData) => {
-    const testOrder = {
-        "startPoint": {
-            "name": "Crosshaven",
-            "coordinate": {"latitude": 51.804713, "longitude": -8.298334}
-        },
-        "endPoint": {"name": "Fountainstown", "coordinate": {"latitude": 51.775695, "longitude": -8.311389}},
-        "wayType": 1,
-        "time": "9 : 00",
-        "more": {"children": "0", "bike": false},
-        "payment": 1
-    };
+
     let newMsg = new Orders(JSON.parse(orderData));
     let result = await to(newMsg.save());
     return result;
@@ -166,7 +156,7 @@ exports.rateDriver = async (data) => {
     // );
 
 
-    return data;
+    return order;
 
 
     // res.json("OK")
