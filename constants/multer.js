@@ -18,7 +18,7 @@ let storage = multer.diskStorage({
                 if (folder.includes('uploads')) {
                     dir = folder
                 } else {
-                    dir = path.join(UPLOADS_FOLDER, 'others/' + folder + '/' + data.name.replace(/ /g, '_'));
+                    dir = path.join(UPLOADS_FOLDER, 'others/' + folder + '/' + data.name.replace(/ /g, '_')) + '_' + Date.now();
                 }
             } else dir = USERS_UPLOAD_FOLDER;
         } else {

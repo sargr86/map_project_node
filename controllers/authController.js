@@ -148,6 +148,8 @@ exports.updateProfile = async (req, res) => {
     let data = req.body;
     let lang = data.lang;
 
+    console.log('update profile!!!!!')
+
     uploadProfileImg(req, res, async (err) => {
         // Gets file type validation error
         if (req.fileTypeError) {
@@ -169,7 +171,10 @@ exports.updateProfile = async (req, res) => {
             // Cloning user object without id and language to build update fields
             let {id, lang, ...fields} = data;
 
-            let result = await to(Users.update(fields, {where: {id: data.id}}), res)
+            console.log(fields)
+
+            delete fields.email; //temporary
+            let result = await to(Users.update(fields, {where: {id: data.id}}), res);
             res.json(result)
         }
     })

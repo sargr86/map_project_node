@@ -9,6 +9,9 @@ const rules = [
         let lang = req.lang;
         let email = req.email;
 
+        console.log(req)
+        console.log('update profile validator')
+
         // Retrieving a user with request email
         let user = await Users.findOne({where: {email: email}});
 
@@ -19,6 +22,7 @@ const rules = [
         //
         // else return true;
     }),
+
 
 
 ];
