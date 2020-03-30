@@ -13,6 +13,8 @@ module.exports = (sequelize, DataTypes) => {
         email: DataTypes.STRING,
         phone: DataTypes.STRING,
         password: DataTypes.STRING,
+        google_user_id: DataTypes.STRING,
+        fb_user_id: DataTypes.STRING,
         profile_img: DataTypes.STRING,
     }, {underscored: true});
     users.associate = function (models) {

@@ -90,7 +90,7 @@ exports.login = async (req, res) => {
         // let userType = data.userType ? 'Partner' : 'Admin';
 
 
-        let attributes = [`first_name`, `last_name`, 'email', 'profile_img', 'password', 'id', 'status_id', 'phone', 'birthday'];
+        let attributes = [`first_name`, `last_name`, 'email', 'profile_img', 'password', 'id', 'status_id', 'phone', 'birthday', 'google_user_id'];
 
         // Active status selecting
         let statusWhere = sequelize.where(sequelize.col('`users_status`.`name_en`'), 'active');
@@ -229,7 +229,6 @@ exports.changePassword = async (req, res) => {
 };
 
 
-
 exports.forgotPassword = async (req, res) => {
 // Getting validation result from express-validator
 //     const errors = validationResult(req);
@@ -238,7 +237,6 @@ exports.forgotPassword = async (req, res) => {
 //     }
     const user = req.body;
     let foundUser = await Users.findOne({where: {email: user.email}});
-
 
 
     if (!foundUser) {
@@ -272,7 +270,7 @@ exports.forgotPassword = async (req, res) => {
         });
 
         let randomCode = Math.floor(1000 + Math.random() * 9000);
-        console.log("CODE"+ randomCode)
+        console.log("CODE" + randomCode)
         // console.log(process.env)
 
         // setup email data with unicode symbols
