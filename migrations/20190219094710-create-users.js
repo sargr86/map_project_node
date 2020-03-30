@@ -39,13 +39,19 @@ module.exports = {
             email: {
                 type: Sequelize.STRING
             },
-            phone:{
+            phone: {
                 type: Sequelize.STRING
             },
             password: {
                 type: Sequelize.STRING
             },
             profile_img: {
+                type: Sequelize.STRING
+            },
+            google_user_id: {
+                type: Sequelize.STRING
+            },
+            fb_user_id: {
                 type: Sequelize.STRING
             },
             created_at: {

@@ -1,4 +1,5 @@
 const Orders = require('../mongoose/orders');
+const moment = require('moment');
 exports.create = async (orderData) => {
 
     let newMsg = new Orders(JSON.parse(orderData));
@@ -53,7 +54,15 @@ exports.getAllOrdersCounts = async (req, res) => {
 
 exports.getUserActiveOrders = async (req, res) => {
     console.log(req.query)
-    const orders = await Orders.find({'client.email': req.query.email, status: {$nin: ['cancelled', 'finished']}});
+    let data = req.query;
+    let condition = {'client.email': data.email, status: {$nin: ['cancelled', 'finished']}};
+    if (data.dateVal) {
+        const tomorrow = moment().add(1, 'days').format('YYYY-MM-DD[T00:00:00.000Z]');
+        console.log(tomorrow)
+        condition.created = {$gt: data.dateVal, $lt: tomorrow};
+    }
+
+    const orders = await Orders.find(condition);
     res.json(orders)
 };
 
