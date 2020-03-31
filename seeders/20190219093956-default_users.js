@@ -10,12 +10,29 @@ module.exports = {
             },
         }, ['id']);
 
+        // Company
+        const company_id = await queryInterface.rawSelect('companies', {
+            where: {
+                name: 'Secret South'
+            },
+        }, ['id']);
+
+        // Admin role and position
         const admin_role_id = await queryInterface.rawSelect('roles', {
             where: {
                 name_en: 'Admin'
             },
         }, ['id']);
 
+        const admin_pos_id = await queryInterface.rawSelect('positions', {
+            where: {
+                name: 'Director'
+            },
+        }, ['id']);
+
+
+
+        // Employee role
         const employee_role_id = await queryInterface.rawSelect('roles', {
             where: {
                 name_en: 'Employee'
@@ -23,18 +40,20 @@ module.exports = {
         }, ['id']);
 
 
+        // Customer role and position
         const customer_role_id = await queryInterface.rawSelect('roles', {
             where: {
                 name_en: 'Customer'
             },
         }, ['id']);
 
-        const company_id = await queryInterface.rawSelect('companies', {
+        const customer_pos_id = await queryInterface.rawSelect('positions', {
             where: {
-                name: 'Secret South'
+                name: 'Customer'
             },
         }, ['id']);
 
+        // Operator position
         const operator_pos_id = await queryInterface.rawSelect('positions', {
             where: {
                 name: 'Operator'
@@ -43,6 +62,7 @@ module.exports = {
 
         console.log("OPERATOR!!!!!!!!!!!" + operator_pos_id)
 
+        // Driver position
         const driver_pos_id = await queryInterface.rawSelect('positions', {
             where: {
                 name: 'Driver'
@@ -59,6 +79,7 @@ module.exports = {
                 password: bcrypt.hashSync('12345678', 10),
                 profile_img: '',
                 role_id: admin_role_id,
+                position_id: admin_pos_id,
                 company_id: company_id,
                 status_id: status_id,
                 created_at: new Date(),
@@ -72,7 +93,8 @@ module.exports = {
                 email: 'operator@gmail.com',
                 password: bcrypt.hashSync('12345678', 10),
                 profile_img: '',
-                role_id: operator_pos_id,
+                role_id: employee_role_id,
+                position_id: operator_pos_id,
                 company_id: company_id,
                 status_id: status_id,
                 created_at: new Date(),
@@ -102,6 +124,7 @@ module.exports = {
                 password: bcrypt.hashSync('12345678a', 10),
                 profile_img: '',
                 role_id: customer_role_id,
+                position_id: customer_pos_id,
                 company_id: company_id,
                 status_id: status_id,
                 created_at: new Date(),
