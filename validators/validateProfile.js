@@ -9,7 +9,7 @@ const rules = [
         let lang = req.lang;
         let email = req.email;
 
-        console.log(req)
+        console.log(Object.keys(req))
         console.log('update profile validator')
 
         // Retrieving a user with request email

@@ -11,6 +11,8 @@ let storage = multer.diskStorage({
         let dir;
 
         console.log('multer!!!!')
+        console.log(data)
+        console.log(file)
 
         // This is done for ferries info editing!!!
         if (edit) {
@@ -23,6 +25,7 @@ let storage = multer.diskStorage({
             } else dir = USERS_UPLOAD_FOLDER;
         } else {
             console.log('not edit!!!')
+
 
             dir = USERS_UPLOAD_FOLDER;
 
@@ -57,6 +60,7 @@ let upload = multer({
     storage: storage,
     limits: {fileSize: UPLOAD_MAX_FILE_SIZE},
     fileFilter: function (req, file, cb) {
+        console.log('file filter!!!!')
         let filetypes = /jpeg|jpg/;
         let mimetype = filetypes.test(file.mimetype);
         let extname = filetypes.test(path.extname(file.originalname).toLowerCase());
