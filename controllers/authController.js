@@ -171,7 +171,7 @@ exports.updateProfile = async (req, res) => {
             // Cloning user object without id and language to build update fields
             let {id, lang, ...fields} = data;
 
-            console.log(fields)
+            // console.log(fields)
 
             delete fields.email; //temporary
             let result = await to(Users.update(fields, {where: {id: data.id}}), res);
