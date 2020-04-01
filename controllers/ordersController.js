@@ -9,9 +9,13 @@ exports.create = async (orderData) => {
 
 exports.getByStatus = async (req, res) => {
     let data = req.query;
+    console.log(data)
     let where = data.status !== 'all' ? {status: data.status} : {};
     if (data.hasOwnProperty('driverEmail')) {
         where['driver.email'] = data.driverEmail;
+    }
+    else if (data.hasOwnProperty('customerEmail')) {
+        where['client.email'] = data.customerEmail;
     }
     console.log(where)
     const orders = await Orders.find(where);
@@ -23,6 +27,9 @@ exports.getAllOrdersCounts = async (req, res) => {
     let where = {};
     if (data.hasOwnProperty('driverEmail')) {
         where['driver.email'] = data.driverEmail;
+    }
+    else if (data.hasOwnProperty('customerEmail')) {
+        where['client.email'] = data.customerEmail;
     }
 
 

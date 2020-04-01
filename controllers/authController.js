@@ -38,10 +38,17 @@ exports.register = async (req, res) => {
             let status = await UsersStatuses.findOne({where: {name_en: 'active'}, attributes: ['id']});
             data.status_id = status.toJSON()['id'];
 
+            // Getting current user type role id
             let role = await Roles.findOne({
                 where: {name_en: {[Op.like]: `%${data.user_type}%`}}, attributes: ['id']
             });
             data.role_id = role.toJSON()['id'];
+
+            // Getting current user type position id
+            let position = await Positions.findOne({
+                where: {name: {[Op.like]: `%${data.user_type}%`}}, attributes: ['id']
+            });
+            data.position_id = position.toJSON()['id'];
 
             if (data.user_type !== 'customer') {
                 let partner_type = await PartnerTypes.findOne({

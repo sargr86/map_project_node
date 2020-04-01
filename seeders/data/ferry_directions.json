@@ -2,48 +2,48 @@
   "locations": [
     {
       "name": "Aghada",
-      "lat": "51.845922",
-      "lng": "-8.209558"
+      "latitude": "51.845922",
+      "longitude": "-8.209558"
     },
     {
       "name": "Crosshaven",
-      "lat": "51.804713",
-      "lng": "-8.298334"
+      "latitude": "51.804713",
+      "longitude": "-8.298334"
     },
     {
       "name": "Fountainstown",
-      "lat": "51.775695",
-      "lng": "-8.311389"
+      "latitude": "51.775695",
+      "longitude": "-8.311389"
     },
     {
       "name": "Cobh The Quays",
-      "lat": "51.848841",
-      "lng": "-8.297425"
+      "latitude": "51.848841",
+      "longitude": "-8.297425"
     },
     {
       "name": "Monkstown",
-      "lat": "51.849744",
-      "lng": "-8.331090"
+      "latitude": "51.849744",
+      "longitude": "-8.331090"
     },
     {
       "name": "Passage West",
-      "lat": "51.871874",
-      "lng": "-8.335133"
+      "latitude": "51.871874",
+      "longitude": "-8.335133"
     },
     {
       "name": "Cork City",
-      "lat": "51.898662",
-      "lng": "-8.462863"
+      "latitude": "51.898662",
+      "longitude": "-8.462863"
     },
     {
       "name": "Ballycotton",
-      "lat": "51.828334",
-      "lng": "-8.000764"
+      "latitude": "51.828334",
+      "longitude": "-8.000764"
     },
     {
       "name": "Kinsale",
-      "lat": "51.700771",
-      "lng": "-8.517872"
+      "latitude": "51.700771",
+      "longitude": "-8.517872"
     }
   ]
 }

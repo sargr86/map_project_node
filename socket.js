@@ -5,14 +5,20 @@ let connections = [];
 const validator = require('validator');
 exports.socket = (io) => {
     io.on('connection', async (socket) => {
-
         connections.push(socket);
 
         console.log('Connected:%s sockets connected', connections.length)
 
 
         // Creating an order
-        socket.on('createOrder', async (data) => {
+        socket.on('createOrder', async (dt) => {
+            let data = JSON.parse(dt);
+            console.log(data.client.first_name + ' ' + data.client.last_name)
+            socket.nickname = data.client.first_name + ' ' + data.client.last_name;
+            users[socket.nickname] = socket;
+
+            console.log(users)
+
             // console.log(validateOrder.rules)
 
             // console.log(data)
@@ -20,7 +26,7 @@ exports.socket = (io) => {
 
 
             console.log('creating order')
-            let result = await ordersController.create(data);
+            let result = await ordersController.create(dt);
             // let customerOrders = await ordersController.getOne({email:data.client.email});
             // console.log(result)
             io.sockets.emit('orderCreated', {status: 200, order: result, msg: 'Order is created!'})
@@ -31,6 +37,12 @@ exports.socket = (io) => {
             await ordersController.assignBoatToDriver(data.selectedOrder);
             let changedOrder = await ordersController.getOrderById(data.selectedOrder);
             // data.selectedOrder.status = 'assigned';
+            let clientFullName = changedOrder.client.first_name + ' ' + changedOrder.client.last_name;
+            let driverFullName = changedOrder.driver.full_name;
+            console.log("CLIENT:" + clientFullName, "DRIVER:" + driverFullName);
+            console.log(users)
+            // users[clientFullName].emit('driverAssignmentFinished', changedOrder);
+            // users[driverFullName].emit('driverAssignmentFinished', changedOrder);
             io.sockets.emit('driverAssignmentFinished', changedOrder)
         });
 
