@@ -10,10 +10,10 @@ module.exports = {
       d['updated_at'] = new Date();
     });
 
-    return queryInterface.bulkInsert('ferry_directions_pricing', data['ferry_directions_pricing'], {})
+    return queryInterface.bulkInsert('ferry_directions_pricings', data['ferry_directions_pricing'], {})
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('ferry_directions_pricing', null, {});
+    return queryInterface.bulkDelete('ferry_directions_pricings', null, {});
   }
 };

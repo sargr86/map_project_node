@@ -4,7 +4,6 @@ const {promisify} = require('util');
 const readdir = promisify(require('fs-extra').readdir);
 const unlink = promisify(require('fs-extra').unlink);
 
-
 /**
  * Gets all ferries list
  * @param req
@@ -183,12 +182,19 @@ exports.getFerriesDirections = async (req, res) => {
     if (data.dropdown) {
 
         directions.map(d => {
-            d['coordinates'] = {lat: d.lat, lng: d.lng};
-            delete d.lat;
-            delete d.lng;
+            d['coordinates'] = {lat: d.latitude, lng: d.longitude};
+            delete d.latitude;
+            delete d.longitude;
         });
     }
     res.json(directions);
+};
+
+
+exports.getFerriesDirectionsPrices = async (req, res) => {
+    let data = req.query;
+    let pricing = await FerryDirectionsPricing.findAll({where: {stop_1:null,stop_2:null}});
+    res.json(pricing);
 };
 
 
