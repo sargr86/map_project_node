@@ -9,15 +9,14 @@ exports.create = async (orderData) => {
 
 exports.getByStatus = async (req, res) => {
     let data = req.query;
-    console.log(data)
+    // console.log(data)
     let where = data.status !== 'all' ? {status: data.status} : {};
     if (data.hasOwnProperty('driverEmail')) {
         where['driver.email'] = data.driverEmail;
-    }
-    else if (data.hasOwnProperty('customerEmail')) {
+    } else if (data.hasOwnProperty('customerEmail')) {
         where['client.email'] = data.customerEmail;
     }
-    console.log(where)
+    // console.log(where)
     const orders = await Orders.find(where);
     res.json(orders)
 };
@@ -27,8 +26,7 @@ exports.getAllOrdersCounts = async (req, res) => {
     let where = {};
     if (data.hasOwnProperty('driverEmail')) {
         where['driver.email'] = data.driverEmail;
-    }
-    else if (data.hasOwnProperty('customerEmail')) {
+    } else if (data.hasOwnProperty('customerEmail')) {
         where['client.email'] = data.customerEmail;
     }
 
@@ -60,7 +58,7 @@ exports.getAllOrdersCounts = async (req, res) => {
 };
 
 exports.getUserActiveOrders = async (req, res) => {
-    console.log(req.query)
+    // console.log(req.query)
     let data = req.query;
     let condition = {'client.email': data.email, status: {$nin: ['cancelled', 'finished']}};
     if (data.dateVal) {
@@ -103,7 +101,7 @@ exports.getAllDriverOrders = async (req, res) => {
 
 exports.changeStatus = async (req, res) => {
     let data = req.body;
-    console.log(data)
+    // console.log(data)
 
     let order = await Orders.findOne({_id: data.id});
     // await Orders.updateOne({id: data.id}, {status: data.status});
@@ -140,36 +138,37 @@ exports.rateDriver = async (data) => {
 
 
     let orderId = data.order_id;
+    let driverId = data.driver_id;
+    let customerId = data.customer_id;
     delete data.order_id;
     delete data.driver_id;
     delete data.customer_id;
-
     let order = await Orders.findOne({_id: orderId});
     order.rating = data;
     await order.save();
     //
     // await Ratings.update({driver_id: data.driver_id}, {where: {id: data.ferry_id}});
-    // let rating = await to(Ratings.findOrCreate({
-    //         where: {
-    //             driver_id: data.driver_id,
-    //             customer_id: data.customer_id
-    //         },
-    //         defaults: {
-    //             driver_feedback: data.driver_feedback,
-    //             driver_rating: data.driver_rating,
-    //             driver_id: data.driver_id,
-    //             customer_id: data.customer_id,
-    //             order_id: data.order_id
-    //         },
-    //
-    //     }).spread((item) => {
-    //         console.log(item)
-    //         return item;
-    //         // return item.get({
-    //         //     plain: true
-    //         // });
-    //     })
-    // );
+    let rating = await to(Ratings.findOrCreate({
+            where: {
+                driver_id: data.driver_id,
+                customer_id: data.customer_id
+            },
+            defaults: {
+                driver_feedback: data.driver_feedback,
+                driver_rating: data.driver_rating,
+                driver_id: driverId,
+                customer_id: customerId,
+                order_id: orderId
+            },
+
+        }).spread((item) => {
+            // console.log(item)
+            return item;
+            // return item.get({
+            //     plain: true
+            // });
+        })
+    );
 
 
     return order;

@@ -97,7 +97,8 @@ exports.login = async (req, res) => {
         // let userType = data.userType ? 'Partner' : 'Admin';
 
 
-        let attributes = [`first_name`, `last_name`, 'email', 'profile_img', 'password', 'id', 'status_id', 'phone', 'birthday', 'google_user_id'];
+        let attributes = [`first_name`, `last_name`, fullName(`first_name`, `last_name`), 'email',
+            fullName(`first_name`, `last_name`, '_', 'socket_nickname'), 'profile_img', 'password', 'id', 'status_id', 'phone', 'birthday', 'google_user_id'];
 
         // Active status selecting
         let statusWhere = sequelize.where(sequelize.col('`users_status`.`name_en`'), 'active');
