@@ -16,7 +16,18 @@ const rules = [
 
             if (!googleUserCheck) throw new Error('Invalid password or email');
             // Regular login
-        } else {
+        }
+
+        else if(req.fb_user_id) {
+            let fbUserCheck = await Users.findOne({
+                attributes: ['email', 'password'],
+                where: {fb_user_id: req.fb_user_id}
+            });
+
+            if (!fbUserCheck) throw new Error('Invalid password or email');
+        }
+
+        else {
 
             if (!pass) {
                 throw new Error('Password is required');
