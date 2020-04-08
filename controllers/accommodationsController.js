@@ -139,7 +139,7 @@ exports.update = async (req, res) => {
 
 
     console.log('!!!!!')
-    console.log(data)
+    // console.log(data)
     console.log('!!!!!')
     await Accommodations.update(data, {where: {id: id}});
     this.get(req, res);

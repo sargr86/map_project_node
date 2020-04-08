@@ -11,8 +11,8 @@ let storage = multer.diskStorage({
         let dir;
 
         console.log('multer!!!!')
-        console.log(data)
-        console.log(file)
+        // console.log(data)
+        // console.log(file)
 
         // This is done for ferries info editing!!!
         if (edit) {
@@ -44,7 +44,7 @@ let storage = multer.diskStorage({
 
 
         console.log('dir!!!!!')
-        console.log(dir)
+        // console.log(dir)
 
         await fse.ensureDir(dir)
 

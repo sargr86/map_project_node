@@ -14,7 +14,6 @@ exports.get = async (req, res) => {
     const data = req.query;
     let partner_id = data.partner_id;
 
-    console.log(data)
     let wherePartner = {where: (partner_id ? {partner_id: data.partner_id} : {}), include: {model: Companies}};
     const result = await to(Ferries.findAll(wherePartner));
 
@@ -105,7 +104,7 @@ exports.removeImage = async (req, res) => {
     let data = req.query;
 
     if (fse.existsSync(data.folder)) {
-        console.log(data.folder)
+        // console.log(data.folder)
         console.log(FERRIES_UPLOAD_FOLDER)
         // Do something
         let files = await readdir(data.folder);
@@ -113,7 +112,7 @@ exports.removeImage = async (req, res) => {
         files.map((async (file) => {
             if (file === data.file) {
 
-                console.log(file)
+                // console.log(file)
                 await unlink(path.join(data.folder, file));
 
                 this.getOne(req, res);
@@ -182,7 +181,7 @@ exports.getFerriesDirections = async (req, res) => {
     if (data.dropdown) {
 
         directions.map(d => {
-            d['coordinates'] = {lat: d.latitude, lng: d.longitude};
+            d['coordinates'] = {latitude: d.latitude, longitude: d.longitude};
             delete d.latitude;
             delete d.longitude;
         });

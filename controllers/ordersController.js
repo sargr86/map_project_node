@@ -63,7 +63,6 @@ exports.getUserActiveOrders = async (req, res) => {
     let condition = {'client.email': data.email, status: {$nin: ['cancelled', 'finished']}};
     if (data.dateVal) {
         const tomorrow = moment().add(1, 'days').format('YYYY-MM-DD[T00:00:00.000Z]');
-        console.log(tomorrow)
         condition.created = {$gt: data.dateVal, $lt: tomorrow};
     }
 

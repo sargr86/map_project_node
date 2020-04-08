@@ -1,59 +1,76 @@
 const ordersController = require('./controllers/ordersController');
-const validateOrder = require('./validators/validateOrder');
-let users = {};
-let connections = [];
-const validator = require('validator');
+
+const socketIDs = [];
+let connectedUsers = [];
+const users = {};
 exports.socket = (io) => {
-    io.on('connection', async (socket) => {
-        connections.push(socket);
+    io.on('connection', (socket) => {
+        socketIDs.push(socket.id);
 
-        console.log('Connected:%s sockets connected', connections.length)
+        // New user (separated operator)
+        socket.on('newUser', (user) => {
 
+            // Separating operator socket id
+            if (user.socket_nickname === 'Operator') {
+                io.sockets.emit('onlineOperatorId', socket.id)
+            }
 
-        // Creating an order
+            users[user.socket_nickname.replace(/ /g,'_')] = socket;
+
+            updateConnectedUsers(user);
+        });
+
+        // Send message
+        socket.on('sendMessage', (data) => {
+            let operatorId = data.operatorId;
+            if (socketIDs.includes(operatorId)) {
+                io.sockets.sockets[data.operatorId].emit('messageSent', data)
+            } else if (data.to !== 'Operator') {
+               users[data.to].emit('messageSent', data);
+            }
+            else {
+                console.log('operator id is not found')
+            }
+        });
+
+        // Create order by customer
         socket.on('createOrder', async (dt) => {
             let data = JSON.parse(dt);
-            console.log(data.client.first_name + ' ' + data.client.last_name)
-            socket.nickname = data.client.first_name + ' ' + data.client.last_name;
-            users[socket.nickname] = socket;
-
-            console.log(users)
-
-            // console.log(validateOrder.rules)
-
-            // console.log(data)
-            // console.log(validator.isEmpty(data.client.email))
-
-
-            console.log('creating order')
             let result = await ordersController.create(dt);
-            // let customerOrders = await ordersController.getOne({email:data.client.email});
-            // console.log(result)
-            io.sockets.emit('orderCreated', {status: 200, order: result, msg: 'Order is created!'})
+            let sendData = {status: 200, order: result, msg: 'Order is created!'};
+            if (socketIDs.includes(data.operatorId)) {
+                io.sockets.sockets[data.operatorId].emit('orderCreated', sendData);
+                socket.emit('orderCreated', sendData);
+            } else {
+                console.log('operator id is not found!!!')
+            }
         });
 
         // Driver assigned
         socket.on('driverAssigned', async (data) => {
             await ordersController.assignBoatToDriver(data.selectedOrder);
             let changedOrder = await ordersController.getOrderById(data.selectedOrder);
-            // data.selectedOrder.status = 'assigned';
-            let clientFullName = changedOrder.client.first_name + ' ' + changedOrder.client.last_name;
-            let driverFullName = changedOrder.driver.full_name;
-            console.log("CLIENT:" + clientFullName, "DRIVER:" + driverFullName);
-            console.log(users)
-            // users[clientFullName].emit('driverAssignmentFinished', changedOrder);
-            // users[driverFullName].emit('driverAssignmentFinished', changedOrder);
-            io.sockets.emit('driverAssignmentFinished', changedOrder)
+            let clientFullName = (changedOrder.client.first_name + '_' + changedOrder.client.last_name).replace(/ /g,'_');
+            console.log(clientFullName)
+            console.log(Object.keys(users))
+            users[clientFullName].emit('driverAssignmentFinished', changedOrder);
+            users['Operator'].emit('driverAssignmentFinished', changedOrder);
+            let driverFullName = changedOrder.driver.full_name.replace(/ /g, '_');
+            users[driverFullName].emit('driverAssignmentFinished', changedOrder);
         });
+
 
         // Order is taken by a driver
         socket.on('orderTaken', async (data) => {
-            console.log("ORDER TAKEN")
             data.status = 'ongoing';
             data.id = data._id;
             await ordersController.changeStatusFromSocket(data);
             let changedOrder = await ordersController.getOrderById(data);
-            io.sockets.emit('orderTakenFinished', changedOrder)
+            let clientFullName = (changedOrder.client.first_name + '_' + changedOrder.client.last_name).replace(/ /g,'_');
+            users[clientFullName].emit('orderTakenFinished', changedOrder);
+            users['Operator'].emit('orderTakenFinished', changedOrder);
+            let driverFullName = changedOrder.driver.full_name.replace(/ /g, '_');
+            users[driverFullName].emit('orderTakenFinished', changedOrder);
         });
 
         socket.on('arrivedToOrder', async (data) => {
@@ -81,25 +98,25 @@ exports.socket = (io) => {
             io.sockets.emit('orderFinished', changedOrder)
         });
 
-        socket.on('rateDriver', async (data) => {
-            data = JSON.parse(data);
-            // console.log(validator.isEmpty(data.driver_feedback))
-            let changedOrder = await ordersController.rateDriver(data);
-            io.sockets.emit('ratedDriver', changedOrder)
-        });
-
-        // Log out
-        socket.on('logout', () => {
-            if (!socket.nickname) return;
-            delete users[socket.nickname];
-        });
-
         // Disconnect
         socket.on('disconnect', () => {
-            connections.splice(connections.indexOf(socket), 1)
-            console.log('Disconnected:%s sockets connected', connections.length)
-            console.log('user disconnected');
+            socketIDs.splice(socketIDs.indexOf(socket), 1)
+            delete users[socket.username]; // removing by saved username in newUser event
+            connectedUsers = connectedUsers.filter(u => u.username !== socket.username);
+            io.sockets.emit('update-usernames', connectedUsers)
         });
-    });
 
-};
+        function updateConnectedUsers(user) {
+            let username = user.socket_nickname;
+            socket.username = username; // for disconnect
+            if (!(connectedUsers.find(u => u.username === username))) {
+                connectedUsers.push({username, email: user.email});
+            }
+            io.sockets.emit('update-usernames', connectedUsers)
+        }
+
+        function sendBack() {
+
+        }
+    })
+}

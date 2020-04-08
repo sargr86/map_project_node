@@ -25,7 +25,7 @@ module.exports = (req, res, err = '') => {
                 singleError = 'Please check db connection';
                 return res.status(422).json({db_error: singleError});
             } else {
-                console.log(singleError)
+                // console.log(singleError)
                 return res.status(422).json(singleError);
             }
             // return true;
