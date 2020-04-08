@@ -9,6 +9,7 @@ exports.socket = (io) => {
 
         socket.on('get-connected-users', ()=>{
             console.log('get-connected-users!!!!!!')
+            console.log(connectedUsers)
             io.sockets.emit('update-usernames', connectedUsers)
         });
 
