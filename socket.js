@@ -7,6 +7,11 @@ exports.socket = (io) => {
     io.on('connection', (socket) => {
         socketIDs.push(socket.id);
 
+        socket.on('get-connected-users', ()=>{
+            console.log('get-connected-users!!!!!!')
+            io.sockets.emit('update-usernames', connectedUsers)
+        });
+
         // New user (separated operator)
         socket.on('newUser', (user) => {
 console.log('new user@!!!!')
@@ -20,6 +25,8 @@ console.log('new user@!!!!')
 
             updateConnectedUsers(user);
         });
+
+
 
         // Send message
         socket.on('sendMessage', (data) => {
