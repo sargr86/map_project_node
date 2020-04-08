@@ -9,9 +9,10 @@ exports.socket = (io) => {
 
         // New user (separated operator)
         socket.on('newUser', (user) => {
-
+console.log('new user@!!!!')
             // Separating operator socket id
             if (user.socket_nickname === 'Operator') {
+                console.log('operator!!!')
                 io.sockets.emit('onlineOperatorId', socket.id)
             }
 
@@ -104,6 +105,7 @@ exports.socket = (io) => {
             delete users[socket.username]; // removing by saved username in newUser event
             connectedUsers = connectedUsers.filter(u => u.username !== socket.username);
             io.sockets.emit('update-usernames', connectedUsers)
+            console.log('user disconnected')
         });
 
         function updateConnectedUsers(user) {
