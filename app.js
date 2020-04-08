@@ -54,6 +54,7 @@ app.use('/partners', require('./routes/partners'));
 app.use('/companies', require('./routes/companies'));
 app.use('/contacts', require('./routes/contacts'));
 app.use('/orders', require('./routes/orders'));
+app.use('/chat', require('./routes/chat'));
 
 // Auth Routes
 app.use('/users', checkAuth, require('./routes/users'));
@@ -98,7 +99,6 @@ app.get('*', (req, res) => {
     // }
 
     app.get('*', (req, res, next) => {
-        console.log(req.url)
         if (!req.url.includes('phpmyadmin')) {
             res.sendFile(dist + 'index.html');
         }

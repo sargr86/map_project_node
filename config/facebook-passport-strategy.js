@@ -13,7 +13,7 @@ module.exports = (passport) => {
         },
         async (accessToken, refreshToken, profile, cb) => {
             delete profile._json['id'];
-            console.log(profile._json)
+            // console.log(profile._json)
 
 
             let user = await to(Users.findOrCreate({
@@ -42,7 +42,7 @@ module.exports = (passport) => {
                 include: [{model: Roles, attributes: ['id', 'name_en']}]
             });
 
-            console.log(user)
+            // console.log(user)
             cb(null, user);
         }
     ));
