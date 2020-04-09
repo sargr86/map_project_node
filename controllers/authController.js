@@ -130,12 +130,8 @@ exports.login = async (req, res) => {
                 // Cloning users object without password and saving user full name
                 user = user.toJSON();
                 user['socket_nickname'] = user['socket_nickname'].replace(/ /g,'_');
-                console.log(user['socket_nickname'])
                 let {password, ...details} = user;
                 let full_name = user[`first_name`] + ' ' + user[`last_name`];
-
-
-                console.log(details)
 
                 res.status(200).json({
                     token: jwt.sign(details, 'secretkey', {expiresIn: '8h'}), user_id: user.id, full_name: full_name
