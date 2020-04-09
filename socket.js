@@ -7,15 +7,16 @@ const users = {};
 exports.socket = (io) => {
     io.on('connection', (socket) => {
         socketIDs.push(socket.id);
-
+        console.log('Connected:%s sockets connected', socketIDs.length)
         // Get all connected users names
-        socket.on('get-connected-users', () => {
-            console.log('get-connected-users!!!!!!')
+        socket.on('update-connected-users', () => {
+            console.log('update-connected-users!!!!!!')
             io.sockets.emit('update-usernames', connectedUsers)
         });
 
         // New user joining
         socket.on('newUser', (user) => {
+            console.log('new user')
             users[user.socket_nickname] = socket;
             updateConnectedUsers(user);
         });
@@ -24,6 +25,7 @@ exports.socket = (io) => {
         // Send message
         socket.on('sendMessage', async (data) => {
             let receiver = data.to;
+            console.log(data)
             await chatController.create(data);
             if (users[receiver]) {
                 users[receiver].emit('messageSent', data);
@@ -108,7 +110,7 @@ exports.socket = (io) => {
             let username = user.socket_nickname;
             socket.username = username; // for disconnect
             if (!(connectedUsers.find(u => u.username === username))) {
-                connectedUsers.push({username, email: user.email});
+                connectedUsers.push({username, email: user.email, id:user.id});
             }
             io.sockets.emit('update-usernames', connectedUsers)
         }

@@ -9,8 +9,8 @@ let MessagesSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    from_email: {
-        type: String,
+    from_user_id: {
+        type: Number,
         required: true
     },
     msg: {
@@ -20,8 +20,8 @@ let MessagesSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    to_email: {
-        type: String,
+    to_user_id: {
+        type: Number,
     },
     created: {
         type: Date,
