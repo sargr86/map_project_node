@@ -1,4 +1,5 @@
 const ordersController = require('./controllers/ordersController');
+const chatController = require('./controllers/chatController');
 
 const socketIDs = [];
 let connectedUsers = [];
@@ -13,25 +14,20 @@ exports.socket = (io) => {
             io.sockets.emit('update-usernames', connectedUsers)
         });
 
-        // New user (separated operator)
+        // New user joining
         socket.on('newUser', (user) => {
-            console.log('new user@!!!!')
-            // Separating operator socket id
-            if (user.socket_nickname === 'Operator') {
-                console.log('operator!!!')
-                io.sockets.emit('onlineOperatorId', socket.id)
-            }
-
-            users[user.socket_nickname.replace(/ /g, '_')] = socket;
-
+            users[user.socket_nickname] = socket;
             updateConnectedUsers(user);
         });
 
 
         // Send message
-        socket.on('sendMessage', (data) => {
-            let receiver = data.to.replace(/ /g, '_');
-            users[receiver].emit('messageSent', data);
+        socket.on('sendMessage', async (data) => {
+            let receiver = data.to
+            await chatController.create(data);
+            if (users[receiver]) {
+                users[receiver].emit('messageSent', data);
+            }
         });
 
         // Create order by customer
