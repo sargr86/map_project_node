@@ -8,9 +8,9 @@ exports.socket = (io) => {
     io.on('connection', (socket) => {
         socketIDs.push(socket.id);
 
+        // Get all connected users names
         socket.on('get-connected-users', () => {
             console.log('get-connected-users!!!!!!')
-            console.log(connectedUsers)
             io.sockets.emit('update-usernames', connectedUsers)
         });
 
@@ -23,11 +23,12 @@ exports.socket = (io) => {
 
         // Send message
         socket.on('sendMessage', async (data) => {
-            let receiver = data.to
+            let receiver = data.to;
             await chatController.create(data);
             if (users[receiver]) {
                 users[receiver].emit('messageSent', data);
             }
+            else console.log('Receiver not found!!!')
         });
 
         // Create order by customer
@@ -35,12 +36,11 @@ exports.socket = (io) => {
             let data = JSON.parse(dt);
             let result = await ordersController.create(dt);
             let sendData = {status: 200, order: result, msg: 'Order is created!'};
-            if (socketIDs.includes(data.operatorId)) {
-                io.sockets.sockets[data.operatorId].emit('orderCreated', sendData);
-                socket.emit('orderCreated', sendData);
-            } else {
-                console.log('operator id is not found!!!')
+            if (users['Operator']) {
+                users['Operator'].emit('orderCreated', sendData);
             }
+            else console.log('Operator not found!!!')
+            socket.emit('orderCreated', sendData);
         });
 
         // Driver assigned

@@ -9,6 +9,7 @@ let OrderSchema = new mongoose.Schema({
         type: {
             first_name: {type: String},
             last_name: {type: String},
+            socket_nickname:{type:String},
             email: {type: String},
             phone: {type: String}
         },
