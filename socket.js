@@ -7,7 +7,7 @@ exports.socket = (io) => {
     io.on('connection', (socket) => {
         socketIDs.push(socket.id);
 
-        socket.on('get-connected-users', ()=>{
+        socket.on('get-connected-users', () => {
             console.log('get-connected-users!!!!!!')
             console.log(connectedUsers)
             io.sockets.emit('update-usernames', connectedUsers)
@@ -15,31 +15,23 @@ exports.socket = (io) => {
 
         // New user (separated operator)
         socket.on('newUser', (user) => {
-console.log('new user@!!!!')
+            console.log('new user@!!!!')
             // Separating operator socket id
             if (user.socket_nickname === 'Operator') {
                 console.log('operator!!!')
                 io.sockets.emit('onlineOperatorId', socket.id)
             }
 
-            users[user.socket_nickname.replace(/ /g,'_')] = socket;
+            users[user.socket_nickname.replace(/ /g, '_')] = socket;
 
             updateConnectedUsers(user);
         });
 
 
-
         // Send message
         socket.on('sendMessage', (data) => {
-            let operatorId = data.operatorId;
-            if (socketIDs.includes(operatorId)) {
-                io.sockets.sockets[data.operatorId].emit('messageSent', data)
-            } else if (data.to !== 'Operator') {
-               users[data.to].emit('messageSent', data);
-            }
-            else {
-                console.log('operator id is not found')
-            }
+            let receiver = data.to.replace(/ /g, '_');
+            users[receiver].emit('messageSent', data);
         });
 
         // Create order by customer
@@ -59,7 +51,7 @@ console.log('new user@!!!!')
         socket.on('driverAssigned', async (data) => {
             await ordersController.assignBoatToDriver(data.selectedOrder);
             let changedOrder = await ordersController.getOrderById(data.selectedOrder);
-            let clientFullName = (changedOrder.client.first_name + '_' + changedOrder.client.last_name).replace(/ /g,'_');
+            let clientFullName = (changedOrder.client.first_name + '_' + changedOrder.client.last_name).replace(/ /g, '_');
             console.log(clientFullName)
             console.log(Object.keys(users))
             users[clientFullName].emit('driverAssignmentFinished', changedOrder);
@@ -75,7 +67,7 @@ console.log('new user@!!!!')
             data.id = data._id;
             await ordersController.changeStatusFromSocket(data);
             let changedOrder = await ordersController.getOrderById(data);
-            let clientFullName = (changedOrder.client.first_name + '_' + changedOrder.client.last_name).replace(/ /g,'_');
+            let clientFullName = (changedOrder.client.first_name + '_' + changedOrder.client.last_name).replace(/ /g, '_');
             users[clientFullName].emit('orderTakenFinished', changedOrder);
             users['Operator'].emit('orderTakenFinished', changedOrder);
             let driverFullName = changedOrder.driver.full_name.replace(/ /g, '_');
@@ -109,7 +101,7 @@ console.log('new user@!!!!')
 
         // Disconnect
         socket.on('disconnect', () => {
-            socketIDs.splice(socketIDs.indexOf(socket), 1)
+            socketIDs.splice(socketIDs.indexOf(socket), 1);
             delete users[socket.username]; // removing by saved username in newUser event
             connectedUsers = connectedUsers.filter(u => u.username !== socket.username);
             io.sockets.emit('update-usernames', connectedUsers)
