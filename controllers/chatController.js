@@ -11,7 +11,7 @@ exports.getMessages = async (req, res) => {
     let data = req.query;
     let result = await Messages.find({
         $or: [
-            {from_email: data.email}, {to_email: data.email}
+            {from_user_id: data.user_id}, {to_email: data.user_id}
         ]
     });
     res.json(result);
