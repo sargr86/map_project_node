@@ -135,6 +135,7 @@ exports.login = async (req, res) => {
                 let full_name = user[`first_name`] + ' ' + user[`last_name`];
 
 
+                console.log(details)
 
                 res.status(200).json({
                     token: jwt.sign(details, 'secretkey', {expiresIn: '8h'}), user_id: user.id, full_name: full_name
