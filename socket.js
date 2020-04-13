@@ -10,13 +10,11 @@ exports.socket = (io) => {
         console.log('Connected:%s sockets connected', socketIDs.length)
         // Get all connected users names
         socket.on('update-connected-users', () => {
-            console.log('update-connected-users!!!!!!')
             io.sockets.emit('update-usernames', connectedUsers)
         });
 
         // New user joining
         socket.on('newUser', (user) => {
-            console.log('new user')
             users[user.socket_nickname] = socket;
             updateConnectedUsers(user);
         });
@@ -25,12 +23,10 @@ exports.socket = (io) => {
         // Send message
         socket.on('sendMessage', async (data) => {
             let receiver = data.to;
-            console.log(data)
             await chatController.create(data);
             if (users[receiver]) {
                 users[receiver].emit('messageSent', data);
-            }
-            else console.log('Receiver not found!!!')
+            } else console.log('Receiver not found!!!')
         });
 
         // Create order by customer
@@ -40,8 +36,7 @@ exports.socket = (io) => {
             let sendData = {status: 200, order: result, msg: 'Order is created!'};
             if (users['Operator']) {
                 users['Operator'].emit('orderCreated', sendData);
-            }
-            else console.log('Operator not found!!!')
+            } else console.log('Operator not found!!!')
             socket.emit('orderCreated', sendData);
         });
 
@@ -49,13 +44,15 @@ exports.socket = (io) => {
         socket.on('driverAssigned', async (data) => {
             await ordersController.assignBoatToDriver(data.selectedOrder);
             let changedOrder = await ordersController.getOrderById(data.selectedOrder);
-            let clientFullName = (changedOrder.client.first_name + '_' + changedOrder.client.last_name).replace(/ /g, '_');
+            let clientFullName = changedOrder.client.socket_nickname;
             console.log(clientFullName)
             console.log(Object.keys(users))
             users[clientFullName].emit('driverAssignmentFinished', changedOrder);
             users['Operator'].emit('driverAssignmentFinished', changedOrder);
             let driverFullName = changedOrder.driver.full_name.replace(/ /g, '_');
-            users[driverFullName].emit('driverAssignmentFinished', changedOrder);
+            if (driverFullName) {
+                users[driverFullName].emit('driverAssignmentFinished', changedOrder);
+            }
         });
 
 
@@ -65,11 +62,13 @@ exports.socket = (io) => {
             data.id = data._id;
             await ordersController.changeStatusFromSocket(data);
             let changedOrder = await ordersController.getOrderById(data);
-            let clientFullName = (changedOrder.client.first_name + '_' + changedOrder.client.last_name).replace(/ /g, '_');
+            let clientFullName = changedOrder.client.socket_nickname;
             users[clientFullName].emit('orderTakenFinished', changedOrder);
             users['Operator'].emit('orderTakenFinished', changedOrder);
             let driverFullName = changedOrder.driver.full_name.replace(/ /g, '_');
-            users[driverFullName].emit('orderTakenFinished', changedOrder);
+            if (driverFullName) {
+                users[driverFullName].emit('orderTakenFinished', changedOrder);
+            }
         });
 
         socket.on('arrivedToOrder', async (data) => {
@@ -77,7 +76,14 @@ exports.socket = (io) => {
             data.id = data._id;
             await ordersController.changeStatusFromSocket(data);
             let changedOrder = await ordersController.getOrderById(data);
-            io.sockets.emit('arrivedToOrderFinished', changedOrder)
+
+            let clientFullName = changedOrder.client.socket_nickname;
+            users[clientFullName].emit('arrivedToOrderFinished', changedOrder);
+            users['Operator'].emit('arrivedToOrderFinished', changedOrder);
+            let driverFullName = changedOrder.driver.full_name.replace(/ /g, '_');
+            users[driverFullName].emit('arrivedToOrderFinished', changedOrder);
+
+            // io.sockets.emit('arrivedToOrderFinished', changedOrder)
         });
 
         socket.on('startOrder', async (data) => {
@@ -85,7 +91,12 @@ exports.socket = (io) => {
             data.id = data._id;
             await ordersController.changeStatusFromSocket(data);
             let changedOrder = await ordersController.getOrderById(data);
-            io.sockets.emit('orderStarted', changedOrder)
+            let clientFullName = changedOrder.client.socket_nickname;
+            users[clientFullName].emit('orderStarted', changedOrder);
+            users['Operator'].emit('orderStarted', changedOrder);
+            let driverFullName = changedOrder.driver.full_name.replace(/ /g, '_');
+            users[driverFullName].emit('orderStarted', changedOrder);
+            // io.sockets.emit('orderStarted', changedOrder)
         });
 
         socket.on('finishOrder', async (data) => {
@@ -94,7 +105,12 @@ exports.socket = (io) => {
             data.id = data._id;
             await ordersController.changeStatusFromSocket(data);
             let changedOrder = await ordersController.getOrderById(data);
-            io.sockets.emit('orderFinished', changedOrder)
+            let clientFullName = changedOrder.client.socket_nickname;
+            users[clientFullName].emit('orderFinished', changedOrder);
+            users['Operator'].emit('orderFinished', changedOrder);
+            let driverFullName = changedOrder.driver.full_name.replace(/ /g, '_');
+            users[driverFullName].emit('orderFinished', changedOrder);
+            // io.sockets.emit('orderFinished', changedOrder)
         });
 
         // Disconnect
@@ -110,7 +126,7 @@ exports.socket = (io) => {
             let username = user.socket_nickname;
             socket.username = username; // for disconnect
             if (!(connectedUsers.find(u => u.username === username))) {
-                connectedUsers.push({username, email: user.email, id:user.id});
+                connectedUsers.push({username, email: user.email, id: user.id});
             }
             io.sockets.emit('update-usernames', connectedUsers)
         }
