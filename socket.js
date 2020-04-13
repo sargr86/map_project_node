@@ -7,8 +7,7 @@ const users = {};
 exports.socket = (io) => {
     io.on('connection', (socket) => {
         socketIDs.push(socket.id);
-        console.log('Connected:%s sockets connected', socketIDs.length)
-        // Get all connected users names
+        // Get all connected users names (for operator)
         socket.on('update-connected-users', () => {
             io.sockets.emit('update-usernames', connectedUsers)
         });
@@ -34,83 +33,45 @@ exports.socket = (io) => {
             let data = JSON.parse(dt);
             let result = await ordersController.create(dt);
             let sendData = {status: 200, order: result, msg: 'Order is created!'};
+
+            // Sending to operator
             if (users['Operator']) {
                 users['Operator'].emit('orderCreated', sendData);
-            } else console.log('Operator not found!!!')
+            } else console.log('Operator not found!!!');
+
+            // Sending back to the client
             socket.emit('orderCreated', sendData);
         });
 
         // Driver assigned
         socket.on('driverAssigned', async (data) => {
-            await ordersController.assignBoatToDriver(data.selectedOrder);
-            let changedOrder = await ordersController.getOrderById(data.selectedOrder);
-            let clientFullName = changedOrder.client.socket_nickname;
-            console.log(clientFullName)
-            console.log(Object.keys(users))
-            users[clientFullName].emit('driverAssignmentFinished', changedOrder);
-            users['Operator'].emit('driverAssignmentFinished', changedOrder);
-            let driverFullName = changedOrder.driver.full_name.replace(/ /g, '_');
-            if (driverFullName) {
-                users[driverFullName].emit('driverAssignmentFinished', changedOrder);
-            }
+            data.id = data._id;
+            await getChangedOrderSendBack(data, 'assigned', 'driverAssignmentFinished');
         });
 
 
         // Order is taken by a driver
         socket.on('orderTaken', async (data) => {
-            data.status = 'ongoing';
             data.id = data._id;
-            await ordersController.changeStatusFromSocket(data);
-            let changedOrder = await ordersController.getOrderById(data);
-            let clientFullName = changedOrder.client.socket_nickname;
-            users[clientFullName].emit('orderTakenFinished', changedOrder);
-            users['Operator'].emit('orderTakenFinished', changedOrder);
-            let driverFullName = changedOrder.driver.full_name.replace(/ /g, '_');
-            if (driverFullName) {
-                users[driverFullName].emit('orderTakenFinished', changedOrder);
-            }
+            await getChangedOrderSendBack(data, 'ongoing', 'orderTakenFinished');
         });
 
+        // Driver is arrived to an order
         socket.on('arrivedToOrder', async (data) => {
-            data.status = 'arrived';
             data.id = data._id;
-            await ordersController.changeStatusFromSocket(data);
-            let changedOrder = await ordersController.getOrderById(data);
-
-            let clientFullName = changedOrder.client.socket_nickname;
-            users[clientFullName].emit('arrivedToOrderFinished', changedOrder);
-            users['Operator'].emit('arrivedToOrderFinished', changedOrder);
-            let driverFullName = changedOrder.driver.full_name.replace(/ /g, '_');
-            users[driverFullName].emit('arrivedToOrderFinished', changedOrder);
-
-            // io.sockets.emit('arrivedToOrderFinished', changedOrder)
+            await getChangedOrderSendBack(data, 'arrived', 'arrivedToOrderFinished');
         });
 
+        // Driver has started an order
         socket.on('startOrder', async (data) => {
-            data.status = 'started';
             data.id = data._id;
-            await ordersController.changeStatusFromSocket(data);
-            let changedOrder = await ordersController.getOrderById(data);
-            let clientFullName = changedOrder.client.socket_nickname;
-            users[clientFullName].emit('orderStarted', changedOrder);
-            users['Operator'].emit('orderStarted', changedOrder);
-            let driverFullName = changedOrder.driver.full_name.replace(/ /g, '_');
-            users[driverFullName].emit('orderStarted', changedOrder);
-            // io.sockets.emit('orderStarted', changedOrder)
+            await getChangedOrderSendBack(data, 'started', 'orderStarted');
         });
 
+        // Driver has finished an order
         socket.on('finishOrder', async (data) => {
-            console.log("FINISH ORDER!!!!!!")
-            data.status = 'finished';
             data.id = data._id;
-            await ordersController.changeStatusFromSocket(data);
-            let changedOrder = await ordersController.getOrderById(data);
-            let clientFullName = changedOrder.client.socket_nickname;
-            users[clientFullName].emit('orderFinished', changedOrder);
-            users['Operator'].emit('orderFinished', changedOrder);
-            let driverFullName = changedOrder.driver.full_name.replace(/ /g, '_');
-            users[driverFullName].emit('orderFinished', changedOrder);
-            // io.sockets.emit('orderFinished', changedOrder)
+            await getChangedOrderSendBack(data, 'finished', 'orderFinished');
         });
 
         // Disconnect
@@ -131,8 +92,26 @@ exports.socket = (io) => {
             io.sockets.emit('update-usernames', connectedUsers)
         }
 
-        function sendBack() {
+        async function getChangedOrderSendBack(data, status, eventBack) {
 
+            // Update current order status and get its changed details
+            await ordersController.changeStatusFromSocket(data, status);
+            let changedOrder = await ordersController.getOrderById(data);
+
+            // Sending to the client & operator
+            let clientFullName = changedOrder.client.socket_nickname;
+            if (users[clientFullName]) {
+                users[clientFullName].emit(eventBack, changedOrder);
+            } else console.log('client not found!!!')
+            if (users['Operator']) {
+                users['Operator'].emit(eventBack, changedOrder);
+            } else console.log('operator not found!!!')
+
+            // Sending to the assigned driver
+            let driverFullName = changedOrder.driver.full_name.replace(/ /g, '_');
+            if (driverFullName && users[driverFullName]) {
+                users[driverFullName].emit(eventBack, changedOrder);
+            } else console.log('driver not found!!!')
         }
     })
-}
+};
