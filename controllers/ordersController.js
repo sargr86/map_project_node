@@ -110,22 +110,17 @@ exports.changeStatus = async (req, res) => {
     res.json("OK")
 };
 
-exports.changeStatusFromSocket = async (data) => {
-    // console.log(data)
+// Changing orders statuses and assigning driver to a boat from here
+exports.changeStatusFromSocket = async (data, status) => {
     let order = await Orders.findOne({_id: data.id});
-    order.status = data.status;
-    await order.save();
-};
 
-// Assigns a boat to the selected driver
-exports.assignBoatToDriver = async (data) => {
-    if (data) {
-        let order = await Orders.findOne({_id: data._id});
+    // Assigns a boat to the selected driver for assigned status
+    if (status === 'assigned') {
         order.driver = data.driver;
         order.ferry = data.driver.ferry;
-        order.status = 'assigned';
-        await order.save();
     }
+    order.status = status;
+    await order.save();
 };
 
 exports.getOrderById = async (data) => {
