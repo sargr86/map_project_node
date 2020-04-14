@@ -23,6 +23,8 @@ exports.socket = (io) => {
         socket.on('sendMessage', async (data) => {
             let receiver = data.to;
             await chatController.create(data);
+            socket.emit('messageSent', data);
+            console.log(Object.keys(users))
             if (users[receiver]) {
                 users[receiver].emit('messageSent', data);
             } else console.log('Receiver not found!!!')
