@@ -7,6 +7,7 @@ const users = {};
 exports.socket = (io) => {
     io.on('connection', (socket) => {
         socketIDs.push(socket.id);
+        // console.log('Connected:%s sockets connected', socketIDs.length)
         // Get all connected users names (for operator)
         socket.on('update-connected-users', () => {
             io.sockets.emit('update-usernames', connectedUsers)
@@ -14,6 +15,7 @@ exports.socket = (io) => {
 
         // New user joining
         socket.on('newUser', (user) => {
+            console.log(`${user.socket_nickname} is a new user`);
             users[user.socket_nickname] = socket;
             updateConnectedUsers(user);
         });
@@ -28,6 +30,11 @@ exports.socket = (io) => {
             if (users[receiver]) {
                 users[receiver].emit('messageSent', data);
             } else console.log('Receiver not found!!!')
+        });
+
+        //Someone is typing a message
+        socket.on('typing',(data,callback)=>{
+            socket.broadcast.emit('typing',data)
         });
 
         // Create order by customer
