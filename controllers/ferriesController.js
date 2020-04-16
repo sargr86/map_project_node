@@ -192,7 +192,7 @@ exports.getFerriesDirections = async (req, res) => {
 
 exports.getFerriesDirectionsPrices = async (req, res) => {
     let data = req.query;
-    let pricing = await FerryDirectionsPricing.findAll({where: {stop_1:null,stop_2:null}});
+    let pricing = await FerryDirectionsPricing.findAll();
     res.json(pricing);
 };
 
