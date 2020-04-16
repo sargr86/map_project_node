@@ -17,7 +17,6 @@ exports.socket = (io) => {
         socket.on('newUser', (user) => {
             console.log(`${user.socket_nickname} is a new user`);
             users[user.socket_nickname] = socket;
-            socket.emit('newUser', 'connected')
             updateConnectedUsers(user);
         });
 
