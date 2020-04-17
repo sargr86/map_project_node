@@ -9,7 +9,7 @@ let OrderSchema = new mongoose.Schema({
         type: {
             first_name: {type: String},
             last_name: {type: String},
-            socket_nickname:{type:String},
+            socket_nickname: {type: String},
             email: {type: String},
             phone: {type: String}
         },
@@ -20,18 +20,18 @@ let OrderSchema = new mongoose.Schema({
             full_name: {type: String}
         }
     },
-    startPoint: {
-        type: {
+    locations: {
+        type: [{
             name: {type: String},
-            coordinate: {type: {latitude: {type: Number}, longitude: {type: Number}}},
-        }
+            coordinates: {type: {latitude: {type: Number}, longitude: {type: Number}}},
+        }]
     },
-    endPoint: {
-        type: {
-            name: {type: String},
-            coordinate: {type: {latitude: {type: Number}, longitude: {type: Number}}},
-        }
-    },
+    // endPoint: {
+    //     type: {
+    //         name: {type: String},
+    //         coordinate: {type: {latitude: {type: Number}, longitude: {type: Number}}},
+    //     }
+    // },
     wayType: {
         type: String,
         required: true
