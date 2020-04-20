@@ -25,7 +25,6 @@ exports.socket = (io) => {
         socket.on('sendMessage', async (data) => {
             let receiver = data.to;
             let currentMsg = await chatController.create(data);
-            console.log(currentMsg)
             socket.emit('messageSent', currentMsg);
             console.log(Object.keys(users))
 
@@ -36,8 +35,17 @@ exports.socket = (io) => {
         });
 
         //Someone is typing a message
-        socket.on('typing', (data, callback) => {
-            socket.broadcast.emit('typing', data)
+        socket.on('typing', (data) => {
+            console.log('typing!!!')
+            console.log(Object.keys(users))
+            console.log(data.to)
+            if (users[data.to]) {
+                // console.log('entered')
+                // console.log(users[data.to])
+                users[data.to].emit('typingBack', data)
+            } else {
+                console.log('Receiver not found!!!')
+            }
         });
 
         // Create order by customer
@@ -111,7 +119,12 @@ exports.socket = (io) => {
                 let username = user.socket_nickname;
                 socket.username = username; // for disconnect
                 if (!(connectedUsers.find(u => u.username === username))) {
-                    connectedUsers.push({username, email: user.email, id: user.id, socket_nickname: user.socket_nickname});
+                    connectedUsers.push({
+                        username,
+                        email: user.email,
+                        id: user.id,
+                        socket_nickname: user.socket_nickname
+                    });
                 }
                 io.sockets.emit('update-usernames', connectedUsers)
             }
