@@ -48,6 +48,14 @@ exports.socket = (io) => {
             }
         });
 
+        socket.on('msgsSeen', (data) => {
+            if (users[data.to]) {
+                users[data.to].emit('msgsSeen', data)
+            } else {
+                console.log('Receiver not found!!!')
+            }
+        });
+
         // Create order by customer
         socket.on('createOrder', async (dt) => {
             let data = JSON.parse(dt);

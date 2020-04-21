@@ -16,3 +16,16 @@ exports.getMessages = async (req, res) => {
     });
     res.json(result);
 };
+
+
+exports.updateSeen = async (req, res) => {
+    let data = req.body;
+    await Messages.updateMany({to_user_id: data.from_user_id}, {"$set": {"seen": true}}, {"multi": true});
+
+    let messages = await Messages.find({
+        to_user_id: data.user_id
+    });
+
+    res.json(messages)
+
+};
