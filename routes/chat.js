@@ -7,7 +7,7 @@ router.get('/load-messages', chatController.getMessages);
 // router.get('/getTypes', customersController.getTypes);
 // router.get('/getOne', checkAdmin, employeesController.getOne);
 // router.post('/add', checkAdmin, uploadProfileImg, validatePartner.rules, employeesController.add);
-// router.put('/update', checkAdmin, validatePartner.rules, employeesController.update);
+router.put('/update-seen', chatController.updateSeen);
 // router.delete('/remove', checkAdmin, employeesController.remove);
 // router.post('/invite', validateInvite.rules, employeesController.invite)
 
