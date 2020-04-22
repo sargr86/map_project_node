@@ -26,6 +26,9 @@ let MessagesSchema = new mongoose.Schema({
     seen: {
         type: Boolean
     },
+    seen_at:{
+        type: String
+    },
     created: {
         type: Date,
         default: moment().format()

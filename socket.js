@@ -49,7 +49,7 @@ exports.socket = (io) => {
         });
 
         socket.on('msgsSeen', (data) => {
-            console.log(data)
+            // console.log(data)
             if (users[data.to]) {
                 users[data.to].emit('msgsSeen', data)
             } else {
