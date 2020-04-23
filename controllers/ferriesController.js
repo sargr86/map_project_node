@@ -197,6 +197,22 @@ exports.getFerriesDirectionsPrices = async (req, res) => {
 };
 
 
+exports.getFerryDirectionPrice = async (req, res) => {
+    let data = req.query;
+    let pricing = await FerryDirectionsPricing.findAll(
+        {
+            where: {
+                start_point: data.start_point,
+                stop_1: data.stop_1,
+                stop_2: data.stop_2,
+                end_point: data.start_point
+            }
+        }
+    );
+    res.json(pricing);
+};
+
+
 exports.getRealLocations = async (req, res) => {
     // const options = {
     //     //     hostname: 'curl \'http://www.marinetraffic.com/ais/getjson.aspx?sw_x=0&sw_y=70&ne_x=30&ne_y=80&zoom=6&fleet=&station=0&id=null\' -H \'Referer: http://www.marinetraffic.com/ais/\'',

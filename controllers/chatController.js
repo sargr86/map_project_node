@@ -1,5 +1,5 @@
 const Messages = require('../mongoose/messages');
-
+const moment = require('moment');
 exports.create = async (data) => {
     data.seen_at = '';
     let newMsg = new Messages(data);
@@ -27,7 +27,7 @@ exports.updateSeen = async (req, res) => {
     await Messages.updateMany({to_user_id: data.from_user_id, seen: false}, {
         "$set": {
             "seen": true,
-            "seen_at": data.seen_at
+            "seen_at": moment().format(data.seen_at)
         }
     }, {"multi": true});
 
