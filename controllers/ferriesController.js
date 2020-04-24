@@ -4,6 +4,8 @@ const {promisify} = require('util');
 const readdir = promisify(require('fs-extra').readdir);
 const unlink = promisify(require('fs-extra').unlink);
 
+const ferryRoutes = require('../mongoose/ferry_routes');
+
 /**
  * Gets all ferries list
  * @param req
@@ -238,3 +240,54 @@ exports.getRealLocations = async (req, res) => {
 exports.removeImage = async (req, res) => {
     await removeImage(req.query, res);
 };
+
+
+exports.importGeoJSONFile = async (req, res) => {
+
+    let data = req.body;
+
+    await ferryRoutes.bulkWrite(
+        data.map((dt) =>
+            ({
+                updateOne: {
+                    filter: {
+                        start_point: dt.start_point,
+                        end_point: dt.end_point,
+                        stop_1: dt.stop_1 ? dt.stop_1 : '',
+                        stop_2: dt.stop_2 ? dt.stop_2 : ''
+
+                    },
+                    update: {
+                        $set: dt
+                    },
+                    upsert: true
+                }
+            })
+        ));
+
+    res.json('OK')
+};
+
+exports.importPricesFile = async (req, res) => {
+    let data = req.body;
+
+    await ferryRoutes.bulkWrite(
+        data.map((dt) =>
+            ({
+                updateOne: {
+                    filter: {
+                        start_point: dt.start_point,
+                        end_point: dt.end_point,
+                        stop_1: dt.stop_1 ? dt.stop_1 : '',
+                        stop_2: dt.stop_2 ? dt.stop_2 : ''
+                    },
+                    update: {
+                        $set: dt
+                    },
+                    upsert: true
+                }
+            })
+        ));
+    res.json("OK");
+};
+
