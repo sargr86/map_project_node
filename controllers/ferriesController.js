@@ -241,7 +241,7 @@ exports.removeImage = async (req, res) => {
     await removeImage(req.query, res);
 };
 
-
+//@todo check if this and the following import function are still the same and change to one function is possible
 exports.importGeoJSONFile = async (req, res) => {
 
     let data = req.body;
@@ -290,4 +290,27 @@ exports.importPricesFile = async (req, res) => {
         ));
     res.json("OK");
 };
+
+exports.getRoutePrice = async (req, res) => {
+    let data = req.body;
+    let condition = {stop_1: '', stop_2: ''};
+
+    condition.start_point = data[0].name;
+    if (data.length === 2) {
+        condition.end_point = data[1].name;
+    } else if (data.length === 3) {
+        condition.stop_1 = data[1].name;
+        condition.end_point = data[2].name;
+    } else if (data.length === 4) {
+        condition.stop_1 = data[1].name;
+        condition.stop_2 = data[2].name;
+        condition.end_point = data[3].name;
+    }
+
+    console.log(condition)
+    let dt = await ferryRoutes.findOne(condition);
+    if (!dt) {
+        res.status(444).json({msg: 'The selected route is not found'});
+    } else res.json(dt);
+}
 
