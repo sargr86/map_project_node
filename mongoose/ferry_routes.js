@@ -27,7 +27,7 @@ let FerryRoutesSchema = new mongoose.Schema({
         type: Number
     },
     min_people: {
-        type: Number
+        type: Number,//@todo add default of min 6 people here
     },
     geometryType: {
         type: String
