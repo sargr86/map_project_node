@@ -293,6 +293,20 @@ exports.importPricesFile = async (req, res) => {
 
 exports.getRoutePrice = async (req, res) => {
     let data = req.body;
+
+    let route = await this.buildConditionAndCheck(data);
+    if (!route || route.coordinates.length === 0) {
+        let reversedRoute = await this.buildConditionAndCheck(data.reverse());
+        if (!reversedRoute) {
+            res.status(444).json({msg: 'The selected route is not found'});
+        } else {
+            res.json(reversedRoute);
+        }
+    } else res.json(route);
+};
+
+
+exports.buildConditionAndCheck = async (data) => {
     let condition = {stop_1: '', stop_2: ''};
 
     condition.start_point = data[0].name;
@@ -307,10 +321,7 @@ exports.getRoutePrice = async (req, res) => {
         condition.end_point = data[3].name;
     }
 
-    console.log(condition)
-    let dt = await ferryRoutes.findOne(condition);
-    if (!dt) {
-        res.status(444).json({msg: 'The selected route is not found'});
-    } else res.json(dt);
-}
 
+    let dt = await ferryRoutes.findOne(condition);
+    return dt;
+}
