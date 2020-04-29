@@ -183,7 +183,7 @@ exports.getFerriesDirections = async (req, res) => {
     if (data.dropdown) {
 
         directions.map(d => {
-            d['coordinates'] = {latitude: d.latitude, longitude: d.longitude};
+            d['coordinates'] = {latitude: +d.latitude, longitude: +d.longitude};
             delete d.latitude;
             delete d.longitude;
         });
@@ -296,7 +296,7 @@ exports.getRoutePrice = async (req, res) => {
 
     let route = await this.buildConditionAndCheck(data);
     if (!route || route.coordinates.length === 0) {
-        let reversedRoute = await this.buildConditionAndCheck(data.reverse());
+        let reversedRoute = await this.buildConditionAndCheck(data.reverse(), true);
         if (!reversedRoute) {
             res.status(444).json({msg: 'The selected route is not found'});
         } else {
@@ -306,7 +306,7 @@ exports.getRoutePrice = async (req, res) => {
 };
 
 
-exports.buildConditionAndCheck = async (data) => {
+exports.buildConditionAndCheck = async (data, reversed = false) => {
     let condition = {stop_1: '', stop_2: ''};
 
     condition.start_point = data[0].name;
@@ -323,5 +323,9 @@ exports.buildConditionAndCheck = async (data) => {
 
 
     let dt = await ferryRoutes.findOne(condition);
+
+    if (reversed) {
+        dt.coordinates = dt.coordinates[0].reverse();
+    }
     return dt;
 }
