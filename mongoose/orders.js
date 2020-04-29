@@ -26,6 +26,9 @@ let OrderSchema = new mongoose.Schema({
             coordinates: {type: {latitude: {type: Number}, longitude: {type: Number}}},
         }]
     },
+    price: {
+      type: Number
+    },
     // endPoint: {
     //     type: {
     //         name: {type: String},
