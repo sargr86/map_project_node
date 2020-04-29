@@ -325,7 +325,7 @@ exports.buildConditionAndCheck = async (data, reversed = false) => {
     let dt = await ferryRoutes.findOne(condition);
 
     if (reversed) {
-        dt.coordinates = dt.coordinates[0].reverse();
+        dt.coordinates = dt.coordinates.reverse();
     }
     return dt;
 }
