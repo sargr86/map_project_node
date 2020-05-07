@@ -291,6 +291,21 @@ exports.importPricesFile = async (req, res) => {
     res.json("OK");
 };
 
+
+exports.addRoutePrice = async (req, res) => {
+    let fr = new ferryRoutes(req.body);
+    console.log(req.body)
+    await fr.save();
+    this.getAllRoutes(req, res);
+};
+
+exports.removeRoutePrice = async (req, res) => {
+    await ferryRoutes.deleteOne({_id: req.query.id});
+    this.getAllRoutes(req, res);
+    // res.json('OK');
+};
+
+
 exports.getRoutePrice = async (req, res) => {
     let data = req.body;
 
@@ -303,6 +318,18 @@ exports.getRoutePrice = async (req, res) => {
             res.json(reversedRoute);
         }
     } else res.json(route);
+};
+
+exports.getAllRoutes = async (req, res) => {
+    let dt = await ferryRoutes.find({coordinates: {$exists: true, $not: {$size: 0}}}, {}).select({
+        "name": 1,
+        "geometry_type": 1,
+        "coordinates": 1
+        // "coordinates.lat": 1,
+        // "coordinates.lng": 1,
+
+    });
+    res.json(dt);
 };
 
 
