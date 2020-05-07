@@ -20,6 +20,9 @@ router.get('/get-directions-pricing', ferriesController.getFerriesDirectionsPric
 router.get('/get-direction-price', ferriesController.getFerryDirectionPrice);
 router.post('/import-routes-file', ferriesController.importGeoJSONFile);
 router.post('/import-prices-file', ferriesController.importPricesFile);
-router.post('/get-route-price', ferriesController.getRoutePrice)
+router.post('/get-route-price', ferriesController.getRoutePrice);
+router.post('/add-route-price', ferriesController.addRoutePrice);
+router.delete('/remove-route-price', ferriesController.removeRoutePrice);
+router.get('/get-all-routes', ferriesController.getAllRoutes);
 
 module.exports = router;
