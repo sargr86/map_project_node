@@ -293,9 +293,34 @@ exports.importPricesFile = async (req, res) => {
 
 
 exports.addRoutePrice = async (req, res) => {
-    let fr = new ferryRoutes(req.body);
-    console.log(req.body)
-    await fr.save();
+    // let fr = new ferryRoutes(req.body);
+    // console.log(req.body)
+    // await fr.save();
+
+    let data = [req.body];
+
+    await ferryRoutes.bulkWrite(
+        data.map((dt) =>
+            (
+                {
+                updateOne: {
+                    filter: {
+                        start_point: dt.start_point,
+                        end_point: dt.end_point,
+                        stop_1: dt.stop_1 ? dt.stop_1 : '',
+                        stop_2: dt.stop_2 ? dt.stop_2 : ''
+
+                    },
+                    update: {
+                        $set: dt
+                    },
+                    upsert: true
+                }
+            }
+            )
+        ));
+
+
     this.getAllRoutes(req, res);
 };
 
@@ -321,14 +346,15 @@ exports.getRoutePrice = async (req, res) => {
 };
 
 exports.getAllRoutes = async (req, res) => {
-    let dt = await ferryRoutes.find({coordinates: {$exists: true, $not: {$size: 0}}}, {}).select({
-        "name": 1,
-        "geometry_type": 1,
-        "coordinates": 1
-        // "coordinates.lat": 1,
-        // "coordinates.lng": 1,
-
-    });
+    let dt = await ferryRoutes.find({coordinates: {$exists: true, $not: {$size: 0}}}, {});
+        // .select({
+        // "name": 1,
+        // "geometry_type": 1,
+        // "coordinates": 1
+        // // "coordinates.lat": 1,
+        // // "coordinates.lng": 1,
+        //
+        // });
     res.json(dt);
 };
 

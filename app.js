@@ -36,6 +36,10 @@ global.io = require('socket.io')(server);
 const {socket} = require('./socket');
 socket(io);
 
+// Stripe
+global.stripe = require('stripe')('sk_test_lp9Seyh7DnoFX0GQXdTRVcy800kvjySjl8');
+
+
 // Static resources
 app.use('/uploads/', express.static(UPLOADS_FOLDER));
 
