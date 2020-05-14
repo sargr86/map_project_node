@@ -1,5 +1,6 @@
 require('../constants/sequelize');
 const nodemailer = require('nodemailer');
+const UsersCards = db.users_cards;
 
 /**
  * Registers a user in the database
@@ -129,7 +130,7 @@ exports.login = async (req, res) => {
             else {
                 // Cloning users object without password and saving user full name
                 user = user.toJSON();
-                user['socket_nickname'] = user['socket_nickname'].replace(/ /g,'_');
+                user['socket_nickname'] = user['socket_nickname'].replace(/ /g, '_');
                 let {password, ...details} = user;
                 let full_name = user[`first_name`] + ' ' + user[`last_name`];
 
@@ -206,7 +207,11 @@ exports.getProfile = async (req, res) => {
     ];
 
     // Selecting an employee that has an email matching request one
-    let user = await Users.findOne({where: {email: email}, attributes: attributes})
+    let user = await Users.findOne({
+        where: {email: email}, attributes: attributes, include: [
+            {model: UsersCards}
+        ]
+    });
     res.json(user);
 };
 

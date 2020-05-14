@@ -359,6 +359,20 @@ exports.getAllRoutes = async (req, res) => {
 };
 
 
+exports.getAllRoutesPrices = async (req, res) => {
+    let dt = await ferryRoutes.find({});
+    // .select({
+    // "name": 1,
+    // "geometry_type": 1,
+    // "coordinates": 1
+    // // "coordinates.lat": 1,
+    // // "coordinates.lng": 1,
+    //
+    // });
+    res.json(dt);
+};
+
+
 exports.buildConditionAndCheck = async (data, reversed = false) => {
     let condition = {stop_1: '', stop_2: ''};
 
