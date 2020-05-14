@@ -24,5 +24,6 @@ router.post('/get-route-price', ferriesController.getRoutePrice);
 router.post('/add-route-price', ferriesController.addRoutePrice);
 router.delete('/remove-route-price', ferriesController.removeRoutePrice);
 router.get('/get-all-routes', ferriesController.getAllRoutes);
+router.get('/get-all-routes-prices', ferriesController.getAllRoutesPrices);
 
 module.exports = router;

@@ -8,6 +8,8 @@ router.put('/change-status',usersController.changeUserStatus);
 router.post('/create-stripe-user-card', usersController.createStripeUserCard);
 router.post('/create-stripe-user', usersController.createStripeUser);
 router.get('/get-customer-cards',usersController.getCustomerCards);
+router.delete('/remove-customer-card',usersController.removeStripeCard);
+router.put('/update-customer-card',usersController.updateStripeCard);
 
 
 module.exports = router;
