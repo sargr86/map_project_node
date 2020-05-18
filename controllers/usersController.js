@@ -203,9 +203,9 @@ exports.updateStripeCard = async (req, res) => {
 };
 
 exports.setCardAsDefault = async (req, res) => {
-    let data = req.query;
+    let data = req.body;
     console.log('DEFAULT REQ QUERY!!!!!')
-    console.log(req.query)
+    console.log(req.body)
     const customer = await stripe.customers.update(
         data.customer_id,
         {
