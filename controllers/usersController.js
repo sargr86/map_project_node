@@ -218,6 +218,7 @@ exports.setCardAsDefault = async (req, res) => {
             res.status(500).json(err);
             }
             else {
+                console.log(customer)
                 res.json('OK');
             }
             // asynchronously called
