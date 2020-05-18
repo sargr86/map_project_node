@@ -134,7 +134,6 @@ exports.createStripeCard = async (data, customer_id) => {
 exports.getCustomerCards = async (req, res) => {
     let data = req.query;
     let userCards = await UsersCards.findOne({where: {user_id: data.user_id}});
-
     if (userCards) {
         let cards = await stripe.customers.listSources(
             userCards.toJSON().stripe_customer_id,
@@ -152,6 +151,27 @@ exports.getCustomerCards = async (req, res) => {
         res.status(500).json('This user doesn\'t have any cards registered in our system');
     }
 };
+
+
+exports.getCustomerInfo = async(req,res) =>{
+    let data = req.query;
+    let userCards = await UsersCards.findOne({where: {user_id: data.user_id}});
+
+    if(!userCards){
+        res.status(500).json('This user hasn\'t got any cards');
+    }
+    else {
+        let customer = await stripe.customers.retrieve(
+            userCards.toJSON().stripe_customer_id,
+            function(err, customer) {
+                console.log(customer)
+                res.json(customer)
+                // asynchronously called
+            }
+        );
+    }
+};
+
 
 exports.removeStripeCard = async (req, res) => {
     let data = req.body;
@@ -180,4 +200,29 @@ exports.updateStripeCard = async (req, res) => {
             // asynchronously called
         }
     );
-}
+};
+
+exports.setCardAsDefault = async (req, res) => {
+    let data = req.query;
+    console.log('DEFAULT REQ QUERY!!!!!')
+    console.log(req.query)
+    const customer = await stripe.customers.update(
+        data.customer_id,
+        {
+            default_source: data.card_id
+        },function(err, customer) {
+            if(err){
+
+            console.log('!!!!!ERROR!!!!')
+            console.log(err)
+            res.status(500).json(err);
+            }
+            else {
+                res.json('OK');
+            }
+            // asynchronously called
+        }
+    );
+    console.log('set card as default')
+
+};
