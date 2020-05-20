@@ -164,7 +164,7 @@ exports.getCustomerInfo = async(req,res) =>{
         let customer = await stripe.customers.retrieve(
             userCards.toJSON().stripe_customer_id,
             function(err, customer) {
-                console.log(customer)
+                // console.log(customer)
                 res.json(customer)
                 // asynchronously called
             }

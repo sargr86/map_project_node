@@ -1,8 +1,34 @@
 const Orders = require('../mongoose/orders');
 const moment = require('moment');
+const usersController = require('./usersController');
+const UsersCards = db.users_cards;
 exports.create = async (orderData) => {
 
-    let newMsg = new Orders(JSON.parse(orderData));
+
+    let data = JSON.parse(orderData);
+    console.log("ORDER DATA!!!!")
+    console.log(data)
+    console.log("ORDER DATA!!!!")
+
+
+    // let stripeUserFound = await UsersCards.findOne({where: {user_id: data.user_id}});
+
+
+    let charges = await stripe.charges.create({
+        amount: data.price,
+        description: 'Boat Ticket',
+        currency: 'eur',
+        customer: data.client.stripe_customer_id
+    });
+
+    console.log(charges)
+
+
+    // Checking for user stripe status
+    // const customerInfo = usersController.getCustomerInfo();
+
+
+    let newMsg = new Orders(data);
     let result = await to(newMsg.save());
     return result;
 };
