@@ -153,17 +153,16 @@ exports.getCustomerCards = async (req, res) => {
 };
 
 
-exports.getCustomerInfo = async(req,res) =>{
+exports.getCustomerInfo = async (req, res) => {
     let data = req.query;
     let userCards = await UsersCards.findOne({where: {user_id: data.user_id}});
 
-    if(!userCards){
+    if (!userCards) {
         res.status(500).json('This user hasn\'t got any cards');
-    }
-    else {
+    } else {
         let customer = await stripe.customers.retrieve(
             userCards.toJSON().stripe_customer_id,
-            function(err, customer) {
+            function (err, customer) {
                 // console.log(customer)
                 res.json(customer)
                 // asynchronously called
@@ -210,14 +209,13 @@ exports.setCardAsDefault = async (req, res) => {
         data.customer_id,
         {
             default_source: data.card_id
-        },function(err, customer) {
-            if(err){
+        }, function (err, customer) {
+            if (err) {
 
-            console.log('!!!!!ERROR!!!!')
-            console.log(err)
-            res.status(500).json(err);
-            }
-            else {
+                console.log('!!!!!ERROR!!!!')
+                console.log(err)
+                res.status(500).json(err);
+            } else {
                 console.log(customer)
                 res.json('OK');
             }
@@ -226,4 +224,85 @@ exports.setCardAsDefault = async (req, res) => {
     );
     console.log('set card as default')
 
+};
+
+
+exports.payViaPaypal = async (req, res) => {
+    console.log(req.query)
+
+    console.log(process.env.API_URL)
+
+    let create_payment_json = {
+        intent: "sale",
+        payer: {
+            payment_method: "paypal"
+        },
+        redirect_urls: {
+            return_url: process.env.API_URL+"paypal/paypal-success?price=" + req.query.price,
+            cancel_url: process.env.API_URL+"cancel"
+        },
+        transactions: [
+            {
+                item_list: {
+                    items: [
+                        {
+                            name: "item",
+                            sku: "item",
+                            price: req.query.price + ".00",
+                            currency: "USD",
+                            quantity: 1
+                        }
+                    ]
+                },
+                amount: {
+                    currency: "USD",
+                    total: req.query.price + ".00"
+                },
+                description: "This is the payment description."
+            }
+        ]
+    };
+
+    paypal.payment.create(create_payment_json, function (error, payment) {
+        if (error) {
+            throw error;
+        } else {
+            console.log("Create Payment Response");
+            console.log(payment.links[1].href);
+            res.redirect(payment.links[1].href);
+        }
+    });
+};
+
+exports.paypalPaymentSuccess = (req, res) => {
+    // res.send("Success");
+    console.log(req.query.price);
+
+    var PayerID = req.query.PayerID;
+    var paymentId = req.query.paymentId;
+    var execute_payment_json = {
+        payer_id: PayerID,
+        transactions: [
+            {
+                amount: {
+                    currency: "USD",
+                    total: req.query.price+".00"
+                }
+            }
+        ]
+    };
+
+    paypal.payment.execute(paymentId, execute_payment_json, function(
+        error,
+        payment
+    ) {
+        if (error) {
+            console.log(error.response);
+            throw error;
+        } else {
+            console.log("Get Payment Response");
+            console.log(JSON.stringify(payment));
+            res.render("success");
+        }
+    });
 };
