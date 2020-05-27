@@ -1,6 +1,8 @@
 require('dotenv').config();
 require('./constants/main');
 
+global.paypal = require("paypal-rest-sdk");
+
 console.log('works')
 server.listen(port);
 // // Start server on pre-defined port
@@ -39,6 +41,24 @@ socket(io);
 // Stripe
 global.stripe = require('stripe')('sk_test_lp9Seyh7DnoFX0GQXdTRVcy800kvjySjl8');
 
+//Paypal
+paypal.configure({
+    mode: "sandbox", //sandbox or live
+    client_id:
+        "AXl9E4BDamgIlM3gIB8DnN3GWECVWKkBM4lnqLC5KiDlkH_FNRs9NJuIIMBtpTOwcTtzU6Ym4Dj4-pvZ",
+    client_secret:
+        "EHyrGqSPTRYRhlagIBCafLujCDL68YJ9wFyUZAxiKTgkUY4llXN1dTpByDq-xLbgXdiqOEH-4DP8R_5v"
+});
+
+
+// Ejs (temporary)
+const engines = require("consolidate");
+app.engine("ejs", engines.ejs);
+app.set("views", "./views");
+app.set("view engine", "ejs");
+
+
+
 
 // Static resources
 app.use('/uploads/', express.static(UPLOADS_FOLDER));
@@ -59,6 +79,7 @@ app.use('/companies', require('./routes/companies'));
 app.use('/contacts', require('./routes/contacts'));
 app.use('/orders', require('./routes/orders'));
 app.use('/chat', require('./routes/chat'));
+app.use('/paypal', require('./routes/paypal'));
 
 // Auth Routes
 app.use('/users', checkAuth, require('./routes/users'));
@@ -66,6 +87,14 @@ app.use('/tour_types', require('./routes/tour_types'));
 app.use('/activity_types', require('./routes/activity_types'));
 app.use('/employees', require('./routes/employees'));
 app.use('/customers', checkAuth, require    ('./routes/customers'));
+
+
+
+
+
+app.get("cancel", (req, res) => {
+    res.render("cancel");
+});
 
 
 // Allowed extensions list can be extended depending on your own needs
@@ -90,8 +119,7 @@ if (process.env.NODE_ENV === 'production') {
 
 app.use(express.static(dist));
 
-// console.log('dist path:', dist)
-// console.log(`${process.env.API_URL}auth/google/callback`)
+
 // Separating Angular routes
 app.get('*', (req, res) => {
     // if (allowedExt.filter(ext => req.url.indexOf(ext) > 0).length > 0) {
