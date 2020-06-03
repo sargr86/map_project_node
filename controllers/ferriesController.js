@@ -303,20 +303,20 @@ exports.addRoutePrice = async (req, res) => {
         data.map((dt) =>
             (
                 {
-                updateOne: {
-                    filter: {
-                        start_point: dt.start_point,
-                        end_point: dt.end_point,
-                        stop_1: dt.stop_1 ? dt.stop_1 : '',
-                        stop_2: dt.stop_2 ? dt.stop_2 : ''
+                    updateOne: {
+                        filter: {
+                            start_point: dt.start_point,
+                            end_point: dt.end_point,
+                            stop_1: dt.stop_1 ? dt.stop_1 : '',
+                            stop_2: dt.stop_2 ? dt.stop_2 : ''
 
-                    },
-                    update: {
-                        $set: dt
-                    },
-                    upsert: true
+                        },
+                        update: {
+                            $set: dt
+                        },
+                        upsert: true
+                    }
                 }
-            }
             )
         ));
 
@@ -347,20 +347,20 @@ exports.getRoutePrice = async (req, res) => {
 
 exports.getAllRoutes = async (req, res) => {
     let dt = await ferryRoutes.find({coordinates: {$exists: true, $not: {$size: 0}}}, {});
-        // .select({
-        // "name": 1,
-        // "geometry_type": 1,
-        // "coordinates": 1
-        // // "coordinates.lat": 1,
-        // // "coordinates.lng": 1,
-        //
-        // });
+    // .select({
+    // "name": 1,
+    // "geometry_type": 1,
+    // "coordinates": 1
+    // // "coordinates.lat": 1,
+    // // "coordinates.lng": 1,
+    //
+    // });
     res.json(dt);
 };
 
 
 exports.getAllRoutesPrices = async (req, res) => {
-    let dt = await ferryRoutes.find({});
+    let dt = await ferryRoutes.find({}).sort({'start_point': 1});
     // .select({
     // "name": 1,
     // "geometry_type": 1,
