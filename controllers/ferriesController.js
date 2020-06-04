@@ -330,6 +330,11 @@ exports.removeRoutePrice = async (req, res) => {
     // res.json('OK');
 };
 
+exports.removeAllRoutesPrices = async (req, res) => {
+    await ferryRoutes.deleteMany({});
+    this.getAllRoutes(req, res);
+}
+
 
 exports.getRoutePrice = async (req, res) => {
     let data = req.body;
