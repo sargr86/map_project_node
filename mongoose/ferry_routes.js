@@ -35,7 +35,8 @@ let FerryRoutesSchema = new mongoose.Schema({
     coordinates: {
         type: [
             {lat: {type: Number}, lng: {type: Number}}
-        ]
+        ],
+        default: []
     },
 
     created: {

@@ -320,8 +320,11 @@ exports.addRoutePrice = async (req, res) => {
             )
         ));
 
-
-    this.getAllRoutes(req, res);
+    if (!req.body.map) {
+        this.getAllRoutesPrices(req, res);
+    } else {
+        this.getAllRoutes(req, res);
+    }
 };
 
 exports.removeRoutePrice = async (req, res) => {
