@@ -245,6 +245,11 @@ exports.removeImage = async (req, res) => {
 exports.importGeoJSONFile = async (req, res) => {
 
     let data = req.body;
+    // console.log(data)
+
+    data.map(dt => {
+        delete dt._id;
+    });
 
     await ferryRoutes.bulkWrite(
         data.map((dt) =>
@@ -271,6 +276,11 @@ exports.importGeoJSONFile = async (req, res) => {
 exports.importPricesFile = async (req, res) => {
     let data = req.body;
 
+
+    data.map(dt => {
+        dt.name = generateRouteName(dt);
+    });
+
     await ferryRoutes.bulkWrite(
         data.map((dt) =>
             ({
@@ -291,6 +301,14 @@ exports.importPricesFile = async (req, res) => {
     res.json("OK");
 };
 
+let generateRouteName = (dt) => {
+    const startPoint = dt.start_point;
+    const stop1 = dt.stop_1;
+    const stop2 = dt.stop_2;
+    const endPoint = dt.end_point;
+    return `${startPoint ? startPoint : ''}${stop1 ? ' - ' + stop1 : ''}${stop2 ? ' - ' + stop2 : ''}${endPoint ? ' - ' + endPoint : ''}`;
+};
+
 
 exports.addRoutePrice = async (req, res) => {
     // let fr = new ferryRoutes(req.body);
@@ -298,7 +316,7 @@ exports.addRoutePrice = async (req, res) => {
     // await fr.save();
 
     let data = [req.body];
-
+    console.log(data)
     await ferryRoutes.bulkWrite(
         data.map((dt) =>
             (
