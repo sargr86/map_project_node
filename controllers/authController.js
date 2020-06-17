@@ -156,7 +156,6 @@ exports.login = async (req, res) => {
 exports.updateProfile = async (req, res) => {
 
     let data = req.body;
-    let lang = data.lang;
 
     console.log('update profile!!!!!')
 
