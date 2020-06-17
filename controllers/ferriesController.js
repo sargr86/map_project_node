@@ -177,7 +177,11 @@ exports.assignDriver = async (req, res) => {
 
 exports.getFerriesDirections = async (req, res) => {
     let data = req.query;
-    let directions = await FerryDirections.findAll({attributes: ['name', 'latitude', 'longitude'], raw: true});
+    let directions = await FerryDirections.findAll({
+        attributes: ['name', 'latitude', 'longitude'],
+        raw: true,
+        order: ['name']
+    });
 
     // For order form mat-select
     if (data.dropdown) {
@@ -372,7 +376,7 @@ exports.getRoutePrice = async (req, res) => {
 };
 
 exports.getAllRoutes = async (req, res) => {
-    let dt = await ferryRoutes.find({coordinates: {$exists: true, $not: {$size: 0}}}, {});
+    let dt = await ferryRoutes.find({coordinates: {$exists: true, $not: {$size: 0}}}, {}).sort({'start_point': 1});
     // .select({
     // "name": 1,
     // "geometry_type": 1,
