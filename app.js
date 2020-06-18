@@ -40,27 +40,23 @@ socket(io);
 
 // Stripe
 let sandbox = {
-    mode: "sandbox",
     key: 'sk_test_lp9Seyh7DnoFX0GQXdTRVcy800kvjySjl8',
-    client_id:
-        "AXl9E4BDamgIlM3gIB8DnN3GWECVWKkBM4lnqLC5KiDlkH_FNRs9NJuIIMBtpTOwcTtzU6Ym4Dj4-pvZ",
-    client_secret:
-        "EHyrGqSPTRYRhlagIBCafLujCDL68YJ9wFyUZAxiKTgkUY4llXN1dTpByDq-xLbgXdiqOEH-4DP8R_5v",
     stripe_publishable_key: 'pk_live_79SLhLfYlUvFHoHHUxkmrMhV00WIYqhoXo'
 };
 let live = {
-    mode: "live",
     key: 'sk_live_rIK1XXeLfghWjCMCdCmd8pKf00GDKWlY08',
+};
+global.stripe = require('stripe')(live.key);
+
+//Paypal
+paypal.configure({
+    mode: "sandbox", //sandbox or live
     client_id:
         "AXl9E4BDamgIlM3gIB8DnN3GWECVWKkBM4lnqLC5KiDlkH_FNRs9NJuIIMBtpTOwcTtzU6Ym4Dj4-pvZ",
     client_secret:
         "EHyrGqSPTRYRhlagIBCafLujCDL68YJ9wFyUZAxiKTgkUY4llXN1dTpByDq-xLbgXdiqOEH-4DP8R_5v"
 
-};
-global.stripe = require('stripe')(live.key);
-
-//Paypal
-paypal.configure(live);
+});
 
 
 // Ejs (temporary)
