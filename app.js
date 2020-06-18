@@ -39,22 +39,15 @@ socket(io);
 
 
 // Stripe
-let sandbox = {
-    key: 'sk_test_lp9Seyh7DnoFX0GQXdTRVcy800kvjySjl8',
-    stripe_publishable_key: 'pk_live_79SLhLfYlUvFHoHHUxkmrMhV00WIYqhoXo'
-};
-let live = {
-    key: 'sk_live_rIK1XXeLfghWjCMCdCmd8pKf00GDKWlY08',
-};
-global.stripe = require('stripe')(live.key);
+global.stripe = require('stripe')(process.env.STRIPE_LIVE_SECRET_KEY);
 
-//Paypal
+// Paypal
 paypal.configure({
     mode: "sandbox", //sandbox or live
     client_id:
-        "AXl9E4BDamgIlM3gIB8DnN3GWECVWKkBM4lnqLC5KiDlkH_FNRs9NJuIIMBtpTOwcTtzU6Ym4Dj4-pvZ",
+    process.env.PAYPAL_CLIENT_ID,
     client_secret:
-        "EHyrGqSPTRYRhlagIBCafLujCDL68YJ9wFyUZAxiKTgkUY4llXN1dTpByDq-xLbgXdiqOEH-4DP8R_5v"
+    process.env.PAYPAL_CLIENT_SECRET_KEY,
 
 });
 

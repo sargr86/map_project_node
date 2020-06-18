@@ -139,10 +139,10 @@ exports.getCustomerCards = async (req, res) => {
             userCards.toJSON().stripe_customer_id,
             {object: 'card'},
             function (err, cards) {
-                console.log(cards.data.length)
+                console.log(cards)
                 if (err) {
                     res.status(500).json(err);
-                } else {
+                } else if (cards) {
                     res.json(cards.data)
                 }
             }
@@ -238,8 +238,8 @@ exports.payViaPaypal = async (req, res) => {
             payment_method: "paypal"
         },
         redirect_urls: {
-            return_url: process.env.API_URL+"paypal/paypal-success?price=" + req.query.price,
-            cancel_url: process.env.API_URL+"cancel"
+            return_url: process.env.API_URL + "paypal/paypal-success?price=" + req.query.price,
+            cancel_url: process.env.API_URL + "cancel"
         },
         transactions: [
             {
@@ -286,13 +286,13 @@ exports.paypalPaymentSuccess = (req, res) => {
             {
                 amount: {
                     currency: "USD",
-                    total: req.query.price+".00"
+                    total: req.query.price + ".00"
                 }
             }
         ]
     };
 
-    paypal.payment.execute(paymentId, execute_payment_json, function(
+    paypal.payment.execute(paymentId, execute_payment_json, function (
         error,
         payment
     ) {
