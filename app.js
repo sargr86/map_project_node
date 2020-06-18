@@ -15,7 +15,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true, limit: postMaxSize + 'mb'}));
 
 
-
 // Cors
 app.use(cors(require('./config/cors')));
 
@@ -38,17 +37,30 @@ global.io = require('socket.io')(server);
 const {socket} = require('./socket');
 socket(io);
 
-// Stripe
-global.stripe = require('stripe')('sk_test_lp9Seyh7DnoFX0GQXdTRVcy800kvjySjl8');
 
-//Paypal
-paypal.configure({
-    mode: "sandbox", //sandbox or live
+// Stripe
+let sandbox = {
+    mode: "sandbox",
+    key: 'sk_test_lp9Seyh7DnoFX0GQXdTRVcy800kvjySjl8',
+    client_id:
+        "AXl9E4BDamgIlM3gIB8DnN3GWECVWKkBM4lnqLC5KiDlkH_FNRs9NJuIIMBtpTOwcTtzU6Ym4Dj4-pvZ",
+    client_secret:
+        "EHyrGqSPTRYRhlagIBCafLujCDL68YJ9wFyUZAxiKTgkUY4llXN1dTpByDq-xLbgXdiqOEH-4DP8R_5v",
+    stripe_publishable_key: 'pk_live_79SLhLfYlUvFHoHHUxkmrMhV00WIYqhoXo'
+};
+let live = {
+    mode: "live",
+    key: 'sk_live_rIK1XXeLfghWjCMCdCmd8pKf00GDKWlY08',
     client_id:
         "AXl9E4BDamgIlM3gIB8DnN3GWECVWKkBM4lnqLC5KiDlkH_FNRs9NJuIIMBtpTOwcTtzU6Ym4Dj4-pvZ",
     client_secret:
         "EHyrGqSPTRYRhlagIBCafLujCDL68YJ9wFyUZAxiKTgkUY4llXN1dTpByDq-xLbgXdiqOEH-4DP8R_5v"
-});
+
+};
+global.stripe = require('stripe')(live.key);
+
+//Paypal
+paypal.configure(live);
 
 
 // Ejs (temporary)
@@ -58,11 +70,8 @@ app.set("views", "./views");
 app.set("view engine", "ejs");
 
 
-
-
 // Static resources
 app.use('/uploads/', express.static(UPLOADS_FOLDER));
-
 
 
 // Non-auth routes
@@ -86,10 +95,7 @@ app.use('/users', checkAuth, require('./routes/users'));
 app.use('/tour_types', require('./routes/tour_types'));
 app.use('/activity_types', require('./routes/activity_types'));
 app.use('/employees', require('./routes/employees'));
-app.use('/customers', checkAuth, require    ('./routes/customers'));
-
-
-
+app.use('/customers', checkAuth, require('./routes/customers'));
 
 
 app.get("cancel", (req, res) => {
@@ -109,7 +115,6 @@ const allowedExt = [
     '.ttf',
     '.svg',
 ];
-
 
 
 let dist = path.join(__dirname, '../../secret_south/frontend/dist/front/');

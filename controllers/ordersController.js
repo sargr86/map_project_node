@@ -14,14 +14,14 @@ exports.create = async (orderData) => {
     // let stripeUserFound = await UsersCards.findOne({where: {user_id: data.user_id}});
 
 
-    let charges = await stripe.charges.create({
-        amount: data.price,
-        description: 'Boat Ticket',
-        currency: 'eur',
-        customer: data.client.stripe_customer_id
-    });
-
-    console.log(charges)
+    // let charges = await stripe.charges.create({
+    //     amount: data.price,
+    //     description: 'Boat Ticket',
+    //     currency: 'eur',
+    //     customer: data.client.stripe_customer_id
+    // });
+    //
+    // console.log(charges)
 
 
     // Checking for user stripe status
