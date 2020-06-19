@@ -3,7 +3,7 @@ require('./constants/main');
 
 global.paypal = require("paypal-rest-sdk");
 
-console.log('works')
+
 server.listen(port);
 // // Start server on pre-defined port
 // server.listen(port,'192.168.1.126', ()=>{
@@ -11,7 +11,7 @@ server.listen(port);
 // });
 
 //Body parser
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({extended: true, limit: postMaxSize + 'mb'}));
 
 
@@ -51,7 +51,7 @@ paypal.configure({
 
 });
 
-
+console.log('works')
 // Ejs (temporary)
 const engines = require("consolidate");
 app.engine("ejs", engines.ejs);
