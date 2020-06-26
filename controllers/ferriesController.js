@@ -178,7 +178,7 @@ exports.assignDriver = async (req, res) => {
 exports.getFerriesDirections = async (req, res) => {
     let data = req.query;
     let directions = await FerryDirections.findAll({
-        attributes: ['name', 'latitude', 'longitude'],
+        attributes: ['id', 'name', 'latitude', 'longitude'],
         raw: true,
         order: ['name']
     });
@@ -232,6 +232,25 @@ exports.getRealLocations = async (req, res) => {
     const {statusCode, data, headers} = await curly.get('http://www.marinetraffic.com/ais/getjson.aspx?sw_x=0&sw_y=70&ne_x=30&ne_y=80&zoom=6&fleet=&station=0&id=null')
 
     console.log(statusCode, data)
+};
+
+
+exports.addLocation = async (req, res) => {
+    await FerryDirections.create(req.body)
+    this.getFerriesDirections(req, res);
+};
+
+exports.updateLocation = async (req, res) => {
+    let data = req.body;
+    console.log(data)
+    await FerryDirections.update(data, {where: {id: data.id}});
+    this.getFerriesDirections(req, res);
+};
+
+exports.removeLocation = async (req, res) => {
+    let data = req.query;
+    await FerryDirections.destroy({where: {id: data.id}});
+    this.getFerriesDirections(req, res);
 };
 
 

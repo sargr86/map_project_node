@@ -106,7 +106,43 @@ exports.createStripeUserCard = async (req, res) => {
     }
 };
 
-exports.createStripeUser = async (req, res) => {
+exports.createStripeAccount = async (req, res) => {
+    let data = req.body;
+console.log(data)
+    await stripe.accounts.create(
+        {
+            type: 'custom',
+            country: 'US',
+            email: 'jenny.rosen@example.com',
+            requested_capabilities: [
+                'card_payments',
+                'transfers',
+            ],
+        },
+        async function (err, account) {
+            console.log(err)
+            if (err) {
+                res.status(500).json(err);
+            } else {
+                console.log(account.id)
+                await stripe.accountLinks.create(
+                    {
+                        account: account.id,
+                        refresh_url: 'https://example.com/reauth',
+                        return_url: 'https://example.com/return',
+                        type: 'custom_account_verification',
+                    },
+                    function (err, accountLink) {
+                        console.log(err.toString())
+                        // asynchronously called
+                        // console.log(accountLink)
+                    }
+                );
+            }
+
+
+            // asynchronously called
+        });
 
 
 };
