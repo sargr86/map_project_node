@@ -15,6 +15,9 @@ router.delete('/remove-image', checkAuth, checkRole('admin', 'partner'), ferries
 // router.delete('/remove-image', ferriesController.removeImage);
 
 router.get('/get_real_locations', ferriesController.getRealLocations);
+router.post('/add-location', ferriesController.addLocation);
+router.put('/update-location', ferriesController.updateLocation);
+router.delete('/remove-location', ferriesController.removeLocation);
 router.get('/get-directions', ferriesController.getFerriesDirections);
 router.get('/get-directions-pricing', ferriesController.getFerriesDirectionsPrices);
 router.get('/get-direction-price', ferriesController.getFerryDirectionPrice);

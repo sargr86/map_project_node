@@ -39,7 +39,7 @@ socket(io);
 
 
 // Stripe
-global.stripe = require('stripe')(process.env.STRIPE_LIVE_SECRET_KEY);
+global.stripe = require('stripe')(process.env.STRIPE_TEST_SECRET_KEY);
 
 // Paypal
 paypal.configure({

@@ -6,7 +6,7 @@ router.get('/get-by-role',usersController.getUsersByRole);
 router.get('/get',usersController.getUsers);
 router.put('/change-status',usersController.changeUserStatus);
 router.post('/create-stripe-user-card', usersController.createStripeUserCard);
-router.post('/create-stripe-user', usersController.createStripeUser);
+router.post('/create-stripe-account', usersController.createStripeAccount);
 router.get('/get-customer-cards',usersController.getCustomerCards);
 router.delete('/remove-customer-card',usersController.removeStripeCard);
 router.put('/update-customer-card',usersController.updateStripeCard);
