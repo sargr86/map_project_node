@@ -249,8 +249,22 @@ exports.updateLocation = async (req, res) => {
 
 exports.removeLocation = async (req, res) => {
     let data = req.query;
-    await FerryDirections.destroy({where: {id: data.id}});
-    this.getFerriesDirections(req, res);
+    console.log(data)
+    let found = await ferryRoutes.findOne({
+        $or: [
+            {start_point: data.name},
+            {end_point: data.name}
+        ]
+    });
+    if (!found) {
+        await FerryDirections.destroy({where: {id: data.id}});
+        this.getFerriesDirections(req, res);
+    } else {
+        res.status(500).json({
+            msg: 'Please remove the routes with the current location name first.',
+            main: 'This location listed in route list!'
+        });
+    }
 };
 
 
