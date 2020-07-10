@@ -354,26 +354,30 @@ exports.addRoutePrice = async (req, res) => {
 
     let data = [req.body];
     console.log(data)
-    await ferryRoutes.bulkWrite(
-        data.map((dt) =>
-            (
-                {
-                    updateOne: {
-                        filter: {
-                            start_point: dt.start_point,
-                            end_point: dt.end_point,
-                            stop_1: dt.stop_1 ? dt.stop_1 : '',
-                            stop_2: dt.stop_2 ? dt.stop_2 : ''
 
-                        },
-                        update: {
-                            $set: dt
-                        },
-                        upsert: true
+    if (!showIfErrors(req, res)) {
+
+        await ferryRoutes.bulkWrite(
+            data.map((dt) =>
+                (
+                    {
+                        updateOne: {
+                            filter: {
+                                start_point: dt.start_point,
+                                end_point: dt.end_point,
+                                stop_1: dt.stop_1 ? dt.stop_1 : '',
+                                stop_2: dt.stop_2 ? dt.stop_2 : ''
+
+                            },
+                            update: {
+                                $set: dt
+                            },
+                            upsert: true
+                        }
                     }
-                }
-            )
-        ));
+                )
+            ));
+    }
 
     if (!req.body.map) {
         this.getAllRoutesPrices(req, res);
