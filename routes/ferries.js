@@ -1,6 +1,7 @@
 const router = express.Router();
 const ferriesController = require('../controllers/ferriesController');
 const validateFerry = require('../validators/validateFerry');
+const validateRoute = require('../validators/validateRoute');
 
 router.get('/get', ferriesController.get);
 router.get('/get-partners', ferriesController.getPartners);
@@ -24,7 +25,7 @@ router.get('/get-direction-price', ferriesController.getFerryDirectionPrice);
 router.post('/import-routes-file', ferriesController.importGeoJSONFile);
 router.post('/import-prices-file', ferriesController.importPricesFile);
 router.post('/get-route-price', ferriesController.getRoutePrice);
-router.post('/save-route-price', ferriesController.addRoutePrice);
+router.post('/save-route-price', validateRoute.rules, ferriesController.addRoutePrice);
 router.delete('/remove-route-price', ferriesController.removeRoutePrice);
 router.delete('/remove-all-routes-prices', ferriesController.removeAllRoutesPrices);
 router.get('/get-all-routes', ferriesController.getAllRoutes);
