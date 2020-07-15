@@ -313,28 +313,32 @@ exports.importGeoJSONFile = async (req, res) => {
 exports.importPricesFile = async (req, res) => {
     let data = req.body;
 
+    if (Object.keys(data).length !== 0 && data.constructor !== Object) {
 
-    data.map(dt => {
-        dt.name = generateRouteName(dt);
-    });
+        data.map(dt => {
+            dt.name = generateRouteName(dt);
+        });
 
-    await ferryRoutes.bulkWrite(
-        data.map((dt) =>
-            ({
-                updateOne: {
-                    filter: {
-                        start_point: dt.start_point,
-                        end_point: dt.end_point,
-                        stop_1: dt.stop_1 ? dt.stop_1 : '',
-                        stop_2: dt.stop_2 ? dt.stop_2 : ''
-                    },
-                    update: {
-                        $set: dt
-                    },
-                    upsert: true
-                }
-            })
-        ));
+        await ferryRoutes.bulkWrite(
+            data.map((dt) =>
+                ({
+                    updateOne: {
+                        filter: {
+                            start_point: dt.start_point,
+                            end_point: dt.end_point,
+                            stop_1: dt.stop_1 ? dt.stop_1 : '',
+                            stop_2: dt.stop_2 ? dt.stop_2 : ''
+                        },
+                        update: {
+                            $set: dt
+                        },
+                        upsert: true
+                    }
+                })
+            ));
+    } else {
+        res.status(500).json({main: 'The necessary data isn\'t loaded', msg: 'Please check the prices file'})
+    }
     res.json("OK");
 };
 

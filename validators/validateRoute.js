@@ -4,8 +4,8 @@ const ferryRoutes = require('../mongoose/ferry_routes');
 
 const rules = [
     body('start_point', 'Route start point is required').not().isEmpty(),
-    body('single', 'Route single direction price should be number').isDecimal(),
-    body('return', 'Route two-way direction price should be number').isDecimal(),
+    // body('single', 'Route single direction price should be number').isDecimal(),
+    // body('return', 'Route two-way direction price should be number').isDecimal(),
     body('end_point', 'Route end point is required').not().isEmpty(),
     body('name', 'Route name is required').not().isEmpty()
     // Retrieving a tour with request name and checking tour existence
