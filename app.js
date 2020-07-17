@@ -131,6 +131,10 @@ app.get('*', (req, res) => {
     });
 });
 
+app.all('*', (req, res) => {
+    return res.status(404).send('Not found');
+})
+
 
 // Passport.js config
 const passport = require('passport');

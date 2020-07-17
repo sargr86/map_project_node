@@ -1,6 +1,6 @@
 // Multer stuff
 global.multer = require('multer');
-global.UPLOAD_MAX_FILE_SIZE = 1024 * 1024;
+global.UPLOAD_MAX_FILE_SIZE = 2* 1024 * 1024;
 
 let storage = multer.diskStorage({
     destination: async function (req, file, cb) {
