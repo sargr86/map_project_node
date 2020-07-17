@@ -128,12 +128,12 @@ app.get('*', (req, res) => {
         if (!req.url.includes('phpmyadmin')) {
             res.sendFile(dist + 'index.html');
         }
+        else {
+            res.status(404).send('Not found');
+        }
     });
 });
 
-app.all('*', (req, res) => {
-    return res.status(404).send('Not found');
-})
 
 
 // Passport.js config
