@@ -1,5 +1,3 @@
-
-
 /**
  * Gets food-drink places
  * @param req
@@ -58,6 +56,19 @@ exports.getOne = async (req, res) => {
 
     let r = await getOneItemImages(req, FOOD_DRINK_UPLOAD_FOLDER, result);
     res.json(r);
+
+};
+
+exports.getByAddress = async (req, res) => {
+    let data = req.query;
+    let result = await FoodDrink.findAll({
+        where: {address: data.address},
+        include: [
+            {model: Companies, attributes: ['id', 'name']}
+        ]
+    });
+
+    res.json(result);
 
 };
 
