@@ -5,6 +5,7 @@ const validateFoodDrink = require('../validators/validateFoodDrink');
 router.get('/get', foodDrinkController.get);
 router.get('/get-partners', foodDrinkController.getPartners);
 router.get('/getOne', foodDrinkController.getOne);
+router.get('/get-by-address', foodDrinkController.getByAddress);
 router.post('/add', uploadImages, validateFoodDrink.rules, foodDrinkController.add);
 router.put('/update', uploadImages, validateFoodDrink.rules, foodDrinkController.update);
 router.put('/make-cover', checkAuth, checkRole('admin', 'partner'), foodDrinkController.makeCover);
