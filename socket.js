@@ -48,8 +48,20 @@ exports.socket = (io) => {
             }
         });
 
+        socket.on('book-a-table', (data) => {
+            io.sockets.emit('reserve-a-table',data)
+        });
+
+        // socket.on('accept-table-order', (data) => {
+        //     io.sockets.emit('reserve-a-table',data)
+        // });
+        //
+        // socket.on('reject-table-order', (data) => {
+        //     io.sockets.emit('reserve-a-table',data)
+        // });
+
         socket.on('msgsSeen', (data) => {
-            // console.log(data)
+
             if (users[data.to]) {
                 users[data.to].emit('msgsSeen', data)
             } else {
