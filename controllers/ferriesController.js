@@ -183,11 +183,12 @@ exports.getFerriesDirections = async (req, res) => {
         order: ['name']
     });
 
+
     // For order form mat-select
     if (data.dropdown) {
 
         directions.map(d => {
-            d['coordinates'] = {latitude: +d.latitude, longitude: +d.longitude};
+            d['coordinates'] = {latitude: d.latitude, longitude: d.longitude};
             delete d.latitude;
             delete d.longitude;
         });
@@ -406,6 +407,7 @@ exports.getRoutePrice = async (req, res) => {
     let data = req.body;
 
     let route = await this.buildConditionAndCheck(data);
+    console.log(!route || route.coordinates.length === 0)
     if (!route || route.coordinates.length === 0) {
         let reversedRoute = await this.buildConditionAndCheck(data.reverse(), true);
         if (!reversedRoute) {
@@ -445,6 +447,7 @@ exports.getAllRoutesPrices = async (req, res) => {
 
 
 exports.buildConditionAndCheck = async (data, reversed = false) => {
+    // console.log(data)
     let condition = {stop_1: '', stop_2: ''};
 
     condition.start_point = data[0].name;
