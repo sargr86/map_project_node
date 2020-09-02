@@ -82,6 +82,19 @@ exports.getOne = async (req, res) => {
 
 };
 
+exports.getByAddress = async (req, res) => {
+    let data = req.query;
+    let result = await Accommodations.findAll({
+        where: {address: data.address},
+        include: [
+            {model: Companies, attributes: ['id', 'name']}
+        ]
+    });
+
+    res.json(result);
+
+};
+
 
 /**
  * Adds a new food-drink
