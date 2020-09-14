@@ -31,7 +31,6 @@ exports.get = async (req, res) => {
     //
     // });
 
-    console.log('get accommodations')
 
 
     res.json(result);
@@ -85,7 +84,8 @@ exports.getOne = async (req, res) => {
 exports.getByAddress = async (req, res) => {
     let data = req.query;
     let result = await Accommodations.findAll({
-        where: {address: data.address},
+        // where: {address: data.address},
+        where: {address: {[Op.like]: `%${data.address}%`}},
         include: [
             {model: Companies, attributes: ['id', 'name']}
         ]
