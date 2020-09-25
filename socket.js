@@ -49,6 +49,7 @@ exports.socket = (io) => {
         });
 
         socket.on('book-a-table', (data) => {
+            console.log('book a table')
             io.sockets.emit('reserve-a-table',data)
         });
 
