@@ -1,7 +1,35 @@
 [
   {
     "name": "Kayaking",
-    "description": "Whether it’s a gentle paddle down unspoilt waterways, an adventure round Irelands Alcatraz or a spot of  cave exploring and cliff jumping, we have many unique locations to please even the most seasoned of paddlers.  For those looking for solitude, a romantic evening  adventure or just some time on the water with the family, you can avail of equipment rentals at one of our locations.   "
+    "description": "Whether it’s a gentle paddle down unspoilt waterways, an adventure round Irelands Alcatraz or a spot of  cave exploring and cliff jumping, we have many unique locations to please even the most seasoned of paddlers.  For those looking for solitude, a romantic evening  adventure or just some time on the water with the family, you can avail of equipment rentals at one of our locations.   ",
+    "subtypes": [
+      {
+        "name": "Cave Exploration",
+        "description": "A two hour tour of a beautiful example of Irish coastline checking out the caves and the wildlife around them. Minimum group of 6 to go ahead, must book minimum 1 day before the listed time slot.",
+        "price": "45"
+      },
+      {
+        "name": "Amazon Adventure",
+        "description": "Funkytown's Amazon Adventure takes you from a quiet rural town down along a woodland waterway, from a narrow river its curves through forestry ever widening until you reach the Tidal Dam with the sea. Stunning scenery and wildlife through an untouched wilderness. This is suitable for people of all abilities. 3 hour round Trip",
+        "price": "50"
+      },
+      {
+        "name": "Full Moon Paddle",
+        "description": "This is a bucket list experience, enjoy Kayaking under the light of the Moon! This is a weather dependant trip that is absolutely unique and unforgettable. Participants must have previous kayaking experience, be fit and be over 18. 2 hours in duration with the option of food by firelight after.",
+        "price": "60"
+      },
+      {
+        "name": "Owenabue Bio Diversity Tour",
+        "description": "Funkytown's Amazon Adventure takes you from a quiet rural town down along a woodland waterway, from a narrow river its curves through forestry ever widening until you reach the Tidal Dam with the sea. Stunning scenery and wildlife through an untouched wilderness. This is suitable for people of all abilities. 3 hour round Trip",
+        "price": "50"
+      },
+      {
+        "name": "Equipment Rental",
+        "description": "Choose between single of double kayaks. Slots are per hour. Kids from 6−18 must be accompanied by an adult in a double kayak.",
+        "price": "20",
+        "double_price": "30"
+      }
+    ]
   },
   {
     "name": "Surfing",
@@ -9,7 +37,34 @@
   },
   {
     "name": "SUP",
-    "description": "Stand Up Paddleboarding gives a unique magic to experience, with great stability and elevated perspective you can enjoy the ocean on a whole new level. Enjoy a relaxing evening on the water taking in the scenery or brush up your skills out in the surf. Got a group, why not try out our SUP Safari where you are whisked away by passenger boat to breath-taking locations.   "
+    "description": "Stand Up Paddleboarding gives a unique magic to experience, with great stability and elevated perspective you can enjoy the ocean on a whole new level. Enjoy a relaxing evening on the water taking in the scenery or brush up your skills out in the surf. Got a group, why not try out our SUP Safari where you are whisked away by passenger boat to breath-taking locations.   ",
+    "subtypes": [
+      {
+        "name": "SUP Skills Course",
+        "description": "Learn the skills involved to become a master at SUP. Your instructor will run through the various strokes and safety procedures to get you up to speed in no time. This is a 4 hour course for over 16's",
+        "price": "120"
+      },
+      {
+        "name": "SUP Fitness",
+        "description": "Check out our custom Funkyfitness track here in Fountainstown, known as the Funky mile this is a full tide track guaranteed to get your burn on.",
+        "price": "20"
+      },
+      {
+        "name": "SUP Safety",
+        "description": "SUP Safety",
+        "price": "20"
+      },
+      {
+        "name": "SUP Safari",
+        "description": "Enjoy being transported by Rib to one of many stunning locations and bask in the stunning scenery while paddling by SUP.",
+        "price": "120"
+      },
+      {
+        "name": "Equipment Rental",
+        "description": "SUP rentals run in Fountainstown Tues and Thursday evenings and Weekends.",
+        "price": "20"
+      }
+    ]
   },
   {
     "name": "Snorkelling",
@@ -17,7 +72,19 @@
   },
   {
     "name": "Scuba",
-    "description": "Have you ever wondered what it would be like to breathe underwater? Well what are you waiting for. . . Come join Oceans Of Discovery for a PADI Discover Scuba Diving experience and turn your dreams into reality. For Certified Divers, why not join us for a fun dive in one of the areas spectacular dive sites. From exploring underwater sea caves in Nohoval Cove to navigating the gullies of Roberts Cove, there is plenty to choose from. Boat dives also available.  "
+    "description": "Have you ever wondered what it would be like to breathe underwater? Well what are you waiting for. . . Come join Oceans Of Discovery for a PADI Discover Scuba Diving experience and turn your dreams into reality. For Certified Divers, why not join us for a fun dive in one of the areas spectacular dive sites. From exploring underwater sea caves in Nohoval Cove to navigating the gullies of Roberts Cove, there is plenty to choose from. Boat dives also available.  ",
+    "subtypes": [
+      {
+        "name": "Pool try dive experience",
+        "description": "Come and experience all Scuba diving has to offer in our brand new custom made dive pool. . . right on the beach!!! A fun hugely entertaining & rewarding activity for anyone aged 10+",
+        "price": "120"
+      },
+      {
+        "name": "Discover Scuba Diving Experience",
+        "description": "Have you ever wondered what it would be like to breathe underwater? Well, what are you waiting for. . . Come join us for a PADI Discover Scuba Diving experience and turn your dreams into reality. In no time you will be experiencing a whole new world and observing an array of marine life.",
+        "price": "20"
+      }
+    ]
   },
   {
     "name": "Sailing",
@@ -34,5 +101,67 @@
   {
     "name": "Walking",
     "description": "There are a number of walking trails to bring you off the beaten track to places simply not seen by the average traveller. Stunning cliff walks and scenic  locations known only to locals will give you a glimpse of the true beauty  of the meeting of land and sea."
+  },
+  {
+    "name": "Kitesurfing",
+    "description": "Holiday makers travel from all over the world to fish the second largest harbour in the world. With a modern fleet and some of the finest waters in the Atlantic, Cork’s recreational fishing is going from strength to strength. Choose from the many vessels and options available.",
+    "subtypes": [
+      {
+        "name": "Junior Kite Academy (LEVEL 1)",
+        "description": "This is the one for the Kiddies! Once they start, they don’t wanna stop! A fun introduction to the world of kites with a ton of kite flying.From one−line kites, two−line kites and an introduction to 4 line kites, beach kite flying till they drop.",
+        "price": "30",
+        "min_age": "9"
+      },
+      {
+        "name": "Junior Kite Academy (LEVEL 2)",
+        "description": "This is our next Level up. Level 2 if you will! Here we are taking Level 1 up a notch. Once happy with kiting flying and we know the basics, we gonna start flying a small version of a kitesurfing kite in shallow water, where amongst some fun exercises, we will expand on our safety aspect of kite flying. If you thought flying a kite on land is fun, wait till you get into the water.",
+        "price": "30",
+        "min_age": "9"
+      },
+      {
+        "name": "Kitesurfing Taster",
+        "description": "Sure or not sure about Kitesurfing, with this IKO Kitesurfing Taster course, we will introduce Kitesurfing to you, so you will definitely be sure. We will talk you through the various different aspects of the sport, practice safety techniques and of course a ton of kite flying on the beach. • Learn all about safety in kitesurfing • Introduction to the wind window • Launching and landing a kitesurfing kite • Flying 2 line trainer kite up to 4 line kitesurfing kite and understanding the powerzone",
+        "price": "60",
+        "min_age": "9"
+      },
+      {
+        "name": "Zero to Hero Full Course Kitesurfing",
+        "description": "The real deal! The Flagship of all Kite course. This is our full IKO course that is aimed to get you safely on the water and up and riding independently. This course includes everything from our Taster course ((Safety, wind window, powerzone, launching & landing kites, etc.), but now we’re taking it to the water • Handling and relauching the kite in the water • Lots and lots of fun body dragging, where we use the kite to pull us through the water • Upwind body dragging • Introduction of the board • Water start and getting up on the board",
+        "price": "400",
+        "min_age": "9"
+      },
+      {
+        "name": "Cork Kitewing Academy",
+        "description": "The latest in watersports, easy to set−up, safe and fun to learn, kitewings is a whole new way to propel yourself on the water. Not so sure about kitesurfing is for you, you definitely need to try kitewings. Easy and accessible, kitewings is truly for everyone! This course will go through how to get the gear ready, how to control the wing. You will then try your first rides on a big enough board to get you going.",
+        "price": "100",
+        "min_age": "9"
+      }
+    ]
+  },
+  {
+    "name": "Passenger Ribs",
+    "description": "There are a number of walking trails to bring you off the beaten track to places simply not seen by the average traveller. Stunning cliff walks and scenic locations known only to locals will give you a glimpse of the true beauty of the meeting of land and sea.",
+    "subtypes": [
+      {
+        "name": "Funkytown Adventure Centre",
+        "description": "• Dolphin Discovery • Sealife Safari • Kinsale Trip",
+        "price": "30"
+      },
+      {
+        "name": "Ocean Escapes",
+        "description": "• Family & Household Trip • City Seafari • Harbour Discovery • Sunset Trips",
+        "price": "30"
+      },
+      {
+        "name": "Cork Sea Safari",
+        "description": "• Grand Harbour Tour• City Seafari • Wildlife and Coast Adventure • Kinsale Sea Safari",
+        "price": "60"
+      },
+      {
+        "name": "Cork Harbour Boat Hire",
+        "description": "• One Hr Trip • Self Drive Boats",
+        "price": "400"
+      }
+    ]
   }
 ]
