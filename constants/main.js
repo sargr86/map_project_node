@@ -16,6 +16,7 @@ console.log(`Your port is ${port}`)
 
 require('./directories');
 require('./multer');
+require('./mongoose');
 require('./helpers');
 
 // Express Validator
