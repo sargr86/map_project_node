@@ -68,6 +68,16 @@ exports.getSubtypes = async (req, res) => {
     res.json(result);
 };
 
+
+exports.getSingleSubtype = async (req, res) => {
+    let data = req.query;
+    let result = await ActivitySubTypes.findOne({
+        where: {id: data.id},
+    });
+
+    res.json(result);
+};
+
 /**
  * Adds a new food-drink
  * @param req

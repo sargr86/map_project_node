@@ -4,6 +4,8 @@ const validateFoodDrink = require('../validators/validateFoodDrink');
 
 router.get('/get', foodDrinkController.get);
 router.get('/get-partners', foodDrinkController.getPartners);
+router.get('/get-orders', foodDrinkController.getOrders);
+router.get('/get-client-orders', foodDrinkController.getClientOrders);
 router.get('/getOne', foodDrinkController.getOne);
 router.get('/get-by-address', foodDrinkController.getByAddress);
 router.post('/add', uploadImages, validateFoodDrink.rules, foodDrinkController.add);

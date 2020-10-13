@@ -1,3 +1,5 @@
+const FoodDrinkOrders = require('../mongoose/food-drink-orders');
+
 /**
  * Gets food-drink places
  * @param req
@@ -139,4 +141,31 @@ exports.makeCover = async (req, res) => {
  */
 exports.removeImage = async (req, res) => {
     await removeImage(req.query, res);
+};
+
+
+exports.createOrder = async (data) => {
+    console.log(data)
+    let o = new FoodDrinkOrders(data);
+    let r = await to(o.save());
+    return r;
+};
+
+exports.getOrders = async (req, res) => {
+    const orders = await FoodDrinkOrders.find({});
+    res.json(orders)
+};
+
+exports.getClientOrders = async (req, res) => {
+    const {email} = req.query;
+    const orders = await FoodDrinkOrders.find({'client.email': email});
+    console.log(orders)
+    res.json(orders)
+};
+
+// Changing orders statuses and assigning driver to a boat from here
+exports.changeStatusFromSocket = async (data, status) => {
+    let order = await FoodDrinkOrders.findOne({_id: data._id});
+    order.status = status;
+    await order.save();
 };
