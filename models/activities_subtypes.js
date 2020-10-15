@@ -21,7 +21,8 @@ module.exports = (sequelize, DataTypes) => {
     }, {
         sequelize,
         modelName: 'activity_subtypes',
-        underscored: true
+        underscored: true,
+        timestamps: false
     });
     return activities_subtypes;
 };
