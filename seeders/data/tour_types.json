@@ -1,32 +1,58 @@
 [
   {
-    "tour_name": "Historical Tour"
+    "name": "Historical Tour",
+    "description": "Explore by boat the rich historical significance of Cork Harbour. View the stunning coastline by boat. Meet your skipper at the Port of Cork’s Marina facility in the heart of Cork City. Enjoy your guide recalling tales of Pirates, Smugglers, Submarine’s and Giant Flying Boats. Gaze upon the Sentinels of the Atlantic, some of the world’s finest examples of Coastal Artillery installations Camden Fort Meaghar, Fort Davis and Spike Island.\n\nChoose to have Lunch at the award winning Cronins MadFish Restaurant in Crosshaven or the stunning cliffside pub and restaurant Bunnyconnellens in Myrtleville which overlooks the Titanics’s last anchorage.\n\nPremium customers will be collected by bus and brought on a tour of a number of historically significant locations, the highlight being a tour of Camden Fort.  On arrival you’ll be met by one of the warm local guides who will show you around the complex. Re-live history through your senses as you explore this unique coastal defence installataion."
   },
   {
-    "tour_name": "Marine Eco Tour"
+    "name": "Marine Eco Tour",
+    "description": ""
   },
   {
-    "tour_name": "Kinsale Boat Trips"
+    "name":"Coastal Eco Tour",
+    "description": "This coastal tour invites you to experience Ireland’s Marine Life by boat.  Witness the native marine life in it’s natural habitat with Dolphin’s, Basking Sharks, Whales, Porpoises, Sun Fish and Seals often spotted along the route. The towering rugged coastline is also home to a diverse selection of bird life, with Ganets, Cormerants, Egrits, Turins and Peregrine Falcons all calling these rocky outcrops home.\n\nChoose to experience locally sourced sea food @ Cronin’s Mad Fish Restaurant  in Crosshaven.\n\nPremium customers may also choose to enjoy  a Wilderness or Bee Keeping tour. The Wilderness Tour is provided by the very engaging warm hearted Mickey Hoey, who takes you by canoe down the calm tranquil Minane River sharing his passion for the great outdoors foraging tasty delights along the way. \n\nThe Bee Keeping Tour is operated by Mark Riordan of Hive Mind, a long established Air B & B host and Bee Keeper. Mark is gentle warm character that welcomes you into his Victorian  Seaside house in a relaxed coastal village. Explore the 2 acre walled in garden and experience what bee keeping is all about."
   },
   {
-    "tour_name": "Hour Sealife Safari"
+    "name": "Tour Of Camden Fort",
+    "description": "Camden Fort Meagher is internationally recognised as being “One of the finest remaining examples of a classical Coastal Artillery Fort in the world”. For almost 400 years the fort played a key role as a strong strategic position for the defence of Ireland, the west coast of England and Wales. 65% of the fort is located underground in a labyrinth of tunnels and chambers. The fort is a prime location to watch ships passing through Cork Harbour, the second largest natural harbour in the world."
   },
   {
-    "tour_name": "Hour Food and Drink Tour"
+    "name": "Kinsale Boat Trips",
+    "description": ""
   },
   {
-    "tour_name": "Cork To Cobh Route"
+    "name": "Hour Sealife Safari",
+    "description": ""
   },
   {
-    "tour_name": "Education Tour"
+    "name": "Harbour Food & Drink Tour",
+    "description": "Come and enjoy Cork Harbour like never before. Travel by Passenger Rib to a number of Harbour based pubs and restaurants, to sample your choice of fine food and tasty beverages. There is a minimum of 6 people to run a tour. Collection can be at a number of fixed platform locations throughout Cork Harbour and Coastline. This tour lets you experience the best in scenery, food and hospitality.\n\nPremium customers if they want their taste buds tickled can, can choose either whiskey or rum tasting at a selection of our partners.\n\nAlso available for premium customers is The Captains Choice, where your skipper will take you for the full day to experience the true Cork. Take the path less traveled, experience outstanding food and tasty beverages."
   },
   {
-    "tour_name": "Ballycotton Sea Adventures"
+    "name": "Cork To Cobh Route",
+    "description": ""
   },
   {
-    "tour_name": "Wilderness Tour"
+    "name": "Education Tour",
+    "description": "This tour provides access to the rich diversity of educational resources located throughout Cork Harbour and surrounding area. With locations such as Camden Fort, Spike Island and The Titanic Experience students can visit world leading amenities illustrating the significance of Cork Harbour throughout the ages. Access to all these sites by water gives a unique view of this historically diverse port.-\n\nCork also boasts one of the foremost nautical colleges and research institutes with the National Marine College of Ireland in Ringaskiddy. For students wishing to pursue a career in the marine world a tour of these facilities or a tour of the Naval base Haulbowline will have a considerable impact to a students future."
   },
   {
-    "tour_name": "Bee Keeping Tour"
+    "name": "Ballycotton Sea Adventures",
+    "description": ""
+  },
+  {
+    "name": "Wilderness Tour",
+    "description": "Mick Hoey lives in Crosshaven. His love, curiosity and exceptional knowledge of the natural world started in early childhood and, after years travelling the world as a deep sea fisherman, he returned home and chose to live his life living off the land; hunting, fishing, growing and foraging for all most of the food he needs.\n\nMick is now offering you the opportunity to take a leisurely paddle along the little known Minane river. As you meander along this tranquil river way, enjoying the unspoilt flora and fauna of its beautiful riverbanks, Mick will reveal the edible delights on offer and forage for some tasty treats.\n\nThe trip will culminate in a delicious riverbank seafood BBQ lunch.\n\nThis 4 hour trip (10am-2pm)"
+  },
+  {
+    "name": "Bee Keeping Tour",
+    "description": ""
+  },
+  {
+    "name": "Sight Seeing Tour",
+    "description": "The rugged Cork Coastline is some of the most stunning scenery in the world. You will get to witness, towering cliffs, hidden bays and inlets and the rich diversity of marine life along the way. The tour takes place by boat, with our local guides sharing myth, legend and our hidden history throughout the journey.  \n\nChoose to have Lunch at the award winning Cronins MadFish Restaurant in Crosshaven or the stunning cliffside pub and restaurant Bunnyconnellens in Myrtleville which overlooks the Titanics’s last anchorage.\n\nFor premium customers there is a bus service which brings you to a number of amazing view points in the area. Spots you simply would not see without local knowledge."
+  },
+  {
+    "name": "Cobh Heritage Centre",
+    "description": "Learn about the story of Irish emigration in its various forms to many destinations, trace your ancestors, hear about the ill fated Titanic and the Lusitania and immerse yourself in Irish Naval and Military history at Cobh Heritage Centre. This beautiful informative and sometimes emotive exhibition is situated within Cobh’s beautifully restored Victorian railway station, a building with its own historic story."
   }
 ]
