@@ -7,11 +7,13 @@ module.exports = {
     up: async (queryInterface, Sequelize) => {
         const data = await fse.readJSON(path.resolve(__dirname + '/data/activity_types.json'));
         const list = data.map(async (type) => {
+            // console.log(type.name)
             const type_id = await queryInterface.rawSelect('activity_types', {
                 where: {
                     name: type.name
                 },
             }, ['id']);
+
 
             return type.hasOwnProperty('subtypes') ? type.subtypes.map(t => {
                 t.type_id = type_id;
