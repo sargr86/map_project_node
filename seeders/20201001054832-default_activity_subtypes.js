@@ -2,11 +2,12 @@
 
 const fse = require('fs-extra');
 const path = require('path');
+const moment = require('moment');
 
 module.exports = {
     up: async (queryInterface, Sequelize) => {
         const data = await fse.readJSON(path.resolve(__dirname + '/data/activity_types.json'));
-        console.log(data)
+        // console.log(data)
         const list = data.map(async (type) => {
             console.log(type.name)
             const type_id = await queryInterface.rawSelect('activity_types', {
@@ -18,7 +19,7 @@ module.exports = {
 
             return type.hasOwnProperty('subtypes') ? type.subtypes.map(t => {
                 t.type_id = type_id;
-                t.created_at = new Date.now();
+                t.created_at = moment().format();
                 console.log(t)
                 return t;
             }) : null;
