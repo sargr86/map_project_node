@@ -168,4 +168,5 @@ exports.changeStatusFromSocket = async (data, status) => {
     let order = await FoodDrinkOrders.findOne({_id: data._id});
     order.status = status;
     await order.save();
+    return order;
 };
