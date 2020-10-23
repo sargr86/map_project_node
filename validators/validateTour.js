@@ -11,8 +11,8 @@ const rules = [
     body('lng').not().isEmpty().withMessage('Tour longitude is required').custom((lat) => validatePattern(lat, 'lat')).withMessage('Tour longitude is invalid'),
     body('address', 'Tour address is required').not().isEmpty(),
     body('tours_type_id', 'Tour type is required').not().isEmpty(),
-    body('partner_id', 'Tour partner is required').not().isEmpty(),
-    body('img').custom((img, {req}) => req.body.id || img).withMessage('Tour image is required'),
+    body('company_id', 'Tour partner company name is required').not().isEmpty(),
+    // body('img').custom((img, {req}) => req.body.id || img).withMessage('Tour image is required'),
 
 ];
 

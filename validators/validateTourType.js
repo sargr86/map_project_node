@@ -1,11 +1,11 @@
 require('../constants/sequelize')
 
 const rules = [
-    body('tour_name', 'Tour type name is required').not().isEmpty(),
+    body('name', 'Tour type name is required').not().isEmpty(),
     body().custom(async (req) => {
 
         // Retrieving a user with request email
-        let tourType = await ToursType.findOne({where: {tour_name: req.tour_name}});
+        let tourType = await ToursType.findOne({where: {name: req.name}});
 
         if (tourType != null && !req.id) throw new Error('Tour type exists');
 

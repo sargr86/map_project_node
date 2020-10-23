@@ -11,7 +11,7 @@ let storage = multer.diskStorage({
         let dir;
 
         console.log('multer!!!!')
-        // console.log(data)
+        console.log(data)
         // console.log(file)
 
         // This is done for ferries info editing!!!
@@ -30,9 +30,10 @@ let storage = multer.diskStorage({
             dir = USERS_UPLOAD_FOLDER;
 
             if (folder !== 'users') {
-                if ('tours_type_id' in data) {
-                    dir = TOURS_UPLOAD_FOLDER;
-                } else if ('activity_types' in data) {
+                // if ('tours_type_id' in data) {
+                //     dir = TOURS_UPLOAD_FOLDER;
+                // } else
+                    if ('activity_types' in data) {
                     dir = ACTIVITIES_UPLOAD_FOLDER;
                     // data.name is added for ferries section
                 } else {
@@ -44,7 +45,7 @@ let storage = multer.diskStorage({
 
 
         console.log('dir!!!!!')
-        // console.log(dir)
+        console.log(dir)
 
         await fse.ensureDir(dir)
 

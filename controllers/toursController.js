@@ -30,7 +30,10 @@ exports.getOne = async (req, res) => {
             {model: Companies, attributes: ['id', 'name']}
         ]
     });
-    res.json(result);
+
+    let r = await getOneItemImages(req, TOURS_UPLOAD_FOLDER, result);
+    console.log(r)
+    res.json(r);
 };
 
 /**
