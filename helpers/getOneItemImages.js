@@ -9,6 +9,7 @@ module.exports = async (req, uploadFolder, dbData) => {
         const folder = path.resolve(uploadFolder + '/' + toFolderName(dbData['name']));
         const realFolder = 'http://' + req.headers.host + path.relative('./', folder).replace(/\\/g, '/').replace('public', '');
         console.log(realFolder)
+        console.log(folder)
         const folderPath = path.relative('./', folder).replace(/\\/g, '/').replace('public', '');
         if (fse.existsSync(folder)) {
             // Do something
