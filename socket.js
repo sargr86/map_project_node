@@ -1,6 +1,7 @@
 const ordersController = require('./controllers/ordersController');
 const chatController = require('./controllers/chatController');
 const foodDrinkController = require('./controllers/foodDrinkController');
+const accommodationController = require('./controllers/accommodationsController');
 
 const socketIDs = [];
 let connectedUsers = [];
@@ -46,6 +47,15 @@ exports.socket = (io) => {
                 users[data.to].emit('typingBack', data)
             } else {
                 console.log('Receiver not found!!!')
+            }
+        });
+
+        socket.on('book-a-room', async (data)=>{
+            let o = await accommodationController.createOrder(data);
+            console.log(o)
+            if (o) {
+                console.log('booked!!!')
+                io.sockets.emit('booked-a-room', 'Booking completed');
             }
         });
 
