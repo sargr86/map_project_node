@@ -5,11 +5,9 @@ module.exports = {
         return queryInterface.bulkInsert('users_statuses', [
             {
                 'name_en': 'active',
-
             },
             {
                 'name_en': 'inactive',
-
             }
         ])
     },

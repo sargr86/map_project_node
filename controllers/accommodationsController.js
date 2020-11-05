@@ -32,7 +32,6 @@ exports.get = async (req, res) => {
     // });
 
 
-
     res.json(result);
 };
 
@@ -166,4 +165,21 @@ exports.makeCover = async (req, res) => {
 
 exports.removeImage = async (req, res) => {
     await removeImage(req.query, res);
+};
+
+
+exports.createOrder = async (data) => {
+    let c = await AccommodationOrders.create(data);
+    return c;
+};
+
+exports.getOrders = async (req, res) => {
+    let c = await AccommodationOrders.findAll({});
+    console.log('OK')
+    res.json(c);
+};
+
+exports.getClientOrders = async (req, res) => {
+    let c = await AccommodationOrders.findAll({email: req.query.email});
+    res.json(c);
 };
