@@ -179,6 +179,12 @@ exports.getOrders = async (req, res) => {
     res.json(c);
 };
 
+// Changing orders statuses and assigning driver to a boat from here
+exports.changeStatusFromSocket = async (data, status) => {
+    let order = await AccommodationOrders.update({status: status}, {where: {id: data.id}});
+    return order;
+};
+
 exports.getClientOrders = async (req, res) => {
     let c = await AccommodationOrders.findAll({email: req.query.email});
     res.json(c);
