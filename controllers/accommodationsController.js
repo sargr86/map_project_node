@@ -181,7 +181,8 @@ exports.getOrders = async (req, res) => {
 
 // Changing orders statuses and assigning driver to a boat from here
 exports.changeStatusFromSocket = async (data, status) => {
-    let order = await AccommodationOrders.update({status: status}, {where: {id: data.id}});
+    await AccommodationOrders.update({status: status}, {where: {id: data.id}});
+    let order = AccommodationOrders.findOne({where: {id: data.id}});
     return order;
 };
 
