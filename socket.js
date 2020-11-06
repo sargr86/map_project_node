@@ -59,6 +59,17 @@ exports.socket = (io) => {
             }
         });
 
+        socket.on('accept-room-order', async(data) => {
+            console.log('accept order!!!')
+            let o = await accommodationController.changeStatusFromSocket(data,'accepted');
+            io.sockets.emit('booking-room-accepted', o)
+        });
+
+        socket.on('reject-room-order', async(data) => {
+            let o = await accommodationController.changeStatusFromSocket(data,'rejected');
+            io.sockets.emit('booking-room-rejected', o)
+        });
+
         socket.on('book-a-table', async (data) => {
             console.log('book a table')
             // data = JSON.parse(data);
@@ -71,6 +82,7 @@ exports.socket = (io) => {
             }
 
         });
+
 
         socket.on('accept-table-order', async(data) => {
             console.log('accept order!!!')
