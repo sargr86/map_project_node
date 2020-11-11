@@ -246,3 +246,26 @@ exports.makeCover = async (req, res) => {
 exports.removeImage = async (req, res) => {
     await removeImage(req.query, res);
 };
+
+exports.createOrder = async (data) => {
+    let c = await ActivitiesOrders.create(data);
+    return c;
+};
+
+exports.getOrders = async (req, res) => {
+    let c = await ActivitiesOrders.findAll({});
+    console.log('OK')
+    res.json(c);
+};
+
+// Changing orders statuses and assigning driver to a boat from here
+exports.changeStatusFromSocket = async (data, status) => {
+    await ActivitiesOrders.update({status: status}, {where: {id: data.id}});
+    let order = ActivitiesOrders.findOne({where: {id: data.id}});
+    return order;
+};
+
+exports.getClientOrders = async (req, res) => {
+    let c = await ActivitiesOrders.findAll({email: req.query.email});
+    res.json(c);
+};
