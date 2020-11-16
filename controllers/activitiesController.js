@@ -61,8 +61,9 @@ exports.getOne = async (req, res) => {
 
 exports.getSubtypes = async (req, res) => {
     let data = req.query;
+    console.log(data)
     let result = await ActivitySubTypes.findAll({
-        where: {type_id: data.id},
+        where: {type_id: data.type_id},
     });
 
     res.json(result);
