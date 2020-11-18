@@ -267,6 +267,11 @@ exports.changeStatusFromSocket = async (data, status) => {
 };
 
 exports.getClientOrders = async (req, res) => {
-    let c = await ActivitiesOrders.findAll({email: req.query.email});
+    let c = await ActivitiesOrders.findAll({id: req.query.id});
+    res.json(c);
+};
+
+exports.getAllOrders = async (req,res) => {
+    let c = await ActivitiesOrders.findAll({});
     res.json(c);
 };

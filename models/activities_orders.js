@@ -14,17 +14,20 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   activities_orders.init({
-    name: DataTypes.STRING,
+    // name: DataTypes.STRING,
     adults: DataTypes.INTEGER,
     children: DataTypes.INTEGER,
     price: DataTypes.INTEGER,
     date: DataTypes.DATE,
     client_email: DataTypes.STRING,
     client_full_name: DataTypes.STRING,
-    status: DataTypes.STRING
+    status: DataTypes.STRING,
+    type_id: DataTypes.INTEGER,
+    subtype_id: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'activities_orders',
+    underscored: true
   });
   return activities_orders;
 };
