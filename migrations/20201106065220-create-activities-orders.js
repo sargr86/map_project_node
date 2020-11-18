@@ -8,9 +8,15 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
-        type: Sequelize.STRING
+      type_id: {
+        type: Sequelize.INTEGER
       },
+      subtype_id: {
+        type: Sequelize.INTEGER
+      },
+      // name: {
+      //   type: Sequelize.STRING
+      // },
       adults: {
         type: Sequelize.INTEGER
       },
@@ -20,6 +26,9 @@ module.exports = {
       price: {
         type: Sequelize.INTEGER
       },
+      // time: {
+      //   type: Sequelize.STRING
+      // },
       date: {
         type: Sequelize.DATE
       },

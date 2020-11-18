@@ -4,6 +4,8 @@ const validateActivity = require('../validators/validateActivity');
 
 router.get('/get', activitiesController.get);
 router.get('/get-partners', activitiesController.getPartners);
+router.get('/get-client-orders', activitiesController.getClientOrders);
+router.get('/get-orders', activitiesController.getOrders);
 router.get('/getOne', activitiesController.getOne);
 router.post('/add', uploadImages, validateActivity.rules, activitiesController.add);
 router.put('/update', uploadImages, validateActivity.rules, activitiesController.update);
