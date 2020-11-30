@@ -21,4 +21,5 @@ global.FerryDirections = db.ferries_directions;
 global.FerryDirectionsPricing = db.ferry_directions_pricings;
 global.AccommodationOrders = db.accommodation_orders;
 global.ActivitiesOrders = db.activities_orders;
+global.ToursOrders = db.tours_orders;
 global.Op = sequelize.Op;

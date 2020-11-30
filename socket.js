@@ -3,6 +3,7 @@ const chatController = require('./controllers/chatController');
 const foodDrinkController = require('./controllers/foodDrinkController');
 const accommodationController = require('./controllers/accommodationsController');
 const activitiesController = require('./controllers/activitiesController');
+const toursController = require('./controllers/toursController');
 
 const socketIDs = [];
 let connectedUsers = [];
@@ -114,6 +115,26 @@ exports.socket = (io) => {
         socket.on('reject-activities-order', async(data) => {
             let o = await activitiesController.changeStatusFromSocket(data,'rejected');
             io.sockets.emit('booking-activities-rejected', o)
+        });
+
+        socket.on('book-tours-package', async (data)=>{
+            let o = await toursController.createOrder(data);
+            console.log(o)
+            if (o) {
+                console.log('booked!!!')
+                io.sockets.emit('booked-tours-package', 'Booking completed');
+            }
+        });
+
+        socket.on('accept-tours-order', async(data) => {
+            console.log('accept order!!!')
+            let o = await toursController.changeStatusFromSocket(data,'accepted');
+            io.sockets.emit('booking-tours-accepted', o)
+        });
+
+        socket.on('reject-tours-order', async(data) => {
+            let o = await toursController.changeStatusFromSocket(data,'rejected');
+            io.sockets.emit('booking-tours-rejected', o)
         });
 
         socket.on('msgsSeen', (data) => {

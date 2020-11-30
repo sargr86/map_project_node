@@ -223,3 +223,15 @@ exports.removeTourType = async (req, res) => {
     await ToursType.destroy({where: {id: data.id}});
     this.getTourTypes(req, res);
 };
+
+exports.createOrder = async (data) => {
+    let c = await ToursOrders.create(data);
+    return c;
+};
+
+// Changing orders statuses and assigning driver to a boat from here
+exports.changeStatusFromSocket = async (data, status) => {
+    await ToursOrders.update({status: status}, {where: {id: data.id}});
+    let order = ToursOrders.findOne({where: {id: data.id}});
+    return order;
+};
