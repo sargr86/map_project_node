@@ -16,6 +16,7 @@ global.Accommodations = db.accommodations;
 global.Companies = db.companies;
 global.Contacts = db.contacts;
 global.Positions = db.positions;
+global.Locations = db.locations;
 global.Ratings = db.ratings;
 global.FerryDirections = db.ferries_directions;
 global.FerryDirectionsPricing = db.ferry_directions_pricings;

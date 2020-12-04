@@ -76,6 +76,7 @@ app.use('/partners', require('./routes/partners'));
 app.use('/companies', require('./routes/companies'));
 app.use('/contacts', require('./routes/contacts'));
 app.use('/orders', require('./routes/orders'));
+app.use('/locations', require('./routes/locations'));
 app.use('/chat', require('./routes/chat'));
 app.use('/paypal', require('./routes/paypal'));
 
