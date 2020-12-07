@@ -90,7 +90,10 @@ exports.add = async (req, res) => {
         //     }
         if (!showIfErrors(req, res, err)) {
 
-            await Tours.create(data);
+            let t = await Tours.create(data);
+            data.locations.map(async (l) => {
+                await TourLocations.create({location_id: l.id, tour_id: t.id})
+            });
             this.get(req, res);
         }
         // }
