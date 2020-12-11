@@ -17,17 +17,26 @@ module.exports = {
       img: {
         type: Sequelize.STRING
       },
-      address: {
-        type: Sequelize.TEXT
-      },
       tours_type_id: {
         type: Sequelize.INTEGER
       },
-      lat: {
+      start_date: {
+        type:Sequelize.DATEONLY
+      },
+      end_date: {
+        type:Sequelize.DATEONLY
+      },
+      start_time: {
         type: Sequelize.STRING
       },
-      lng: {
+      end_time:{
         type: Sequelize.STRING
+      },
+      participants_max_count: {
+        type: Sequelize.INTEGER
+      },
+      price: {
+        type: Sequelize.INTEGER
       },
       partner_id: {
         type: Sequelize.INTEGER
