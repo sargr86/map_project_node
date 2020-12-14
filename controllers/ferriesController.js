@@ -281,7 +281,7 @@ exports.removeImage = async (req, res) => {
 };
 
 //@todo check if this and the following import function are still the same and change to one function is possible
-exports.importGeoJSONFile = async (req, res) => {
+exports.importJSONFile = async (req, res) => {
 
     let data = req.body;
     // console.log(data)
@@ -414,7 +414,6 @@ exports.updateRoutePrice = async (req, res) => {
 exports.removeRoutePrice = async (req, res) => {
     await to(FerryDirectionsPricing.destroy({where: {id: req.query.id}}));
     this.getFerriesDirectionsPrices(req, res);
-    // res.json('OK');
 };
 
 exports.removeAllRoutesPrices = async (req, res) => {
@@ -423,7 +422,6 @@ exports.removeAllRoutesPrices = async (req, res) => {
         truncate: true
     }));
     this.getFerriesDirectionsPrices(req, res);
-
 };
 
 

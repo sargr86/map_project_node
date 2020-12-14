@@ -22,7 +22,7 @@ router.delete('/remove-location', ferriesController.removeLocation);
 router.get('/get-directions', ferriesController.getFerriesDirections);
 router.get('/get-directions-pricing', ferriesController.getFerriesDirectionsPrices);
 router.get('/get-direction-price', ferriesController.getFerryDirectionPrice);
-router.post('/import-routes-file', ferriesController.importGeoJSONFile);
+router.post('/import-routes-file', ferriesController.importJSONFile);
 router.post('/import-prices-file', ferriesController.importPricesFile);
 router.post('/get-route-price', ferriesController.getRoutePrice);
 router.post('/save-route-price', validateRoute.rules, ferriesController.addRoutePrice);
