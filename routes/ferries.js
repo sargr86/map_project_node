@@ -26,6 +26,7 @@ router.post('/import-routes-file', ferriesController.importGeoJSONFile);
 router.post('/import-prices-file', ferriesController.importPricesFile);
 router.post('/get-route-price', ferriesController.getRoutePrice);
 router.post('/save-route-price', validateRoute.rules, ferriesController.addRoutePrice);
+router.put('/update-route-price', validateRoute.rules, ferriesController.updateRoutePrice);
 router.delete('/remove-route-price', ferriesController.removeRoutePrice);
 router.delete('/remove-all-routes-prices', ferriesController.removeAllRoutesPrices);
 router.get('/get-all-routes', ferriesController.getAllRoutes);
