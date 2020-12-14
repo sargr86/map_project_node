@@ -6,6 +6,7 @@ const unlink = promisify(require('fs-extra').unlink);
 
 const ferryRoutes = require('../mongoose/ferry_routes');
 
+
 /**
  * Gets all ferries list
  * @param req
@@ -352,55 +353,78 @@ let generateRouteName = (dt) => {
 };
 
 
+// exports.addRoutePrice = async (req, res) => {
+//     // let fr = new ferryRoutes(req.body);
+//     // console.log(req.body)
+//     // await fr.save();
+//
+//     let data = [req.body];
+//     console.log(data)
+//
+//     if (!showIfErrors(req, res)) {
+//
+//         await ferryRoutes.bulkWrite(
+//             data.map((dt) =>
+//                 (
+//                     {
+//                         updateOne: {
+//                             filter: {
+//                                 start_point: dt.start_point,
+//                                 end_point: dt.end_point,
+//                                 stop_1: dt.stop_1 ? dt.stop_1 : '',
+//                                 stop_2: dt.stop_2 ? dt.stop_2 : ''
+//
+//                             },
+//                             update: {
+//                                 $set: dt
+//                             },
+//                             upsert: true
+//                         }
+//                     }
+//                 )
+//             ));
+//     }
+//
+//     if (!req.body.map) {
+//         this.getAllRoutesPrices(req, res);
+//     } else {
+//         this.getAllRoutes(req, res);
+//     }
+// };
+
+
 exports.addRoutePrice = async (req, res) => {
-    // let fr = new ferryRoutes(req.body);
-    // console.log(req.body)
-    // await fr.save();
-
-    let data = [req.body];
+    const data = req.body;
     console.log(data)
-
     if (!showIfErrors(req, res)) {
-
-        await ferryRoutes.bulkWrite(
-            data.map((dt) =>
-                (
-                    {
-                        updateOne: {
-                            filter: {
-                                start_point: dt.start_point,
-                                end_point: dt.end_point,
-                                stop_1: dt.stop_1 ? dt.stop_1 : '',
-                                stop_2: dt.stop_2 ? dt.stop_2 : ''
-
-                            },
-                            update: {
-                                $set: dt
-                            },
-                            upsert: true
-                        }
-                    }
-                )
-            ));
-    }
-
-    if (!req.body.map) {
-        this.getAllRoutesPrices(req, res);
-    } else {
-        this.getAllRoutes(req, res);
+        await to(FerryDirectionsPricing.create(data));
+        this.getFerriesDirectionsPrices(req, res);
     }
 };
 
+exports.updateRoutePrice = async (req, res) => {
+    const data = req.body;
+    if (!showIfErrors(req, res)) {
+        await to(FerryDirectionsPricing.update(data, {where: {id: data.id}}));
+        this.getFerriesDirectionsPrices(req, res);
+    }
+};
+
+
 exports.removeRoutePrice = async (req, res) => {
-    await ferryRoutes.deleteOne({_id: req.query.id});
-    this.getAllRoutes(req, res);
+    await to(FerryDirectionsPricing.destroy({where: {id: req.query.id}}));
+    this.getFerriesDirectionsPrices(req, res);
     // res.json('OK');
 };
 
 exports.removeAllRoutesPrices = async (req, res) => {
-    await ferryRoutes.deleteMany({});
-    this.getAllRoutes(req, res);
-}
+    await to(FerryDirectionsPricing.destroy({
+        where: {},
+        truncate: true
+    }));
+    this.getFerriesDirectionsPrices(req, res);
+
+};
 
 
 exports.getRoutePrice = async (req, res) => {

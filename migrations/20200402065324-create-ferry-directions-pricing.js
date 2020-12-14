@@ -21,7 +21,8 @@ module.exports = {
         type: Sequelize.STRING
       },
       min_people: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        defaultValue: 6
       },
       single: {
         type: Sequelize.INTEGER
@@ -33,12 +34,14 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       created_at: {
+        defaultValue: Sequelize.fn('NOW'),
         allowNull: false,
-        type: Sequelize.DATEONLY
+        type: Sequelize.DATE
       },
       updated_at: {
+        defaultValue: Sequelize.fn('NOW'),
         allowNull: false,
-        type: Sequelize.DATEONLY
+        type: Sequelize.DATE
       }
     });
   },
