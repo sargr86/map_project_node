@@ -10,7 +10,7 @@ const rules = [
     // body('name', 'Route name is required').not().isEmpty()
     // Retrieving a tour with request name and checking tour existence
     body().custom(async (name, {req}) => {
-        console.log(req.body)
+        // console.log(req.body)
         const data = req.body;
         let found = await FerryDirectionsPricing.findOne({
             where: {
