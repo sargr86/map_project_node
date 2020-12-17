@@ -200,7 +200,11 @@ exports.getFerriesDirections = async (req, res) => {
 
 exports.getFerriesDirectionsPrices = async (req, res) => {
     let data = req.query;
-    let pricing = await FerryDirectionsPricing.findAll({include: [{model: FerryRoutesCoordinates, as: 'coordinates'}]});
+    console.log('here!!!!!!!!!')
+    let pricing = await FerryDirectionsPricing.findAll({
+        include: [{model: FerryRoutesCoordinates, as: 'coordinates'}],
+        order: ['start_point']
+    });
     res.json(pricing);
 };
 
@@ -282,8 +286,8 @@ exports.removeImage = async (req, res) => {
 
 exports.importJSONFile = async (req, res) => {
     let d = req.body;
-    console.log('here')
-    d.map(async (data) => {
+
+    let list = d.map(async (data) => {
         let found = await FerryDirectionsPricing.findOne({
             where: {
                 start_point: data.start_point,
@@ -294,6 +298,7 @@ exports.importJSONFile = async (req, res) => {
         });
 
         if (!found) {
+            console.log('importing!!!!')
             let f = await FerryDirectionsPricing.create(data);
             data.coordinates.map(async (c) => {
                 await FerryRoutesCoordinates.create({ferry_route_id: f.id, lat: c.lat, lng: c.lng})
@@ -306,8 +311,8 @@ exports.importJSONFile = async (req, res) => {
         }
 
     });
-
-
+    const results = await Promise.all(list);
+    console.log('here')
     this.getFerriesDirectionsPrices(req, res);
 };
 
@@ -453,6 +458,10 @@ exports.removeRoutePrice = async (req, res) => {
 
 exports.removeAllRoutesPrices = async (req, res) => {
     await to(FerryDirectionsPricing.destroy({
+        where: {},
+        truncate: true
+    }));
+    await to(FerryRoutesCoordinates.destroy({
         where: {},
         truncate: true
     }));
