@@ -284,105 +284,112 @@ exports.removeImage = async (req, res) => {
     await removeImage(req.query, res);
 };
 
-exports.importJSONFile = async (req, res) => {
-    let d = req.body;
-
-    let list = d.map(async (data) => {
-        let found = await FerryDirectionsPricing.findOne({
-            where: {
-                start_point: data.start_point,
-                stop_1: data.stop_1,
-                stop_2: data.stop_2,
-                end_point: data.end_point
-            }
-        });
-
-        if (!found) {
-            console.log('importing!!!!')
-            let f = await FerryDirectionsPricing.create(data);
-            data.coordinates.map(async (c) => {
-                await FerryRoutesCoordinates.create({ferry_route_id: f.id, lat: c.lat, lng: c.lng})
-            })
-        } else {
-            data.coordinates.map(async (c) => {
-                await FerryRoutesCoordinates.create({ferry_route_id: found.id, lat: c.lat, lng: c.lng})
-            });
-            console.log(found.id)
-        }
-
-    });
-    const results = await Promise.all(list);
-    console.log('here')
-    this.getFerriesDirectionsPrices(req, res);
-};
+// exports.importJSONFile = async (req, res) => {
+//     let d = req.body;
+//
+//     let list = d.map(async (data) => {
+//         let found = await FerryDirectionsPricing.findOne({
+//             where: {
+//                 start_point: data.start_point,
+//                 stop_1: data.stop_1,
+//                 stop_2: data.stop_2,
+//                 end_point: data.end_point
+//             }
+//         });
+//
+//         if (!found) {
+//             console.log('importing!!!!')
+//             let f = await FerryDirectionsPricing.create(data);
+//             data.coordinates.map(async (c) => {
+//                 await FerryRoutesCoordinates.findOrCreate({
+//                     where:{ferry_route_id: f.id, lat: c.lat, lng: c.lng},
+//                     defaults:{ferry_route_id: f.id, lat: c.lat, lng: c.lng}
+//                 })
+//             })
+//         } else {
+//             data.coordinates.map(async (c) => {
+//                 await FerryRoutesCoordinates.findOrCreate({
+//                     where:{ferry_route_id: found.id, lat: c.lat, lng: c.lng},
+//                     defaults:{ferry_route_id: found.id, lat: c.lat, lng: c.lng}
+//                 })
+//             });
+//             console.log(found.id)
+//         }
+//
+//     });
+//     const results = await Promise.all(list);
+//     console.log('here')
+//     this.getFerriesDirectionsPrices(req, res);
+// };
 
 exports.importPricesFile = async (req, res) => {
 
 };
 
 //@todo check if this and the following import function are still the same and change to one function is possible
-// exports.importJSONFile = async (req, res) => {
-//
-//     let data = req.body;
-//     // console.log(data)
-//
-//     data.map(dt => {
-//         delete dt._id;
-//     });
-//
-//     await ferryRoutes.bulkWrite(
-//         data.map((dt) =>
-//             ({
-//                 updateOne: {
-//                     filter: {
-//                         start_point: dt.start_point,
-//                         end_point: dt.end_point,
-//                         stop_1: dt.stop_1 ? dt.stop_1 : '',
-//                         stop_2: dt.stop_2 ? dt.stop_2 : ''
-//
-//                     },
-//                     update: {
-//                         $set: dt
-//                     },
-//                     upsert: true
-//                 }
-//             })
-//         ));
-//
-//     res.json('OK')
-// };
+exports.importJSONFile = async (req, res) => {
 
-// exports.importPricesFile = async (req, res) => {
-//     let data = req.body;
-//
-//     if (Object.keys(data).length !== 0 && data.constructor !== Object) {
-//
-//         data.map(dt => {
-//             dt.name = generateRouteName(dt);
-//         });
-//
-//         await ferryRoutes.bulkWrite(
-//             data.map((dt) =>
-//                 ({
-//                     updateOne: {
-//                         filter: {
-//                             start_point: dt.start_point,
-//                             end_point: dt.end_point,
-//                             stop_1: dt.stop_1 ? dt.stop_1 : '',
-//                             stop_2: dt.stop_2 ? dt.stop_2 : ''
-//                         },
-//                         update: {
-//                             $set: dt
-//                         },
-//                         upsert: true
-//                     }
-//                 })
-//             ));
-//     } else {
-//         res.status(500).json({main: 'The necessary data isn\'t loaded', msg: 'Please check the prices file'})
-//     }
-//     res.json("OK");
-// };
+    let data = req.body;
+    // console.log(data)
+
+    data.map(dt => {
+        delete dt._id;
+    });
+
+    await ferryRoutes.bulkWrite(
+        data.map((dt) =>
+            ({
+                updateOne: {
+                    filter: {
+                        start_point: dt.start_point,
+                        end_point: dt.end_point,
+                        stop_1: dt.stop_1 ? dt.stop_1 : '',
+                        stop_2: dt.stop_2 ? dt.stop_2 : ''
+
+                    },
+                    update: {
+                        $set: dt
+                    },
+                    upsert: true
+                }
+            })
+        ));
+
+    let routes = await ferryRoutes.find({});
+    res.json(routes)
+};
+
+exports.importPricesFile = async (req, res) => {
+    let data = req.body;
+
+    if (Object.keys(data).length !== 0 && data.constructor !== Object) {
+
+        data.map(dt => {
+            dt.name = generateRouteName(dt);
+        });
+
+        await ferryRoutes.bulkWrite(
+            data.map((dt) =>
+                ({
+                    updateOne: {
+                        filter: {
+                            start_point: dt.start_point,
+                            end_point: dt.end_point,
+                            stop_1: dt.stop_1 ? dt.stop_1 : '',
+                            stop_2: dt.stop_2 ? dt.stop_2 : ''
+                        },
+                        update: {
+                            $set: dt
+                        },
+                        upsert: true
+                    }
+                })
+            ));
+    } else {
+        res.status(500).json({main: 'The necessary data isn\'t loaded', msg: 'Please check the prices file'})
+    }
+    res.json("OK");
+};
 
 let generateRouteName = (dt) => {
     const startPoint = dt.start_point;
@@ -393,54 +400,53 @@ let generateRouteName = (dt) => {
 };
 
 
-// exports.addRoutePrice = async (req, res) => {
-//     // let fr = new ferryRoutes(req.body);
-//     // console.log(req.body)
-//     // await fr.save();
-//
-//     let data = [req.body];
-//     console.log(data)
-//
-//     if (!showIfErrors(req, res)) {
-//
-//         await ferryRoutes.bulkWrite(
-//             data.map((dt) =>
-//                 (
-//                     {
-//                         updateOne: {
-//                             filter: {
-//                                 start_point: dt.start_point,
-//                                 end_point: dt.end_point,
-//                                 stop_1: dt.stop_1 ? dt.stop_1 : '',
-//                                 stop_2: dt.stop_2 ? dt.stop_2 : ''
-//
-//                             },
-//                             update: {
-//                                 $set: dt
-//                             },
-//                             upsert: true
-//                         }
-//                     }
-//                 )
-//             ));
-//     }
-//
-//     if (!req.body.map) {
-//         this.getAllRoutesPrices(req, res);
-//     } else {
-//         this.getAllRoutes(req, res);
-//     }
-// };
-
-
 exports.addRoutePrice = async (req, res) => {
-    const data = req.body;
+    // let fr = new ferryRoutes(req.body);
+    // console.log(req.body)
+    // await fr.save();
+    let data = [req.body];
     console.log(data)
+
     if (!showIfErrors(req, res)) {
-        await to(FerryDirectionsPricing.create(data));
-        this.getFerriesDirectionsPrices(req, res);
+
+        await ferryRoutes.bulkWrite(
+            data.map((dt) =>
+                (
+                    {
+                        updateOne: {
+                            filter: {
+                                start_point: dt.start_point,
+                                end_point: dt.end_point,
+                                stop_1: dt.stop_1 ? dt.stop_1 : '',
+                                stop_2: dt.stop_2 ? dt.stop_2 : ''
+
+                            },
+                            update: {
+                                $set: dt
+                            },
+                            upsert: true
+                        }
+                    }
+                )
+            ));
+    }
+
+    if (!req.body.map) {
+        this.getAllRoutesPrices(req, res);
+    } else {
+        this.getAllRoutes(req, res);
     }
 };
+
+
+// exports.addRoutePrice = async (req, res) => {
+//     const data = req.body;
+//     console.log(data)
+//     if (!showIfErrors(req, res)) {
+//         await to(FerryDirectionsPricing.create(data));
+//         this.getFerriesDirectionsPrices(req, res);
+//     }
+// };
 
 exports.updateRoutePrice = async (req, res) => {
     const data = req.body;
@@ -452,20 +458,24 @@ exports.updateRoutePrice = async (req, res) => {
 
 
 exports.removeRoutePrice = async (req, res) => {
-    await to(FerryDirectionsPricing.destroy({where: {id: req.query.id}}));
-    this.getFerriesDirectionsPrices(req, res);
+    await to(ferryRoutes.remove({_id: req.query._id}));
+    this.getAllRoutesPrices(req, res);
+    // await to(FerryDirectionsPricing.destroy({where: {id: req.query.id}}));
+    // this.getFerriesDirectionsPrices(req, res);
 };
 
 exports.removeAllRoutesPrices = async (req, res) => {
-    await to(FerryDirectionsPricing.destroy({
-        where: {},
-        truncate: true
-    }));
-    await to(FerryRoutesCoordinates.destroy({
-        where: {},
-        truncate: true
-    }));
-    this.getFerriesDirectionsPrices(req, res);
+    // await to(FerryDirectionsPricing.destroy({
+    //     where: {},
+    //     truncate: true
+    // }));
+    // await to(FerryRoutesCoordinates.destroy({
+    //     where: {},
+    //     truncate: true
+    // }));
+    // this.getFerriesDirectionsPrices(req, res);
+    await to(ferryRoutes.remove({}));
+    this.getAllRoutesPrices(req, res);
 };
 
 

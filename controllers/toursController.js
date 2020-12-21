@@ -10,7 +10,8 @@ exports.get = async (req, res) => {
     let result = await Tours.findAll({
         include: [
             {model: ToursType},
-            {model: Companies, attributes: ['id', 'name']}
+            {model: Companies, attributes: ['id', 'name']},
+            {model: Locations, as: 'tour_locations'}
         ]
     });
     res.json(result);
@@ -93,11 +94,11 @@ exports.add = async (req, res) => {
 
                 // if (!showIfErrors(req, res, err)) {
 
-                    let t = await Tours.create(data);
-                    JSON.parse(data.locations).map(async (l) => {
-                        await TourLocations.create({location_id: l.id, tour_id: t.id})
-                    });
-                    this.get(req, res);
+                let t = await Tours.create(data);
+                JSON.parse(data.locations).map(async (l) => {
+                    await TourLocations.create({location_id: l.id, tour_id: t.id})
+                });
+                this.get(req, res);
                 // }
             }
         }
