@@ -1,5 +1,5 @@
 require('../constants/sequelize');
-
+const moment = require('moment');
 /**
  * Gets all tours list
  * @param req
@@ -10,11 +10,14 @@ exports.get = async (req, res) => {
     let result = await Tours.findAll({
         include: [
             {model: ToursType},
-            {model: Companies, attributes: ['id', 'name']}
+            {model: Companies, attributes: ['id', 'name']},
+            {model: Locations, as: 'tour_locations'},
+            {model: ToursDailies}
         ]
     });
     res.json(result);
 };
+
 
 /**
  * Gets one tour info
@@ -35,6 +38,26 @@ exports.getOne = async (req, res) => {
     console.log(r)
     res.json(r);
 };
+
+exports.getTourDailies = async (req, res) => {
+    const {scheduled, date} = req.query;
+    console.log('filter!!!!' + scheduled)
+    const today = moment().format('YYYY-MM-DD')
+    let whereDate = scheduled === '0' ? {start_date: {[Op.eq]: today}} : {
+        start_date: {[Op.gt]: today}
+    };
+
+    if (date) {
+        whereDate = {start_date: {[Op.eq]: date}};
+    }
+    console.log(whereDate)
+    let td = await ToursDailies.findAll({
+        include: [{model: Tours, include: [{model: Locations, as: 'tour_locations'}]}],
+        where: whereDate,
+        order: [['start_date', 'desc']]
+    });
+    res.json(td);
+}
 
 /**
  * Gets tour partners list
@@ -91,8 +114,10 @@ exports.add = async (req, res) => {
         if (!showIfErrors(req, res, err)) {
 
             let t = await Tours.create(data);
-            data.locations.map(async (l) => {
-                await TourLocations.create({location_id: l.id, tour_id: t.id})
+            await ToursDailies.create({tour_id: t.id, ...data});
+            console.log(JSON.parse(data.locations))
+            JSON.parse(data.locations).map(async (l) => {
+                await TourLocations.create({location_id: l.id, tour_id: t.id});
             });
             this.get(req, res);
         }

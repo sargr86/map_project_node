@@ -3,6 +3,7 @@ const toursController = require('../controllers/toursController');
 const validateTour = require('../validators/validateTour');
 
 router.get('/get', toursController.get);
+router.get('/get-dailies', toursController.getTourDailies);
 router.get('/get-partners', toursController.getPartners);
 
 router.get('/getOne', checkAuth, checkRole('admin', 'partner'), toursController.getOne);
