@@ -20,6 +20,7 @@ global.Locations = db.locations;
 global.Ratings = db.ratings;
 global.FerryDirections = db.ferries_directions;
 global.FerryDirectionsPricing = db.ferry_directions_pricings;
+global.FerryRoutesCoordinates = db.ferry_routes_coordinates;
 global.AccommodationOrders = db.accommodation_orders;
 global.ActivitiesOrders = db.activities_orders;
 global.ToursOrders = db.tours_orders;

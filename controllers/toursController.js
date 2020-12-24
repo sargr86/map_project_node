@@ -30,7 +30,8 @@ exports.getOne = async (req, res) => {
     let result = await Tours.findOne({
         where: {id: data.id},
         include: [
-            {model: Companies, attributes: ['id', 'name']}
+            {model: Companies, attributes: ['id', 'name']},
+            {model: Locations, as: 'tour_locations'}
         ]
     });
 
@@ -95,23 +96,25 @@ exports.add = async (req, res) => {
     uploadProfileImg(req, res, async (err) => {
 
 
-        // // Gets file type validation error
-        // if (req.fileTypeError) {
-        //     res.status(423).json(req.fileTypeError);
-        // }
-        //
-        // // Getting multer errors if any
-        // else if (err) res.status(423).json(err);
-        //
-        // // If file validation passed, heading to the request data validation
-        // else {
-        //
-        //     // Getting validation result from express-validator
-        //     const errors = validationResult(req);
-        //     if (!errors.isEmpty()) {
-        //         return res.status(422).json(errors.array()[0]);
-        //     }
-        if (!showIfErrors(req, res, err)) {
+            // // Gets file type validation error
+            if (req.fileTypeError) {
+                res.status(423).json(req.fileTypeError);
+            }
+            //
+            // // Getting multer errors if any
+            else if (err) res.status(423).json(err);
+            //
+            // If file validation passed, heading to the request data validation
+            else {
+
+                // Getting validation result from express-validator
+                const errors = validationResult(req);
+                // console.log(errors.array())
+                if (!errors.isEmpty()) {
+                    return res.status(422).json(errors.array()[0]);
+                }
+
+                // if (!showIfErrors(req, res, err)) {
 
             let t = await Tours.create(data);
             await ToursDailies.create({tour_id: t.id, ...data});
@@ -170,6 +173,7 @@ exports.update = async (req, res) => {
 exports.remove = async (req, res) => {
     let data = req.query;
     await Tours.destroy({where: {id: data.id}});
+    await TourLocations.destroy({where: {tour_id: data.id}});
     this.get(req, res);
 };
 

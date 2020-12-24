@@ -6,6 +6,7 @@ const unlink = promisify(require('fs-extra').unlink);
 
 const ferryRoutes = require('../mongoose/ferry_routes');
 
+
 /**
  * Gets all ferries list
  * @param req
@@ -199,7 +200,11 @@ exports.getFerriesDirections = async (req, res) => {
 
 exports.getFerriesDirectionsPrices = async (req, res) => {
     let data = req.query;
-    let pricing = await FerryDirectionsPricing.findAll();
+    console.log('here!!!!!!!!!')
+    let pricing = await FerryDirectionsPricing.findAll({
+        include: [{model: FerryRoutesCoordinates, as: 'coordinates'}],
+        order: ['start_point']
+    });
     res.json(pricing);
 };
 
@@ -279,8 +284,50 @@ exports.removeImage = async (req, res) => {
     await removeImage(req.query, res);
 };
 
+// exports.importJSONFile = async (req, res) => {
+//     let d = req.body;
+//
+//     let list = d.map(async (data) => {
+//         let found = await FerryDirectionsPricing.findOne({
+//             where: {
+//                 start_point: data.start_point,
+//                 stop_1: data.stop_1,
+//                 stop_2: data.stop_2,
+//                 end_point: data.end_point
+//             }
+//         });
+//
+//         if (!found) {
+//             console.log('importing!!!!')
+//             let f = await FerryDirectionsPricing.create(data);
+//             data.coordinates.map(async (c) => {
+//                 await FerryRoutesCoordinates.findOrCreate({
+//                     where:{ferry_route_id: f.id, lat: c.lat, lng: c.lng},
+//                     defaults:{ferry_route_id: f.id, lat: c.lat, lng: c.lng}
+//                 })
+//             })
+//         } else {
+//             data.coordinates.map(async (c) => {
+//                 await FerryRoutesCoordinates.findOrCreate({
+//                     where:{ferry_route_id: found.id, lat: c.lat, lng: c.lng},
+//                     defaults:{ferry_route_id: found.id, lat: c.lat, lng: c.lng}
+//                 })
+//             });
+//             console.log(found.id)
+//         }
+//
+//     });
+//     const results = await Promise.all(list);
+//     console.log('here')
+//     this.getFerriesDirectionsPrices(req, res);
+// };
+
+exports.importPricesFile = async (req, res) => {
+
+};
+
 //@todo check if this and the following import function are still the same and change to one function is possible
-exports.importGeoJSONFile = async (req, res) => {
+exports.importJSONFile = async (req, res) => {
 
     let data = req.body;
     // console.log(data)
@@ -308,7 +355,8 @@ exports.importGeoJSONFile = async (req, res) => {
             })
         ));
 
-    res.json('OK')
+    let routes = await ferryRoutes.find({});
+    res.json(routes)
 };
 
 exports.importPricesFile = async (req, res) => {
@@ -356,7 +404,6 @@ exports.addRoutePrice = async (req, res) => {
     // let fr = new ferryRoutes(req.body);
     // console.log(req.body)
     // await fr.save();
-
     let data = [req.body];
     console.log(data)
 
@@ -391,16 +438,45 @@ exports.addRoutePrice = async (req, res) => {
     }
 };
 
+
+// exports.addRoutePrice = async (req, res) => {
+//     const data = req.body;
+//     console.log(data)
+//     if (!showIfErrors(req, res)) {
+//         await to(FerryDirectionsPricing.create(data));
+//         this.getFerriesDirectionsPrices(req, res);
+//     }
+// };
+
+exports.updateRoutePrice = async (req, res) => {
+    const data = req.body;
+    if (!showIfErrors(req, res)) {
+        await to(FerryDirectionsPricing.update(data, {where: {id: data.id}}));
+        this.getFerriesDirectionsPrices(req, res);
+    }
+};
+
+
 exports.removeRoutePrice = async (req, res) => {
-    await ferryRoutes.deleteOne({_id: req.query.id});
-    this.getAllRoutes(req, res);
-    // res.json('OK');
+    await to(ferryRoutes.remove({_id: req.query._id}));
+    this.getAllRoutesPrices(req, res);
+    // await to(FerryDirectionsPricing.destroy({where: {id: req.query.id}}));
+    // this.getFerriesDirectionsPrices(req, res);
 };
 
 exports.removeAllRoutesPrices = async (req, res) => {
-    await ferryRoutes.deleteMany({});
-    this.getAllRoutes(req, res);
-}
+    // await to(FerryDirectionsPricing.destroy({
+    //     where: {},
+    //     truncate: true
+    // }));
+    // await to(FerryRoutesCoordinates.destroy({
+    //     where: {},
+    //     truncate: true
+    // }));
+    // this.getFerriesDirectionsPrices(req, res);
+    await to(ferryRoutes.remove({}));
+    this.getAllRoutesPrices(req, res);
+};
 
 
 exports.getRoutePrice = async (req, res) => {

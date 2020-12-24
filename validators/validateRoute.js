@@ -7,12 +7,22 @@ const rules = [
     // body('single', 'Route single direction price should be number').isDecimal(),
     // body('return', 'Route two-way direction price should be number').isDecimal(),
     body('end_point', 'Route end point is required').not().isEmpty(),
-    body('name', 'Route name is required').not().isEmpty()
+    // body('name', 'Route name is required').not().isEmpty()
     // Retrieving a tour with request name and checking tour existence
-        .custom(async (name, {req}) => {
-            let route = await ferryRoutes.findOne({name: req.body.name});
-            return !((route != null && !req.body._id));
-        }).withMessage('Route name exists'),
+    body().custom(async (name, {req}) => {
+        // console.log(req.body)
+        const data = req.body;
+        let found = await FerryDirectionsPricing.findOne({
+            where: {
+                start_point: data.start_point,
+                stop_1: data.stop_1,
+                stop_2: data.stop_2,
+                end_point: data.end_point
+            }
+        });
+        if (found != null && !data.id) throw new Error('Route  exists');
+        return true;
+    })
     // body('start_point').not().isEmpty().withMessage('Tour latitude is required').custom((lat) => validatePattern(lat, 'lat')).withMessage('Tour latitude is invalid'),
     // body('end_point').not().isEmpty().withMessage('Tour longitude is required').custom((lat) => validatePattern(lat, 'lat')).withMessage('Tour longitude is invalid'),
     // body('partner_id', 'Tour partner is required').not().isEmpty(),

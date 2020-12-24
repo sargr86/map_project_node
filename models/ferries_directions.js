@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     longitude: DataTypes.FLOAT
   }, {underscored: true});
   ferries_directions.associate = function(models) {
+
     // associations can be defined here
   };
   return ferries_directions;

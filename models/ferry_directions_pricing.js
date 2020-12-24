@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {timestamps:false});
   ferry_directions_pricing.associate = function(models) {
     // associations can be defined here
+    ferry_directions_pricing.hasMany(models.ferry_routes_coordinates, {foreignKey: 'ferry_route_id', as: 'coordinates'});
   };
   return ferry_directions_pricing;
 };
