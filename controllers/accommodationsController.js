@@ -76,6 +76,7 @@ exports.getOne = async (req, res) => {
     });
 
     let r = await getOneItemImages(req, ACCOMMODATIONS_UPLOAD_FOLDER, result);
+    console.log(r)
     res.json(r);
 
 };
@@ -108,8 +109,13 @@ exports.add = async (req, res) => {
     if (!errors.isEmpty()) {
         return res.status(422).json(errors.array()[0]);
     }
-
     let data = req.body;
+
+    // Ensuring if folder created
+    if (!fse.existsSync(data.folder)) {
+        await fse.ensureDir(data.folder)
+    }
+
     await Accommodations.create(data);
     this.get(req, res)
 };

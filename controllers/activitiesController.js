@@ -94,6 +94,12 @@ exports.add = async (req, res) => {
     }
 
     let data = req.body;
+
+    // Ensuring if folder created
+    if (!fse.existsSync(data.folder)) {
+        await fse.ensureDir(data.folder)
+    }
+
     await Activities.create(data);
     this.get(req, res)
 };
@@ -271,7 +277,7 @@ exports.getClientOrders = async (req, res) => {
     res.json(c);
 };
 
-exports.getAllOrders = async (req,res) => {
+exports.getAllOrders = async (req, res) => {
     let c = await ActivitiesOrders.findAll({});
     res.json(c);
 };
