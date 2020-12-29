@@ -32,7 +32,7 @@ exports.getOne = async (req, res) => {
         include: [
             {model: Companies, attributes: ['id', 'name']},
             {model: Locations, as: 'tour_locations'},
-            {model: ToursDailies}
+            {model: ToursDailies, attributes: {exclude: ['id']}}
         ]
     });
 
@@ -166,8 +166,14 @@ exports.update = async (req, res) => {
                 return res.status(422).json(errors.array()[0]);
             }
 
+            // Renaming folder if name is changed
+            if (data.oldName !== data.name) await renameFolder(data.oldName, data.name, TOURS_UPLOAD_FOLDER);
+
             let id = data.id;
             delete data.id;
+            data.folder = path.basename(data.folder);
+
+
             await Tours.update(data, {where: {id: id}});
             this.get(req, res);
         }

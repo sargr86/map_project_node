@@ -40,7 +40,7 @@ const rules = [
         // Validate empty locations
         let emptyLocations = locations.find(l => !l.id);
         if (emptyLocations) {
-            throw new Error('Please select 2-4 locations and make sure they\'re selected');
+            throw new Error('Please select 2-4 locations and make sure they\'re not empty');
         }
         return true;
     }),
@@ -61,8 +61,11 @@ const rules = [
     // Retrieving a tour with request name and checking tour existence
         .custom(async (name, {req}) => {
 
-            let partner = await Tours.findOne({where: {name: name}, attributes: ['name']});
-            return !((partner != null && !req.body.id));
+            let data = req.body;
+            let edit = !!data.id;
+            let tour = await to(Tours.findOne({where: {name: name}, attributes: ['name', 'id']}));
+            return edit ? !tour || +data.id === tour.id : !!!tour;
+
         }).withMessage('Tour name exists'),
     body('company_id', 'Tour partner company name is required').not().isEmpty(),
     // body('img').custom((img, {req}) => req.body.id || img).withMessage('Tour image is required'),
