@@ -85,6 +85,12 @@ exports.add = async (req, res) => {
     let data = req.body;
     uploadTourImg(req, res, async (err) => {
         if (!showIfErrors(req, res, err)) {
+
+            // Ensuring if folder created
+            if (!fse.existsSync(data.folder)) {
+                await fse.ensureDir(data.folder)
+            }
+
             await FoodDrink.create(data);
             this.get(req, res)
         }

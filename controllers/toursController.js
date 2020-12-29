@@ -31,7 +31,8 @@ exports.getOne = async (req, res) => {
         where: {id: data.id},
         include: [
             {model: Companies, attributes: ['id', 'name']},
-            {model: Locations, as: 'tour_locations'}
+            {model: Locations, as: 'tour_locations'},
+            {model: ToursDailies}
         ]
     });
 
@@ -96,25 +97,34 @@ exports.add = async (req, res) => {
     uploadProfileImg(req, res, async (err) => {
 
 
-            // // Gets file type validation error
-            if (req.fileTypeError) {
-                res.status(423).json(req.fileTypeError);
+        // // Gets file type validation error
+        if (req.fileTypeError) {
+            res.status(423).json(req.fileTypeError);
+        }
+        //
+        // // Getting multer errors if any
+        else if (err) res.status(423).json(err);
+        //
+        // If file validation passed, heading to the request data validation
+        else {
+
+            let folder = path.join(UPLOADS_FOLDER, 'others/' + data.folder + '/' + data.name.replace(/ /g, '_'));
+
+            console.log('ensure!!!!' + folder)
+            if (!fse.existsSync(folder)) {
+                console.log('ensure!!!!' + folder)
+                await fse.ensureDir(folder)
             }
-            //
-            // // Getting multer errors if any
-            else if (err) res.status(423).json(err);
-            //
-            // If file validation passed, heading to the request data validation
-            else {
 
-                // Getting validation result from express-validator
-                const errors = validationResult(req);
-                // console.log(errors.array())
-                if (!errors.isEmpty()) {
-                    return res.status(422).json(errors.array()[0]);
-                }
+            // Getting validation result from express-validator
+            const errors = validationResult(req);
+            // console.log(errors.array())
+            if (!errors.isEmpty()) {
+                return res.status(422).json(errors.array()[0]);
+            }
 
-                // if (!showIfErrors(req, res, err)) {
+            // if (!showIfErrors(req, res, err)) {
+
 
             let t = await Tours.create(data);
             await ToursDailies.create({tour_id: t.id, ...data});
@@ -171,9 +181,18 @@ exports.update = async (req, res) => {
  * @returns {Promise<void>}
  */
 exports.remove = async (req, res) => {
-    let data = req.query;
-    await Tours.destroy({where: {id: data.id}});
-    await TourLocations.destroy({where: {tour_id: data.id}});
+    let {id, name} = req.query;
+    let folder = path.join(UPLOADS_FOLDER, 'others/tours/' + name.replace(/ /g, '_'));
+
+    // Removing the corresponding folder
+    if (fse.existsSync(folder)) {
+        await to(fse.remove(folder))
+    }
+
+    await to(Tours.destroy({where: {id: id}}));
+    await to(TourLocations.destroy({where: {tour_id: id}}));
+    await to(ToursDailies.destroy({where: {tour_id: id}}));
+
     this.get(req, res);
 };
 
