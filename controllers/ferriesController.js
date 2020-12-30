@@ -322,9 +322,9 @@ exports.removeImage = async (req, res) => {
 //     this.getFerriesDirectionsPrices(req, res);
 // };
 
-exports.importPricesFile = async (req, res) => {
-
-};
+// exports.importPricesFile = async (req, res) => {
+//
+// };
 
 //@todo check if this and the following import function are still the same and change to one function is possible
 exports.importJSONFile = async (req, res) => {
@@ -388,7 +388,8 @@ exports.importPricesFile = async (req, res) => {
     } else {
         res.status(500).json({main: 'The necessary data isn\'t loaded', msg: 'Please check the prices file'})
     }
-    res.json("OK");
+    let routes = await ferryRoutes.find({});
+    res.json(routes)
 };
 
 let generateRouteName = (dt) => {
