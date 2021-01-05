@@ -6,7 +6,7 @@ router.get('/get', toursController.get);
 router.get('/get-dailies', toursController.getTourDailies);
 router.get('/get-partners', toursController.getPartners);
 
-router.get('/getOne', checkAuth, checkRole('admin', 'partner'), toursController.getOne);
+router.get('/get-one', checkAuth, checkRole('admin', 'partner'), toursController.getOne);
 router.post('/add', checkAuth, checkRole('admin', 'partner'), uploadImages, validateTour.rules, toursController.add);
 router.put('/update', checkAuth, checkRole('admin', 'partner'), uploadImages, validateTour.rules, toursController.update);
 router.delete('/remove', checkAuth, checkRole('admin', 'partner'), toursController.remove);
