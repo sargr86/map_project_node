@@ -107,13 +107,18 @@ const allowedExt = [
 ];
 
 
-let dist = path.join(__dirname, '../../secret_south/frontend/dist/front/');
-if (process.env.NODE_ENV === 'production') {
-    dist = path.join(__dirname, '../../secret_south/secret_south_angular/dist/front/')
-}
+// let dist = path.join(__dirname, '../../secret_south/frontend/dist/front/');
+// // if (process.env.NODE_ENV === 'production') {
+// //     dist = path.join(__dirname, '../../secret_south/secret_south_angular/dist/front/')
+// // }
 
+
+let dist = path.join(__dirname, 'dist/');
+console.log(dist);
+
+// Static resources
 app.use(express.static(dist));
-
+app.use('/uploads/', express.static(path.join(__dirname, './public/uploads')));
 
 // Separating Angular routes
 app.get('*', (req, res) => {
