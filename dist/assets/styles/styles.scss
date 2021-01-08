@@ -1,0 +1,1605 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import './mixins';
+@import 'variables';
+@import "media";
+@import "fonts";
+// regular style toast
+@import '~ngx-toastr/toastr.css';
+
+
+$fa-font-path: "../node_modules/@fortawesome/fontawesome-free/webfonts";
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free/scss/brands";
+@import "~@fortawesome/fontawesome-free/scss/regular";
+@import "~@fortawesome/fontawesome-free/scss/solid";
+@import "~@fortawesome/fontawesome-free/scss/v4-shims";
+
+// Ng-select styles
+@import "~@ng-select/ng-select/themes/material.theme.css";
+
+// Owl Carousel styles
+@import '~ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
+@import '~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
+
+* {
+  outline: none !important;
+}
+
+.mat-sidenav-container, .mat-sidenav-content, .mat-tab-body-content {
+  transform: none !important;
+}
+
+.mat-sidenav-container {
+  background: none !important;
+}
+
+
+.header_top {
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.26);
+
+  &.color-black {
+    box-shadow: 0px 0px 6px #00000029;
+    background: transparent;
+
+    *:not(.selected) {
+      color: #707070;
+    }
+
+    .selected {
+      span {
+        color: #7BC447 !important;
+
+      }
+    }
+  }
+}
+
+.agm-map-container-inner {
+  height: 512px !important;
+}
+
+.input-g {
+  display: flex;
+}
+
+
+p {
+  margin-bottom: 0 !important;
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+  height: 2px !important;
+}
+
+::-webkit-scrollbar-track:horizontal {
+  border-width: 0
+}
+
+.logo {
+  background-image: url("assets/images/logo_blue_gradient_white_text.png");
+  width: 89px;
+  height: 91px;
+  background-size: cover;
+  cursor: pointer;
+}
+
+.mat-spinner {
+  text-align: center !important;
+  margin: 20px auto;
+}
+
+.removeBtn, .finishOrderBtn {
+  @include noBgBtn;
+  color: $red;
+}
+
+.editBtn {
+  @include noBgBtn;
+  color: $yellow;
+}
+
+.arrivedToOrder {
+  @include noBgBtn;
+  color: $orange;
+}
+
+.assignBtn {
+  @include noBgBtn;
+  color: $silver;
+}
+
+.orderBtn, .startOrder {
+  @include noBgBtn;
+  color: $green;
+}
+
+.green {
+  color: $green !important;
+}
+
+.red {
+  color: $red !important;
+}
+
+.yellow {
+  color: $orange;
+}
+
+table.mat-table {
+  @include matTable;
+}
+
+.formTitle {
+  @include formTitle;
+}
+
+.terminalTitle {
+  color: $dark_gray;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  margin: 0 0 30px;
+
+  span {
+    font-size: 24px;
+    margin: -3px 10px;
+  }
+
+  mat-icon, i {
+    background-color: $dark_gray;
+    color: $white;
+  }
+}
+
+.no_table_items_found {
+  color: $silver;
+  text-align: center;
+}
+
+.mat-form-field {
+  display: block !important;
+}
+
+#toast-container > div {
+  opacity: 1;
+}
+
+.mat-icon-button, .mat-button, .mat-raised-button {
+  outline: none !important;
+}
+
+.no_data {
+  text-align: center;
+  display: block;
+  padding: 20px;
+
+  .item {
+    text-transform: capitalize;
+  }
+}
+
+.underConstruction {
+  color: $yellow;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+mat-label {
+  //color: #807d7dc9;
+}
+
+.phone_error {
+  font-size: 75%;
+  font-weight: 400;
+  line-height: 1.125;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.title-sign {
+  background-color: $dark_gray;
+  color: $white;
+}
+
+.formTitle {
+  justify-content: left;
+  color: $dark_gray;
+  margin: 20px;
+
+  span {
+    margin-left: 10px;
+  }
+}
+
+
+/** multiple files drop zone styles */
+dropzone.multiple {
+  height: 410px !important;
+  border: 1px solid #c0c0c042;
+  margin-top: 27px;
+
+  .dz-wrapper {
+    height: 100%;
+    overflow: hidden !important;
+
+    .dz-message {
+      height: 392px !important;
+      border: none !important;
+    }
+
+    .dz-progress {
+      display: none !important;
+    }
+  }
+
+  .dz-started {
+    .dz-message {
+      display: none !important;
+    }
+  }
+
+  .dz-remove {
+    color: $red;
+    border-radius: 20px;
+    margin-top: 10px;
+    font-weight: bold;
+    text-decoration: none !important;
+  }
+}
+
+
+/** one file drop zone styles */
+dropzone.single {
+  height: 410px !important;
+
+  .dz-wrapper {
+    height: 100%;
+    overflow: hidden !important;
+
+    .dz-message {
+      height: 400px !important;
+    }
+
+    .dz-image img {
+      height: 400px !important;
+    }
+
+    .dz-progress {
+      display: none;
+    }
+
+    .dz-remove {
+      @include namedBtn;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      background-color: $red;
+      border-radius: 20px;
+      transform: translate(-50%, -50%);
+      text-decoration: none !important;
+      //color: $white;
+      z-index: 44444;
+    }
+  }
+}
+
+.dropzoneContainer {
+  min-width: 420px;
+  width: 25%;
+  float: right;
+  margin-top: 39px;
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  height: 452px;
+  position: relative;
+
+  .savedImg {
+    width: 400px;
+    cursor: pointer;
+  }
+
+  .removeSavedImg {
+    @include namedBtn;
+    background-color: $red;
+    position: absolute;
+    top: 50%;
+    left: 45%;
+    font-weight: bold;
+    border-radius: 20px;
+    padding: 0 5px;
+  }
+
+  //.ngx-gallery-thumbnail:hover {
+  //  -webkit-filter: grayscale(1)!important;
+  //  filter: grayscale(1)!important;
+  //}
+
+
+  ngx-dropzone {
+    align-self: center;
+    width: 100%;
+  }
+}
+
+///////////////////////////////////////////////////////
+
+ul {
+  margin: 0;
+  padding: 0;
+
+  li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.backBtn {
+  @include noBgBtn;
+  background-color: $silver;
+  margin-right: 10px;
+  margin-top: 3px;
+}
+
+.backBtn:hover {
+  //background-color: $yellow;
+  background-color: #71a8b1;
+}
+
+mat-progress-bar .mat-progress-bar-buffer {
+  background: transparent;
+}
+
+.mat-progress-bar-fill::after {
+  background-color: $white !important;
+}
+
+.mat-progress-bar-background {
+  display: none !important;
+}
+
+/* Scroll bar styles */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.22);
+}
+
+.clock-face {
+  border: 1px solid #f5f5f51c !important;
+}
+
+/* Booking form persons count input */
+.personsCount {
+  width: 70px;
+  margin: auto;
+
+  input {
+    border: 1px solid silver !important;
+    border-radius: unset;
+  }
+
+  .input-group-text {
+    border-radius: unset;
+    background-color: #673ab7;
+    color: $white;
+  }
+}
+
+
+.phoneField, .bookingTime, .personsContainer {
+  input {
+    border: none;
+    outline: none;
+    border-radius: unset;
+    border-bottom: 1px solid silver;
+  }
+
+  input:focus {
+    box-shadow: none !important;
+    border-bottom: 2px solid #673ab7;
+  }
+}
+
+
+.table_responsive table td:not(:first-of-type) {
+  padding: 0 !important;
+}
+
+.mat-raised-button.mat-primary {
+  background-color: #0b9194;
+}
+
+
+.checkIn, .checkOut, .location {
+  input {
+    padding-left: 32px;
+  }
+}
+
+.checkInIcon, .checkOutIcon, .dateIcon {
+  position: absolute !important;
+  top: 8px !important;
+  left: 3px !important;
+  color: #fff !important;
+  font-size: 18px !important;;
+
+  button {
+    width: 24px !important;
+    height: 30px !important;
+    line-height: 0 !important;
+    border-radius: unset !important;
+  }
+}
+
+// Ngx Material time picker
+.ngx-material-timepicker-toggle, ngx-material-timepicker-toggle {
+  position: absolute !important;
+  top: 8px !important;
+
+  svg {
+    fill: #D2D2D2 !important;
+    margin-left: 16px;
+  }
+}
+
+.cdk-overlay-container {
+  z-index: 500 !important;
+}
+
+.daily-tour-form {
+  ngx-material-timepicker-toggle {
+    position: absolute !important;
+    top: 0 !important;
+    left: -18px !important;
+  }
+
+  input[name="input-spin-val"] {
+    padding: 26px 14px !important;
+    background: #F2F2F2;
+    font-size: 16px;
+    border: 0;
+  }
+
+  .input-group-append {
+    .input-group-text {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 0;
+      border: 0;
+      cursor: pointer;
+
+      span {
+        flex: 1;
+        width: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #dce6f0;
+        transition: 0.3s;
+
+        &:hover {
+          background: #7BC447;
+          color: #fff;
+        }
+      }
+    }
+  }
+}
+
+#save-tour-form {
+  ngx-material-timepicker-toggle {
+    position: absolute !important;
+    top: 0 !important;
+    left: 8px !important;
+  }
+}
+
+.timepicker__header, .clock-face__number span.active, .clock-face__clock-hand {
+  background-color: #084f93 !important;
+}
+
+.timepicker-button {
+  color: #084f93 !important;
+}
+
+
+.timepicker-dial__item_active {
+  outline: 1px solid #c0c0c05c;
+}
+
+.mat-datepicker-toggle-default-icon {
+  fill: silver
+}
+
+.guests-count {
+
+  //input {
+  //  border: 1px solid white !important;
+  //  border-radius: unset !important;
+  //  background: transparent !important;
+  //  padding-left: 28px;
+  //  color: $white;
+  //  font-weight: bold;
+  //  height: 42px;
+  //}
+
+  input[name="input-spin-val"] {
+    border: none;
+    padding: 0;
+    //width: 20px;
+    text-align: center;
+  }
+
+  input[name="input-spin-val"]:hover, input[name="input-spin-val"]:focus {
+    box-shadow: unset !important;
+  }
+
+  .guests-count .input-group .input-group-text {
+    background-color: $white;
+    color: #D2D2D2 !important;
+
+  }
+
+  //input:focus {
+  //  color: $white;
+  //}
+
+  .input-group {
+    //  height: 41px;
+    //  margin-top: -1px;
+    //
+    margin-bottom: 0 !important;
+
+    .input-group-text {
+      background-color: transparent;
+      border-radius: unset;
+      border: none;
+      padding: 0 !important;
+    }
+
+    .input-group-text:hover {
+      background-color: transparent;
+    }
+  }
+}
+
+//.childrenCount, .adultsCount {
+//  input {
+//    width: 50px !important;
+//    padding-left: 20px !important;
+//  }
+//
+//  input:focus {
+//    border: 1px solid silver !important;
+//    background: unset !important;
+//    outline: none !important;
+//    outline-width: 0;
+//  }
+//
+//
+//  .input-group {
+//    height: 41px;
+//    margin-top: -1px;
+//
+//    //.input-group-text {
+//    //  background-color: transparent;
+//    //  border-radius: unset;
+//    //}
+//  }
+//}
+
+.order-ferry-form {
+  .ngx-material-timepicker-toggle {
+    position: absolute !important;
+    top: 0 !important;
+    width: 25px;
+
+    svg {
+      fill: #D2D2D2 !important;
+    }
+  }
+
+  mat-label {
+    font: normal normal 300 16px/15px Roboto;
+    color: #636363;
+    display: block;
+  }
+
+  .left-group {
+
+
+    .times-row {
+      display: flex;
+      justify-content: space-between;
+
+      .start-time, .end-time {
+        //width: 200px !important;
+
+        .mat-form-field-infix {
+          width: 100%;
+        }
+
+        mat-label {
+          display: block;
+          margin-top: 40px;
+        }
+
+        .mat-form-field-underline {
+          display: none !important;
+        }
+
+        .ngx-material-timepicker-toggle {
+          margin-top: 14px !important;
+        }
+
+        input {
+          color: #D2D2D2;
+        }
+      }
+    }
+
+    .counts-row {
+      display: flex;
+
+      .adults-count, .children-count {
+
+        position: relative;
+        //width: 123px !important;
+
+
+        mat-label {
+          margin-bottom: 16px;
+        }
+
+        mat-icon {
+          position: absolute;
+          top: 47px;
+          left: 6px;
+          font-size: 16px;
+          z-index: 5;
+          color: #D2D2D2;
+        }
+
+        input {
+          font: normal normal 300 16px/15px Roboto;
+          color: #D2D2D2;
+          border: none;
+          height: 51px;
+          padding-left: 40px !important;
+          box-shadow: 0px 0px 6px #00000029;
+          outline: none !important;
+        }
+
+        input:focus {
+          border: none !important;
+          background-color: $white !important;
+        }
+
+        .input-group-text {
+          border: none;
+          box-shadow: 0px 0px 6px #00000029;
+          background: #F2F2F2;
+
+          > span {
+            width: 25px;
+            height: 25px;
+            display: block;
+            padding-top: 5px;
+            color: #949494;
+          }
+        }
+      }
+
+      .children-count {
+        margin-left: 32px;
+      }
+    }
+
+    #start-time, #end-time {
+      padding-left: 32px !important;
+      box-shadow: 0px 0px 6px #00000029;
+      //width: 200px;
+      height: 51px;
+    }
+  }
+
+  .right-group {
+    .card-row {
+      .mat-form-field-label {
+        font: normal normal 300 16px/15px Roboto !important;
+        color: #D3D3D3 !important;
+      }
+
+      .mat-form-field-underline {
+        background-color: #D6D6D6 !important;
+      }
+
+      .date-cvv {
+        display: flex;
+
+        .card-expiry-date-input, .cvv-input-field {
+          width: 168px !important;
+        }
+
+        .cvv-input-field {
+          margin-left: 32px;
+        }
+      }
+
+      button {
+        width: 370px;
+        height: 51px;
+        background: #7BC447 0 0 no-repeat padding-box;
+        box-shadow: 0px 0px 6px #00000029;
+        border: none;
+        font: normal normal bold 16px/15px Roboto;
+        color: #FFFFFF;
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  .timepicker__header { //.clock-face__number span.active
+    background-color: #88bf4a !important;
+  }
+
+  .guests {
+    position: relative;
+    width: 70px;
+    margin-left: 10px;
+
+    mat-icon {
+      position: absolute !important;
+      top: 5px !important;
+    }
+
+    .guestsCount {
+
+      input {
+        border-radius: unset !important;
+        background: transparent !important;
+        color: #000000 !important;
+        border: none !important;
+        border-bottom: 1px solid silver !important;
+        padding-left: 28px;
+        font-weight: bold;
+        height: 42px;
+        outline: none !important;
+      }
+
+      //input:focus {
+      //  color: $white;
+      //}
+
+      .input-group {
+        height: 41px;
+        margin-top: -1px;
+
+        .input-group-text {
+          background-color: transparent;
+          border: none !important;
+          border-bottom: 1px solid silver !important;
+          //border-right: 1px solid silver!important;
+          border-radius: unset;
+          color: #000000 !important;
+
+          span:first-child {
+            font-size: 20px !important;
+          }
+
+          span:last-child {
+            font-size: 30px !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+// Owl carousel
+.owl-theme .owl-nav {
+  background-color: unset !important;
+}
+
+
+//.owl-nav {
+//  color: #fff;
+//  margin: 5px;
+//  padding: 4px 7px;
+//
+//  //background: #959595;
+//  display: inline-block;
+//  cursor: pointer;
+//  border-radius: 3px;
+//  border: none;
+//}
+
+//.owl-prev, .owl-next {
+//  font-size: 34px !important;
+//  display: flex;
+//  background-color: unset !important;
+//
+//  img {
+//    width: 20px !important;
+//  }
+//}
+
+//.owl-prev {
+//  left: -7px;
+//
+//}
+//
+//.owl-next {
+//  right: 15px;
+//}
+.owl-theme .owl-nav [class*='owl-']:hover {
+  background-color: $preferred_green;
+}
+
+.owl-nav {
+  position: absolute;
+  top: -71px;
+  right: 26px;
+  //  width: 40px;
+  //  height: 40px;
+  //  border-radius: 50%;
+}
+
+.selected {
+  //color: #08C1C6 !important;
+  color: #7BC447 !important;
+}
+
+.section {
+  cursor: pointer;
+}
+
+.mat-calendar-body-selected {
+  background: $dark_green;
+  border: none;
+}
+
+.mat-calendar-body-today.mat-calendar-body-selected {
+  box-shadow: none;
+}
+
+
+// Material calendar styles
+.mat-calendar {
+  //  background-color: $preferred_blue;
+  //  color: $white !important;
+  //
+  //  .mat-calendar-table-header {
+  //    th {
+  //      color: $white !important;
+  //    }
+  //  }
+  //
+  //  .mat-calendar-arrow {
+  //    border-top-color: $white;
+  //  }
+  //
+  .mat-calendar-body-label, .mat-calendar-body-cell-content, .mat-icon-button {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+  }
+
+  //
+  //  .mat-calendar-previous-button, .mat-calendar-next-button {
+  //    color: $white !important;
+  //  }
+}
+
+.header_main_box {
+  .guests {
+    height: 40px !important;
+    width: 75px !important;
+  }
+}
+
+
+// Range slider styles
+.ng5-slider {
+  .ng5-slider-selection {
+    background: #08C1C6 !important;
+  }
+
+  .ng5-slider-pointer {
+    background-color: $dark_green !important;
+    width: 20px !important;
+    height: 20px !important;
+    top: -9px !important;
+    outline: none !important;
+  }
+}
+
+.ng5-slider-pointer:after {
+  display: none !important;
+}
+
+//Ngx progress bar styles
+.progress-outer {
+  width: 217px !important;
+}
+
+.progress-inner {
+  height: 4px !important;
+}
+
+// No image
+.no_image {
+  background-image: url('assets/images/no_image_slider.jpg');
+  background-position: center center;
+  background-size: cover;
+  //height: 256px;
+  height: 244px;
+
+}
+
+
+//Mat checkbox
+.mat-checkbox:not(.mat-checkbox-disabled).mat-accent .mat-checkbox-ripple .mat-ripple-element {
+  background-color: $dark_green !important;
+}
+
+.mat-checkbox-frame {
+  border: 1px solid $silver !important;
+}
+
+.filter_checkbox {
+  margin: 7px 17px 0 3px !important;
+}
+
+
+.activityTypes, .tourTypes {
+
+  .ng-select {
+    margin-top: 2px;
+
+    .ng-select-container {
+      border-bottom: 1px solid $white;
+      //margin-top: 10px;
+      .ng-value-container {
+        height: 55px;
+        margin-top: 1px;
+        padding-top: 9px !important;
+      }
+
+      .ng-placeholder, .ng-arrow, .ng-clear {
+        color: $white !important;
+        margin-top: 7px;
+      }
+
+      .ng-value {
+        height: 27px !important;
+        margin: 2px 0.4375em 0 0 !important;
+        background-color: #08c1c6 !important;
+      }
+    }
+  }
+
+  .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected {
+    color: #08c1c6 !important;
+  }
+
+  .ng-select .ng-select-container:after {
+    display: none !important;
+  }
+}
+
+
+// Ngx gallery icons
+.ngx-gallery-icon[title='delete'] {
+  left: 4px !important;
+  top: 0 !important;
+  position: absolute !important;
+}
+
+.coverStar {
+  color: $dark_green !important;
+}
+
+// Slide toggler styles
+.mat-slide-toggle.mat-primary.mat-checked .mat-slide-toggle-thumb {
+  background-color: $dark_green;
+}
+
+.mat-slide-toggle.mat-primary.mat-checked .mat-slide-toggle-bar {
+  background-color: rgba(22, 69, 71, .54);
+}
+
+
+// Edit item(ferries, etc.) form gallery
+.editFormGallery {
+  margin-left: 235px !important;
+  margin-top: 50px;
+}
+
+.savedImgContainer {
+  height: 450px;
+  margin-top: 15px;
+
+  img {
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.coverToggler {
+  float: right;
+}
+
+
+// -----------------Header
+/* header */
+header:not(.timepicker__header) {
+  width: 100%;
+  min-height: 100vh;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  //padding-top: 14px;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: space-between;
+
+
+  .header_main {
+    width: 1200px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+
+    .header_main_box {
+      height: 108px;
+      opacity: 0.9;
+      //background-color: #164547;
+      background-color: $preferred_blue;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 16px;
+
+      input:not(.timepicker-dial__control):not([role="combobox"]) {
+        width: 300px;
+        height: 44px;
+        border: solid 1px #ffffff;
+        font-size: 16px;
+        font-weight: 600;
+        background: transparent;
+        color: #fff !important;
+        display: block !important;
+      }
+
+      input::placeholder {
+        //padding-left: 27px;
+        color: #fff !important
+      }
+
+      select {
+        width: 288px;
+        height: 47px;
+        border: solid 1px #ffffff;
+        font-size: 16px;
+        font-weight: 600;
+        background: transparent;
+        color: #fff !important;
+        padding-left: 25px;
+
+        option {
+          background-color: #164547;
+          padding: 10px 0
+        }
+      }
+
+      .searchBtn {
+        width: 120px;
+        height: 46px;
+        border-radius: 4px;
+        background-image: linear-gradient(to right, #0b9194, #08c1c6);
+        color: #fff;
+        font-size: 20px;
+        font-weight: 600;
+        border: none;
+
+        button {
+          width: 120px;
+          height: 46px;
+          border-radius: 4px;
+          background-image: linear-gradient(to right, #0b9194, #08c1c6);
+          color: #fff;
+          font-size: 20px;
+          font-weight: 600;
+          border: none;
+        }
+      }
+
+      .login {
+        cursor: pointer;
+      }
+
+      > div {
+        position: relative;
+        margin: 10px !important;
+
+        mat-icon, i {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          margin: auto;
+          left: 5px;
+          color: #fff;
+          //font-size: 18px;
+        }
+
+        mat-icon {
+          left: -3px !important;
+        }
+
+      }
+    }
+  }
+
+}
+
+.guests input {
+  width: 1% !important;
+}
+
+.mat-badge-content {
+  width: 16px !important;
+  height: 16px !important;
+  line-height: 19px !important;
+  background-color: $green !important;
+  opacity: 1 !important;
+}
+
+.mat-badge-content .mat-badge-active {
+}
+
+.mat-tab-label {
+  opacity: 1 !important;
+}
+
+.mat-tab-label-active {
+  .mat-tab-label-content {
+    color: $red !important;
+  }
+
+  .mat-badge-content {
+    background-color: $red !important;
+  }
+}
+
+.mat-ink-bar {
+  background-color: $red !important;
+}
+
+.order-ferry-form {
+  .mat-checkbox-label {
+    //color: $white !important;
+  }
+
+  .mat-list-item {
+    margin: 0 0 24px 0 !important;
+  }
+
+  .mat-checkbox-frame {
+    border: 1px solid $white !important;
+  }
+}
+
+.orderNow {
+  display: flex;
+  justify-content: center;
+
+  .orderNowBtn {
+    width: 181px;
+    height: 50px;
+    border-radius: 4px;
+    //background-image: linear-gradient(to right, #0b9194, #08c1c6);
+    background-color: #7BC447;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+    border: none;
+    outline: none;
+  }
+}
+
+.order-ferry-form {
+  .mat-checkbox {
+    margin-left: 8px !important;
+
+    .mat-checkbox-frame {
+      border: 1px solid #88bf4a !important;
+      border-radius: 20px !important;
+      width: 20px !important;
+      height: 20px !important;
+      background-color: #88bf4a !important;
+    }
+
+    .mat-checkbox-background {
+      background-color: unset !important;
+      top: 2px !important;
+
+      .mat-checkbox-checkmark {
+        left: 2px !important;
+      }
+    }
+  }
+}
+
+// Chat window styles
+.chat-window-container {
+
+  /* Button used to open the chat form - fixed at the bottom of the page */
+  .open-button {
+    position: fixed;
+    bottom: 23px;
+    right: 28px;
+    background-color: transparent;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+  }
+
+  /* The popup chat - hidden by default */
+  .chat-popup {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    right: 15px;
+    z-index: 9;
+    background-color: $white;
+    height: 380px;
+
+    .all-container {
+      display: flex;
+      height: 100%;
+
+      .chat-itself {
+        width: 300px;
+      }
+
+      .contacts {
+        width: 200px;
+
+        .search-users-container {
+          display: flex;
+          margin-top: 20px;
+          padding: 2px;
+          justify-content: center;
+          align-items: center;
+
+          input {
+            width: 170px;
+          }
+        }
+      }
+    }
+  }
+
+  .chat-top {
+    display: flex;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: $white;
+    justify-content: space-between;
+    padding-left: 12px;
+    height: 36px;
+    cursor: pointer;
+
+    .close-chat-window {
+      @include noBgBtn;
+
+      mat-icon {
+        color: $white;
+        font-size: 17px;
+        font-weight: bold;
+      }
+    }
+  }
+
+  .operator-chat {
+    background-color: $white;
+    color: rgba(0, 0, 0, 0.6);
+
+    mat-icon {
+      color: rgba(0, 0, 0, 0.6) !important;
+      font-size: 25px !important;
+    }
+  }
+
+  /* Add styles to the form container */
+  .form-container {
+    max-width: 300px;
+    background-color: white;
+  }
+
+  .messages-container {
+    padding: 0 10px;
+    height: 276px;
+
+    .messages {
+      height: 100%;
+      background-color: #f1f1f163;
+
+      li {
+        word-break: break-word;
+        margin-top: 10px;
+
+        .msg-container {
+          display: flex;
+          align-items: center;
+
+        }
+      }
+    }
+  }
+
+  /* Full-width textarea */
+  .form-container ul {
+    width: 100%;
+    padding: 10px 0;
+    margin: 5px 0 22px 0;
+    border: none;
+    height: 257px;
+    min-height: 150px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+
+  .contacts {
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+
+    .users {
+      margin-top: 50px;
+      margin-left: 24px;
+    }
+
+    .selected-user {
+      font-weight: bold;
+    }
+  }
+
+  /* When the textarea gets focus, do something */
+  .form-container textarea:focus {
+    background-color: #ddd;
+    outline: none;
+  }
+
+
+  /* Set a style for the submit/send button */
+  .form-container .send-btn {
+    color: white;
+    background-image: linear-gradient(to right, #0b9194, #08c1c6);
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 10px;
+    opacity: 0.8;
+    border-radius: 4px;
+  }
+
+  /* Add a red background color to the cancel button */
+
+
+  /* Add some hover effects to buttons */
+  .form-container .btn:hover {
+    opacity: 1;
+  }
+
+  .message-input {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .actions {
+    margin-top: 20px;
+  }
+}
+
+.mat-list-text span {
+  cursor: pointer;
+}
+
+// Mat error, invalid field styles override
+.mat-error, .mat-form-field .mat-select.mat-select-invalid .mat-select-arrow {
+  color: $red !important;
+}
+
+.mat-form-field.mat-form-field-invalid .mat-form-field-ripple, .mat-form-field.mat-form-field-invalid .mat-form-field-ripple.mat-accent {
+  background-color: $red !important;
+  color: $red !important;
+}
+
+.mat-form-field.mat-form-field-invalid .mat-form-field-label {
+  color: $red !important;
+}
+
+.owl-carousel .owl-item img {
+  //height: 250px !important;
+  object-fit: cover !important;
+}
+
+.single-page-gallery {
+  width: 100% !important;
+}
+
+.no-images {
+  width: 100%;
+  height: 343px;
+  object-fit: cover;
+}
+
+.table-book-form {
+  .dropbtn, input {
+    background-color: unset !important;
+  }
+
+  .flagInput {
+    margin-top: -7px;
+  }
+
+  .form-control {
+    //height: 20px;
+    margin-top: -17px;
+    padding-top: 11px;
+  }
+}
+
+.main-page-error {
+  color: $white !important;
+  position: absolute !important;
+}
+
+
+agm-map {
+  height: 360px !important;
+}
+
+.manage-all-container {
+  agm-map {
+    height: 500px !important;
+  }
+}
+
+.route-type {
+  .mat-radio-inner-circle, .mat-ripple-element {
+    background-color: $green !important;
+  }
+
+  .mat-radio-outer-circle {
+    border-color: $green !important;
+  }
+
+  .mat-radio-label-content {
+    font: normal normal 300 16px/15px Roboto;
+    color: #707070;
+  }
+}
+
+
+.mat-menu-content, .mat-menu-panel {
+  background-color: rgba(0, 0, 0, 0.26) !important;
+
+  .mat-menu-item, mat-icon {
+    color: $white !important;
+  }
+
+  span {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 16px;
+  }
+}
+
+.accommodation-single-page {
+  .owl-dots {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+  }
+
+  .owl-carousel .owl-item img {
+    height: 473px !important;
+  }
+
+}
+
+.view-more {
+  width: 122px;
+  height: 43px;
+  background-color: $preferred_blue;
+  border: none;
+  color: $white;
+  font: normal normal 16px 'Roboto';
+  margin-top: 57px;
+  margin-left: 32px;
+}
+
+.accommodation-single-page {
+  .right-side {
+    .map-box {
+      margin-top: 32px;
+    }
+  }
+}
+
+.home_1 {
+  .owl-theme {
+    .owl-nav {
+      .owl-prev, .owl-next {
+        padding: 5px 11px;
+      }
+    }
+  }
+}
+
+.picker {
+  width: 100%;
+  height: 100%;
+  margin-left: 0 !important;
+
+  .input-group {
+    height: 100%;
+
+    input {
+      height: 100%;
+    }
+
+    .input-group-text {
+      span {
+        flex: 1;
+        width: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f2f2f2;
+
+        &:hover {
+          background: #dce6f0;
+        }
+      }
+    }
+  }
+}
+
+#save-tour-form {
+  .people-count {
+    input[name="input-spin-val"] {
+      background-color: #f9f9f9 !important;
+      padding: 12px 23px;
+      font-size: 16px;
+      color: #707070;
+      text-align: left;
+      border: 0.5px solid transparent;
+      border-radius: 0;
+
+      &:focus {
+        border: 0.5px solid #7BC447;
+      }
+    }
+  }
+
+  .ngx-material-timepicker-toggle svg {
+    margin-left: 0 !important;
+  }
+
+}
