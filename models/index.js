@@ -23,7 +23,7 @@ app.get('*', (req, res, next) => {
             next();
         })
         .catch(err => {
-            // console.log('error', err)
+            console.log('sequelize error', err)
             res.status(422).json({db_error: 'Please check db connection'}); //err.toString()
         });
     if (!res.headersSent) {
