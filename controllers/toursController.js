@@ -202,6 +202,16 @@ exports.remove = async (req, res) => {
     this.get(req, res);
 };
 
+exports.removeImage = async (req, res) => {
+    await removeImage(req.query, res);
+};
+
+exports.makeCover = async (req, res) => {
+    let data = req.body;
+    await Tours.update({img: data.img}, {where: {id: data.id}});
+    res.json("OK")
+};
+
 /**
  * Gets all tour types list
  * @param req
