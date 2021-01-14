@@ -19,7 +19,7 @@ module.exports = {
 
             return type.hasOwnProperty('subtypes') ? type.subtypes.map(t => {
                 t.type_id = type_id;
-                t.created_at = moment().format();
+                t.created_at = new Date();
                 console.log(t)
                 return t;
             }) : null;
