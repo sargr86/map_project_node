@@ -5,12 +5,12 @@ const rules = [
     body('locations').custom((item) => {
         let locations = JSON.parse(item);
         let invalidRoute = false;
-        let startPoint = locations.find(l => l.title === 'Start');
-        let endPoint = locations.find(l => l.title === 'End');
-        let stop1 = locations.find(l => l.title === 'Stop 1');
-        let stop2 = locations.find(l => l.title === 'Stop 2');
+        let startPoint = locations.find(l => l.title === 'Start point') || {};
+        let endPoint = locations.find(l => l.title === 'End point') || {};
+        let stop1 = locations.find(l => l.title === 'Stop 1') || {};
+        let stop2 = locations.find(l => l.title === 'Stop 2') || {};
 
-
+        console.log(startPoint, endPoint, stop1, stop2)
         switch (locations.length) {
             case 2:
                 if (startPoint.id === endPoint.id) {
@@ -40,7 +40,7 @@ const rules = [
         // Validate empty locations
         let emptyLocations = locations.find(l => !l.id);
         if (emptyLocations) {
-            throw new Error('Please select 2-4 locations and make sure they\'re not empty');
+            throw new Error('Please select 1-4 locations and make sure they\'re not empty');
         }
         return true;
     }),
