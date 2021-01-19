@@ -11,7 +11,7 @@ exports.get = async (req, res) => {
         include: [
             {model: ToursType},
             {model: Companies, attributes: ['id', 'name']},
-            {model: Locations, as: 'tour_locations'},
+            {model: Locations, as: 'tour_locations', attributes: ['name']},
             {model: ToursDailies}
         ]
     });
