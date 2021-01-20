@@ -44,9 +44,15 @@ exports.getOne = async (req, res) => {
 exports.getTourDailies = async (req, res) => {
     const {scheduled, date} = req.query;
     console.log('filter!!!!' + scheduled)
-    const today = moment().format('YYYY-MM-DD')
-    let whereDate = scheduled === '0' ? {start_date: {[Op.eq]: today}} : {
-        start_date: {[Op.gt]: today}
+    const weekStart = moment().startOf('isoWeek').format('YYYY-MM-DD')
+    const weekEnd = moment().endOf('isoWeek').format('YYYY-MM-DD')
+    // let whereDate = scheduled === '0' ? {start_date: {[Op.eq]: today}} : {
+    //     start_date: {[Op.gt]: today}
+    // };
+    let whereDate = {
+        start_date: {
+            [Op.between]: [weekStart, weekEnd]
+        }
     };
 
     if (date) {
@@ -301,4 +307,11 @@ exports.changeStatusFromSocket = async (data, status) => {
     await ToursOrders.update({status: status}, {where: {id: data.id}});
     let order = ToursOrders.findOne({where: {id: data.id}});
     return order;
+};
+
+exports.updateDailyTourDates = async (req, res) => {
+    const {start_date, end_date, id} = req.body;
+    console.log('aaaaaa', start_date, end_date)
+    await ToursDailies.update({start_date: start_date, end_date: end_date}, {where: {id: id}});
+    this.getTourDailies(req, res);
 };
