@@ -44,7 +44,7 @@
     "rimraf-promise": "^2.0.0",
     "sequelize": "^4.42.0",
     "sequelize-cli": "^5.4.0",
-    "socket.io": "^2.3.0",
+    "socket.io": "^2.4.0",
     "stripe": "^8.49.0",
     "util": "^0.12.1",
     "validator": "^13.0.0"
