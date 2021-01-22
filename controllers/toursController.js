@@ -42,7 +42,7 @@ exports.getOne = async (req, res) => {
 };
 
 exports.getTourDailies = async (req, res) => {
-    const {scheduled, date} = req.query;
+    const {scheduled, date, name} = req.query;
     console.log('filter!!!!' + scheduled)
     const weekStart = moment().startOf('isoWeek').format('YYYY-MM-DD')
     const weekEnd = moment().endOf('isoWeek').format('YYYY-MM-DD')
@@ -55,13 +55,16 @@ exports.getTourDailies = async (req, res) => {
         }
     };
 
+    let whereTour = name ? sequelize.where(sequelize.col('tour.name'), name) : {};
+
+
     if (date) {
-        whereDate = {start_date: {[Op.eq]: date}};
+        whereDate = date ? {start_date: {[Op.eq]: date}} : {};
     }
     console.log(whereDate)
     let td = await ToursDailies.findAll({
         include: [{model: Tours, include: [{model: Locations, as: 'tour_locations'}]}],
-        where: whereDate,
+        where: [whereDate, whereTour],
         order: [['start_date', 'desc']]
     });
     res.json(td);
