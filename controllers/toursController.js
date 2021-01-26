@@ -44,23 +44,26 @@ exports.getOne = async (req, res) => {
 exports.getTourDailies = async (req, res) => {
     const {scheduled, date, name} = req.query;
     console.log('filter!!!!' + scheduled)
-    const weekStart = moment().startOf('isoWeek').format('YYYY-MM-DD')
-    const weekEnd = moment().endOf('isoWeek').format('YYYY-MM-DD')
+    let weekStart = moment().startOf('isoWeek').format('YYYY-MM-DD')
+    let weekEnd = moment().endOf('isoWeek').format('YYYY-MM-DD')
     // let whereDate = scheduled === '0' ? {start_date: {[Op.eq]: today}} : {
     //     start_date: {[Op.gt]: today}
     // };
+
+    console.log('name' + name)
+    let whereTour = name ? sequelize.where(sequelize.col('tour.name'), name) : {};
+    console.log(whereTour)
+
+    if (date) {
+        weekStart = moment(date).startOf('isoWeek').format('YYYY-MM-DD')
+        weekEnd = moment(date).endOf('isoWeek').format('YYYY-MM-DD')
+        // whereDate = date ? {start_date: {[Op.eq]: date}} : {};
+    }
     let whereDate = {
         start_date: {
             [Op.between]: [weekStart, weekEnd]
         }
     };
-
-    let whereTour = name ? sequelize.where(sequelize.col('tour.name'), name) : {};
-
-
-    if (date) {
-        whereDate = date ? {start_date: {[Op.eq]: date}} : {};
-    }
     console.log(whereDate)
     let td = await ToursDailies.findAll({
         include: [{model: Tours, include: [{model: Locations, as: 'tour_locations'}]}],
@@ -314,7 +317,26 @@ exports.changeStatusFromSocket = async (data, status) => {
 
 exports.updateDailyTourDates = async (req, res) => {
     const {start_date, end_date, id} = req.body;
-    console.log('aaaaaa', start_date, end_date)
     await ToursDailies.update({start_date: start_date, end_date: end_date}, {where: {id: id}});
+    this.getTourDailies(req, res);
+};
+
+exports.updateDailyTour = async (req, res) => {
+    const data = req.body;
+    const {id} = data;
+    await ToursDailies.update(data, {where: {id: id}});
+    this.getTourDailies(req, res);
+};
+
+exports.removeDailyTour = async (req, res) => {
+    const data = req.query;
+    await ToursDailies.destroy({where: {id: data.id}});
+    this.getTourDailies(req, res);
+};
+
+
+exports.addDaily = async (req, res) => {
+    let data = req.body;
+    await ToursDailies.create(data);
     this.getTourDailies(req, res);
 };
