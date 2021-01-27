@@ -42,7 +42,8 @@ exports.getOne = async (req, res) => {
 };
 
 exports.getTourDailies = async (req, res) => {
-    const {scheduled, date, name} = req.query;
+    let data = req.query;
+    const {scheduled, date, name, search} = data;
     console.log('filter!!!!' + scheduled)
     let weekStart = moment().startOf('isoWeek').format('YYYY-MM-DD')
     let weekEnd = moment().endOf('isoWeek').format('YYYY-MM-DD')
@@ -52,9 +53,8 @@ exports.getTourDailies = async (req, res) => {
 
     console.log('name' + name)
     let whereTour = name ? sequelize.where(sequelize.col('tour.name'), name) : {};
-    console.log(whereTour)
 
-    if (date) {
+    if (date && !search) {
         weekStart = moment(date).startOf('isoWeek').format('YYYY-MM-DD')
         weekEnd = moment(date).endOf('isoWeek').format('YYYY-MM-DD')
         // whereDate = date ? {start_date: {[Op.eq]: date}} : {};
@@ -64,9 +64,24 @@ exports.getTourDailies = async (req, res) => {
             [Op.between]: [weekStart, weekEnd]
         }
     };
+
+    if (search) {
+        // whereTour = {where: {name: {[Op.like]: `%${search}%`}}};
+        whereTour = sequelize.where(sequelize.col('tour.name'), 'like', `%${search}%`);
+        whereDate = date ? {start_date: {[Op.lte]: date}, end_date: {[Op.gte]: date}} : {};
+    }
+
+    console.log(whereTour)
+
+
     console.log(whereDate)
     let td = await ToursDailies.findAll({
-        include: [{model: Tours, include: [{model: Locations, as: 'tour_locations'}]}],
+        include: [{
+            model: Tours, include: [
+                {model: Locations, as: 'tour_locations'},
+                {model: Companies}
+            ]
+        }],
         where: [whereDate, whereTour],
         order: [['start_date', 'desc']]
     });
