@@ -4,6 +4,7 @@ const validateTour = require('../validators/validateTour');
 
 router.get('/get', toursController.get);
 router.get('/get-dailies', toursController.getTourDailies);
+router.get('/search-daily', toursController.getTourDailies);
 router.get('/get-partners', toursController.getPartners);
 
 router.get('/get-one', checkAuth, checkRole('admin', 'partner'), toursController.getOne);
