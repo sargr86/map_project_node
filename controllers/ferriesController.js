@@ -482,6 +482,7 @@ exports.removeAllRoutesPrices = async (req, res) => {
 
 exports.getRoutePrice = async (req, res) => {
     let data = req.body;
+    console.log(data)
 
     let route = await this.buildConditionAndCheck(data);
     console.log(!route || route.coordinates.length === 0)
