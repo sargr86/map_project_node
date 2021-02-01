@@ -41,6 +41,6 @@ router.post('/get-route-price', ferriesController.getFerriesDirectionsPrices);
 router.get('/get-all-routes-prices', ferriesController.getFerriesDirectionsPrices);
 router.post('/import-routes-file', ferriesController.importJSONFile);
 router.post('/save-route-price', validateRoute.rules, ferriesController.addRoutePrice);
-router.post('/import-prices-file', ferriesController.importPricesFile)
+router.post('/import-prices-file', ferriesController.importPricesFile);
 
 module.exports = router;

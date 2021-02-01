@@ -43,7 +43,7 @@ exports.getOne = async (req, res) => {
 
 exports.getTourDailies = async (req, res) => {
     let data = req.query;
-    const {scheduled, date, name, search, order} = data;
+    const {scheduled, date, name, search, order, today} = data;
     console.log('filter!!!!' + scheduled)
     let weekStart = moment().startOf('isoWeek').format('YYYY-MM-DD')
     let weekEnd = moment().endOf('isoWeek').format('YYYY-MM-DD')
@@ -64,6 +64,10 @@ exports.getTourDailies = async (req, res) => {
             [Op.between]: [weekStart, weekEnd]
         }
     };
+
+    if (today) {
+        whereDate = {start_date: moment().format('YYYY-MM-DD')};
+    }
 
 
     if (search) {
