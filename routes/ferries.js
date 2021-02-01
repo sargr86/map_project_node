@@ -22,14 +22,25 @@ router.delete('/remove-location', ferriesController.removeLocation);
 router.get('/get-directions', ferriesController.getFerriesDirections);
 router.get('/get-directions-pricing', ferriesController.getFerriesDirectionsPrices);
 router.get('/get-direction-price', ferriesController.getFerryDirectionPrice);
-router.post('/import-routes-file', ferriesController.importJSONFile);
-router.post('/import-prices-file', ferriesController.importPricesFile);
-router.post('/get-route-price', ferriesController.getRoutePrice);
-router.post('/save-route-price', validateRoute.rules, ferriesController.addRoutePrice);
+// router.post('/import-routes-file', ferriesController.importJSONFile);
+// router.post('/get-route-price', ferriesController.getRoutePrice);
 router.put('/update-route-price', validateRoute.rules, ferriesController.updateRoutePrice);
 router.delete('/remove-route-price', ferriesController.removeRoutePrice);
 router.delete('/remove-all-routes-prices', ferriesController.removeAllRoutesPrices);
-router.get('/get-all-routes', ferriesController.getAllRoutes);
-router.get('/get-all-routes-prices', ferriesController.getAllRoutesPrices);
+
+// Mongo version
+// router.post('/import-prices-file', ferriesController.importPricesFile);
+// router.get('/get-all-routes-prices', ferriesController.getAllRoutesPrices);
+// router.post('/save-route-price', validateRoute.rules, ferriesController.addRoutePrice);
+
+
+
+// MySQL version
+router.get('/get-all-routes', ferriesController.getFerriesDirectionsPrices);
+router.post('/get-route-price', ferriesController.getFerriesDirectionsPrices);
+router.get('/get-all-routes-prices', ferriesController.getFerriesDirectionsPrices);
+router.post('/import-routes-file', ferriesController.importJSONFile);
+router.post('/save-route-price', validateRoute.rules, ferriesController.addRoutePrice);
+router.post('/import-prices-file', ferriesController.importPricesFile)
 
 module.exports = router;

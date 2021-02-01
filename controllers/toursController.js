@@ -43,7 +43,7 @@ exports.getOne = async (req, res) => {
 
 exports.getTourDailies = async (req, res) => {
     let data = req.query;
-    const {scheduled, date, name, search} = data;
+    const {scheduled, date, name, search, order} = data;
     console.log('filter!!!!' + scheduled)
     let weekStart = moment().startOf('isoWeek').format('YYYY-MM-DD')
     let weekEnd = moment().endOf('isoWeek').format('YYYY-MM-DD')
@@ -65,16 +65,22 @@ exports.getTourDailies = async (req, res) => {
         }
     };
 
+
     if (search) {
         // whereTour = {where: {name: {[Op.like]: `%${search}%`}}};
         whereTour = sequelize.where(sequelize.col('tour.name'), 'like', `%${search}%`);
         whereDate = date ? {start_date: {[Op.lte]: date}, end_date: {[Op.gte]: date}} : {};
     }
 
-    console.log(whereTour)
 
+    let orderColumns = [];
 
-    console.log(whereDate)
+    if (order) {
+        orderColumns.push(['price', order]);
+    }
+
+    orderColumns.push(['start_date', 'desc']);
+
     let td = await ToursDailies.findAll({
         include: [{
             model: Tours, include: [
@@ -83,10 +89,10 @@ exports.getTourDailies = async (req, res) => {
             ]
         }],
         where: [whereDate, whereTour],
-        order: [['start_date', 'desc']]
+        order: orderColumns
     });
     res.json(td);
-}
+};
 
 /**
  * Gets tour partners list
