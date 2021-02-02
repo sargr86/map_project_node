@@ -393,8 +393,13 @@ exports.getRoutePrice = async (req, res) => {
     console.log(data)
 
     let route = await this.buildConditionAndCheck(data);
-    console.log(!route || route.coordinates.length === 0)
-    if (!route || route.coordinates.length === 0) {
+    // console.log(whereRoute)
+    // console.log(!route || route.coordinates.length === 0)
+
+    console.log(route.dataValues)
+    // res.json(route);
+
+    if (!route || route[0].coordinates.length === 0) {
         let reversedRoute = await this.buildConditionAndCheck(data.reverse(), true);
         if (!reversedRoute) {
             res.status(444).json({msg: 'The selected route is not found'});
@@ -403,6 +408,42 @@ exports.getRoutePrice = async (req, res) => {
         }
     } else res.json(route);
 };
+
+exports.buildConditionAndCheck = async (data, reversed = false) => {
+    // console.log(data)
+    let condition = {stop_1: '', stop_2: ''};
+
+    condition.start_point = data[0].name;
+    if (data.length === 2) {
+        condition.end_point = data[1].name;
+    } else if (data.length === 3) {
+        condition.stop_1 = data[1].name;
+        condition.end_point = data[2].name;
+    } else if (data.length === 4) {
+        condition.stop_1 = data[1].name;
+        condition.stop_2 = data[2].name;
+        condition.end_point = data[3].name;
+    }
+
+
+    console.log(condition)
+
+    let dt = await FerryDirectionsPricing.findAll({
+        include: [{model: FerryRoutesCoordinates, as: 'coordinates'}],
+        order: [['start_point', 'asc'], [sequelize.col('`coordinates`.`id`'), 'asc']],
+        where: condition
+    });
+
+
+    if (reversed && dt && dt.coordinates) {
+        console.log('reversed!!!!')
+        dt.coordinates = dt.coordinates.reverse();
+    }
+    // console.log('!!!!!!!')
+    // console.log(dt[0])
+    // console.log('!!!!!!!')
+    return dt;
+}
 
 // exports.getAllRoutes = async (req, res) => {
 //     // let dt = await ferryRoutes.find({coordinates: {$exists: true, $not: {$size: 0}}}, {}).sort({'start_point': 1});
@@ -432,27 +473,4 @@ exports.getRoutePrice = async (req, res) => {
 // };
 
 
-// exports.buildConditionAndCheck = async (data, reversed = false) => {
-//     // console.log(data)
-//     let condition = {stop_1: '', stop_2: ''};
-//
-//     condition.start_point = data[0].name;
-//     if (data.length === 2) {
-//         condition.end_point = data[1].name;
-//     } else if (data.length === 3) {
-//         condition.stop_1 = data[1].name;
-//         condition.end_point = data[2].name;
-//     } else if (data.length === 4) {
-//         condition.stop_1 = data[1].name;
-//         condition.stop_2 = data[2].name;
-//         condition.end_point = data[3].name;
-//     }
-//
-//
-//     let dt = await ferryRoutes.findOne(condition);
-//
-//     if (reversed && dt && dt.coordinates) {
-//         dt.coordinates = dt.coordinates.reverse();
-//     }
-//     return dt;
-// }
+

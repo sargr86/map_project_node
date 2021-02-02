@@ -37,7 +37,7 @@ router.delete('/remove-all-routes-prices', ferriesController.removeAllRoutesPric
 
 // MySQL version
 router.get('/get-all-routes', ferriesController.getFerriesDirectionsPrices);
-router.post('/get-route-price', ferriesController.getFerriesDirectionsPrices);
+router.post('/get-route-price', ferriesController.getRoutePrice);
 router.get('/get-all-routes-prices', ferriesController.getFerriesDirectionsPrices);
 router.post('/import-routes-file', ferriesController.importJSONFile);
 router.post('/save-route-price', validateRoute.rules, ferriesController.addRoutePrice);
