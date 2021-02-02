@@ -399,7 +399,7 @@ exports.getRoutePrice = async (req, res) => {
     console.log(route.dataValues)
     // res.json(route);
 
-    if (!route || route[0].coordinates.length === 0) {
+    if (!route || (route.length > 0 && route[0].coordinates.length === 0)) {
         let reversedRoute = await this.buildConditionAndCheck(data.reverse(), true);
         if (!reversedRoute) {
             res.status(444).json({msg: 'The selected route is not found'});
