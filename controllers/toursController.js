@@ -66,7 +66,8 @@ exports.getTourDailies = async (req, res) => {
     };
 
     if (today) {
-        whereDate = {start_date: moment().format('YYYY-MM-DD')};
+        let todayVal = moment().format('YYYY-MM-DD');
+        whereDate = {start_date: {[Op.lte]: todayVal}, end_date: {[Op.gte]: todayVal}};
     }
 
 
@@ -84,6 +85,8 @@ exports.getTourDailies = async (req, res) => {
     }
 
     orderColumns.push(['start_date', 'desc']);
+
+    console.log(whereDate)
 
     let td = await ToursDailies.findAll({
         include: [{
