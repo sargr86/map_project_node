@@ -31,7 +31,8 @@ module.exports = {
                 type: Sequelize.INTEGER
             },
             return: {
-                type: Sequelize.INTEGER
+                type: Sequelize.INTEGER,
+                allowNull: true,
             },
             total: {
                 type: Sequelize.INTEGER
