@@ -1,6 +1,11 @@
 require('dotenv').config();
 require('./constants/main');
 
+const compression = require('compression');
+
+// Compress all HTTP responses
+app.use(compression());
+
 global.paypal = require("paypal-rest-sdk");
 
 
