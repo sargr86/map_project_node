@@ -2,62 +2,23 @@
 global.multer = require('multer');
 global.UPLOAD_MAX_FILE_SIZE = 2 * 1024 * 1024;
 const path = require('path');
+const fs = require('fs');
+const generateFolderPath = require('../helpers/generateFolderPath');
+
 
 let storage = multer.diskStorage({
     destination: async function (req, file, cb) {
         const data = req.body;
-        const folder = data.folder;
         const edit = !!data.id;
-
-        let dir;
-
-        console.log('multer!!!!')
-        console.log(data)
-        // console.log(file)
-
-        // This is done for ferries info editing!!!
-        if (edit) {
-            console.log('edit!!!!!')
-            if (folder !== 'users') {
-                console.log('this folder' + folder)
-                if (folder.includes('uploads')) {
-                    dir = folder
-                } else {
-                    dir = path.join(UPLOADS_FOLDER, 'others/' + folder + '/' + data.name.replace(/ /g, '_')) + '_' + Date.now();
-                    console.log('this dir!!!')
-                    console.log(dir)
-
-                }
-            } else dir = USERS_UPLOAD_FOLDER;
-        } else {
-            console.log('not edit!!!')
-
-
-            dir = USERS_UPLOAD_FOLDER;
-
-            if (folder !== 'users') {
-                // if ('tours_type_id' in data) {
-                //     dir = TOURS_UPLOAD_FOLDER;
-                // } else
-                if ('activity_types' in data) {
-                    dir = ACTIVITIES_UPLOAD_FOLDER;
-                    // data.name is added for ferries section
-                } else {
-                    dir = path.join(UPLOADS_FOLDER, 'others/' + folder + '/' + data.name.replace(/ /g, '_'));
-                    // dir = folder;
-                }
-            }
-        }
-
-
-        console.log('dir!!!!!')
-        dir = path.normalize(dir).replace(/^(\.\.(\/|\\|$))+/, '');
-        console.log(dir)
-        await fse.ensureDir(dir);
+        let dir = await generateFolderPath(data.folder, edit, data);
 
         cb(null, dir)
     },
-    filename: function (req, file, cb) {
+    filename: async function (req, file, cb) {
+        // const data = req.body;
+        // const edit = !!data.id;
+        // let dir = await generateFolderPath(data.folder, edit, data);
+
         cb(null, file.originalname)
     }
 });
@@ -78,6 +39,8 @@ let upload = multer({
         cb(null, true);
     }
 });
+
+
 global.uploadProfileImg = upload.single('profile_img_file');
 global.uploadTourImg = upload.single('upload_image');
 global.uploadImages = upload.array('upload_images');
