@@ -1,6 +1,7 @@
 // Multer stuff
 global.multer = require('multer');
 global.UPLOAD_MAX_FILE_SIZE = 2 * 1024 * 1024;
+const path = require('path');
 
 let storage = multer.diskStorage({
     destination: async function (req, file, cb) {
@@ -50,14 +51,14 @@ let storage = multer.diskStorage({
 
 
         console.log('dir!!!!!')
+        dir = path.normalize(dir).replace(/^(\.\.(\/|\\|$))+/, '');
         console.log(dir)
-
-        await fse.ensureDir(dir)
+        await fse.ensureDir(dir);
 
         cb(null, dir)
     },
     filename: function (req, file, cb) {
-        cb(null, file.originalname) // already have got Date implemented in the name
+        cb(null, file.originalname)
     }
 });
 
