@@ -92,7 +92,8 @@ exports.getTourDailies = async (req, res) => {
         include: [{
             model: Tours, include: [
                 {model: Locations, as: 'tour_locations'},
-                {model: Companies}
+                {model: Companies},
+                {model: ToursType}
             ]
         }],
         where: [whereDate, whereTour],
