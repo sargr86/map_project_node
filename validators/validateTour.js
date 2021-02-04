@@ -44,18 +44,18 @@ const rules = [
         }
         return true;
     }),
-    body('start_date', 'Start date is required').not().isEmpty(),
-    body('end_date', 'End date is required').not().isEmpty(),
-    body('start_time', 'Start time is required').not().isEmpty(),
-    body('end_time').not().isEmpty().withMessage('End time is required').custom((data, {req}) => {
-        let d = req.body;
-        if (d.start_date === d.end_date) {
-            if (d.start_time === d.end_time) {
-                throw new Error('If this is a one-day tour, it can\'t have equal start and end time values');
-            }
-        }
-        return true;
-    }),
+    // body('start_date', 'Start date is required').not().isEmpty(),
+    // body('end_date', 'End date is required').not().isEmpty(),
+    // body('start_time', 'Start time is required').not().isEmpty(),
+    // body('end_time').not().isEmpty().withMessage('End time is required').custom((data, {req}) => {
+    //     let d = req.body;
+    //     if (d.start_date === d.end_date) {
+    //         if (d.start_time === d.end_time) {
+    //             throw new Error('If this is a one-day tour, it can\'t have equal start and end time values');
+    //         }
+    //     }
+    //     return true;
+    // }),
     body('price', 'Price is required').not().isEmpty(),
     body('name', 'Tour name is required').not().isEmpty()
     // Retrieving a tour with request name and checking tour existence
