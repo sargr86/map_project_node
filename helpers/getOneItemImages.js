@@ -7,7 +7,10 @@ module.exports = async (req, uploadFolder, dbData) => {
     if (dbData) {
         dbData = dbData.toJSON();
         const folder = path.resolve(uploadFolder + '/' + toFolderName(dbData['name']));
-        const realFolder = 'http://' + req.headers.host + path.relative('./', folder).replace(/\\/g, '/').replace('public', '');
+        const environment = process.env.NODE_ENV || 'development';
+        const host = (environment === 'development' ? 'http://' : 'https://') + req.headers.host
+        console.log(environment, process.env.NODE_ENV, host)
+        const realFolder = host + path.relative('./', folder).replace(/\\/g, '/').replace('public', '');
         console.log(realFolder)
         console.log(folder)
         const folderPath = path.relative('./', folder).replace(/\\/g, '/').replace('public', '');
