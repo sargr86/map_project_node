@@ -395,9 +395,11 @@ exports.getRoutePrice = async (req, res) => {
     let route = await this.buildConditionAndCheck(data);
     // console.log(whereRoute)
     // console.log(!route || route.coordinates.length === 0)
-
+console.log('route!!!')
     console.log(route.dataValues)
+    console.log(route)
     // res.json(route);
+console.log('route!!!')
 
     if (!route || (route.length > 0 && route[0].coordinates.length === 0)) {
         let reversedRoute = await this.buildConditionAndCheck(data.reverse(), true);
@@ -426,7 +428,7 @@ exports.buildConditionAndCheck = async (data, reversed = false) => {
     }
 
 
-    console.log(condition)
+    // console.log(condition)
 
     let dt = await FerryDirectionsPricing.findAll({
         include: [{model: FerryRoutesCoordinates, as: 'coordinates'}],
