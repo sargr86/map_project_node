@@ -9,9 +9,10 @@ module.exports = (req, res, next) => {
             // Remove Bearer from string
             console.log(token)
             token = token.slice(7, token.length);
-        } else if (token.startsWith('Basic ')) {
-            token = token.slice(6, token.length);
         }
+        // else if (token.startsWith('Basic ')) {
+        //     token = token.slice(6, token.length);
+        // }
         console.log(token)
         console.log(token.includes('Bearer '))
         jwt.verify(token, 'secretkey', (err, decoded) => {
