@@ -4,7 +4,7 @@ module.exports = (req, res, next) => {
     if (!token) {
         res.status(500).send('Auth token is not supplied');
     } else {
-
+        console.log(token.startsWith('Bearer '))
         if (token.startsWith('Bearer ')) {
             // Remove Bearer from string
             console.log(token)
