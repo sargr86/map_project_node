@@ -4,13 +4,16 @@ module.exports = (req, res, next) => {
     if (!token) {
         res.status(500).send('Auth token is not supplied');
     } else {
-        console.log(token.includes('Bearer '))
+
         if (token.startsWith('Bearer ')) {
             // Remove Bearer from string
             console.log(token)
             token = token.slice(7, token.length);
+        } else if (token.startsWith('Basic ')) {
+            token = token.slice(6, token.length);
         }
         console.log(token)
+        console.log(token.includes('Bearer '))
         jwt.verify(token, 'secretkey', (err, decoded) => {
             if (err) {
                 console.log(err)
